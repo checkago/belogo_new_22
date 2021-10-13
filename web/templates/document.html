@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% include '_header_pages.html' %}
+<div class="container">
+    <div class="row">
+        {% include '_sidebar_bib.html' %}
+        <div class="col-md-9">
+            <h3 class="">{{ title }}</h3>
+            <hr class="hr-dark">
+            <div class="col-md-4">
+                {% if document.image %}
+                <img class=img-fluid src="{{ document.image.url }}" />
+                {% else %}
+                {% endif %}
+            </div>
+            <div class="col-md-8">
+                Дата публикации: <h4>{{ document.date }}</h4>
+            </div>
+            <div>{{ document.description|safe }}</div>
+
+                <hr class="hr-pink mb-3">
+
+        </div>
+    </div>
+</div>
+{% include '_footer.html' %}
+
+{% endblock %}

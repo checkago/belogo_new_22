@@ -1,0 +1,60 @@
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+<section class="mt-4 mb-5">
+
+<!--Section heading-->
+    <h1 class="mb-3 my-5 pt-5 text-center dark-grey-text wow fadeIn" data-wow-delay="0.2s" style="visibility: visible; animation-name: fadeIn; animation-delay: 0.2s;">
+        <strong class="font-weight-bold">Партнеры</strong> и инфо ресурсы</h1>
+
+    <div id="carousel-example-multi" class="carousel slide carousel-multi-item v-2" data-ride="carousel">
+
+        <!--Controls-->
+        <div class="controls-top">
+        <a class="btn-floating" href="#carousel-example-multi" data-slide="prev"><i
+        class="fas fa-chevron-left"></i></a>
+        <a class="btn-floating" href="#carousel-example-multi" data-slide="next"><i
+        class="fas fa-chevron-right"></i></a>
+        </div>
+        <!--/.Controls-->
+
+        <div class="carousel-inner v-2" role="listbox">
+            <div class="carousel-item active">
+                {% for Partner in partners1 %}
+                {% if Partner.published == True %}
+                <div class="col-12 col-lg-2 col-md-6 text-center">
+                    <div class="card mb-2">
+                      <div class="card-body">
+                        <a href="{{ Partner.link }}" target="_blank" rel="nofollow">
+                            <img class="card-img-top img-fluid" src="{{ Partner.image.url }}" alt="{{ Partner.name }}">
+                        </a>
+                      </div>
+                    </div>
+                </div>
+                {% else %}
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div class="carousel-item">
+                {% for Partner in partners2 %}
+                {% if Partner.published == True %}
+                <div class="col-12 col-lg-2 col-md-6 text-center">
+                    <div class="card mb-2">
+                      <div class="card-body">
+                        <a href="{{ Partner.link }}" target="_blank" rel="nofollow">
+                            <img class="card-img-top img-fluid" src="{{ Partner.image.url }}" alt="{{ Partner.name }}">
+                        </a>
+                      </div>
+                    </div>
+                </div>
+                {% else %}
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+</section>
+</div>
+{% endblock %}

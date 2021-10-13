@@ -1,0 +1,179 @@
+{% load static %}
+{% block content %}
+{% load crispy_forms_field %}
+{% load crispy_forms_tags %}
+
+
+<div class="modal fade" id="books" tabindex="-1" role="dialog" aria-labelledby="Продление книг"
+  aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-warning" role="document">
+    <!--Content-->
+    <form method="POST">
+        {% csrf_token %}
+        <div class="modal-content">
+          <!--Header-->
+          <div class="modal-header primary-color text-center">
+            <h4 class="modal-title white-text w-100 font-weight-bold py-2">Продление книги</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+              <span aria-hidden="true" class="white-text">&times;</span>
+            </button>
+          </div>
+          <!--Body-->
+          <div class="modal-body">
+              <div hidden>{% crispy_field bform.category %}</div>
+            <div class="md-form mb-5">
+                <i class="fas fa-user prefix grey-text"></i>
+                {% crispy_field bform.fio 'class' 'form-control' 'placeholder' 'Иванов Иван Иванович' %}
+                <label data-error="Не верно" data-success="Верно" for="form2"><strong>{{ form.fio.label }}</strong></label>
+            </div>
+
+            <div class="md-form">
+                <i class="fas fa-id-card prefix grey-text"></i>
+                {% crispy_field bform.bilet 'class' 'form-control' 'placeholder' '№ читательского билета' %}
+                <label data-error="Не верно" data-success="Верно" for="form2"><strong>{{ form.bilet.label }}</strong></label>
+            </div>
+
+            <div class="md-form">
+                <i class="fas fa-phone prefix grey-text"></i>
+                {% crispy_field bform.phone 'class' 'form-control' 'placeholder' '8 (999) 999-99-99' %}
+                <label data-error="Не верно" data-success="Верно" for="form2"><strong>{{ form.phone.label }}</strong></label>
+            </div>
+
+            <div class="md-form">
+                <i class="fas fa-envelope prefix grey-text"></i>
+                {% crispy_field bform.email 'class' 'form-control' 'placeholder' 'Почта' %}
+                <label data-error="Не верно" data-success="Верно" for="form2"><strong>{{ form.email.label }}</strong></label>
+            </div>
+
+            <div class="md-form">
+                <i class="fas fa-comment-alt prefix grey-text"></i>
+                {% crispy_field bform.comment 'class' 'form-control' 'placeholder' 'Ваше сообщение или список книг' %}
+                <label data-error="Не верно" data-success="Верно" for="form2"><strong>{{ form.comment.label }}</strong></label>
+            </div>
+          </div>
+
+          <!--Footer-->
+          <div class="modal-footer justify-content-center">
+            <button type="submit" class="btn btn-outline-blue waves-effect">Отправить <i class="fas fa-paper-plane-o ml-1"></i></button>
+          </div>
+        </div>
+    </form>
+    <!--/.Content-->
+  </div>
+</div>
+
+<div class="modal fade" id="questions" tabindex="-1" role="dialog" aria-labelledby="Вопросы библиотекарю"
+  aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-warning" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header warning-color text-center">
+        <h4 class="modal-title white-text w-100 font-weight-bold py-2">Спросить библиотекаря</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+        <div class="md-form mb-5">
+          <i class="fas fa-user prefix grey-text"></i>
+          <input type="text" id="form3" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="form3">Фамилия</label>
+        </div>
+
+        <div class="md-form">
+          <i class="fas fa-envelope prefix grey-text"></i>
+          <input type="email" id="form2" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="form2">Ваш емейл</label>
+        </div>
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <a type="button" class="btn btn-outline-warning waves-effect">Отправить <i class="fas fa-paper-plane-o ml-1"></i></a>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+
+<div class="modal fade" id="feedback" tabindex="-1" role="dialog" aria-labelledby="Форма обратной связи"
+  aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-warning" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header danger-color text-center">
+        <h4 class="modal-title white-text w-100 font-weight-bold py-2">Форма обратной связи</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+        <div class="md-form mb-5">
+          <i class="fas fa-user prefix grey-text"></i>
+          <input type="text" id="form3" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="form3">Фамилия</label>
+        </div>
+
+        <div class="md-form">
+          <i class="fas fa-envelope prefix grey-text"></i>
+          <input type="email" id="form2" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="form2">Ваш емейл</label>
+        </div>
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <a type="button" class="btn btn-outline-danger waves-effect">Отправить <i class="fas fa-paper-plane-o ml-1"></i></a>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+
+<div class="modal fade" id="services" tabindex="-1" role="dialog" aria-labelledby="Дополнительные услуги"
+  aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-warning" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header success-color text-center">
+        <h4 class="modal-title white-text w-100 font-weight-bold py-2">Дополнительные услуги</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+        <div class="md-form mb-5">
+          <i class="fas fa-user prefix grey-text"></i>
+          <input type="text" id="form3" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="form3">Фамилия</label>
+        </div>
+
+        <div class="md-form">
+          <i class="fas fa-envelope prefix grey-text"></i>
+          <input type="email" id="form2" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="form2">Ваш емейл</label>
+        </div>
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <a type="button" class="btn btn-outline-success waves-effect">Отправить <i class="fas fa-paper-plane-o ml-1"></i></a>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+
+
+
+
+{% endblock %}

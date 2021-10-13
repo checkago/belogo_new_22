@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% include '_header_pages.html' %}
+<div class="container">
+    <div class="row">
+        {% include '_sidebar_bib.html' %}
+        <div class="col-md-9">
+            <h3 class="">{{ title }}</h3>
+            <hr class="hr-dark">
+            {% for Biblioteka in biblioteki %}
+                {% if Biblioteka.primary == True %}
+            <div class="col-12">
+
+                <div class="card mb-2 pb-2 hover-overlay ripple">
+                  <div class="card-body pt-1 pb-1 mt-1 mb-1">
+                    <p class="card-text">
+                      <div class="row">
+                        <div class="col-md-4">
+                            <a href="{% url 'biblioteka' Biblioteka.pk %}"><img class='img-fluid' src="{{ Biblioteka.image.url }}" /></a>
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="text-center text-dark black-text"><strong>{{ Biblioteka.name }}</strong></h5>
+                            <hr>
+                            <h5 class="blue-text pb-2"><strong>{{ Biblioteka.phone }}</strong></h5>
+                            <h5 class="blue-text pb-2"><strong>{{ Biblioteka.email }}</strong></h5>
+                            <h6>{{ Biblioteka.adress }}</h6>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+            {% else %}
+                <div class="col-md-4 d-flex mt-3">
+                <div class="card card-cascade wider hover-overlay ripple">
+
+                  <!-- Card image -->
+                  <div class="view view-cascade overlay">
+                    <img class="card-img-top" src="{{ Biblioteka.image.url }}" alt="Card image cap">
+                    <a href="{% url 'biblioteka' Biblioteka.pk %}">
+                      <div class="mask rgba-white-slight"></div>
+                    </a>
+                  </div>
+
+                  <!-- Card content -->
+                  <div class="card-body card-body-cascade text-center pb-0">
+
+                    <!-- Title -->
+                    <h5 class="card-title"><strong>{{ Biblioteka.name }}</strong></h5>
+                    <!-- Subtitle -->
+                    <h6 class="blue-text pb-2"><strong>{{ Biblioteka.phone }}</strong></h6>
+                    <!-- Text -->
+
+                  </div>
+
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+{% include '_footer.html' %}
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% include '_header_pages.html' %}
+<div class="container">
+    <div class="row">
+        {% include '_sidebar_bib.html' %}
+        <div class="col-md-9">
+            <h3 class="">{{ title }}</h3>
+            <hr class="hr-dark">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+               {% if page_obj.has_previous %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                </li>
+                  {% endif %}
+              {% for p in paginator.page_range %}
+                  {% if page_obj.number == p %}
+                <li class="page-item active" aria-current="page">
+                  <a class="page-link" href="#">{{ p }} <span class="visually-hidden"></span></a>
+                </li>
+                   {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+                  {% endif %}
+              {% endfor %}
+              {% if page_obj.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a>
+                </li>
+               {% endif %}
+              </ul>
+            </nav>
+            <ul class="">
+                {% for Document in documents %}
+                    <li><a href="{% url 'document' Document.pk %}">{{ Document.name }}</a></li>
+                {% endfor %}
+            </ul>
+            <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-center">
+                   {% if page_obj.has_previous %}
+                    <li class="page-item">
+                      <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                    </li>
+                      {% endif %}
+                  {% for p in paginator.page_range %}
+                      {% if page_obj.number == p %}
+                    <li class="page-item active" aria-current="page">
+                      <a class="page-link" href="#">{{ p }} <span class="visually-hidden"></span></a>
+                    </li>
+                       {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+                      {% endif %}
+                  {% endfor %}
+                  {% if page_obj.has_next %}
+                    <li class="page-item">
+                      <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a>
+                    </li>
+                   {% endif %}
+                  </ul>
+                </nav>
+
+        </div>
+    </div>
+</div>
+{% include '_footer.html' %}
+
+{% endblock %}

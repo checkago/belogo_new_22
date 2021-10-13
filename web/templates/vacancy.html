@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% include '_header_pages.html' %}
+<div class="container">
+    <div class="row">
+        {% include '_sidebar_bib.html' %}
+        <div class="col-md-9">
+            <h3>{{ vacancy.date }} | <strong><strong>{{ vacancy.position }}</strong></strong></h3>
+            <hr class="hr-dark">
+            <div class="col-md-5 title"><h5><strong>Оклад:</strong> {{ vacancy.salary }} руб.</h5></div>
+            <section class="extra-margins pb-5 text-lg-left">
+
+                          <!-- Grid column -->
+                          <div class="col-md-12">
+
+                            <!-- Text -->
+                            <p class="dark-grey-text mb-3 mt-4 mx-4 wow fadeIn" data-wow-delay="0.2s">
+                                {{ vacancy.description|safe }}
+                            </p>
+
+                          </div>
+                          <!-- Grid column -->
+
+
+                      </section>
+        </div>
+    </div>
+</div>
+{% include '_footer.html' %}
+
+{% endblock %}

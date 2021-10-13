@@ -1,0 +1,131 @@
+from django.shortcuts import render, get_object_or_404, redirect
+from django.core.paginator import Paginator
+from .forms import *
+from .models import *
+
+
+def index(request):
+    title = 'МБУК ЦБС им. А. Белого'
+    categories = Category.objects.filter(name='Новости')
+    category = Category.objects.all()
+    partners1 = Partner.objects.filter(block='1').order_by('?')
+    partners2 = Partner.objects.filter(block='2').order_by('?')
+    branch_categories = categories.get_descendants(include_self=True)
+    news_list = News.objects.filter(category__in=branch_categories).distinct().order_by('-date')[:6]
+
+    if request.method == 'POST':
+        bform = BookForm(request.POST)
+
+        if bform.is_valid():
+            Book = bform.save(commit=False)
+            Book.save()
+            return redirect('/')
+
+    else:
+        bform = BookForm()
+
+    return render(request, 'index.html', {'bform': bform, 'title': title, 'news': news, 'category': category, 'categories': categories,
+                                          'news_list': news_list, 'partners1': partners1, 'partners2': partners2})
+
+
+def biblioteki(request):
+    title = 'Состав централизованной библиотечной системы'
+    biblioteki = Biblioteka.objects.all()
+    return render(request, 'biblioteki.html', {'title': title, 'biblioteki': biblioteki})
+
+
+def biblioteka(request, pk):
+    biblioteka = get_object_or_404(Biblioteka, pk=pk)
+    title = biblioteka.name
+    direktor = Biblioteka.direktor
+    phone = Biblioteka.phone
+    return render(request, 'biblioteka.html', {'title': title, 'biblioteka': biblioteka, 'direktor': direktor, 'phone': phone})
+
+
+def news(request):
+    categories = Category.objects.filter(name='Новости')
+    title = 'Новости ЦБС им. А. Белого'
+    branch_categories = categories.get_descendants(include_self=True)
+    news_list = News.objects.filter(category__in=branch_categories).distinct().order_by('-date')
+    paginator = Paginator(news_list, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'news_all.html', {'categories': categories, 'title': title,
+                                             'news_list': news_list, 'paginator': paginator, 'page_obj': page_obj})
+
+
+def news_view(request, pk):
+    news = get_object_or_404(News, pk=pk)
+    category = Category.objects.filter(name='Новости')
+    title = news.name
+    image = News.image
+    description = News.description
+    date = News.date
+    return render(request, 'news.html', {'news': news, 'title': title, 'image': image, 'description': description, 'date': date,
+                                         'category': category})
+
+
+def documents(request):
+    categories = Category.objects.filter(name='Документы')
+    title = 'Оффициальные документы библиотечной системы'
+    branch_categories = categories.get_descendants(include_self=True)
+    docs_list = Document.objects.filter(category__in=branch_categories).distinct().order_by('-date')
+    paginator = Paginator(docs_list, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'documents.html', {'categories': categories, 'title': title,
+                                              'docs_list': docs_list, 'paginator': paginator, 'page_obj': page_obj})
+
+
+def document(request, pk):
+    document = get_object_or_404(Document, pk=pk)
+    category = Document.category
+    title = document.name
+    image = Document.image
+    description = Document.description
+    date = Document.date
+    return render(request, 'document.html', {'title': title, 'document': document, 'date': date, 'description': description,
+                                             'image': image, 'category': category})
+
+
+def raitings(request):
+    categories = Category.objects.filter(name='Оценка качества')
+    title = 'Документы оценки качества'
+    branch_categories = categories.get_descendants(include_self=True)
+    raitings = Raiting.objects.filter(category__in=branch_categories).distinct().order_by('-date')
+    paginator = Paginator(raitings, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'qualitys.html', {'categories': categories, 'title': title, 'raitings': raitings,
+                                             'paginator': paginator, 'page_obj': page_obj})
+
+
+def raiting(request, pk):
+    quality = get_object_or_404(Raiting, pk=pk)
+    title = quality.name
+    date = quality.date
+    name = quality.name
+    description = quality.description
+    return render(request, 'quality.html', {'title': title, 'date': date, 'name': name, 'description': description})
+
+
+def vacancies(request):
+    title = 'Вакансии МБУК "ЦБС им. А. Белого'
+    vacancies = Vacancy.objects.all()
+    paginator = Paginator(vacancies, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'vacancies.html', {'title': title, 'vacancies': vacancies,
+                                              'paginator': paginator, 'page_obj': page_obj})
+
+
+def vacancy(request, pk):
+    vacancy = get_object_or_404(Vacancy, pk=pk)
+    title = vacancy.position
+    date = Vacancy.date
+    salary = Vacancy.salary
+    description = Vacancy.description
+    return render(request, 'vacancy.html', {'title': title, 'vacancy': vacancy, 'date': date, 'salary': salary,
+                                            'description': description})

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% include '_header_pages.html' %}
+<div class="container">
+    <div class="row">
+        {% include '_sidebar_bib.html' %}
+        <div class="col-md-9">
+            <h3 class="">{{ title }}</h3>
+            <hr class="hr-dark">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img class=img-fluid src="{{ biblioteka.image.url }}" />
+                        </div>
+                        <div class="col-md-8">
+                            <p><strong class="font-weight-bold">{{ biblioteka.direktor }}:</strong> {{ biblioteka.employer }}</p>
+                            <p><strong class="font-weight-bold">Адрес:</strong> {{ biblioteka.adress }}</p>
+                            <p><strong class="font-weight-bold">Телефон:</strong> <strong class="blue-text"><strong>{{ biblioteka.phone }}</strong></strong></p>
+                            <p><strong class="font-weight-bold">Время работы:</strong> {{ biblioteka.worktime }}</p>
+                            <p><strong class="font-weight-bold">Рабочие дни:</strong> {{ biblioteka.workdays }}</p>
+                            <p><strong><strong class="blue-text">Последний день месяца – санитарный</strong></strong></p>
+                            <p><strong class="font-weight-bold">Соц.сети:</strong> {% if biblioteka.instagram != Null %}<a href='{{ biblioteka.instagram }}'><i class="fab fa-instagram fa-2x pink-text"></i></a>{% else %}{% endif %} {% if biblioteka.facebook != Null %}<a href="{{ biblioteka.facebook }}"><i class="fab fa-facebook fa-2x blue-text"></i></a>{% else %}{% endif %}</p>
+                            <hr>
+                        </div>
+                    </div>
+        <div>{{ biblioteka.description|safe }}</div>
+
+                <hr class="hr-pink mb-3">
+
+        </div>
+    </div>
+</div>
+{% include '_footer.html' %}
+
+{% endblock %}
