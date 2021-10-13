@@ -18,6 +18,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./:/usr/src/bibsite
+    ports:
+      - "8000:8000"
     depends_on:
       - postgresdb
 
