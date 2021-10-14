@@ -15,8 +15,7 @@ RUN apk add postgresql-dev
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-RUN chmod +x entrypoint.sh
 
 COPY . .
 
-ENTRYPOINT ["/usr/src/bibsite/entrypoint.sh"]
+ENTRYPOINT ["sh", "/usr/src/bibsite/entrypoint.sh"]
