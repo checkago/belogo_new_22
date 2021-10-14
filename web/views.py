@@ -90,6 +90,20 @@ def document(request, pk):
                                              'image': image, 'category': category})
 
 
+def services(request):
+    categories = Category.objects.filter(name='Услуги')
+    title = 'Услуги библиотечной системы'
+    branch_categories = categories.get_descendants(include_self=True)
+    services_list = Service.objects.filter(category__in=branch_categories).distinct().order_by('id')
+    paginator = Paginator(services_list, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'services_all.html', {'categories': categories, 'title': title,
+                                              'services_list': services_list, 'paginator': paginator, 'page_obj': page_obj})
+
+
+
 def raitings(request):
     categories = Category.objects.filter(name='Оценка качества')
     title = 'Документы оценки качества'

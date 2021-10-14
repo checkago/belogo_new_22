@@ -39,6 +39,21 @@ class NewsAdmin(admin.ModelAdmin):
     list_display = ('name', 'category',)
 
 
+class DocumentAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorUploadingWidget(config_name='awesome_ckeditor'))
+
+    class Meta:
+        verbose_name = 'Текст'
+        model = Document
+        fields = '__all__'
+
+
+class DocumentAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name',)}
+    form = DocumentAdminForm
+    list_display = ('name',)
+
+
 class CinemaAdmin(admin.ModelAdmin):
     list_display = ('name',)
 
@@ -102,6 +117,7 @@ class PartnerAdmin(admin.ModelAdmin):
 
 
 admin.site.register(News, NewsAdmin),
+admin.site.register(Document, DocumentAdmin),
 admin.site.register(Event, EventAdmin),
 admin.site.register(Cinema, CinemaAdmin),
 admin.site.register(Biblioteka, BibliotekaAdmin),

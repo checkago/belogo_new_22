@@ -12,6 +12,7 @@ urlpatterns = [
     path('biblioteki/<int:pk>/', views.biblioteka, name='biblioteka'),
     path('documents/', views.documents, name='documents'),
     path('documents/<int:pk>/', views.document, name='document'),
+    path('services/', views.services, name='services'),
     path('quality/', views.raitings, name='raitings'),
     path('quality/<int:pk>/', views.raiting, name='raiting'),
     path('vacancy/', views.vacancies, name='vacancies'),

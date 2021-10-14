@@ -1,13 +1,31 @@
 {% load static %}
 {% load mptt_tags %}
-<div class="container">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url 'index' %}"><i class="fas fa-home"></i></a> </li>
-
-          <li class="breadcrumb-item"><a href="{{ category.url }}">&nbsp;{{ category }} </a></li>
-
-        <li class="breadcrumb-item active" aria-current="page">&nbsp;{{ title }}</li>
-      </ol>
+<div class="container mb-3">
+    <nav class="navbar scrolling-navbar navbar-light">
+      <div class="container">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-8"
+          aria-controls="navbarSupportedContent-8" aria-expanded="true" aria-label="Мобильное меню">
+          <span class="navbar-toggler-icon"></span><span class=""> МЕНЮ раздела</span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent-8">
+            <ul class="sidenav-menu mt-3 mb-3 ">
+            <li class="sidenav-item mt-1">
+                <a class="nav-link h6 ripple-surface" href="{% url 'biblioteki' %}" tabindex="1"> <i class="fas fa-hotel pr-3"></i><strong> Библиотеки</strong></a>
+            </li>
+            <li class="sidenav-item mt-1">
+                <a class="nav-link h6 ripple-surface" href="{% url 'documents' %}" tabindex="1"> <i class="fas fa-folder-open pr-3"></i><strong> Документы</strong></a>
+            </li>
+            <li class="sidenav-item mt-1">
+                <a class="nav-link h6 ripple-surface" href="{% url 'raitings' %}" tabindex="1"> <i class="fas fa-spell-check pr-3"></i><strong> Качество</strong></a>
+            </li>
+            <li class="sidenav-ite mt-1">
+                <a class="nav-link h6 ripple-surface" href="{% url 'news' %}" tabindex="1"> <i class="far fa-newspaper pr-3"></i><strong> Новости</strong></a>
+            </li>
+            <li class="sidenav-item mt-1">
+                <a class="nav-link h6 ripple-surface" href="{% url 'vacancies' %}"tabindex="1"> <i class="fas fa-id-badge pr-3"></i><strong> Вакансии</strong></a>
+            </li>
+        </ul>
+        </div>
+      </div>
     </nav>
 </div>

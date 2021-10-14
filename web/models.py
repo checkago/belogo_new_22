@@ -1,3 +1,5 @@
+from unicodedata import category
+
 from django.db import models
 from datetime import date
 from mptt.models import MPTTModel, TreeForeignKey
@@ -185,7 +187,7 @@ class Feedback(models.Model):
 
 
 class Edizm(models.Model):
-    name = models.CharField(max_length=5, verbose_name='Название')
+    name = models.CharField(max_length=100, verbose_name='Название')
 
     class Meta:
         verbose_name = 'Еденица измерения'
@@ -196,7 +198,10 @@ class Edizm(models.Model):
 
 
 class Service(models.Model):
+    category = models.ForeignKey(u'Category', blank=True, on_delete=models.SET_NULL, related_name='services',
+                                 null=True, verbose_name='Категория')
     name = models.CharField(max_length=200, verbose_name='Название услуги')
+    time = models.CharField(max_length=3, blank=True, verbose_name='Время')
     ed_izm = models.ForeignKey(u'Edizm', blank=True, on_delete=models.SET_NULL, null=True, verbose_name='Ед. изм.')
     price = models.IntegerField(verbose_name='Цена')
 

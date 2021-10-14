@@ -3,10 +3,10 @@
 
 {% block content %}
 {% include '_header_pages.html' %}
-<div class="container">
+<div class="container" xmlns="http://www.w3.org/1999/html">
     <div class="row">
-        {% include '_sidebar_bib.html' %}
-        <div class="col-md-9">
+
+        <div class="col-md-12">
             <h3 class="">{{ title }}</h3>
             <hr class="hr-dark">
             <nav aria-label="Page navigation example">
@@ -33,8 +33,8 @@
               </ul>
             </nav>
             <ul class="">
-                {% for Document in documents %}
-                    <li><a href="{% url 'document' Document.pk %}">{{ Document.name }}</a></li>
+                {% for Document in page_obj %}
+                    <li><a href="{% url 'document' Document.pk %}"><h5><span class="font-weight-bold">{{ Document.name }}</h5></span></a></li>
                 {% endfor %}
             </ul>
             <nav aria-label="Page navigation example">
