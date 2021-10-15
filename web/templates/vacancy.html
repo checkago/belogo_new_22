@@ -3,11 +3,13 @@
 
 {% block content %}
 {% include '_header_pages.html' %}
+
 <div class="container">
+    {% include "_page_menu_bib.html" %}
     <div class="row">
 
         <div class="col-md-12">
-            <h3>{{ vacancy.date }} | <strong><strong>{{ vacancy.position }}</strong></strong></h3>
+            <h5 class="text-left text-dark black-text text-bold"><strong>{{ vacancy.name }}</strong> | {{ vacancy.date }}</h5>
             <hr class="hr-dark">
             <div class="col-md-5 title"><h5><strong>Оклад:</strong> {{ vacancy.salary }} руб.</h5></div>
             <section class="extra-margins pb-5 text-lg-left">

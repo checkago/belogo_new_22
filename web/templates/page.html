@@ -3,18 +3,24 @@
 
 {% block content %}
 {% include '_header_pages.html' %}
+
 <div class="container">
+    {% include "_page_menu_service.html" %}
     <div class="row">
-        {% include '_sidebar_bib.html' %}
-        <div class="col-md-9">
+
+        <div class="col-md-12">
             <h3 class="">{{ title }}</h3>
             <hr class="hr-dark">
+            <div class="col-md-8">
+                Дата публикации: <h4>{{ fservice.date }}</h4>
+            </div>
+            <div>{{ fservice.description|safe }}</div>
 
-
+                <hr class="hr-pink mb-3">
 
         </div>
     </div>
 </div>
-
+{% include '_footer.html' %}
 
 {% endblock %}

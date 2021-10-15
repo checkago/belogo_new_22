@@ -3,6 +3,7 @@ from django import forms
 from mptt.admin import DraggableMPTTAdmin
 from ckeditor.widgets import CKEditorWidget
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from import_export.admin import ImportExportModelAdmin
 from web.models import *
 
 
@@ -84,15 +85,11 @@ class EmployerAdmin(admin.ModelAdmin):
     list_display = ('lastname', 'position',)
 
 
-class EdizmAdmin(admin.ModelAdmin):
-    list_display = ('name',)
-
-
 class Service_dopAdmin(admin.ModelAdmin):
     list_display = ('name', 'price',)
 
 
-class ServiceAdmin(admin.ModelAdmin):
+class ServiceAdmin(ImportExportModelAdmin):
     list_display = ('name', 'price',)
 
 
@@ -116,6 +113,54 @@ class PartnerAdmin(admin.ModelAdmin):
     list_display = ('name', 'link', 'published',)
 
 
+
+class FreeServiceAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorUploadingWidget(config_name='awesome_ckeditor'))
+
+    class Meta:
+        verbose_name = 'Текст'
+        model = FreeService
+        fields = '__all__'
+
+
+class FreeServiceAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name',)}
+    form = FreeServiceAdminForm
+    list_display = ('id', 'name',)
+
+
+
+class TermsOfUseAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorUploadingWidget(config_name='awesome_ckeditor'))
+
+    class Meta:
+        verbose_name = 'Текст'
+        model = TermsOfUse
+        fields = '__all__'
+
+
+class TermsOfUseAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name',)}
+    form = TermsOfUseAdminForm
+    list_display = ('id', 'name',)
+
+
+
+class VacancyAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorUploadingWidget(config_name='awesome_ckeditor'))
+
+    class Meta:
+        verbose_name = 'Текст'
+        model = Vacancy
+        fields = '__all__'
+
+
+class VacancyAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name',)}
+    form = VacancyAdminForm
+    list_display = ('name', 'salary',)
+
+
 admin.site.register(News, NewsAdmin),
 admin.site.register(Document, DocumentAdmin),
 admin.site.register(Event, EventAdmin),
@@ -123,7 +168,6 @@ admin.site.register(Cinema, CinemaAdmin),
 admin.site.register(Biblioteka, BibliotekaAdmin),
 admin.site.register(Position, PositionAdmin),
 admin.site.register(Employers, EmployerAdmin),
-admin.site.register(Edizm, EdizmAdmin),
 admin.site.register(Service_dop, Service_dopAdmin),
 admin.site.register(Service, ServiceAdmin),
 admin.site.register(Book, BookAdmin),
@@ -131,3 +175,6 @@ admin.site.register(Question, QuestionAdmin),
 admin.site.register(Feedback, FeedbackAdmin),
 admin.site.register(Service_dop_form, Service_dop_formAdmin),
 admin.site.register(Partner, PartnerAdmin),
+admin.site.register(FreeService, FreeServiceAdmin),
+admin.site.register(TermsOfUse, TermsOfUseAdmin),
+admin.site.register(Vacancy, VacancyAdmin),

@@ -5,16 +5,16 @@
 {% include '_header_pages.html' %}
 
 <div class="container">
-    {% include "_page_menu_bib.html" %}
+    {% include "_page_menu_service.html" %}
     <div class="row">
 
         <div class="col-md-12">
             <h3 class="">{{ title }}</h3>
             <hr class="hr-dark">
-            <div class="col-md-8">
-                Дата публикации: <h4>{{ date }}</h4>
+            <div class="mb-3">
+                Дата публикации: <h4>{{ fservice.date }}</h4>
             </div>
-            <div>{{ description|safe }}</div>
+            <div>{{ fservice.description|safe }}</div>
 
                 <hr class="hr-pink mb-3">
 

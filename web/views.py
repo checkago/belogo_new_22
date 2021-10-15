@@ -103,6 +103,21 @@ def services(request):
                                               'services_list': services_list, 'paginator': paginator, 'page_obj': page_obj})
 
 
+def free_services(request, pk):
+    fservice = get_object_or_404(FreeService, pk=pk)
+    title = fservice.name
+    description = FreeService.description
+    date = FreeService.date
+    return render(request, 'fservice.html', {'title': title, 'fservice': fservice, 'date': date, 'description': description})
+
+
+def termsofuse(request, pk):
+    tofuse = get_object_or_404(TermsOfUse, pk=pk)
+    title = tofuse.name
+    description = TermsOfUse.description
+    date = TermsOfUse.date
+    return render(request, 'termsofuse.html', {'title': title, 'tofuse': tofuse, 'date': date, 'description': description})
+
 
 def raitings(request):
     categories = Category.objects.filter(name='Оценка качества')
@@ -137,9 +152,10 @@ def vacancies(request):
 
 def vacancy(request, pk):
     vacancy = get_object_or_404(Vacancy, pk=pk)
-    title = vacancy.position
+    title = vacancy.name
+    name = Vacancy.name
     date = Vacancy.date
     salary = Vacancy.salary
     description = Vacancy.description
-    return render(request, 'vacancy.html', {'title': title, 'vacancy': vacancy, 'date': date, 'salary': salary,
+    return render(request, 'vacancy.html', {'title': title, 'name': name, 'vacancy': vacancy, 'date': date, 'salary': salary,
                                             'description': description})

@@ -17,6 +17,8 @@ urlpatterns = [
     path('quality/<int:pk>/', views.raiting, name='raiting'),
     path('vacancy/', views.vacancies, name='vacancies'),
     path('vacancy/<int:pk>/', views.vacancy, name='vacancy'),
+    path('fservices/<int:pk>/', views.free_services, name='free_services'),
+    path('terms/<int:pk>/', views.termsofuse, name='termsofuse'),
 ]
 
 

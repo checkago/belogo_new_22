@@ -186,24 +186,13 @@ class Feedback(models.Model):
         return self.name
 
 
-class Edizm(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Название')
-
-    class Meta:
-        verbose_name = 'Еденица измерения'
-        verbose_name_plural = 'Еденицы измерения'
-
-    def __str__(self):
-        return self.name
-
-
 class Service(models.Model):
     category = models.ForeignKey(u'Category', blank=True, on_delete=models.SET_NULL, related_name='services',
                                  null=True, verbose_name='Категория')
     name = models.CharField(max_length=200, verbose_name='Название услуги')
     time = models.CharField(max_length=3, blank=True, verbose_name='Время')
-    ed_izm = models.ForeignKey(u'Edizm', blank=True, on_delete=models.SET_NULL, null=True, verbose_name='Ед. изм.')
-    price = models.IntegerField(verbose_name='Цена')
+    ed_izm = models.CharField(max_length=100, blank=True, verbose_name='Название')
+    price = models.CharField(max_length=100, blank=True, verbose_name='Цена')
 
     class Meta:
         verbose_name = 'Услуга'
@@ -215,8 +204,8 @@ class Service(models.Model):
 
 class Service_dop(models.Model):
     name = models.CharField(max_length=200, verbose_name='Название услуги')
-    ed_izm = models.ForeignKey(u'Edizm', blank=True, on_delete=models.SET_NULL, null=True, verbose_name='Ед. изм.')
-    price = models.IntegerField(verbose_name='Цена')
+    ed_izm = models.CharField(max_length=100, blank=True, verbose_name='Название')
+    price = models.CharField(max_length=100, blank=True, verbose_name='Цена')
 
     class Meta:
         verbose_name = 'Дополнительная услуга'
@@ -293,6 +282,35 @@ class Vacancy(models.Model):
     def __str__(self):
         return self.name
 
+
+class TermsOfUse(models.Model):
+    date = models.DateField(default=date.today, verbose_name='Дата')
+    name = models.CharField(max_length=100, verbose_name='Название')
+    slug = models.SlugField(null=True, unique=True, verbose_name='Псевдоним')
+    description = models.TextField(verbose_name='Текст')
+    published = models.BooleanField(default=True, verbose_name='Опубликована')
+
+    class Meta:
+        verbose_name = 'Правила пользования'
+        verbose_name_plural = 'Правила пользования'
+
+    def __str__(self):
+        return self.name
+
+
+class FreeService(models.Model):
+    date = models.DateField(default=date.today, verbose_name='Дата')
+    name = models.CharField(max_length=100, verbose_name='Название')
+    slug = models.SlugField(null=True, unique=True, verbose_name='Псевдоним')
+    description = models.TextField(verbose_name='Текст')
+    published = models.BooleanField(default=True, verbose_name='Опубликована')
+
+    class Meta:
+        verbose_name = 'Бесплатные услуги'
+        verbose_name_plural = 'Бесплатные услуги'
+
+    def __str__(self):
+        return self.name
 
 
 
