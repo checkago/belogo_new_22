@@ -9,7 +9,14 @@
     <div class="row">
 
         <div class="col-md-12">
-            <h5 class="text-left text-dark black-text text-bold"><strong>{{ vacancy.name }}</strong> | {{ vacancy.date }}</h5>
+            <div class="row">
+                <div class="col-md-8">
+                  <h5 class="text-left text-dark black-text text-bold"><strong>{{ vacancy.name }}</strong> | {{ vacancy.date }}</h5>
+                </div>
+                <div class="col-md-4">
+                    <a class="btn btn-sm btn-rounded btn-outline-warning float-right">Назад</a>
+                </div>
+            </div>
             <hr class="hr-dark">
             <div class="col-md-5 title"><h5><strong>Оклад:</strong> {{ vacancy.salary }} руб.</h5></div>
             <section class="extra-margins pb-5 text-lg-left">

@@ -9,3 +9,10 @@ class BookForm(forms.ModelForm):
     class Meta:
         model = Book
         fields = ('fio', 'bilet', 'phone', 'email', 'comment', 'category')
+
+
+class BookForm(forms.ModelForm):
+
+    class Meta:
+        model = Book
+        fields = ('fio', 'bilet', 'phone', 'email', 'comment', 'category')
