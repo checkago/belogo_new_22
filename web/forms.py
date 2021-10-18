@@ -11,8 +11,8 @@ class BookForm(forms.ModelForm):
         fields = ('fio', 'bilet', 'phone', 'email', 'comment', 'category')
 
 
-class BookForm(forms.ModelForm):
+class FeedbackForm(forms.ModelForm):
 
     class Meta:
-        model = Book
-        fields = ('fio', 'bilet', 'phone', 'email', 'comment', 'category')
+        model = Feedback
+        fields = ('name', 'phone', 'email', 'comment', 'category')

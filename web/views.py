@@ -159,3 +159,22 @@ def vacancy(request, pk):
     description = Vacancy.description
     return render(request, 'vacancy.html', {'title': title, 'name': name, 'vacancy': vacancy, 'date': date, 'salary': salary,
                                             'description': description})
+
+
+def contacts(request):
+    title = 'Контакты'
+    category = Category.objects.get(id=1)
+    biblioteki = Biblioteka.objects.all
+
+    if request.method == 'POST':
+        fback = FeedbackForm(request.POST, initial={"category": "category"})
+
+        if fback.is_valid():
+            Feedback = fback.save(commit=False)
+            Feedback.save()
+            return redirect('/contacts')
+
+    else:
+        fback = FeedbackForm()
+
+    return render(request, 'contacts.html', {'fback': fback, 'title': title, 'biblioteki': biblioteki, 'category': category})
