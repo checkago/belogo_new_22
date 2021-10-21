@@ -49,9 +49,39 @@ INSTALLED_APPS = [
     'mptt',
     'crispy_forms',
     'import_export',
+    'admin_reorder'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+ADMIN_REORDER = (
+    # НОВОСТИ
+    {'app': 'web', 'label': 'НОВОСТИ',
+     'models': ('web.News',)
+     },
+    # ГЛАВНАЯ СТРАНИЦА
+    {'app': 'web', 'label': 'ГЛАВНАЯ СТРАНИЦА',
+     'models': ('web.Partner', 'web.Shedule', 'web.Event', 'web.Cinema',)
+    },
+    # БИБЛИОТЕКИ
+    {'app': 'web', 'label': 'БИБЛИОТЕКА',
+     'models': ('web.Biblioteka', 'web.Document', 'web.Raiting', 'web.Vacancy')
+    },
+    # УСЛУГИ
+    {'app': 'web', 'label': 'УСЛУГИ',
+     'models': ('web.Service', 'web.FreeService', 'web.TermsOfUse',)
+    },
+    # ФОРМЫ
+    {'app': 'alcohol', 'label': 'ФОРМЫ',
+     'models': ('web.Book', 'web.Question', 'web.Feedback', 'web.Service_dop',)
+     },
+    # СПРАВОЧНИКИ
+    {'app': 'web', 'label':'СПРАВОЧНИКИ',
+     'models': ('web.Position', 'web.Employers', 'web.Category',)
+     }
+)
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -61,6 +91,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'admin_reorder.middleware.ModelAdminReorder',
 ]
 
 ROOT_URLCONF = 'belogo_new.urls'

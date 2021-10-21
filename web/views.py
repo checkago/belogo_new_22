@@ -8,6 +8,9 @@ def index(request):
     title = 'МБУК ЦБС им. А. Белого'
     categories = Category.objects.filter(name='Новости')
     category = Category.objects.all()
+    shedule = Shedule.objects.latest('id')
+    event = Event.objects.latest('id')
+    cinema = Cinema.objects.latest('id')
     partners1 = Partner.objects.filter(block='1').order_by('?')
     partners2 = Partner.objects.filter(block='2').order_by('?')
     branch_categories = categories.get_descendants(include_self=True)
@@ -25,7 +28,8 @@ def index(request):
         bform = BookForm()
 
     return render(request, 'index.html', {'bform': bform, 'title': title, 'news': news, 'category': category, 'categories': categories,
-                                          'news_list': news_list, 'partners1': partners1, 'partners2': partners2})
+                                          'news_list': news_list, 'partners1': partners1, 'partners2': partners2, 'shedule': shedule,
+                                          'event': event, 'cinema': cinema})
 
 
 def biblioteki(request):

@@ -37,7 +37,7 @@ class Category(MPTTModel):
 
     def get_pages(self):
         ids = self.get_descendants(include_self=True).values_list('id')
-        var = Book or News or Feedback or Document or Vacancy or Raiting
+        var = Book or News or Feedback or Document or Vacancy or Raiting or Service
         return var.objects.filter(category_id__in=ids).count()
 
     class Meta:
@@ -112,34 +112,47 @@ class Partner(models.Model):
 
 class Event(models.Model):
     name = models.CharField(max_length=100, verbose_name='Название события')
-    date = models.DateField(verbose_name='Дата проведения')
+    date = models.DateField(default=date.today, verbose_name='Дата проведения')
     image = models.ImageField(upload_to='img/events', blank=True, null=True, verbose_name='Изображение')
 
     class Meta:
         verbose_name = 'Событие'
         verbose_name_plural = 'События'
 
-    def  __str__(self):
-        return self.name
+    def __str__(self):
+        return f"{self.name} | {self.date}"
 
 
 class Cinema(models.Model):
     name = models.CharField(max_length=100, verbose_name='тема кинозала')
-    date = models.DateField(verbose_name='Дата проведения')
+    date = models.DateField(default=date.today, verbose_name='Дата проведения')
     image = models.ImageField(upload_to='img/events', blank=True, null=True, verbose_name='Изображение')
 
     class Meta:
         verbose_name = 'Кинозал'
         verbose_name_plural = 'Темы кинозала'
 
-    def  __str__(self):
-        return self.name
+    def __str__(self):
+        return f"{self.name} | {self.date}"
 
+
+class Shedule(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Системное расписание')
+    date = models.DateField(default=date.today, verbose_name='Дата версии')
+    image = models.ImageField(upload_to='img/events', blank=True, null=True, verbose_name='Изображение')
+
+    class Meta:
+        verbose_name = 'Системное расписание'
+        verbose_name_plural = 'Системные расписания'
+
+    def __str__(self):
+        return f"{self.name} | {self.date}"
 
 # FORMS
 class Book(models.Model):
     category = models.ForeignKey(u'Category', default='Продление книг', blank=True, on_delete=models.SET_NULL,
                                  related_name='books', null=True, verbose_name='Категория')
+    date = models.DateTimeField(auto_now=True, verbose_name='Дата')
     fio = models.CharField(max_length=200, verbose_name='ФИО')
     bilet = models.CharField(max_length=18, verbose_name='№ читательского билета', blank=True)
     phone = models.CharField(max_length=17, blank=True, verbose_name='Телефон')
@@ -151,7 +164,7 @@ class Book(models.Model):
         verbose_name_plural = 'Формы продления книг'
 
     def __str__(self):
-        return self.fio
+        return f"{self.fio} | {self.date}"
 
 
 class Question(models.Model):
@@ -286,6 +299,7 @@ class Vacancy(models.Model):
 class TermsOfUse(models.Model):
     date = models.DateField(default=date.today, verbose_name='Дата')
     name = models.CharField(max_length=100, verbose_name='Название')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория')
     slug = models.SlugField(null=True, unique=True, verbose_name='Псевдоним')
     description = models.TextField(verbose_name='Текст')
     published = models.BooleanField(default=True, verbose_name='Опубликована')
@@ -301,6 +315,7 @@ class TermsOfUse(models.Model):
 class FreeService(models.Model):
     date = models.DateField(default=date.today, verbose_name='Дата')
     name = models.CharField(max_length=100, verbose_name='Название')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория')
     slug = models.SlugField(null=True, unique=True, verbose_name='Псевдоним')
     description = models.TextField(verbose_name='Текст')
     published = models.BooleanField(default=True, verbose_name='Опубликована')

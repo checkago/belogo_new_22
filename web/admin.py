@@ -49,6 +49,21 @@ class DocumentAdminForm(forms.ModelForm):
         fields = '__all__'
 
 
+class RaitingAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name',)}
+    form = DocumentAdminForm
+    list_display = ('name',)
+
+
+class RaitingAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorUploadingWidget(config_name='awesome_ckeditor'))
+
+    class Meta:
+        verbose_name = 'Текст'
+        model = Raiting
+        fields = '__all__'
+
+
 class DocumentAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     form = DocumentAdminForm
@@ -77,6 +92,18 @@ class BibliotekaAdmin(admin.ModelAdmin):
     form = BibliotekaAdminForm
 
 
+class SheduleAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+
+class EventAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+
+class CinemaAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+
 class PositionAdmin(admin.ModelAdmin):
     list_display = ('name',)
 
@@ -94,7 +121,7 @@ class ServiceAdmin(ImportExportModelAdmin):
 
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('fio', 'bilet', 'phone', 'email', 'comment',)
+    list_display = ('date', 'fio', 'bilet', 'phone', 'email', 'comment',)
 
 
 class QuestionAdmin(admin.ModelAdmin):
@@ -163,6 +190,8 @@ class VacancyAdmin(admin.ModelAdmin):
 
 admin.site.register(News, NewsAdmin),
 admin.site.register(Document, DocumentAdmin),
+admin.site.register(Raiting, RaitingAdmin),
+admin.site.register(Shedule, SheduleAdmin),
 admin.site.register(Event, EventAdmin),
 admin.site.register(Cinema, CinemaAdmin),
 admin.site.register(Biblioteka, BibliotekaAdmin),
