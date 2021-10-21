@@ -7,57 +7,158 @@
 {% block content %}
 {% include '_header_pages.html' %}
 
-<div id="fback" class="container">
-    <h3 class="">{{ title }}</h3>
-    <hr class="hr-dark">
-
-    <form method="POST">
+<div id="fback" class="container mt-5 pt-2  pb-2 mt-2">
+    <div class="row">
+    <div class="col-xs-12 col-lg-5 mb-3">
+        <form method="POST">
         {% csrf_token %}
-        <div class="modal-content">
-          <!--Header-->
-          <div class="modal-header primary-color text-center">
-            <h4 class="modal-title white-text w-100 font-weight-bold py-2">Форма обратной связи</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
-              <span aria-hidden="true" class="white-text">&times;</span>
-            </button>
+        <!-- Form with header -->
+        <div class="card wow fadeIn" data-wow-delay="0.3s">
+            <div class="card-body">
+
+          <!-- Header -->
+            <div class="form-header bg-yellow2">
+            <h3 class="font-weight-500 my-2 py-1 text-dark"><i class="fas fa-user"></i> Форма обратной связи:</h3>
           </div>
-          <!--Body-->
-          <div class="modal-body">
+
+          <!-- Body -->
               <div hidden>{% crispy_field fback.category %}</div>
-            <div class="md-form mb-5">
-                <i class="fas fa-user prefix grey-text"></i>
-                {% crispy_field fback.name 'class' 'form-control' 'placeholder' 'Иван' %}
-                <label data-error="Не верно" data-success="Верно" for="form2"><strong>{{ form.name.label }}</strong></label>
+              <div class="md-form">
+                <i class="fas fa-user prefix dark-grey-text"></i>
+                {% crispy_field fback.name 'class' 'form-control' %}
+                <label for="orangeForm-name">Ваше имя</label>
+              </div>
+
+              <div class="md-form">
+                <i class="fas fa-envelope prefix dark-grey-text"></i>
+                {% crispy_field fback.email 'class' 'form-control' %}
+                <label for="orangeForm-email">Ваша почта</label>
+              </div>
+
+              <div class="md-form">
+                <i class="fas fa-phone prefix dark-grey-text"></i>
+                {% crispy_field fback.phone 'class' 'form-control' %}
+                <label for="orangeForm-phone">Номер телефона</label>
+              </div>
+
+              <div class="md-form">
+                <i class="fas fa-envelope prefix dark-grey-text"></i>
+                {% crispy_field fback.comment %}
+                <label for="orangeForm-text">Сообщение</label>
+              </div>
+
+              <div class="text-center">
+                <button type="submit" class="btn bg-yellow2 btn-lg">Оправить</button>
+              </div>
+
             </div>
-
-
-            <div class="md-form">
-                <i class="fas fa-phone prefix grey-text"></i>
-                {% crispy_field fback.phone 'class' 'form-control' 'placeholder' '8 (999) 999-99-99' %}
-                <label data-error="Не верно" data-success="Верно" for="form2"><strong>{{ form.phone.label }}</strong></label>
-            </div>
-
-            <div class="md-form">
-                <i class="fas fa-envelope prefix grey-text"></i>
-                {% crispy_field fback.email 'class' 'form-control' 'placeholder' 'Почта' %}
-                <label data-error="Не верно" data-success="Верно" for="form2"><strong>{{ form.email.label }}</strong></label>
-            </div>
-
-            <div class="md-form">
-                <i class="fas fa-comment-alt prefix grey-text"></i>
-                {% crispy_field fback.comment 'class' 'form-control' 'placeholder' 'Ваше сообщение или список книг' %}
-                <label data-error="Не верно" data-success="Верно" for="form2"><strong>{{ form.comment.label }}</strong></label>
-            </div>
-          </div>
-
-          <!--Footer-->
-          <div class="modal-footer justify-content-center">
-            <button type="submit" class="btn btn-outline-blue waves-effect">Отправить <i class="fas fa-paper-plane-o ml-1"></i></button>
-          </div>
         </div>
+        <!-- Form with header -->
     </form>
-    <!--/.Content-->
+    </div>
+    <div class="col-xs-12 col-lg-7 mt-3">
+        <h2 class="page-header">МБУК "ЦБС им. А. Белого"</h2>
+        <p>Муниципальное Бюджетное Учреждение Культуры</p>
+        <p>"Централизованная Библиотечная Система имени Андрея Белого"</p>
+        <hr>
+        <span class="font-weight-bold">АДРЕС: </span>
+        <ul>
+            <li>
+                143980, Московская область,
+            </li>
+            <li>
+                г. о. Балашиха, мкр. Железнодорожный,
+            </li>
+            <li>
+                ул. Пролетарская, д. 8
+            </li>
+        </ul>
+
+        <span class="font-weight-bold">ТЕЛЕФОН: </span> +7 (495) 522-11-44
+        <br>
+        <span class="font-weight-bold">ЭЛЕКТРОННАЯ ПОЧТА: </span> bib76@yandex.ru
+        <hr>
+          <!-- СОЦСЕТИ -->
+        <div class="inline-ul text-center d-flex justify-content-center">
+          <a href="https://www.instagram.com/bib.a.belogo/"
+             rel="nofollow" target="_blank" class="nav-link waves-effect waves-light">
+              <i class="fab fa-instagram fa-2x pink-text-2"></i>
+          </a>
+          <a href="http://www.facebook.com/profile.php?id=100004034438828/"
+             rel="nofollow" target="_blank" class="nav-link waves-effect waves-light">
+              <i class="fab fa-facebook fa-2x text-primary"></i>
+          </a>
+          <a href="https://www.youtube.com/channel/UCC41ydTC2Kljun8jya1Iyog/featured"
+             rel="nofollow" target="_blank" class="nav-link waves-effect waves-light">
+              <i class="fab fa-youtube fa-2x text-danger"></i>
+          </a>
+
+        </div>
+    </div>
 </div>
+</div>
+<section>
+    <div class="container">
+        <div class="divider-new">
+            <h4 class="h4-responsive font-weight-bold spirits-text-dark mx-3">Адреса и местоположение филиалов</h4>
+        </div>
+        <!-- Accordion wrapper -->
+        <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+          <!-- Accordion card -->
+            {% for Biblioteka in biblioteki %}
+                {% if Biblioteka.primary == True %}
+                {% else %}
+          <div class="card">
+
+            <!-- Card header -->
+            <div class="card-header" role="tab" id="headingOne{{ Biblioteka.id }}">
+
+              <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne{{ Biblioteka.id }}" aria-expanded="true"
+                aria-controls="collapseOne{{ Biblioteka.id }}">
+
+                <h5 class="mb-0">
+
+                    <span class="font-weight-bold">{{ Biblioteka.name }}</span>
+
+                  <i class="fas fa-angle-down rotate-icon"></i>
+
+                </h5>
+
+              </a>
+
+            </div>
+
+            <!-- Card body -->
+            <div id="collapseOne{{ Biblioteka.id }}" class="collapse" role="tabpanel" aria-labelledby="headingOne{{ Biblioteka.id }}"
+              data-parent="#accordionEx">
+
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-md-2 col-lg-4">
+                           <span class="font-weight-bold">ЗАВЕДУЮЩИЙ: </span> {{ Biblioteka.employer }}
+                           <br><br>
+                           <span class="font-weight-bold">ТЕЛЕФОН: </span> {{ Biblioteka.phone }}
+                           <br>
+                           <span class="font-weight-bold">ЭЛЕКТРОННАЯ ПОЧТА: </span> {{ Biblioteka.email }}
+                          <br><br>
+                           <span class="font-weight-bold">АДРЕС: </span> {{ Biblioteka.adress }}
+                      </div>
+                      <div class="col-md-12 col-lg-8">
+                          <iframe frameborder="0" height="350" src="{{ Biblioteka.map }}" width="100%"></iframe>
+                      </div>
+                  </div>
+              </div>
+
+            </div>
+
+          </div>
+          <!-- Accordion card -->
+                {% endif %}
+            {% endfor %}
+        </div>
+        <!-- Accordion wrapper -->
+    </div>
+</section>
 {% include '_footer.html' %}
 
 {% endblock %}

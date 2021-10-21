@@ -12,6 +12,10 @@ class BookForm(forms.ModelForm):
 
 
 class FeedbackForm(forms.ModelForm):
+    comment = forms.CharField(
+        label='Сообщение',
+        widget=forms.Textarea(attrs={'rows': '1'})
+    )
 
     class Meta:
         model = Feedback

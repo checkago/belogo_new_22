@@ -37,7 +37,7 @@ class Category(MPTTModel):
 
     def get_pages(self):
         ids = self.get_descendants(include_self=True).values_list('id')
-        var = Book or News or Feedback or Document or Vacancy or Raiting or Service
+        var = Book or News or Feedback or Document or Vacancy or Raiting or Service or Feedback
         return var.objects.filter(category_id__in=ids).count()
 
     class Meta:
@@ -69,6 +69,7 @@ class Biblioteka(models.Model):
     workdays = models.CharField(max_length=50, verbose_name='Рабочие дни', blank=True, default='Вт-Вск')
     adress = models.CharField(max_length=250, verbose_name='Адрес')
     primary = models.BooleanField(default=False, verbose_name='Основное подразделение')
+    map = models.URLField(blank=True, null=True, verbose_name='Ссылка на карту')
 
     class Meta:
         verbose_name = 'Библиотека/Филиал'
@@ -189,7 +190,7 @@ class Feedback(models.Model):
     name = models.CharField(max_length=35, verbose_name='Имя' )
     email = models.EmailField(verbose_name='Емэйл')
     phone = models.CharField(max_length=17, blank=True, default='8 (965) 999 99 99')
-    comment = models.TextField(verbose_name='Вопрос')
+    comment = models.TextField(max_length=350, verbose_name='Вопрос')
 
     class Meta:
         verbose_name = 'Форма обратной связи'

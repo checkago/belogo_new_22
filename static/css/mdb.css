@@ -1463,7 +1463,8 @@ button.bg-dark:focus {
   border-color: #212121 !important; }
 
 .bg-light {
-  background-color: #e0e0e0 !important; }
+  background-color: #ffc107 !important;
+  }
 
 a.bg-light:hover, a.bg-light:focus,
 button.bg-light:hover,
@@ -8648,7 +8649,8 @@ span[data-jarallax-element] {
     margin-bottom: 1.88rem;
     text-align: center; }
     .carousel-multi-item .controls-top .btn-floating {
-      background: #4285f4; }
+      background: #fb3;
+      }
   .carousel-multi-item .carousel-indicators {
     margin-bottom: -2em; }
   .carousel-multi-item .card-cascade.narrower {

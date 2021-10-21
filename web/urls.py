@@ -19,6 +19,8 @@ urlpatterns = [
     path('vacancy/<int:pk>/', views.vacancy, name='vacancy'),
     path('fservices/<int:pk>/', views.free_services, name='free_services'),
     path('terms/<int:pk>/', views.termsofuse, name='termsofuse'),
+    path('resources/', views.resources, name='resources'),
+    path('projects/', views.projects, name='projects'),
     path('contacts/', views.contacts, name='contacts'),
 ]
 

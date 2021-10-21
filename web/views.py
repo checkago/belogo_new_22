@@ -168,7 +168,7 @@ def vacancy(request, pk):
 def contacts(request):
     title = 'Контакты'
     category = Category.objects.get(id=1)
-    biblioteki = Biblioteka.objects.all
+    biblioteki = Biblioteka.objects.all()
 
     if request.method == 'POST':
         fback = FeedbackForm(request.POST, initial={"category": "category"})
@@ -182,3 +182,15 @@ def contacts(request):
         fback = FeedbackForm()
 
     return render(request, 'contacts.html', {'fback': fback, 'title': title, 'biblioteki': biblioteki, 'category': category})
+
+
+def resources(request):
+    title = 'Данный раздел на данный момент не доступен'
+    text = 'Раздел находится в процессе доработки и наполнения материалами. Попробуйте вернутся позже'
+    return render(request, 'empty.html', {'title': title, 'text': text,})
+
+
+def projects(request):
+    title = 'Данный раздел на данный момент не доступен'
+    text = 'Раздел находится в процессе доработки и наполнения материалами. Попробуйте вернутся позже'
+    return render(request, 'empty.html', {'title': title, 'text': text,})
