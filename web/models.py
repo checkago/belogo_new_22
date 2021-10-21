@@ -17,7 +17,7 @@ class Position(models.Model):
 
 
 class Employers(models.Model):
-    position = models.ForeignKey(u'Position', blank=True, on_delete=models.SET_NULL, related_name='employer', null=True, verbose_name='Должность')
+    position = models.ForeignKey(Position, blank=True, on_delete=models.SET_NULL, related_name='employer', null=True, verbose_name='Должность')
     lastname = models.CharField(max_length=50, verbose_name='Фамилия')
     firstname = models.CharField(max_length=50, verbose_name='Имя')
     surname = models.CharField(max_length=50, verbose_name='Отчество')
@@ -55,7 +55,7 @@ class Category(MPTTModel):
 class Biblioteka(models.Model):
     name = models.CharField(max_length=100, verbose_name='Название')
     slug = models.SlugField(null=True, unique=True, verbose_name='Псевдоним')
-    category = models.ForeignKey(u'Category', blank=True, on_delete=models.SET_NULL, null=True, verbose_name='Категория')
+    category = models.ForeignKey(Category, blank=True, on_delete=models.SET_NULL, null=True, verbose_name='Категория')
     phone = models.CharField(max_length=18, default='+7 (495) 555-55-55', verbose_name='Телефон')
     email = models.EmailField(verbose_name='Емэйл', blank=True)
     direktor = models.ForeignKey(u'Position', blank=True, on_delete=models.SET_NULL, related_name='positions', null=True, verbose_name='Должность')
@@ -83,7 +83,7 @@ class News(models.Model):
     date = models.DateField(default=date.today, verbose_name='Дата')
     name = models.CharField(max_length=250, verbose_name='Заголовок')
     slug = models.SlugField(null=True, unique=True, verbose_name='Псевдоним')
-    category = models.ForeignKey(u'Category', blank=True, on_delete=models.SET_NULL, related_name='news', null=True, verbose_name='Категория')
+    category = models.ForeignKey(Category, blank=True, on_delete=models.SET_NULL, related_name='news', null=True, verbose_name='Категория')
     description = models.TextField(verbose_name='Текст')
     image = models.ImageField(upload_to='img/news', blank=True, null=True, verbose_name='Главное фото')
     published = models.BooleanField(default=True, verbose_name='Опубликована')
@@ -149,9 +149,10 @@ class Shedule(models.Model):
     def __str__(self):
         return f"{self.name} | {self.date}"
 
+
 # FORMS
 class Book(models.Model):
-    category = models.ForeignKey(u'Category', default='Продление книг', blank=True, on_delete=models.SET_NULL,
+    category = models.ForeignKey(Category, default='Продление книг', blank=True, on_delete=models.SET_NULL,
                                  related_name='books', null=True, verbose_name='Категория')
     date = models.DateTimeField(auto_now=True, verbose_name='Дата')
     fio = models.CharField(max_length=200, verbose_name='ФИО')
@@ -169,7 +170,7 @@ class Book(models.Model):
 
 
 class Question(models.Model):
-    category = models.ForeignKey(u'Category', default='Вопрос библиотекарю', blank=True, related_name='questions',
+    category = models.ForeignKey(Category, default='Вопрос библиотекарю', blank=True, related_name='questions',
                                  on_delete=models.SET_NULL, null=True, verbose_name='Категория')
     name = models.CharField(max_length=35, verbose_name='Имя' )
     email = models.EmailField(verbose_name='Емэйл')
@@ -185,7 +186,7 @@ class Question(models.Model):
 
 
 class Feedback(models.Model):
-    category = models.ForeignKey(u'Category', default='Форма обратной связи', blank=True, related_name='feedbacks',
+    category = models.ForeignKey(Category, default='Форма обратной связи', blank=True, related_name='feedbacks',
                                  on_delete=models.SET_NULL, null=True, verbose_name='Категория')
     name = models.CharField(max_length=35, verbose_name='Имя' )
     email = models.EmailField(verbose_name='Емэйл')
@@ -201,7 +202,7 @@ class Feedback(models.Model):
 
 
 class Service(models.Model):
-    category = models.ForeignKey(u'Category', blank=True, on_delete=models.SET_NULL, related_name='services',
+    category = models.ForeignKey(Category, blank=True, on_delete=models.SET_NULL, related_name='services',
                                  null=True, verbose_name='Категория')
     name = models.CharField(max_length=200, verbose_name='Название услуги')
     time = models.CharField(max_length=3, blank=True, verbose_name='Время')
@@ -230,7 +231,7 @@ class Service_dop(models.Model):
 
 
 class Service_dop_form(models.Model):
-    service = models.ForeignKey(u'Service_dop', blank=True, on_delete=models.SET_NULL, null=True, verbose_name='Выбор услуги')
+    service = models.ForeignKey(Service_dop, blank=True, on_delete=models.SET_NULL, null=True, verbose_name='Выбор услуги')
     date = models.DateField(default=date.today, verbose_name='Дата')
     fio = models.CharField(default='Иванов Иван Иванович', max_length=200, verbose_name='ФИО')
     phone = models.CharField(max_length=17, blank=True, default='8 (965) 999 99 99')
@@ -249,7 +250,7 @@ class Document(models.Model):
     date = models.DateField(default=date.today, verbose_name='Дата')
     name = models.CharField(max_length=250, verbose_name='Заголовок')
     slug = models.SlugField(null=True, unique=True, verbose_name='Псевдоним')
-    category = models.ForeignKey(u'Category', blank=True, on_delete=models.SET_NULL, related_name='documents', null=True, verbose_name='Категория')
+    category = models.ForeignKey(Category, blank=True, on_delete=models.SET_NULL, related_name='documents', null=True, verbose_name='Категория')
     description = models.TextField(verbose_name='Текст')
     image = models.ImageField(upload_to='img/news', blank=True, null=True, verbose_name='Главное фото')
     published = models.BooleanField(default=True, verbose_name='Опубликована')
@@ -266,7 +267,7 @@ class Raiting(models.Model):
     date = models.DateField(default=date.today, verbose_name='Дата')
     name = models.CharField(max_length=250, verbose_name='Заголовок')
     slug = models.SlugField(null=True, unique=True, verbose_name='Псевдоним')
-    category = models.ForeignKey(u'Category', blank=True, on_delete=models.SET_NULL, related_name='raitings', null=True, verbose_name='Категория')
+    category = models.ForeignKey(Category, blank=True, on_delete=models.SET_NULL, related_name='raitings', null=True, verbose_name='Категория')
     description = models.TextField(verbose_name='Текст')
     image = models.ImageField(upload_to='img/news', blank=True, null=True, verbose_name='Главное фото')
     published = models.BooleanField(default=True, verbose_name='Опубликована')
@@ -283,10 +284,10 @@ class Vacancy(models.Model):
     date = models.DateField(default=date.today, verbose_name='Дата')
     name = models.CharField(max_length=250, verbose_name='Заголовок')
     slug = models.SlugField(null=True, unique=True, verbose_name='Псевдоним')
-    category = models.ForeignKey(u'Category', blank=True, on_delete=models.SET_NULL, related_name='vacancies', null=True, verbose_name='Категория')
+    category = models.ForeignKey(Category, blank=True, on_delete=models.SET_NULL, related_name='vacancies', null=True, verbose_name='Категория')
     salary = models.CharField(max_length=5, verbose_name='Оклад')
     description = models.TextField(verbose_name='Текст')
-    image = models.ImageField(upload_to='img/news', blank=True, null=True, verbose_name='Главное фото')
+    image = models.ImageField(upload_to='img/vacancy', blank=True, null=True, verbose_name='Главное фото')
     published = models.BooleanField(default=True, verbose_name='Опубликована')
 
     class Meta:
