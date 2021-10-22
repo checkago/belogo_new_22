@@ -25,30 +25,30 @@
               <div hidden>{% crispy_field fback.category %}</div>
               <div class="md-form">
                 <i class="fas fa-user prefix dark-grey-text"></i>
-                {% crispy_field fback.name 'class' 'form-control' %}
-                <label for="orangeForm-name">Ваше имя</label>
+                {% crispy_field fback.name 'class' 'form-control textInput required' 'placeholder' ' ' %}
+                <label for="orangeForm-name" class="active">Ваше имя <span class="sup text-danger">*</span></label>
               </div>
 
               <div class="md-form">
                 <i class="fas fa-envelope prefix dark-grey-text"></i>
-                {% crispy_field fback.email 'class' 'form-control' %}
-                <label for="orangeForm-email">Ваша почта</label>
+                {% crispy_field fback.email 'class' 'form-control emailinput required' 'placeholder' ' ' %}
+                <label for="orangeForm-email" class="active">Ваша почта <span class="sup text-danger">*</span></label>
               </div>
 
               <div class="md-form">
-                <i class="fas fa-phone prefix dark-grey-text"></i>
-                {% crispy_field fback.phone 'class' 'form-control' %}
-                <label for="orangeForm-phone">Номер телефона</label>
+                  <i class="fas fa-phone prefix dark-grey-text"></i>
+                {% crispy_field fback.phone 'class' 'form-control textInput' 'placeholder' ' ' %}
+                <label for="orangeForm-phone" class="active">Номер телефона</label>
               </div>
 
               <div class="md-form">
                 <i class="fas fa-envelope prefix dark-grey-text"></i>
-                {% crispy_field fback.comment %}
-                <label for="orangeForm-text">Сообщение</label>
+                {% crispy_field fback.comment 'class' 'form-control md-textarea' 'placeholder' ' ' %}
+                <label for="orangeForm-text" class="active">Сообщение <span class="sup text-danger">*</span></label>
               </div>
-
+                <span class="sup text-danger">*</span><span class="font-small"> - обязательное поле</span>
               <div class="text-center">
-                <button type="submit" class="btn bg-yellow2 btn-lg">Оправить</button>
+                <button type="submit" class="btn bg-yellow2 btn-lg font-weight-bold">Оправить</button>
               </div>
 
             </div>
@@ -57,9 +57,9 @@
     </form>
     </div>
     <div class="col-xs-12 col-lg-7 mt-3">
-        <h2 class="page-header">МБУК "ЦБС им. А. Белого"</h2>
-        <p>Муниципальное Бюджетное Учреждение Культуры</p>
-        <p>"Централизованная Библиотечная Система имени Андрея Белого"</p>
+        <h2 class="page-header text-center">МБУК "ЦБС им. А. Белого"</h2>
+        <p  class="text-center">Муниципальное Бюджетное Учреждение Культуры</p>
+        <p class="text-center">"Централизованная Библиотечная Система имени Андрея Белого"</p>
         <hr>
         <span class="font-weight-bold">АДРЕС: </span>
         <ul>
@@ -97,7 +97,7 @@
     </div>
 </div>
 </div>
-<section>
+<section class="pb-4 mb-3">
     <div class="container">
         <div class="divider-new">
             <h4 class="h4-responsive font-weight-bold spirits-text-dark mx-3">Адреса и местоположение филиалов</h4>

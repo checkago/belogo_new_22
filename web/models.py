@@ -174,7 +174,7 @@ class Question(models.Model):
                                  on_delete=models.SET_NULL, null=True, verbose_name='Категория')
     name = models.CharField(max_length=35, verbose_name='Имя' )
     email = models.EmailField(verbose_name='Емэйл')
-    phone = models.CharField(max_length=17, blank=True, default='8 (965) 999 99 99')
+    phone = models.CharField(max_length=17, blank=True)
     comment = models.TextField(verbose_name='Вопрос')
 
     class Meta:
@@ -190,7 +190,7 @@ class Feedback(models.Model):
                                  on_delete=models.SET_NULL, null=True, verbose_name='Категория')
     name = models.CharField(max_length=35, verbose_name='Имя' )
     email = models.EmailField(verbose_name='Емэйл')
-    phone = models.CharField(max_length=17, blank=True, default='8 (965) 999 99 99')
+    phone = models.CharField(max_length=17, blank=True)
     comment = models.TextField(max_length=350, verbose_name='Вопрос')
 
     class Meta:
