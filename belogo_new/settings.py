@@ -62,7 +62,7 @@ ADMIN_REORDER = (
      },
     # ГЛАВНАЯ СТРАНИЦА
     {'app': 'web', 'label': 'ГЛАВНАЯ СТРАНИЦА',
-     'models': ('web.Partner', 'web.Shedule', 'web.Event', 'web.Cinema',)
+     'models': ('web.Event', 'web.Cinema', 'web.Shedule', 'web.Partner')
     },
     # БИБЛИОТЕКИ
     {'app': 'web', 'label': 'БИБЛИОТЕКА',
@@ -119,23 +119,23 @@ WSGI_APPLICATION = 'belogo_new.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.sqlite3',
-       'NAME': BASE_DIR / 'db.sqlite3',
-   }
-}
-
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': env("POSTGRES_DB"),
-#         'USER': env("POSTGRES_USER"),
-#         'PASSWORD': env("POSTGRES_PASSWORD"),
-#         'HOST': env("POSTGRES_HOST"),
-#         'PORT': env("POSTGRES_PORT")
-#     }
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env("POSTGRES_DB"),
+        'USER': env("POSTGRES_USER"),
+        'PASSWORD': env("POSTGRES_PASSWORD"),
+        'HOST': env("POSTGRES_HOST"),
+        'PORT': env("POSTGRES_PORT")
+    }
+}
 
 
 
