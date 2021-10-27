@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load crispy_forms_field %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+{% include '_header_pages.html' %}
+
+<div class="container">
+    <nav class='mt-2' aria-label="breadcrumb sm-hidden" id="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+      </ol>
+    </nav>
+    <div class="row">
+        <div class="col-md-3 col-lg-3"></div>
+        <div class="col-md-6 col-lg-6 mt-3 mb-3 pt-3 pb-3">
+            <div class="mt-2 mb-4">
+                <!--Content-->
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="card wow fadeIn" data-wow-delay="0.3s">
+                        <div class="card">
+
+                              <!--Body-->
+                              <div class="card-body">
+                                  <!--Header-->
+                                  <div class="form-header bg-yellow2">
+                                    <h4 class="card-title text-dark w-100 font-weight-bold py-2">Продление книг/и</h4>
+                                  </div>
+                                  <div hidden>{% crispy_field bform.category %}</div>
+                                <div class="md-form">
+                                    <i class="fas fa-user prefix grey-text"></i>
+                                    {% crispy_field bform.fio 'class' 'form-control' 'placeholder' '' %}
+                                    <label data-error="Не верно" data-success="Верно" for="form2"><strong>{{ bform.fio.label }}</strong></label>
+                                </div>
+
+                                <div class="md-form">
+                                    <i class="fas fa-id-card prefix grey-text"></i>
+                                    {% crispy_field bform.bilet 'class' 'form-control' 'placeholder' '' %}
+                                    <label data-error="Не верно" data-success="Верно" for="form2"><strong>{{ bform.bilet.label }}</strong></label>
+                                </div>
+
+                                <div class="md-form">
+                                    <i class="fas fa-phone prefix grey-text"></i>
+                                    {% crispy_field bform.phone 'class' 'form-control' 'placeholder' '' %}
+                                    <label data-error="Не верно" data-success="Верно" for="form2"><strong>{{ bform.phone.label }}</strong></label>
+                                </div>
+
+                                <div class="md-form">
+                                    <i class="fas fa-envelope prefix grey-text"></i>
+                                    {% crispy_field bform.email 'class' 'form-control' 'placeholder' '' %}
+                                    <label data-error="Не верно" data-success="Верно" for="form2"><strong>{{ bform.email.label }}</strong></label>
+                                </div>
+
+                                <div class="md-form">
+                                    <i class="fas fa-comment-alt prefix grey-text"></i>
+                                    {% crispy_field bform.comment 'class' 'form-control  md-textarea' 'placeholder' '' %}
+                                    <label data-error="Не верно" data-success="Верно" for="form2"><strong>{{ bform.comment.label }}</strong></label>
+                                </div>
+                              </div>
+
+                              <!--Footer-->
+                              <div class="modal-footer justify-content-center">
+                                <button type="submit" class="btn bg-yellow2 waves-effect">Отправить <i class="fas fa-paper-plane-o ml-1"></i></button>
+                              </div>
+                        </div>
+                    </div>
+                </form>
+                <!--/.Content-->
+            </div>
+        </div>
+        <div class="col-md-3 col-lg-3"></div>
+    </div>
+</div>
+{% include '_footer.html' %}
+
+{% endblock %}

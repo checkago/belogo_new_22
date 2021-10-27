@@ -1,11 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
+from django.core.mail import send_mail
 from .forms import *
 from .models import *
 
 
 def index(request):
     title = 'МБУК ЦБС им. А. Белого'
+    anonsy = Anons.objects.all()
     categories = Category.objects.filter(name='Новости')
     category = Category.objects.all()
     shedule = Shedule.objects.latest('id')
@@ -16,18 +18,7 @@ def index(request):
     branch_categories = categories.get_descendants(include_self=True)
     news_list = News.objects.filter(category__in=branch_categories).distinct().order_by('-date')[:6]
 
-    if request.method == 'POST':
-        bform = BookForm(request.POST)
-
-        if bform.is_valid():
-            Book = bform.save(commit=False)
-            Book.save()
-            return redirect('/')
-
-    else:
-        bform = BookForm()
-
-    return render(request, 'index.html', {'bform': bform, 'title': title, 'news': news, 'category': category, 'categories': categories,
+    return render(request, 'index.html', {'title': title, 'anonsy': anonsy, 'news': news, 'category': category, 'categories': categories,
                                           'news_list': news_list, 'partners1': partners1, 'partners2': partners2, 'shedule': shedule,
                                           'event': event, 'cinema': cinema})
 
@@ -176,6 +167,10 @@ def contacts(request):
         if fback.is_valid():
             Feedback = fback.save(commit=False)
             Feedback.save()
+            subject = 'Сообщение от {} ({})'.format(cd['name'], cd['email'])
+            message = '"{}". {} | {}'.format(cd['comment'], cd['name'], cd['phone'])
+            send_mail(subject, message, 'site@biblioteka-belogo.ru', [cd['email'], 'bib76@yandex.ru'])
+            sent = True
             return redirect('/contacts')
 
     else:
@@ -187,10 +182,101 @@ def contacts(request):
 def resources(request):
     title = 'Данный раздел на данный момент не доступен'
     text = 'Раздел находится в процессе доработки и наполнения материалами. Попробуйте вернутся позже'
-    return render(request, 'empty.html', {'title': title, 'text': text,})
+    return render(request, 'empty.html', {'title': title, 'text': text})
 
 
 def projects(request):
     title = 'Данный раздел на данный момент не доступен'
     text = 'Раздел находится в процессе доработки и наполнения материалами. Попробуйте вернутся позже'
-    return render(request, 'empty.html', {'title': title, 'text': text,})
+    return render(request, 'empty.html', {'title': title, 'text': text})
+
+
+def veterany_vov(request):
+    title = 'Жители Железнодорожного - участники Великой Отечественной войны'
+    veterans = VeteranVOV.objects.all()
+    paginator = Paginator(veterans, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'veterany_vov.html', {'title': title, 'veterans': veterans,
+                                             'paginator': paginator, 'page_obj': page_obj})
+
+
+def veterany_tyla(request):
+    title = 'Труженики тыла'
+    veterans = VeteranTruda.objects.all()
+    return render(request, 'veterany_tyla.html', {'title': title, 'veterans': veterans})
+
+
+def lg_residents(request):
+    title = 'Жители блокадного Ленинграда, проживающие в Железнодорожном.'
+    residents = LeningradResident.objects.all()
+    return render(request, 'lg_residents_vov.html', {'title': title, 'residents': residents})
+
+
+def kniga_pamyati(request):
+    title = 'Книга памяти'
+    heroes = HeroMemoryBook.objects.all()
+    return render(request, 'vov_kniga_pamyati.html', {'title': title, 'heroes': heroes})
+
+
+def book_form(request):
+    title = 'Форма форма продления книг/и'
+    sent = False
+    if request.method == 'POST':
+        bform = BookForm(request.POST)
+        if bform.is_valid():
+            Book = bform.save(commit=False)
+            cd = bform.cleaned_data
+            Book.save()
+            subject = 'Запрос на продление книги с сайта, от {} ({})'.format(cd['fio'], cd['email'])
+            message = '"{}". Чит.билет №{} {}'.format(cd['fio'], cd['bilet'], cd['comment'])
+            send_mail(subject, message, 'site@biblioteka-belogo.ru', [cd['email'], 'chzbelogo@yandex.ru'])
+            sent = True
+            return redirect('/')
+
+    else:
+        bform = BookForm()
+
+    return render(request, 'book_form.html', {'title': title, 'bform': bform, 'sent': sent})
+
+
+def q_form(request):
+    title = 'Задайте ваш вопрос библиотекарю'
+    sent = False
+    if request.method == 'POST':
+        qform = QuestionForm(request.POST)
+        if qform.is_valid():
+            Question = qform.save(commit=False)
+            cd = qform.cleaned_data
+            Question.save()
+            subject = 'Вопрос библиотекарю от {} ({})'.format(cd['name'], cd['email'])
+            message = '"{}". {}'.format(cd['comment'], cd['name'])
+            send_mail(subject, message, 'site@biblioteka-belogo.ru', [cd['email'], 'bib76@yandex.ru'])
+            sent = True
+            return redirect('/')
+
+    else:
+        qform = QuestionForm()
+
+    return render(request, 'q_form.html', {'title': title, 'qform': qform, 'sent': sent})
+
+
+def s_form(request):
+    title = 'Ваше мероприятие или аренда зала'
+    sent = False
+    if request.method == 'POST':
+        sform = ServiceDopForm(request.POST)
+        if sform.is_valid():
+            ServiceDop = sform.save(commit=False)
+            cd = sform.cleaned_data
+            ServiceDop.save()
+            subject = 'Запрос на "{}" от {} ({})'.format(cd['service'], cd['fio'], cd['email'])
+            message = '{} "{}". {} | {}'.format(cd['service'], cd['comment'], cd['fio'], cd['phone'])
+            send_mail(subject, message, 'site@biblioteka-belogo.ru', [cd['email'], 'bib76@yandex.ru'])
+            sent = True
+            return redirect('/')
+
+    else:
+        sform = ServiceDopForm()
+
+    return render(request, 's_form.html', {'title': title, 'sform': sform, 'sent': sent})

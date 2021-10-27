@@ -157,8 +157,8 @@ class Book(models.Model):
     date = models.DateTimeField(auto_now=True, verbose_name='Дата')
     fio = models.CharField(max_length=200, verbose_name='ФИО')
     bilet = models.CharField(max_length=18, verbose_name='№ читательского билета', blank=True)
-    phone = models.CharField(max_length=17, blank=True, verbose_name='Телефон')
-    email = models.EmailField(verbose_name='Емэйл')
+    phone = models.CharField(max_length=17, blank=True, verbose_name='Номер елефона')
+    email = models.EmailField(verbose_name='Е-мэйл')
     comment = models.TextField(max_length=300, verbose_name='Комментарий')
 
     class Meta:
@@ -172,9 +172,9 @@ class Book(models.Model):
 class Question(models.Model):
     category = models.ForeignKey(Category, default='Вопрос библиотекарю', blank=True, related_name='questions',
                                  on_delete=models.SET_NULL, null=True, verbose_name='Категория')
-    name = models.CharField(max_length=35, verbose_name='Имя' )
-    email = models.EmailField(verbose_name='Емэйл')
-    phone = models.CharField(max_length=17, blank=True)
+    name = models.CharField(max_length=35, verbose_name='Имя')
+    email = models.EmailField(verbose_name='Е-мэйл')
+    phone = models.CharField(max_length=17, blank=True, verbose_name='Номер телефона')
     comment = models.TextField(verbose_name='Вопрос')
 
     class Meta:
@@ -188,10 +188,10 @@ class Question(models.Model):
 class Feedback(models.Model):
     category = models.ForeignKey(Category, default='Форма обратной связи', blank=True, related_name='feedbacks',
                                  on_delete=models.SET_NULL, null=True, verbose_name='Категория')
-    name = models.CharField(max_length=35, verbose_name='Имя' )
-    email = models.EmailField(verbose_name='Емэйл')
-    phone = models.CharField(max_length=17, blank=True)
-    comment = models.TextField(max_length=350, verbose_name='Вопрос')
+    name = models.CharField(max_length=35, verbose_name='Имя')
+    email = models.EmailField(verbose_name='Е-мэйл')
+    phone = models.CharField(max_length=17, blank=True, verbose_name='Номер телефона')
+    comment = models.TextField(max_length=350, verbose_name='Комментарий')
 
     class Meta:
         verbose_name = 'Форма обратной связи'
@@ -219,7 +219,7 @@ class Service(models.Model):
 
 class Service_dop(models.Model):
     name = models.CharField(max_length=200, verbose_name='Название услуги')
-    ed_izm = models.CharField(max_length=100, blank=True, verbose_name='Название')
+    ed_izm = models.CharField(max_length=100, blank=True, verbose_name='Время/кол-во')
     price = models.CharField(max_length=100, blank=True, verbose_name='Цена')
 
     class Meta:
@@ -230,20 +230,23 @@ class Service_dop(models.Model):
         return self.name
 
 
-class Service_dop_form(models.Model):
-    service = models.ForeignKey(Service_dop, blank=True, on_delete=models.SET_NULL, null=True, verbose_name='Выбор услуги')
-    date = models.DateField(default=date.today, verbose_name='Дата')
-    fio = models.CharField(default='Иванов Иван Иванович', max_length=200, verbose_name='ФИО')
-    phone = models.CharField(max_length=17, blank=True, default='8 (965) 999 99 99')
-    email = models.EmailField(verbose_name='Емэйл')
-    comment = models.TextField(default='Ваш комментарий или список книг для продления', max_length=300, verbose_name='Комментарий')
+class ServiceDop(models.Model):
+    category = models.ForeignKey(Category, default='Форма для услуг', blank=True, on_delete=models.SET_NULL, related_name='dopservices',
+                                 null=True, verbose_name='Категория')
+    service = models.ForeignKey(Service_dop, blank=True, on_delete=models.SET_NULL, null=True,
+                                verbose_name='Выбор услуги')
+    date = models.DateField(verbose_name='Дата')
+    fio = models.CharField(max_length=200, verbose_name='ФИО')
+    phone = models.CharField(max_length=17, blank=True, verbose_name='Номер телефона')
+    email = models.EmailField(verbose_name='Е-мэйл')
+    comment = models.TextField(verbose_name='Комментарий')
 
     class Meta:
         verbose_name = 'Форма дополнительной услуги'
         verbose_name_plural = 'Формы дополнительных услуг'
 
     def __str__(self):
-        return self.service
+        return f"{self.date} | {self.fio} | {self.phone} | {self.comment}"
 
 
 class Document(models.Model):
@@ -328,6 +331,85 @@ class FreeService(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class VeteranVOV(models.Model):
+    last_name = models.CharField(max_length=50, verbose_name='Фамилия')
+    first_name = models.CharField(max_length=50, verbose_name='Имя')
+    middle_name = models.CharField(max_length=50, null=True, blank=True, verbose_name='Отчество')
+    image = models.ImageField(upload_to='img/veterans/vov', null=True, blank=True, verbose_name='Фото')
+    description = models.TextField(verbose_name='Текст')
+
+    class Meta:
+        verbose_name = 'Данные ветерана'
+        verbose_name_plural = 'Ветераны ВОВ'
+
+    def __str__(self):
+        return f"{self.last_name} {self.first_name}"
+
+
+class VeteranTruda(models.Model):
+    last_name = models.CharField(max_length=50, verbose_name='Фамилия')
+    first_name = models.CharField(max_length=50, verbose_name='Имя')
+    middle_name = models.CharField(max_length=50, null=True, blank=True, verbose_name='Отчество')
+    image = models.ImageField(upload_to='img/veterans/tyl', null=True, blank=True, verbose_name='Фото')
+    description = models.TextField(verbose_name='Текст')
+
+    class Meta:
+        verbose_name = 'Труженик тыла'
+        verbose_name_plural = 'Труженики тыла'
+
+    def __str__(self):
+        return f"{self.last_name} {self.first_name}"
+
+
+class LeningradResident(models.Model):
+    last_name = models.CharField(max_length=50, verbose_name='Фамилия')
+    first_name = models.CharField(max_length=50, verbose_name='Имя')
+    middle_name = models.CharField(max_length=50, null=True, blank=True, verbose_name='Отчество')
+    image = models.ImageField(upload_to='img/veterans/lg', null=True, blank=True, verbose_name='Фото')
+    description = models.TextField(verbose_name='Текст')
+
+    class Meta:
+        verbose_name = 'Данные жителя Блокадного Лениграда'
+        verbose_name_plural = 'Жители Блокадного Ленинграда'
+
+    def __str__(self):
+        return f"{self.last_name} {self.first_name}"
+
+
+class HeroMemoryBook(models.Model):
+    last_name = models.CharField(max_length=50, verbose_name='Фамилия')
+    first_name = models.CharField(max_length=50, verbose_name='Имя')
+    middle_name = models.CharField(max_length=50, null=True, blank=True, verbose_name='Отчество')
+    image = models.ImageField(upload_to='img/veterans/tyl', null=True, blank=True, verbose_name='Фото')
+    description = models.TextField(verbose_name='Текст')
+
+    class Meta:
+        verbose_name = 'Герой книги памяти'
+        verbose_name_plural = 'Герои книги памяти'
+
+    def __str__(self):
+        return f"{self.last_name} {self.first_name}"
+
+
+class Anons(models.Model):
+    title = models.CharField(max_length=100, verbose_name='Наименование анонса')
+    description = models.TextField(verbose_name='Текст')
+    active = models.BooleanField(default=False, verbose_name='Виден на главной?')
+
+    class Meta:
+        verbose_name = 'Анонс'
+        verbose_name_plural = 'Анонсы библиотеки'
+
+    def __str__(self):
+        return self.title
+
+
+
+
+
+
 
 
 

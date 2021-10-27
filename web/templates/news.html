@@ -8,7 +8,7 @@
     {% include "_page_menu_bib.html" %}
         <nav class='mt-2' aria-label="breadcrumb sm-hidden" id="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Главная</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
         <li class="breadcrumb-item"><a href="{% url 'news' %}">Новости</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
       </ol>
@@ -18,9 +18,6 @@
         <div class="col-md-12">
                            <div class="col-md-8">
                   <h5 class="text-left text-dark black-text text-bold"><strong>{{ news.name }} | {{ news.date }}</strong></h5>
-                </div>
-                <div class="col-md-4">
-                    <a href="{% url 'documents' %}" class="btn btn-sm btn-rounded btn-outline-warning float-right">Назад</a>
                 </div>
             </div>
             <hr class="hr-dark">
@@ -34,7 +31,7 @@
 
                       <!-- Image -->
                       <div class="view">
-                        <img src="{{ news.image.url }}" class="img-fluid z-depth-1 wow fadeIn"
+                        <img src="{{ news.image.url }}" class="z-depth-3" style="max-width:400px"
                           data-wow-delay="0.2s">
                       </div>
 
@@ -43,10 +40,7 @@
                   </div>
                   <!--  Cover photo -->
                   <!-- Blog -->
-                  <div class="col-12">
-                    <!-- Main listing -->
-                    <div class="col-12 mt-1">
-
+                  <div class="col-md-12">
                       <!-- Section: Blog v.3 -->
                       <section class="extra-margins pb-5 text-lg-left">
 
@@ -64,9 +58,6 @@
 
                       </section>
                       <!-- Section: Blog v.3 -->
-
-                    </div>
-                    <!-- Main listing -->
                   </div>
                   <!-- Blog -->
 

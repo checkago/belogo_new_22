@@ -8,7 +8,7 @@
     {% include "_page_menu_bib.html" %}
     <nav class='mt-2' aria-label="breadcrumb sm-hidden" id="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Главная</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
         <li class="breadcrumb-item"><a href="{% url 'biblioteki' %}">Библиотеки</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
       </ol>
@@ -50,15 +50,19 @@
                         <p class="card-text">
                           <div class="row">
                             <div class="col-md-3">
-                                {% if News.image != Null %}<img class='img-fluid' src="{{ News.image.url }}" />{% else %}{% endif %}
+                                {% if News.image != Null %}
+                                    <img class='img-fluid' src="{{ News.image.url }}" />
+                                {% else %}
+
+                                {% endif %}
                             </div>
                             <div class="col-md-9">
                                 <h6 class="text-right text-dark black-text"><strong>{{ News.name }}</strong> | {{ News.date }}</h6>
-                                {{ News.description | safe | slice:":100" }}...
+                                {{ News.description | safe | slice:":200" }}...
                             </div>
                         </div>
                         </p>
-                        <a href="{% url 'news_view' News.pk %}" class="btn btn-primary float-right btn-sm">Читать далее</a>
+                        <a href="{% url 'news_view' News.pk %}" class="btn bg-yellow2 float-right btn-sm">Читать далее</a>
                       </div>
                     </div>
                 {% endfor %}

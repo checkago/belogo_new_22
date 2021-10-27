@@ -3,17 +3,17 @@
 
 {% block content %}
 {% include '_header_pages.html' %}
+
 <div class="container">
-{% include "_page_menu_service.html" %}
+{% include "_page_menu_victory.html" %}
     <nav class='mt-2' aria-label="breadcrumb sm-hidden" id="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'services' %}">Услуги</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'veterany_vov' %}">Открытая книга победы</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
       </ol>
     </nav>
     <div class="row">
-
         <div class="col-md-12">
             <h3 class="">{{ title }}</h3>
             <hr class="hr-dark">
@@ -40,28 +40,45 @@
                {% endif %}
               </ul>
             </nav>
-                <table class="table table-responsive">
-                    <thead class="table-light">
-                        <tr>
-                            <th class="font-weight-bold">№ п/п</th>
-                            <th class="font-weight-bold">Наименование</th>
-                            <th class="font-weight-bold">Время предоставления услуги, мин</th>
-                            <th class="font-weight-bold">Стоимость в рублях согласно калькуляции</th>
-                            <th class="font-weight-bold">Единица  измерения услуг</th>
-                        </tr>
-                    </thead>
-                    {% for Service in page_obj %}
-                    <tbody>
-                        <tr>
-                        <td>{{ Service.id }}</td>
-                        <td>{{ Service.name }}</td>
-                        <td>{{ Service.time }}</td>
-                        <td>{{ Service.price }}</td>
-                        <td>{{ Service.ed_izm }}</td>
-                    </tr>
-                    </tbody>
-                    {% endfor %}
-                </table>
+            <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+                {% for VeteranVOV in page_obj %}
+                <div class="card mb-2">
+                    <!-- Card header -->
+                    <div class="card-header" role="tab" id="headingOne{{ VeteranVOV.id }}">
+
+                      <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne{{ VeteranVOV.id }}" aria-expanded="true"
+                        aria-controls="collapseOne{{ VeteranVOV.id }}">
+
+                        <h5 class="mb-0">
+
+                            <span class="font-weight-bold">{{ VeteranVOV.last_name }} {{ VeteranVOV.first_name }} {{ VeteranVOV.middle_name }}</span>
+
+                          <i class="fas fa-angle-down rotate-icon"></i>
+
+                        </h5>
+
+                      </a>
+
+                    </div>
+                    <!-- Card body -->
+                    <div id="collapseOne{{ VeteranVOV.id }}" class="collapse" role="tabpanel" aria-labelledby="headingOne{{ VeteranVOV.id }}"
+                      data-parent="#accordionEx">
+
+                      <div class="card-body">
+                          <div class="row">
+                              <div class="col-md-3 col-lg-3">
+                                    <img src="{{ VeteranVOV.image.url }}" class="img-fluid border" alt="{{ VeteranVOV.first_name }} {{ VeteranVOV.last_name }}"/>
+                              </div>
+                              <div class="col-md-12 col-lg-9 z-depth-1 py-2">
+                                  {{ VeteranVOV.description|safe }}
+                              </div>
+                          </div>
+                      </div>
+
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
             <nav aria-label="Page navigation example">
                   <ul class="pagination justify-content-center">
                    {% if page_obj.has_previous %}
@@ -85,7 +102,6 @@
                    {% endif %}
                   </ul>
                 </nav>
-
         </div>
     </div>
 </div>

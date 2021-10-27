@@ -10,14 +10,14 @@
         </p>
 
         <div class="row row-cols-1 row-cols-lg-6 row-cols-md-2 ml-2 mr-2">
-            {% for Page in news_list %}
+            {% for News in news_list %}
             <div class="col mb-4 d-flex">
                 <div class="card card-cascade wider">
 
                   <!-- Card image -->
                   <div class="view view-cascade overlay">
-                    <img class="card-img-top" src="{{ Page.image.url }}" alt="Card image cap">
-                    <a href="{% url 'news_view' Page.pk %}">
+                    <img class="card-img-top" src="{{ News.image.url }}" alt="Card image cap">
+                    <a href="{% url 'news_view' News.pk %}">
                       <div class="mask rgba-white-slight"></div>
                     </a>
                   </div>
@@ -26,11 +26,11 @@
                   <div class="card-body card-body-cascade text-center pb-0">
 
                     <!-- Title -->
-                    <h4 class="card-title"><strong>{{ Page.name }}</strong></h4>
+                    <h4 class="card-title"><strong>{{ News.name }}</strong></h4>
                     <!-- Subtitle -->
-                    <h5 class="blue-text pb-2"><strong>{{ Page.date }}</strong></h5>
+                    <h5 class="blue-text pb-2"><strong>{{ News.date }}</strong></h5>
                     <!-- Text -->
-                    <p class="card-text mb-2">{{ Page.description | safe | slice:":150" }}...</p>
+                    <p class="card-text mb-2">{{ News.description | safe | slice:":150" }}...</p>
 
                   </div>
 

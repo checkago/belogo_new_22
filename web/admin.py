@@ -79,7 +79,7 @@ class EventAdmin(admin.ModelAdmin):
 
 
 class BibliotekaAdminForm(forms.ModelForm):
-    description = forms.CharField(widget=CKEditorWidget(config_name='awesome_ckeditor'))
+    description = forms.CharField(widget=CKEditorUploadingWidget(config_name='awesome_ckeditor'))
 
     class Meta:
         verbose_name = 'Текст'
@@ -132,8 +132,8 @@ class FeedbackAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'phone', 'comment')
 
 
-class Service_dop_formAdmin(admin.ModelAdmin):
-    list_display = ('fio', 'email', 'comment')
+class ServiceDopAdmin(admin.ModelAdmin):
+    list_display = ('fio', 'email', 'date', 'comment')
 
 
 class PartnerAdmin(admin.ModelAdmin):
@@ -172,7 +172,6 @@ class TermsOfUseAdmin(admin.ModelAdmin):
     list_display = ('id', 'name',)
 
 
-
 class VacancyAdminForm(forms.ModelForm):
     description = forms.CharField(widget=CKEditorUploadingWidget(config_name='awesome_ckeditor'))
 
@@ -188,22 +187,97 @@ class VacancyAdmin(admin.ModelAdmin):
     list_display = ('name', 'salary',)
 
 
-admin.site.register(News, NewsAdmin),
-admin.site.register(Document, DocumentAdmin),
-admin.site.register(Raiting, RaitingAdmin),
-admin.site.register(Shedule, SheduleAdmin),
-admin.site.register(Event, EventAdmin),
-admin.site.register(Cinema, CinemaAdmin),
-admin.site.register(Biblioteka, BibliotekaAdmin),
-admin.site.register(Position, PositionAdmin),
-admin.site.register(Employers, EmployerAdmin),
-admin.site.register(Service_dop, Service_dopAdmin),
-admin.site.register(Service, ServiceAdmin),
-admin.site.register(Book, BookAdmin),
-admin.site.register(Question, QuestionAdmin),
-admin.site.register(Feedback, FeedbackAdmin),
-admin.site.register(Service_dop_form, Service_dop_formAdmin),
-admin.site.register(Partner, PartnerAdmin),
-admin.site.register(FreeService, FreeServiceAdmin),
-admin.site.register(TermsOfUse, TermsOfUseAdmin),
-admin.site.register(Vacancy, VacancyAdmin),
+class VeteranVOVAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorUploadingWidget(config_name='awesome_ckeditor'))
+
+    class Meta:
+        verbose_name = 'Текст'
+        model = VeteranVOV
+        fields = '__all__'
+
+
+class VeteranVOVAdmin(admin.ModelAdmin):
+    form = VeteranVOVAdminForm
+    list_display = ('last_name', 'first_name', 'middle_name',)
+
+
+class VeteranTrudaAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorUploadingWidget(config_name='awesome_ckeditor'))
+
+    class Meta:
+        verbose_name = 'Текст'
+        model = VeteranTruda
+        fields = '__all__'
+
+
+class VeteranTrudaAdmin(admin.ModelAdmin):
+    form = VeteranTrudaAdminForm
+    list_display = ('last_name', 'first_name', 'middle_name',)
+
+
+class LeningradResidentAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorUploadingWidget(config_name='awesome_ckeditor'))
+
+    class Meta:
+        verbose_name = 'Текст'
+        model = LeningradResident
+        fields = '__all__'
+
+
+class LeningradResidentAdmin(admin.ModelAdmin):
+    form = LeningradResidentAdminForm
+    list_display = ('last_name', 'first_name', 'middle_name',)
+
+
+class HeroMemoryBookAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorUploadingWidget(config_name='awesome_ckeditor'))
+
+    class Meta:
+        verbose_name = 'Текст'
+        model = HeroMemoryBook
+        fields = '__all__'
+
+
+class HeroMemoryBookAdmin(admin.ModelAdmin):
+    form = HeroMemoryBookAdminForm
+    list_display = ('last_name', 'first_name', 'middle_name',)
+
+
+class AnonsAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorUploadingWidget(config_name='awesome_ckeditor'))
+
+    class Meta:
+        verbose_name = 'Текст'
+        model = Anons
+        fields = '__all__'
+
+
+class AnonsAdmin(admin.ModelAdmin):
+    form = AnonsAdminForm
+    list_display = ('title',)
+
+
+admin.site.register(News, NewsAdmin)
+admin.site.register(Document, DocumentAdmin)
+admin.site.register(Raiting, RaitingAdmin)
+admin.site.register(Shedule, SheduleAdmin)
+admin.site.register(Event, EventAdmin)
+admin.site.register(Cinema, CinemaAdmin)
+admin.site.register(Biblioteka, BibliotekaAdmin)
+admin.site.register(Position, PositionAdmin)
+admin.site.register(Employers, EmployerAdmin)
+admin.site.register(Service_dop, Service_dopAdmin)
+admin.site.register(Service, ServiceAdmin)
+admin.site.register(Book, BookAdmin)
+admin.site.register(Question, QuestionAdmin)
+admin.site.register(Feedback, FeedbackAdmin)
+admin.site.register(ServiceDop, ServiceDopAdmin)
+admin.site.register(Partner, PartnerAdmin)
+admin.site.register(FreeService, FreeServiceAdmin)
+admin.site.register(TermsOfUse, TermsOfUseAdmin)
+admin.site.register(Vacancy, VacancyAdmin)
+admin.site.register(VeteranVOV, VeteranVOVAdmin)
+admin.site.register(VeteranTruda, VeteranTrudaAdmin)
+admin.site.register(LeningradResident, LeningradResidentAdmin)
+admin.site.register(HeroMemoryBook, HeroMemoryBookAdmin)
+admin.site.register(Anons, AnonsAdmin)

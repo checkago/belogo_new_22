@@ -8,12 +8,12 @@
     {% include "_page_menu_bib.html" %}
     <nav class='mt-2' aria-label="breadcrumb sm-hidden" id="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Главная</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
         <li class="breadcrumb-item"><a href="{% url 'biblioteki' %}">Библиотеки</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
       </ol>
     </nav>
-    <div class="row">
+    <div class="">
         <div class="col-md-12">
             <h3 class="">{{ title }}</h3>
             <hr class="hr-dark">
@@ -21,9 +21,8 @@
                 {% if Biblioteka.primary == True %}
             <div class="col-12">
 
-                <div class="card mb-2 pb-2 hover-overlay ripple">
+                <div class="card pt-3 mb-5 mt-5 pb-2 z-depth-2 border-primary  border-2">
                   <div class="card-body pt-1 pb-1 mt-1 mb-1">
-                    <p class="card-text">
                       <div class="row">
                         <div class="col-md-4">
                             <a href="{% url 'biblioteka' Biblioteka.pk %}"><img class='img-fluid' src="{{ Biblioteka.image.url }}" /></a>
@@ -42,7 +41,7 @@
             </div>
 
             <div class="row">
-            {% else %}
+                    {% else %}
                 <div class="col-md-6 col-lg-4 d-flex mt-3">
                     <div class="card card-cascade wider hover-overlay ripple">
                       <!-- Card image -->
@@ -64,8 +63,8 @@
                       </div>
                     </div>
                 </div>
-            {% endif %}
-            {% endfor %}
+                    {% endif %}
+                    {% endfor %}
             </div>
         </div>
     </div>

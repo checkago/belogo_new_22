@@ -24,6 +24,8 @@
     <link href="{% static 'css/mdb.css' %}" rel="stylesheet">
 
     <link href="{% static 'css/modules/accordion-extended.min.css' %}" rel="stylesheet">
+    <!-- JQuery -->
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 
 </head>
 <body class="software-lp">
@@ -33,8 +35,6 @@
     {% endblock %}
   <!-- SCRIPTS -->
 
-  <!-- JQuery -->
-  <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 
   <!-- Bootstrap tooltips -->
   <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
@@ -51,21 +51,6 @@
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="{% static 'js/modules/accordion-extended.min.js' %}"></script>
 
-  <script>
-    //Animation init
-    new WOW().init();
-
-    //Modal
-    $('#myModal').on('shown.bs.modal', function () {
-      $('#myInput').focus()
-    })
-
-    // Material Select Initialization
-    $(document).ready(function () {
-      $('.mdb-select').material_select();
-    });
-
-  </script>
 
     <script>
         $('.carousel.carousel-multi-item.v-2 .carousel-item').each(function(){
@@ -84,6 +69,5 @@
           }
         });
     </script>
-
 </body>
 </html>

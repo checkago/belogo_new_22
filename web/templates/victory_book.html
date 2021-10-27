@@ -3,17 +3,17 @@
 
 {% block content %}
 {% include '_header_pages.html' %}
+
 <div class="container">
-{% include "_page_menu_service.html" %}
+{% include "_page_menu_bib.html" %}
     <nav class='mt-2' aria-label="breadcrumb sm-hidden" id="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'services' %}">Услуги</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'victory_book' %}">Открытая книга победы</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
       </ol>
     </nav>
     <div class="row">
-
         <div class="col-md-12">
             <h3 class="">{{ title }}</h3>
             <hr class="hr-dark">
@@ -40,28 +40,11 @@
                {% endif %}
               </ul>
             </nav>
-                <table class="table table-responsive">
-                    <thead class="table-light">
-                        <tr>
-                            <th class="font-weight-bold">№ п/п</th>
-                            <th class="font-weight-bold">Наименование</th>
-                            <th class="font-weight-bold">Время предоставления услуги, мин</th>
-                            <th class="font-weight-bold">Стоимость в рублях согласно калькуляции</th>
-                            <th class="font-weight-bold">Единица  измерения услуг</th>
-                        </tr>
-                    </thead>
-                    {% for Service in page_obj %}
-                    <tbody>
-                        <tr>
-                        <td>{{ Service.id }}</td>
-                        <td>{{ Service.name }}</td>
-                        <td>{{ Service.time }}</td>
-                        <td>{{ Service.price }}</td>
-                        <td>{{ Service.ed_izm }}</td>
-                    </tr>
-                    </tbody>
-                    {% endfor %}
-                </table>
+            <ul class="">
+                {% for Document in page_obj %}
+                    <li><a href="{% url 'document' Document.pk %}"><h5><span class="font-weight-bold">{{ Document.name }}</h5></span></a></li>
+                {% endfor %}
+            </ul>
             <nav aria-label="Page navigation example">
                   <ul class="pagination justify-content-center">
                    {% if page_obj.has_previous %}
@@ -85,7 +68,6 @@
                    {% endif %}
                   </ul>
                 </nav>
-
         </div>
     </div>
 </div>

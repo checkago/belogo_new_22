@@ -58,7 +58,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 ADMIN_REORDER = (
     # НОВОСТИ
     {'app': 'web', 'label': 'НОВОСТИ',
-     'models': ('web.News',)
+     'models': ('web.News', 'web.Anons')
      },
     # ГЛАВНАЯ СТРАНИЦА
     {'app': 'web', 'label': 'ГЛАВНАЯ СТРАНИЦА',
@@ -72,6 +72,10 @@ ADMIN_REORDER = (
     {'app': 'web', 'label': 'УСЛУГИ',
      'models': ('web.Service', 'web.FreeService', 'web.TermsOfUse',)
     },
+    # ВЕТЕРАНЫ
+    {'app': 'web', 'label':'ВЕТЕРАНЫ',
+     'models': ('web.VeteranVOV', 'web.VeteranTruda', 'web.LeningradResident',)
+     },
     # ФОРМЫ
     {'app': 'alcohol', 'label': 'ФОРМЫ',
      'models': ('web.Book', 'web.Question', 'web.Feedback', 'web.Service_dop',)
@@ -119,7 +123,7 @@ WSGI_APPLICATION = 'belogo_new.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
+#DATABASES = {
 #    'default': {
 #        'ENGINE': 'django.db.backends.sqlite3',
 #        'NAME': BASE_DIR / 'db.sqlite3',
@@ -137,7 +141,11 @@ DATABASES = {
     }
 }
 
-
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'site@biblioteka-belogo.ru'
+EMAIL_HOST_PASSWORD = 'Bib5221144'
+EMAIL_USE_TLS = True
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

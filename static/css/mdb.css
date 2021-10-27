@@ -1172,10 +1172,10 @@
   background-color: rgba(62, 69, 81, 0.7); }
 
 .primary-color, ul.stepper li.active a .circle, ul.stepper li.completed a .circle {
-  background-color: #4285f4 !important; }
+  background-color: #ffcd36 !important; }
 
 .primary-color-dark {
-  background-color: #0d47a1 !important; }
+  background-color: #f9a600 !important; }
 
 .secondary-color {
   background-color: #a6c !important; }
@@ -1383,7 +1383,7 @@ button.bg-primary:focus {
   background-color: #1266f1 !important; }
 
 .border-primary {
-  border-color: #4285f4 !important; }
+  border-color: #ffc107 !important; }
 
 .bg-danger {
   background-color: #ff3547 !important; }
@@ -4970,7 +4970,7 @@ body.scrollable {
     padding: 0.6rem 0 0.4rem 0;
     margin: 0 0 0.5rem 0;
     background-color: transparent;
-    border-radius: 0; }
+    border-radius: 20; }
     .md-form .form-control:focus {
       box-shadow: none; }
     .md-form .form-control:disabled, .md-form .form-control[readonly] {
@@ -5343,6 +5343,12 @@ body.scrollable {
         font-weight: 500;
         background: #fff;
         transform: translateY(-13px) scale(0.8); }
+	  .md-form.md-outline label.active-primary {
+		left: 8px;
+		padding-right: 5px;
+		padding-left: 5px;
+		background: white;
+		transform: translateY(-13px) scale(0.8); }											 											
     .md-form.md-outline.form-lg .form-control.form-control-lg {
       padding: .5rem .725rem; }
     .md-form.md-outline.form-lg label {
@@ -10684,3 +10690,61 @@ footer.page-footer h2 {
 
 .orange-text-2 {
   color: #ffa726 !important; }
+
+.cascading-admin-card {
+  margin-top: 1.25rem; }
+  .cascading-admin-card .admin-up {
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-top: -1.25rem; }
+    .cascading-admin-card .admin-up .fas,
+    .cascading-admin-card .admin-up .far,
+    .cascading-admin-card .admin-up .fab {
+      padding: 1.7rem;
+      font-size: 2rem;
+      color: #fff;
+      text-align: left;
+      border-radius: 3px; }
+    .cascading-admin-card .admin-up .data {
+      float: right;
+      margin-top: 2rem;
+      text-align: right; }
+      .cascading-admin-card .admin-up .data p {
+        color: #999999;
+        font-size: 12px; }
+					  
+.multi-item-carousel{
+  .carousel-inner{
+    > .item{
+      transition: 500ms ease-in-out left;
+    }
+    .active{
+      &.left{
+        left:-33%;
+      }
+      &.right{
+        left:33%;
+      }
+    }
+    .next{
+      left: 33%;
+    }
+    .prev{
+      left: -33%;
+    }
+    @media all and (transform-3d), (-webkit-transform-3d) {
+      > .item{
+        // use your favourite prefixer here
+        transition: 500ms ease-in-out left;
+        transition: 500ms ease-in-out all;
+        backface-visibility: visible;
+        transform: none!important;
+      }
+    }
+  }
+  .carouse-control{
+    &.left, &.right{
+      background-image: none;
+    }
+  }
+}

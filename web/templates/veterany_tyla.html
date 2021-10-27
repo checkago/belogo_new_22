@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% include '_header_pages.html' %}
+
+<div class="container">
+{% include "_page_menu_victory.html" %}
+    <nav class='mt-2' aria-label="breadcrumb sm-hidden" id="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'veterany_vov' %}">Открытая книга победы</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+      </ol>
+    </nav>
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="">{{ title }}</h3>
+            <hr class="hr-dark">
+            <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+                {% for VeteranTruda in veterans %}
+                <div class="card mb-2">
+                    <!-- Card header -->
+                    <div class="card-header" role="tab" id="headingOne{{ VeteranTruda.id }}">
+
+                      <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne{{ VeteranTruda.id }}" aria-expanded="true"
+                        aria-controls="collapseOne{{ VeteranTruda.id }}">
+
+                        <h5 class="mb-0">
+
+                            <span class="font-weight-bold">{{ VeteranTruda.last_name }} {{ VeteranTruda.first_name }} {{ VeteranTruda.middle_name }}</span>
+
+                          <i class="fas fa-angle-down rotate-icon"></i>
+
+                        </h5>
+
+                      </a>
+
+                    </div>
+                    <!-- Card body -->
+                    <div id="collapseOne{{ VeteranTruda.id }}" class="collapse show" role="tabpanel" aria-labelledby="headingOne{{ VeteranTruda.id }}"
+                      data-parent="#accordionEx">
+
+                      <div class="card-body">
+                          <div class="row">
+                              {% if VeteranTruda.image != NULL %}
+                              <div class="col-md-12 col-lg-12 z-depth-1 py-2">
+                                {{ VeteranTruda.description|safe }}
+                              </div>
+                              {% else %}
+                              <div class="col-md-3 col-lg-3">
+                                    <img src="{{ VeteranTruda.image.url }}" class="img-fluid border" alt="{{ VeteranTruda.first_name }} {{ VeteranTruda.last_name }}"/>
+                              </div>
+                              <div class="col-md-12 col-lg-9 z-depth-1 py-2">
+                                  {{ VeteranTruda.description|safe }}
+                              </div>
+                              {% endif %}
+                          </div>
+                      </div>
+
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% include '_footer.html' %}
+
+{% endblock %}

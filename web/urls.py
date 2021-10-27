@@ -22,6 +22,13 @@ urlpatterns = [
     path('resources/', views.resources, name='resources'),
     path('projects/', views.projects, name='projects'),
     path('contacts/', views.contacts, name='contacts'),
+    path('veterany_vov/', views.veterany_vov, name='veterany_vov'),
+    path('trujeniki_tyla/', views.veterany_tyla, name='veterany_truda'),
+    path('lg_residents_vov/', views.lg_residents, name='lg_residents'),
+    path('kniga-pamyati/', views.kniga_pamyati, name='kniga_pamyati'),
+    path('book_form/', views.book_form, name='book_form'),
+    path('q_form/', views.q_form, name='q_form'),
+    path('s_form/', views.s_form, name='s_form'),
 ]
 
 
