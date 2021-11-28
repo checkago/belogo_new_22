@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-qgj-94qz%*=o+4byxx%##qoy*wx$luxs0%_rp$#!i1_!*%)9jt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.88.95', 'localhost', 'revenant-it.ru', '213.141.153.187', 'biblioteka-belogo.ru', '127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'biblioteka-belogo.ru', 'www.biblioteka-belogo.ru', '213.141.153.187']
 
 
 # Application definition
@@ -44,9 +44,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'web',
+    'easy_thumbnails',
+    'filer',
+    'mptt',
     'ckeditor',
     'ckeditor_uploader',
-    'mptt',
     'crispy_forms',
     'import_export',
     'admin_reorder'
@@ -123,23 +125,23 @@ WSGI_APPLICATION = 'belogo_new.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-# }
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("POSTGRES_DB"),
-        'USER': env("POSTGRES_USER"),
-        'PASSWORD': env("POSTGRES_PASSWORD"),
-        'HOST': env("POSTGRES_HOST"),
-        'PORT': env("POSTGRES_PORT")
-    }
+   'default': {
+       'ENGINE': 'django.db.backends.sqlite3',
+       'NAME': BASE_DIR / 'db.sqlite3',
+   }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': env("POSTGRES_DB"),
+#         'USER': env("POSTGRES_USER"),
+#         'PASSWORD': env("POSTGRES_PASSWORD"),
+#         'HOST': env("POSTGRES_HOST"),
+#         'PORT': env("POSTGRES_PORT")
+#     }
+# }
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 587
@@ -203,6 +205,7 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_BROWSE_SHOW_DIRS = True
 CKEDITOR_CONFIGS = {
     'awesome_ckeditor': {
+        'extraPlugins': 'lightbox_filer',
         'toolbar': 'full',
     },
 }
