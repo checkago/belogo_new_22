@@ -1,5 +1,10 @@
 {% load static %}
-
+{% url 'index' as index_url %}
+{% url 'biblioteki' as biblioteki_url %}
+{% url 'services' as services_url %}
+{% url 'resources' as resources_url %}
+{% url 'projects' as projects_url %}
+{% url 'contacts' as contacts_url %}
 {% block content %}
 
  <!--Main Navigation-->
@@ -16,22 +21,22 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item {% if request.path == index_url %}active{%endif%}">
               <a class="nav-link" href="{% url 'index' %}">ГЛАВНАЯ</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item {% if request.path == biblioteki_url %}active{%endif%}">
               <a class="nav-link" href="{% url 'biblioteki' %}">БИБЛИОТЕКИ ЦБС</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item {% if request.path == services_url %}active{%endif%}">
               <a class="nav-link" href="{% url 'services' %}">УСЛУГИ</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item {% if request.path == resources_url %}active{%endif%}">
                 <a class="nav-link" href="{% url 'resources' %}">РЕСУРСЫ</a>
             </li>
-              <li class="nav-item">
+              <li class="nav-item {% if request.path == projects_url %}active{%endif%}">
                 <a class="nav-link" href="{% url 'projects' %}">ПРОЕКТЫ</a>
             </li>
-              <li class="nav-item">
+              <li class="nav-item {% if request.path == contacts_url %}active{%endif%}">
                 <a class="nav-link" href="{% url 'contacts' %}">КОНТАКТЫ</a>
             </li>
           </ul>
@@ -67,7 +72,7 @@
             <div class="row mb-4 wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
 
           <!--Grid column-->
-          <div class="col-lg-3 col-md-6 mb-4">
+          <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
 
             <!--Card-->
             <div class="card hoverable">
@@ -140,15 +145,13 @@
             <div class="card hoverable">
               <div class="bg-image hover-overlay ripple text-center" style="background-color:#f5f3ed" data-mdb-ripple-color="light">
                 <img src="{% static 'img/sereb.png' %}" class="img-fluid pt-3" />
-                <a href="https://izi.travel/ru/browse/bb651a7f-434f-48b7-8da7-2201fab107e7#4e3added-b694-42c5-8931-2884df01ca13" target="_blank" rel="nofollow">
+                <a href="#!">
                   <div class="mask" style="background-color:#f5f3ed"></div>
                 </a>
               </div>
 
               <div class="card-body text-center" style="background-color:#f5f3ed">
-                  <a href="https://izi.travel/ru/browse/bb651a7f-434f-48b7-8da7-2201fab107e7#4e3added-b694-42c5-8931-2884df01ca13" target="_blank" rel="nofollow">
-                    <h5 class="card-title font-weight-bold">Тропою Андрея Белого</h5>
-                  </a>
+                <h5 class="card-title">Тропою Андрея Белого</h5>
 
               </div>
             </div>
