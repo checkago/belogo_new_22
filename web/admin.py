@@ -264,6 +264,7 @@ class AnonsAdmin(admin.ModelAdmin):
     list_display = ('title',)
 
 
+
 admin.site.register(News, NewsAdmin)
 admin.site.register(Document, DocumentAdmin)
 admin.site.register(Raiting, RaitingAdmin)
