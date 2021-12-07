@@ -1,10 +1,16 @@
 from django.contrib import admin
 from django import forms
 from mptt.admin import DraggableMPTTAdmin
+from django.contrib.contenttypes.admin import GenericTabularInline
 from ckeditor.widgets import CKEditorWidget
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from import_export.admin import ImportExportModelAdmin
 from web.models import *
+
+
+class ImageGalleryInline(GenericTabularInline):
+    model = ImageGallery
+    readonly_fields = ('image_url',)
 
 
 class CategoryAdmin(DraggableMPTTAdmin):
@@ -36,6 +42,7 @@ class NewsAdminForm(forms.ModelForm):
 
 class NewsAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
+    inlines = [ImageGalleryInline]
     form = NewsAdminForm
     list_display = ('name', 'category',)
 
@@ -269,6 +276,7 @@ admin.site.register(Employers, EmployerAdmin)
 admin.site.register(Service_dop, Service_dopAdmin)
 admin.site.register(Service, ServiceAdmin)
 admin.site.register(Book, BookAdmin)
+admin.site.register(ImageGallery)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Feedback, FeedbackAdmin)
 admin.site.register(ServiceDop, ServiceDopAdmin)

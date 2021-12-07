@@ -27,6 +27,7 @@
     <link href="{% static 'css/mdb.css' %}" rel="stylesheet">
 
     <link href="{% static 'css/modules/accordion-extended.min.css' %}" rel="stylesheet">
+
     <!-- JQuery -->
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 
@@ -49,7 +50,7 @@
   <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
 
     <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="{% static 'js/modules/lightbox.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/modules/lightbox.min.js' %}"></script>
 
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="{% static 'js/modules/accordion-extended.min.js' %}"></script>
@@ -71,6 +72,13 @@
             next.children(':first-child').clone().appendTo($(this));
           }
         });
+    </script>
+
+    <script>
+         // MDB Lightbox Init
+         $(function () {
+              $("#mdb-lightbox-ui").load("{% static 'mdb-addons/mdb-lightbox-ui.html' %}");
+         });
     </script>
 </body>
 </html>

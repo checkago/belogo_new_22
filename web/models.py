@@ -1,8 +1,10 @@
-from unicodedata import category
-
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from datetime import date
 from mptt.models import MPTTModel, TreeForeignKey
+from django.utils.safestring import mark_safe
+from utils import upload_function
 
 
 class Position(models.Model):
@@ -79,14 +81,34 @@ class Biblioteka(models.Model):
         return self.name
 
 
+class ImageGallery(models.Model):
+
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+    image = models.ImageField(upload_to=upload_function)
+
+    class Meta:
+        verbose_name = 'Галерея изображений'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return f"Изображение для {self.content_object}"
+
+    def image_url(self):
+        return mark_safe(f'<img src="{self.image.url}" width="auto" height="100px"')
+
+
 class News(models.Model):
     date = models.DateField(default=date.today, verbose_name='Дата')
     name = models.CharField(max_length=250, verbose_name='Заголовок')
     slug = models.SlugField(null=True, unique=True, verbose_name='Псевдоним')
-    category = models.ForeignKey(Category, blank=True, on_delete=models.SET_NULL, related_name='news', null=True, verbose_name='Категория')
+    category = models.ForeignKey(Category, blank=True, on_delete=models.SET_NULL, related_name='news', null=True,
+                                 verbose_name='Категория')
     description = models.TextField(verbose_name='Текст')
     image = models.ImageField(upload_to='img/news', blank=True, null=True, verbose_name='Главное фото')
     published = models.BooleanField(default=True, verbose_name='Опубликована')
+    image_gallery = GenericRelation('imagegallery')
 
     class Meta:
         verbose_name = 'Новость сайта'
