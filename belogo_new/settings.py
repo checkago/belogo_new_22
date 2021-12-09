@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'mptt',
     'crispy_forms',
+    'easy_thumbnails',
+    'filer',
 ]
 
 MIDDLEWARE = [
