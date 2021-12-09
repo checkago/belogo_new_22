@@ -18,9 +18,6 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-qgj-94qz%*=o+4byxx%##qoy*wx$luxs0%_rp$#!i1_!*%)9jt'
 
@@ -29,7 +26,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['biblioteka-belogo.ru', '213.141.153.187', '127.0.0.1']
 
-
+env = environ.Env()
+environ.Env.read_env('.env')
 # Application definition
 
 INSTALLED_APPS = [
