@@ -6,7 +6,7 @@
       <!--Section: Features v.1-->
             <div class="bg-image"
                     style="background-image: url('{% static 'img/new_year_back.webp' %}');
-                    height: 30vh">
+                    height: 38vh">
                 <h2 class="pt-5 text-center font-weight-bold text-warning">С НАСТУПАЮЩИМ НОВЫМ ГОДОМ!</h2>
                 <div class="container">
                     <div class="row mt-5">
@@ -16,10 +16,11 @@
                         <div class="col-md-6 text-center">
                             <a class="" data-toggle="modal" data-target="#afisha_2"><h3 class="title text-danger uppercase font-weight-bold">Афиша новогодних спектаклей и представлений в микрорайонах города Балашиха 2021, декабрь.</h3></a>
                         </div>
+                        <hr>
                         <div class="col-md-12 pt-3 text-center">
-                            <a class=""><h3 class="title text-danger uppercase font-weight-bold" data-toggle="modal" data-target="#afisha_3">Информация о проведении новогодних и рождественских спектаклей и культурно-развлекательных программ
-в Городском округе Балашиха (декабрь 2021- январь 2022)
-</h3></a>
+                            <a class="" target="_blank" href="{% static 'img/afisha_3.pdf' %}"><h3 class="title text-primary uppercase font-weight-bold">Информация о проведении новогодних и рождественских спектаклей и культурно-развлекательных программ
+                            в Городском округе Балашиха (декабрь 2021- январь 2022)
+                            </h3></a>
                         </div>
                     </div>
                 </div>
@@ -58,20 +59,6 @@
         </div>
       </div>
     </div>
-    <div class="modal top fade" id="afisha_3" tabindex="-1" aria-labelledby="Спектали новый год Балашиха" aria-hidden="true" data-backdrop="true" data-keyboard="true">
-      <div class="modal-dialog modal-xl  modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="btn-close btn-danger" data-dismiss="modal" aria-label="Закрыть"></button>
-          </div>
-          <div class="modal-body"><img class="img-fluid z-depth-2 rounded" src="{% static 'img/afisha_3.pdf' %}" /></div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">
-              Закрыть
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
 
 {% endblock %}
