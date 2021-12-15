@@ -31,6 +31,14 @@
     <!-- JQuery -->
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 
+    <script>
+         // MDB Lightbox Init
+         $(function () {
+              $("#mdb-lightbox-ui").load("{% static 'mdb-addons/mdb-lightbox-ui.html' %}");
+         });
+
+    </script>
+
 </head>
 <body class="software-lp">
 
@@ -76,10 +84,17 @@
 
     <script>
          // MDB Lightbox Init
-         $(function () {
-              $("#mdb-lightbox-ui").load("{% static 'mdb-addons/mdb-lightbox-ui.html' %}");
-         });
+
+          $('img').each(function(index){
+            var imageSizeProportion = $('img')[index].width / $('img')[index].height;
+            var width = '1600';
+            var height = '1067';
+            imageSizeProportion < 0.65 ? height = (1600/imageSizeProportion).toString() : width = (1067*imageSizeProportion).toString();
+            var fullsize = width + 'x' + height;
+            $('.mdb-lightbox a')[index].attributes[1].value = fullsize;
+        });
     </script>
+
     <script async="" src="https://culturaltracking.ru/static/js/spxl.js?pixelId=8120" data-pixel-id="8120"></script>
 </body>
 </html>
