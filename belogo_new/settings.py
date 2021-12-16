@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-qgj-94qz%*=o+4byxx%##qoy*wx$luxs0%_rp$#!i1_!*%)9jt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['biblioteka-belogo.ru', '213.141.153.187', '127.0.0.1']
 
@@ -118,6 +118,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'site@biblioteka-belogo.ru'
+EMAIL_HOST_PASSWORD = 'Bib5221144'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
