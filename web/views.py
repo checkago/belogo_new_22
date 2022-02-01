@@ -228,9 +228,9 @@ def book_form(request):
             Book = bform.save(commit=False)
             cd = bform.cleaned_data
             Book.save()
-            subject = 'Запрос на продление книги с сайта, от {} ({})'.format(cd['fio'], cd['email'])
+            subject = 'Запрос на продление книги с сайта, от {} выданой в {}'.format(cd['fio'], cd['library'])
             message = '"{}". Чит.билет №{} {}'.format(cd['fio'], cd['bilet'], cd['comment'])
-            send_mail(subject, message, 'site@biblioteka-belogo.ru', [cd['email'], 'chzbelogo@yandex.ru'])
+            send_mail(subject, message, 'site@biblioteka-belogo.ru', [cd['email'], 'site@biblioteka-belogo.ru'])
             sent = True
             return redirect('/')
 

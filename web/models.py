@@ -1,3 +1,5 @@
+from unicodedata import category
+
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -177,8 +179,31 @@ class Shedule(models.Model):
 
 # FORMS
 class Book(models.Model):
+
+    IKC = 'Информационно-культурный центр (Пролетарская 8)'
+    CDSCH = 'Центр детского и семейного чтения (Пролетарская 8)'
+    BER = 'Бибилиотека эстетического развития (Керамик)'
+    B2 = 'Библиотека №2 (Саввино)'
+    DB = 'Детская библиотека (Павлино)'
+    B4 = 'Библиотека №4 (Павлино)'
+    B3 = 'Библиотека №3 (Кучино)'
+    BSCH = 'Библиотека семейного чтения (Купавна)'
+
+    BIB_CHOICES = (
+        (IKC, 'Информационно-культурный центр (Пролетарская 8)'),
+        (CDSCH, 'Центр детского и семейного чтения (ПРолетарская 8)'),
+        (BER, 'Бибилиотека эстетического развития (Керамик)'),
+        (B2, 'Библиотека №2 (Саввино)'),
+        (DB, 'Детская библиотека (Павлино)'),
+        (B4, 'Библиотека №4 (Павлино)'),
+        (B3, 'Библиотека №3 (Кучино)'),
+        (BSCH, 'Библиотека семейного чтения (Купавна)'),
+    )
+
     category = models.ForeignKey(Category, default='Продление книг', blank=True, on_delete=models.SET_NULL,
                                  related_name='books', null=True, verbose_name='Категория')
+    library = models.CharField(max_length=150, blank=True, null=True, choices=BIB_CHOICES, default=IKC,
+                               verbose_name='Выбор Бибилотеки')
     date = models.DateTimeField(auto_now=True, verbose_name='Дата')
     fio = models.CharField(max_length=200, verbose_name='ФИО')
     bilet = models.CharField(max_length=18, verbose_name='№ читательского билета', blank=True)
@@ -429,6 +454,49 @@ class Anons(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Library(models.Model):
+    title = models.CharField(max_length=200, verbose_name='Наименование')
+    author = models.ForeignKey('Author', blank=True, on_delete=models.SET_NULL, null=True, verbose_name='Автор')
+    category = models.ForeignKey('LibraryCategory', blank=True, on_delete=models.SET_NULL, null=True, verbose_name = 'Категория')
+    description = models.TextField(verbose_name='Описание')
+    image = models.ImageField(upload_to='img/books/images', blank=True, verbose_name='Изображение')
+    file = models.FileField(upload_to='img/books/files', blank=True, verbose_name='Файл')
+
+    class Meta:
+        verbose_name = 'Электронная книга'
+        verbose_name_plural = 'Электонные книги'
+
+    def __str__(self):
+        return self.title
+
+
+class Author(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Имя автора')
+
+    class Meta:
+        verbose_name = 'Автор'
+        verbose_name_plural = 'Авторы'
+
+    def __str__(self):
+        return self.name
+
+
+class LibraryCategory(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Наименование категории')
+
+    class Meta:
+        verbose_name = 'Категория электронной библиотеки'
+        verbose_name_plural = 'Категории электронной библиотеки'
+
+    def __str__(self):
+        return self.name
+
+
+
+
+
 
 
 

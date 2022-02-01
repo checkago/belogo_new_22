@@ -5,6 +5,7 @@ from crispy_forms.layout import Layout, Submit, Row, Column
 
 
 class BookForm(forms.ModelForm):
+    library = forms.Select()
     comment = forms.CharField(
         label='Сообщение',
         widget=forms.Textarea(attrs={'rows': '2'})
@@ -12,7 +13,7 @@ class BookForm(forms.ModelForm):
 
     class Meta:
         model = Book
-        fields = ('fio', 'bilet', 'phone', 'email', 'comment', 'category')
+        fields = ('library', 'fio', 'bilet', 'phone', 'email', 'comment', 'category')
 
 
 class QuestionForm(forms.ModelForm):
