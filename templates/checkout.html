@@ -3,7 +3,9 @@
 {% block content %}
 <section>
     <div class="container">
-        <div class="card mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mt-5">
           <div class="card-body">
               <div class="row">
                   <div class="col-md-4">
@@ -18,6 +20,26 @@
                   </div>
               </div>
           </div>
+        </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mt-5">
+          <div class="card-body">
+              <div class="row">
+                  <div class="col-md-4">
+                    <a href="{% static '/img/reviews_new_bib.pdf' %}" target="_blank">
+                      <img class="card-img-top" src="{% static '/img/reviews_new_bib.webp' %}" alt="Card image cap">
+                    </a>
+                  </div>
+                  <div class="col-md-8 d-flex align-items-center">
+                      <a href="{% static '/img/reviews_new_bib.pdf' %}" target="_blank">
+                        <h4 class="card-title"><strong>Оставьте отзыв о нашей библиотеке на сайте новаябиблиотека.рф</strong></h4>
+                      </a>
+                  </div>
+              </div>
+          </div>
+        </div>
+            </div>
         </div>
     </div>
 </section>
