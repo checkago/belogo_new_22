@@ -63,7 +63,7 @@ def news_view(request, pk):
 
 def documents(request):
     categories = Category.objects.filter(name='Документы')
-    title = 'Оффициальные документы библиотечной системы'
+    title = 'Официальные документы библиотечной системы'
     branch_categories = categories.get_descendants(include_self=True)
     docs_list = Document.objects.filter(category__in=branch_categories).distinct().order_by('-date')
     paginator = Paginator(docs_list, 10)
