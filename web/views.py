@@ -321,3 +321,13 @@ def library_hud(request):
 
     return render(request, 'book_list.html', {'categories': categories, 'title': title,
                                              'books_list': books_list, 'paginator': paginator, 'page_obj': page_obj})
+
+
+def book_view(request, pk):
+    book = get_object_or_404(Library, pk=pk)
+    title = book.title
+    image = book.image
+    link = book.link
+    description = book.description
+    return render(request, 'book_view.html',
+                  {'book': book, 'title': title, 'image': image, 'description': description, 'link': link})
