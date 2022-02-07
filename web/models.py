@@ -462,6 +462,7 @@ class Library(models.Model):
     category = models.ForeignKey('LibraryCategory', blank=True, on_delete=models.SET_NULL, null=True, verbose_name = 'Категория')
     description = models.TextField(verbose_name='Описание')
     image = models.ImageField(upload_to='img/books/images', blank=True, verbose_name='Изображение')
+    link = models.URLField(verbose_name='Ссылка на PDF файл', blank=True)
     file = models.FileField(upload_to='img/books/files', blank=True, verbose_name='Файл')
 
     class Meta:

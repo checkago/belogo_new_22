@@ -319,8 +319,8 @@ def library_hud(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'book_list.html', {'categories': categories, 'title': title,
-                                             'books_list': books_list, 'paginator': paginator, 'page_obj': page_obj})
+    return render(request, 'book_list.html', {'categories': categories, 'title': title, 'books_list': books_list,
+                                              'paginator': paginator, 'page_obj': page_obj})
 
 
 def book_view(request, pk):
