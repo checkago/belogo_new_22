@@ -264,6 +264,27 @@ class AnonsAdmin(admin.ModelAdmin):
     list_display = ('title',)
 
 
+class LibraryAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorUploadingWidget(config_name='awesome_ckeditor'))
+
+    class Meta:
+        verbose_name = 'Описание'
+        model = Anons
+        fields = '__all__'
+
+
+class LibraryAdmin(admin.ModelAdmin):
+    form = LibraryAdminForm
+    list_display = ('title',)
+
+
+class AuthorAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+
+class LibraryCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
 
 admin.site.register(News, NewsAdmin)
 admin.site.register(Document, DocumentAdmin)
@@ -290,3 +311,6 @@ admin.site.register(VeteranTruda, VeteranTrudaAdmin)
 admin.site.register(LeningradResident, LeningradResidentAdmin)
 admin.site.register(HeroMemoryBook, HeroMemoryBookAdmin)
 admin.site.register(Anons, AnonsAdmin)
+admin.site.register(Library, LibraryAdmin)
+admin.site.register(Author, AuthorAdmin)
+admin.site.register(LibraryCategory, LibraryCategoryAdmin)
