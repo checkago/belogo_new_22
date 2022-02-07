@@ -29,6 +29,10 @@ urlpatterns = [
     path('book_form/', views.book_form, name='book_form'),
     path('q_form/', views.q_form, name='q_form'),
     path('s_form/', views.s_form, name='s_form'),
+    path('library-category/', views.library_category, name='library_category'),
+    path('book-list/1917/', views.library_imperia, name='library_imperia'),
+    path('book-list/krai/', views.library_krai, name='library_krai'),
+    path('book-list/hud/', views.library_hud, name='library_hud'),
 ]
 
 

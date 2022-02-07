@@ -280,3 +280,44 @@ def s_form(request):
         sform = ServiceDopForm()
 
     return render(request, 's_form.html', {'title': title, 'sform': sform, 'sent': sent})
+
+
+def library_category(request):
+    title = 'Разделы электронной библиотеки'
+    return render(request, 'library_category.html', {'title': title})
+
+
+def library_imperia(request):
+    title = 'Книги, изданные до 1917 года'
+    categories = LibraryCategory.objects.filter(name='Книги, изданные до 1917 года')
+    books_list = Library.objects.filter(category__in=categories).distinct().order_by('id')
+    paginator = Paginator(books_list, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'book_list.html', {'categories': categories, 'title': title,
+                                             'books_list': books_list, 'paginator': paginator, 'page_obj': page_obj})
+
+
+def library_krai(request):
+    title = 'Краеведческая литература'
+    categories = LibraryCategory.objects.filter(name='Краеведческая литература')
+    books_list = Library.objects.filter(category__in=categories).distinct().order_by('id')
+    paginator = Paginator(books_list, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'book_list.html', {'categories': categories, 'title': title,
+                                             'books_list': books_list, 'paginator': paginator, 'page_obj': page_obj})
+
+
+def library_hud(request):
+    title = 'Художественная литература'
+    categories = LibraryCategory.objects.filter(name='Художественная литература')
+    books_list = Library.objects.filter(category__in=categories).distinct().order_by('id')
+    paginator = Paginator(books_list, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'book_list.html', {'categories': categories, 'title': title,
+                                             'books_list': books_list, 'paginator': paginator, 'page_obj': page_obj})

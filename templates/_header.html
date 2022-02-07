@@ -119,14 +119,15 @@
             <div class="card hoverable">
               <div class="bg-image hover-overlay ripple text-center" style="background-color:#f5f3ed" data-mdb-ripple-color="light">
                 <img src="{% static 'img/online.png' %}" class="img-fluid pt-3" />
-                <a href="#!">
+                <a href="{% url 'library_category' %}">
                   <div class="mask" style="background-color:#f5f3ed"></div>
                 </a>
               </div>
 
               <div class="card-body text-center" style="background-color:#f5f3ed">
-                <h5 class="card-title">Электронная библиотека</h5>
-
+                  <a href="{% url 'library_category' %}">
+                    <h5 class="card-title font-weight-bold">Электронная библиотека</h5>
+                  </a>
               </div>
             </div>
             <!--/.Card-->

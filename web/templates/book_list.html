@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% include '_header_pages.html' %}
+
+<div class="container">
+    {% include "_page_menu_bib.html" %}
+    <nav class='mt-2' aria-label="breadcrumb sm-hidden" id="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'library_category' %}">Разделы ЭБ</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+      </ol>
+    </nav>
+    <div class="row">
+
+        <div class="col-md-12">
+            <h3 class="">{{ title }}</h3>
+            <hr class="hr-dark">
+
+            <div class="container-fluid mb-2">
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-center">
+                   {% if page_obj.has_previous %}
+                    <li class="page-item">
+                      <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                    </li>
+                      {% endif %}
+                  {% for p in paginator.page_range %}
+                      {% if page_obj.number == p %}
+                    <li class="page-item active" aria-current="page">
+                      <a class="page-link" href="#">{{ p }} <span class="visually-hidden"></span></a>
+                    </li>
+                       {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+                      {% endif %}
+                  {% endfor %}
+                  {% if page_obj.has_next %}
+                    <li class="page-item">
+                      <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a>
+                    </li>
+                   {% endif %}
+                  </ul>
+                </nav>
+
+                {% for Library in page_obj %}
+                    <div class="card mb-2">
+                      <div class="card-body">
+                        <p class="card-text">
+                          <div class="row">
+                            <div class="col-md-3">
+                                {% if Library.image != Null %}
+                                    <img class="" width="100px" src="{{ Library.image.url }}" />
+                                {% else %}
+
+                                {% endif %}
+                            </div>
+                            <div class="col-md-9">
+                                <a href="#">
+                                    <h5 class="text-right text-dark black-text"><strong>{{ Library.title }}</strong></h5>
+                                </a>
+                                <h6 class="text-right text-dark black-text"><strong>Автор: {{ Library.author }}</strong></h6>
+                            </div>
+                          </div>
+                        </p>
+                      </div>
+                    </div>
+                {% endfor %}
+
+
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-center">
+                   {% if page_obj.has_previous %}
+                    <li class="page-item">
+                      <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                    </li>
+                      {% endif %}
+                  {% for p in paginator.page_range %}
+                      {% if page_obj.number == p %}
+                    <li class="page-item active" aria-current="page">
+                      <a class="page-link" href="#">{{ p }} <span class="visually-hidden"></span></a>
+                    </li>
+                       {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+                      {% endif %}
+                  {% endfor %}
+                  {% if page_obj.has_next %}
+                    <li class="page-item">
+                      <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a>
+                    </li>
+                   {% endif %}
+                  </ul>
+                </nav>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{% include '_footer.html' %}
+
+{% endblock %}
