@@ -7,7 +7,7 @@ from .models import *
 
 def index(request):
     title = 'МБУК ЦБС им. А. Белого'
-    description = 'Официальный сайт Централизованной библиотесной сети имени Андрея Белого. Библиотека Железнодорожный'
+    description = 'Официальный сайт Централизованной библиотечной сети имени Андрея Белого. Библиотека Железнодорожный'
     anonsy = Anons.objects.all()
     categories = Category.objects.filter(name='Новости')
     category = Category.objects.all()
@@ -63,8 +63,8 @@ def news_view(request, pk):
     image = News.image
     description = News.description
     date = News.date
-    return render(request, 'news.html', {'news': news, 'title': title, 'image': image, 'description': description, 'date': date,
-                                         'category': category})
+    return render(request, 'news.html', {'news': news, 'title': title, 'image': image, 'description': description,
+                                         'date': date, 'category': category})
 
 
 def documents(request):
@@ -169,6 +169,7 @@ def contacts(request):
     title = 'Контакты'
     category = Category.objects.get(id=1)
     biblioteki = Biblioteka.objects.all()
+    description = 'Контакты и способы связи с сострудниками и руководством Библиотек Балашиха мкр Железнодорожный'
 
     if request.method == 'POST':
         fback = FeedbackForm(request.POST, initial={"category": "category"})
@@ -185,7 +186,8 @@ def contacts(request):
     else:
         fback = FeedbackForm()
 
-    return render(request, 'contacts.html', {'fback': fback, 'title': title, 'biblioteki': biblioteki, 'category': category})
+    return render(request, 'contacts.html', {'fback': fback, 'title': title, 'biblioteki': biblioteki,
+                                             'category': category, 'description': description})
 
 
 def resources(request):
