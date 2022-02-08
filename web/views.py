@@ -169,7 +169,7 @@ def contacts(request):
     title = 'Контакты'
     category = Category.objects.get(id=1)
     biblioteki = Biblioteka.objects.all()
-    description = 'Контакты и способы связи с сострудниками и руководством Библиотек Балашиха мкр Железнодорожный'
+    description = 'Контакты и способы связи с сотрудниками и руководством Библиотек Балашиха мкр Железнодорожный'
 
     if request.method == 'POST':
         fback = FeedbackForm(request.POST, initial={"category": "category"})
