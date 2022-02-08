@@ -34,6 +34,8 @@ urlpatterns = [
     path('book-list/krai/', views.library_krai, name='library_krai'),
     path('book-list/hud/', views.library_hud, name='library_hud'),
     path('library/<int:pk>/', views.book_view, name='book_view'),
+    path('events/', views.events, name='events'),
+    path('events-archive/', views.events_archive, name='events_archive'),
 ]
 
 

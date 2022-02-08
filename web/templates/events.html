@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% include '_header_pages.html' %}
+
+<div class="container">
+    {% include "_page_menu_bib.html" %}
+    <nav class='mt-2' aria-label="breadcrumb sm-hidden" id="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'events_archive' %}">Архив мероприятий</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+      </ol>
+    </nav>
+    <div class="container">
+        <div class="row">
+            {% for Event in events %}
+            <div class="col-md-4">
+                <div class="card my-3">
+                    <img class="img-responsive" src="{{ Event.image.url }}" />
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% include '_footer.html' %}
+
+{% endblock %}

@@ -208,8 +208,8 @@ def veterany_vov(request):
     paginator = Paginator(veterans, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'veterany_vov.html', {'title': title, 'veterans': veterans,
-                                             'paginator': paginator, 'page_obj': page_obj})
+    return render(request, 'veterany_vov.html', {'title': title, 'veterans': veterans, 'paginator': paginator,
+                                                 'page_obj': page_obj})
 
 
 def veterany_tyla(request):
@@ -342,3 +342,22 @@ def book_view(request, pk):
     description = book.description
     return render(request, 'book_view.html',
                   {'book': book, 'title': title, 'image': image, 'description': description, 'link': link})
+
+
+def events(request):
+    title = 'Мероприятия и события'
+    description = 'Ожидаемые и недавно прошедшие мероприятия и события в библиотеках Балашихи в микрорайоне Железнодорожный'
+    events = Event.objects.order_by('id')[:9]
+    return render(request, 'events.html', {'title': title, 'description': description, 'events': events})
+
+
+def events_archive(request):
+    title = 'Архив мероприятий'
+    description = 'Архив прошедших в билиотеках Балашихи мероприятий'
+    events = Event.objects.all()
+    paginator = Paginator(events, 9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'events_archive.html', {'events': events, 'title': title, 'paginator': paginator,
+                                              'page_obj': page_obj, 'description': description})
