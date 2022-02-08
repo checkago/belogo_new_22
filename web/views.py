@@ -7,6 +7,7 @@ from .models import *
 
 def index(request):
     title = 'МБУК ЦБС им. А. Белого'
+    description = 'Официальный сайт Централизованной библиотесной сети имени Андрея Белого. Библиотека Железнодорожный'
     anonsy = Anons.objects.all()
     categories = Category.objects.filter(name='Новости')
     category = Category.objects.all()
@@ -18,13 +19,15 @@ def index(request):
     branch_categories = categories.get_descendants(include_self=True)
     news_list = News.objects.filter(category__in=branch_categories).distinct().order_by('-date')[:6]
 
-    return render(request, 'index.html', {'title': title, 'anonsy': anonsy, 'news': news, 'category': category, 'categories': categories,
-                                          'news_list': news_list, 'partners1': partners1, 'partners2': partners2, 'shedule': shedule,
+    return render(request, 'index.html', {'title': title, 'description': description, 'anonsy': anonsy, 'news': news,
+                                          'category': category, 'categories': categories, 'news_list': news_list,
+                                          'partners1': partners1, 'partners2': partners2, 'shedule': shedule,
                                           'event': event, 'cinema': cinema})
 
 
 def biblioteki(request):
     title = 'Состав централизованной библиотечной системы'
+    description = 'Состав централизованной библиотечной системы. Список библиотек в микрорайоне Железнодорожный'
     biblioteki = Biblioteka.objects.all()
     return render(request, 'biblioteki.html', {'title': title, 'biblioteki': biblioteki})
 
@@ -32,22 +35,25 @@ def biblioteki(request):
 def biblioteka(request, pk):
     biblioteka = get_object_or_404(Biblioteka, pk=pk)
     title = biblioteka.name
+    description = biblioteka.description
     direktor = Biblioteka.direktor
     phone = Biblioteka.phone
-    return render(request, 'biblioteka.html', {'title': title, 'biblioteka': biblioteka, 'direktor': direktor, 'phone': phone})
+    return render(request, 'biblioteka.html', {'title': title, 'biblioteka': biblioteka, 'direktor': direktor,
+                                               'phone': phone, 'description': description})
 
 
 def news(request):
     categories = Category.objects.filter(name='Новости')
     title = 'Новости ЦБС им. А. Белого'
+    description = 'Новости и события произошедшие в библиотеках Железнодорожного'
     branch_categories = categories.get_descendants(include_self=True)
     news_list = News.objects.filter(category__in=branch_categories).distinct().order_by('-date')
     paginator = Paginator(news_list, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'news_all.html', {'categories': categories, 'title': title,
-                                             'news_list': news_list, 'paginator': paginator, 'page_obj': page_obj})
+    return render(request, 'news_all.html', {'categories': categories, 'title': title, 'news_list': news_list,
+                                             'paginator': paginator, 'page_obj': page_obj, 'description': description})
 
 
 def news_view(request, pk):
@@ -64,14 +70,15 @@ def news_view(request, pk):
 def documents(request):
     categories = Category.objects.filter(name='Документы')
     title = 'Официальные документы библиотечной системы'
+    description = 'Официальные документы МБУК ЦБС им. А. Белого'
     branch_categories = categories.get_descendants(include_self=True)
     docs_list = Document.objects.filter(category__in=branch_categories).distinct().order_by('-date')
     paginator = Paginator(docs_list, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'documents.html', {'categories': categories, 'title': title,
-                                              'docs_list': docs_list, 'paginator': paginator, 'page_obj': page_obj})
+    return render(request, 'documents.html', {'categories': categories, 'title': title, 'docs_list': docs_list,
+                                              'paginator': paginator, 'page_obj': page_obj, 'description': description})
 
 
 def document(request, pk):
@@ -88,6 +95,7 @@ def document(request, pk):
 def services(request):
     categories = Category.objects.filter(name='Услуги')
     title = 'Услуги библиотечной системы'
+    description = 'Список услуг предоставляемых в централизованной библиотечной системе. Услуги библиотек Железнодорожного'
     branch_categories = categories.get_descendants(include_self=True)
     services_list = Service.objects.filter(category__in=branch_categories).distinct().order_by('id')
     paginator = Paginator(services_list, 20)
@@ -95,7 +103,8 @@ def services(request):
     page_obj = paginator.get_page(page_number)
 
     return render(request, 'services_all.html', {'categories': categories, 'title': title,
-                                              'services_list': services_list, 'paginator': paginator, 'page_obj': page_obj})
+                                                 'services_list': services_list, 'paginator': paginator,
+                                                 'page_obj': page_obj, 'description': description})
 
 
 def free_services(request, pk):

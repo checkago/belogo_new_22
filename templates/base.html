@@ -19,12 +19,14 @@
     <!-- FAVICON END -->
     <meta charset="UTF-8">
     <title>{{ title }}</title>
+    <meta name="description" content="{{ description | safe | slice:":150" }}">
       <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
     <!-- Bootstrap core CSS -->
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="{% static 'css/mdb.css' %}" rel="stylesheet">
+
 
     <link href="{% static 'css/modules/accordion-extended.min.css' %}" rel="stylesheet">
     <meta name="proculture-verification" content="5d2b1c3f6776e47d80634c27e9c1e1ed">
