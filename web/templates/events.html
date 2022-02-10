@@ -18,7 +18,13 @@
             {% for Event in events %}
             <div class="col-md-4">
                 <div class="card my-3">
-                    <img class="img-responsive" src="{{ Event.image.url }}" />
+                    <div class="card-body">
+                        <img class="img-responsive" src="{{ Event.image.url }}" />
+                    </div>
+                    <div class="card-footer">
+                        <h5>{{ Event.name }}</h5>
+                        <p>{{ Event.date }}</p>
+                    </div>
                 </div>
             </div>
             {% endfor %}
