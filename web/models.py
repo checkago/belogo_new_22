@@ -147,6 +147,10 @@ class Event(models.Model):
         verbose_name = 'Событие'
         verbose_name_plural = 'События'
 
+    @property
+    def is_past_due(self):
+        return date.today() > self.date
+
     def __str__(self):
         return f"{self.name} | {self.date}"
 

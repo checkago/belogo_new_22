@@ -3,6 +3,7 @@ from django.core.paginator import Paginator
 from django.core.mail import send_mail
 from .forms import *
 from .models import *
+import datetime
 
 
 def index(request):
@@ -347,17 +348,20 @@ def book_view(request, pk):
 def events(request):
     title = 'Мероприятия и события'
     description = 'Ожидаемые и недавно прошедшие мероприятия и события в библиотеках Балашихи в микрорайоне Железнодорожный'
-    events = Event.objects.order_by('id')[:9]
-    return render(request, 'events.html', {'title': title, 'description': description, 'events': events})
+    events = Event.objects.order_by('-id')[:9]
+    datenow = datetime.date.today()
+    return render(request, 'events.html', {'title': title, 'description': description, 'events': events,
+                                           'datenow': datenow})
 
 
 def events_archive(request):
     title = 'Архив мероприятий'
     description = 'Архив прошедших в билиотеках Балашихи мероприятий'
-    events = Event.objects.all()
+    events = Event.objects.order_by('-id')
+    datenow = datetime.date.today()
     paginator = Paginator(events, 9)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     return render(request, 'events_archive.html', {'events': events, 'title': title, 'paginator': paginator,
-                                              'page_obj': page_obj, 'description': description})
+                                              'page_obj': page_obj, 'description': description, 'datenow': datenow})
