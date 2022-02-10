@@ -54,11 +54,13 @@
                                     </div>
                                     <div class="card-footer">
                                         <h5>{{ Event.name }}</h5>
-                                    {% if Event.is_past_due %}
-                                        <p class="text-danger font-weight-bold"><s>{{ Event.date }}</s></p>
-                                    {% else %}
-                                        <p class="text-dark font-weight-bold">{{ Event.date }}</p>
-                                    {% endif %}
+                                        {% if Event.is_past_due %}
+                                            <span class="text-dark font-weight-bold">Завершено:</span>
+                                            <p class="text-danger font-weight-bold"><s>{{ Event.date }}</s></p>
+                                        {% else %}
+                                            <span class="text-dark font-weight-bold">Ожидается:</span>
+                                            <p class="text-dark font-weight-bold">{{ Event.date }}</p>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
