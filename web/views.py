@@ -62,7 +62,7 @@ def news_view(request, pk):
     category = Category.objects.filter(name='Новости')
     title = news.name
     image = News.image
-    description = News.description
+    description = news.description
     date = News.date
     return render(request, 'news.html', {'news': news, 'title': title, 'image': image, 'description': description,
                                          'date': date, 'category': category})
