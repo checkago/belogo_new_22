@@ -102,20 +102,14 @@
 
     <script>
          // MDB Lightbox Init
-
-          $('img').each(function(index){
-            var imageSizeProportion = $('img')[index].width / $('img')[index].height;
-            var width = '1600';
-            var height = '1067';
-            imageSizeProportion < 1.5 ? height = (1600/imageSizeProportion).toString() : width = (1067*imageSizeProportion).toString();
-            var fullsize = width + 'x' + height;
-            $('.mdb-lightbox a')[index].attributes[1].value = fullsize;
+        $(function () {
+        $("#mdb-lightbox-ui").load("mdb-addons/mdb-lightbox-ui.html");
         });
     </script>
 
 
 
 
-    <script defer src="https://culturaltracking.ru/static/js/spxl.js?pixelId=8120" data-pixel-id="8120"></script>
+    <script defer="" src="https://culturaltracking.ru/static/js/spxl.js?pixelId=8120" data-pixel-id="8120"></script>
 </body>
 </html>
