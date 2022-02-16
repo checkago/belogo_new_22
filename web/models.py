@@ -139,7 +139,30 @@ class Partner(models.Model):
 
 
 class Event(models.Model):
+
+    IKC = 'Информационно-культурный центр (Пролетарская 8)'
+    CDSCH = 'Центр детского и семейного чтения (Пролетарская 8)'
+    BER = 'Бибилиотека эстетического развития (Керамик)'
+    B2 = 'Библиотека №2 (Саввино)'
+    DB = 'Детская библиотека (Павлино)'
+    B4 = 'Библиотека №4 (Павлино)'
+    B3 = 'Библиотека №3 (Кучино)'
+    BSCH = 'Библиотека семейного чтения (Купавна)'
+
+    BIB_CHOICES = (
+        (IKC, 'Информационно-культурный центр (Пролетарская 8)'),
+        (CDSCH, 'Центр детского и семейного чтения (Пролетарская 8)'),
+        (BER, 'Бибилиотека эстетического развития (Керамик)'),
+        (B2, 'Библиотека №2 (Саввино)'),
+        (DB, 'Детская библиотека (Павлино)'),
+        (B4, 'Библиотека №4 (Павлино)'),
+        (B3, 'Библиотека №3 (Кучино)'),
+        (BSCH, 'Библиотека семейного чтения (Купавна)'),
+    )
+
     name = models.CharField(max_length=100, verbose_name='Название события')
+    library = models.CharField(max_length=150, choices=BIB_CHOICES, default=IKC,
+                               verbose_name='Выбор Библиотеки')
     date = models.DateField(default=date.today, verbose_name='Дата проведения')
     image = models.ImageField(upload_to='img/events', blank=True, null=True, verbose_name='Изображение')
 
@@ -207,7 +230,7 @@ class Book(models.Model):
     category = models.ForeignKey(Category, default='Продление книг', blank=True, on_delete=models.SET_NULL,
                                  related_name='books', null=True, verbose_name='Категория')
     library = models.CharField(max_length=150, choices=BIB_CHOICES, default=IKC,
-                               verbose_name='Выбор Бибилотеки')
+                               verbose_name='Выбор Библиотеки')
     date = models.DateTimeField(auto_now=True, verbose_name='Дата')
     fio = models.CharField(max_length=200, verbose_name='ФИО')
     bilet = models.CharField(max_length=18, verbose_name='№ читательского билета', blank=True)
