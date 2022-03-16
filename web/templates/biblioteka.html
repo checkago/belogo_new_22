@@ -34,19 +34,19 @@
                             <p><strong><strong class="blue-text">Последний день месяца – санитарный</strong></strong></p>
                             <p><strong class="font-weight-bold">Соц.сети:</strong>
                                 {% if biblioteka.instagram != Null %}
-                                    <a href='{{ biblioteka.instagram }}'><i class="fab fa-odnoklassniki fa-2x text-warning"></i></a>
+                                    <a href='{{ biblioteka.instagram }}'> <i class="fab fa-odnoklassniki fa-2x text-warning"></i></a>
                                 {% else %}
 
                                 {% endif %}
 
                                 {% if biblioteka.facebook != Null %}
-                                    <a href="{{ biblioteka.facebook }}"><i class="fab fa-vk fa-2x text-primary"></i></a>
+                                    <a href="{{ biblioteka.facebook }}"> <i class="fab fa-vk fa-2x text-primary"></i></a>
                                 {% else %}
 
                                 {% endif %}
 
                                 {% if biblioteka.telegram != Null %}
-                                    <a href="{{ biblioteka.telegram }}"><i class="fab fa-telegram fa-2x blue-text"></i></a>
+                                    <a href="{{ biblioteka.telegram }}"> <i class="fab fa-telegram fa-2x blue-text"></i></a>
                                 {% else %}
 
                                 {% endif %}</p>
