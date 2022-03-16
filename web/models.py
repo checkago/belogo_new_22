@@ -64,7 +64,6 @@ class Biblioteka(models.Model):
     email = models.EmailField(verbose_name='Емэйл', blank=True)
     direktor = models.ForeignKey(u'Position', blank=True, on_delete=models.SET_NULL, related_name='positions', null=True, verbose_name='Должность')
     employer = models.ForeignKey(u'Employers', blank=True, on_delete=models.SET_NULL, related_name='employer', null=True, verbose_name='Руководитель')
-    vk = models.URLField(verbose_name='страница в ВК', blank=True)
     facebook = models.URLField(verbose_name='страница в ВКонтакте', blank=True, null=True)
     instagram = models.URLField(verbose_name='страница в Одноклассниках', blank=True, null=True)
     telegram = models.URLField(verbose_name='аккаунт Телеграмм', blank=True, null=True)
