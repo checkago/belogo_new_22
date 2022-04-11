@@ -106,10 +106,10 @@ class ImageGallery(models.Model):
 
 class News(models.Model):
     date = models.DateField(default=date.today, verbose_name='Дата')
-    name = models.CharField(max_length=250, verbose_name='Заголовок')
+    name = models.CharField(max_length=250, verbose_name='Заголовок', db_index=True)
     slug = models.SlugField(null=True, unique=True, verbose_name='Псевдоним')
     category = models.ForeignKey(Category, blank=True, on_delete=models.SET_NULL, related_name='news', null=True,
-                                 verbose_name='Категория')
+                                 verbose_name='Категория', db_index=True)
     description = models.TextField(verbose_name='Текст')
     image = models.ImageField(upload_to='img/news', blank=True, null=True, verbose_name='Главное фото')
     published = models.BooleanField(default=True, verbose_name='Опубликована')
