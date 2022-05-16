@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'easy_thumbnails',
     'filer',
+    'import_export'
 ]
 
 MIDDLEWARE = [
@@ -78,8 +79,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'belogo_new.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 # DATABASES = {
 #     'default': {
