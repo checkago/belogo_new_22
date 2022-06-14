@@ -177,6 +177,7 @@ def contacts(request):
 
         if fback.is_valid():
             Feedback = fback.save(commit=False)
+            cd = fback.cleaned_data
             Feedback.save()
             subject = 'Сообщение от {} ({})'.format(cd['name'], cd['email'])
             message = '"{}". {} | {}'.format(cd['comment'], cd['name'], cd['phone'])
@@ -365,3 +366,7 @@ def events_archive(request):
 
     return render(request, 'events_archive.html', {'events': events, 'title': title, 'paginator': paginator,
                                               'page_obj': page_obj, 'description': description, 'datenow': datenow})
+
+
+def page_not_found_view(request, exception):
+    return render(request, '404.html', status=404)
