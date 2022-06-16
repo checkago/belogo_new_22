@@ -28,7 +28,7 @@ class QuestionForm(forms.ModelForm):
 
 
 class FeedbackForm(forms.ModelForm):
-    text = forms.CharField(
+    comment = forms.CharField(
         label='Сообщение',
         widget=forms.Textarea(attrs={'rows': '1'})
     )
