@@ -50,7 +50,7 @@ class FeedbackForm(forms.ModelForm):
 
     class Meta:
         model = Feedback
-        fields = ('name', 'phone', 'email', 'comment')
+        fields = ('name', 'phone', 'email', 'comment', 'category')
 
 
 class ServiceDopForm(forms.ModelForm):
