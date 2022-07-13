@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
 
@@ -33,6 +34,7 @@ class FeedbackForm(forms.ModelForm):
         widget=forms.Textarea(attrs={'rows': '1'})
     )
     email = forms.EmailField(required=False, widget=forms.EmailInput)
+    captcha = ReCaptchaField()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

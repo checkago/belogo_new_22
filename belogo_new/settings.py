@@ -44,8 +44,17 @@ INSTALLED_APPS = [
     'crispy_forms',
     'easy_thumbnails',
     'filer',
-    'import_export'
+    'import_export',
+    'snowpenguin.django.recaptcha3'
 ]
+
+
+RECAPTCHA_PRIVATE_KEY = '6LfZteggAAAAAJ99PU0qWuKImJxru8kn_iszuPPH'
+RECAPTCHA_PUBLIC_KEY = '6LfZteggAAAAAMhm41VTKqRZHBOqDgACartcdFgt'
+RECAPTCHA_DEFAULT_ACTION = 'generic'
+RECAPTCHA_SCORE_THRESHOLD = 0.5
+RECAPTCHA_LANGUAGE = 'ru'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -168,7 +168,6 @@ def vacancy(request, pk):
 
 def contacts(request):
     title = 'Контакты'
-    category = Category.objects.get(id=1)
     biblioteki = Biblioteka.objects.all()
     description = 'Контакты и способы связи с сотрудниками и руководством Библиотек Балашиха мкр Железнодорожный'
 
