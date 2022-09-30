@@ -206,7 +206,7 @@ class Shedule(models.Model):
 
 # FORMS
 class Book(models.Model):
-
+    NUL = '------------'
     IKC = 'Информационно-культурный центр (Пролетарская 8)'
     CDSCH = 'Центр детского и семейного чтения (Пролетарская 8)'
     BER = 'Бибилиотека эстетического развития (Керамик)'
@@ -217,6 +217,7 @@ class Book(models.Model):
     BSCH = 'Библиотека семейного чтения (Купавна)'
 
     BIB_CHOICES = (
+        (NUL, '------------'),
         (IKC, 'Информационно-культурный центр (Пролетарская 8)'),
         (CDSCH, 'Центр детского и семейного чтения (Пролетарская 8)'),
         (BER, 'Бибилиотека эстетического развития (Керамик)'),
@@ -229,7 +230,7 @@ class Book(models.Model):
 
     category = models.ForeignKey(Category, default='Продление книг', blank=True, on_delete=models.SET_NULL,
                                  related_name='books', null=True, verbose_name='Категория')
-    library = models.CharField(max_length=150, choices=BIB_CHOICES, default=IKC,
+    library = models.CharField(max_length=150, choices=BIB_CHOICES, default=NUL,
                                verbose_name='Выбор Библиотеки')
     date = models.DateTimeField(auto_now=True, verbose_name='Дата')
     fio = models.CharField(max_length=200, verbose_name='ФИО')
