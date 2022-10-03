@@ -112,7 +112,7 @@ def free_services(request, pk):
     fservice = get_object_or_404(FreeService, pk=pk)
     title = fservice.name
     description = fservice.description
-    date = FreeService.date
+    date = fservice.date
     return render(request, 'fservice.html', {'title': title, 'fservice': fservice, 'date': date,
                                              'description': description})
 
@@ -121,7 +121,7 @@ def termsofuse(request, pk):
     tofuse = get_object_or_404(TermsOfUse, pk=pk)
     title = tofuse.name
     description = tofuse.description
-    date = TermsOfUse.date
+    date = tofuse.date
     return render(request, 'termsofuse.html', {'title': title, 'tofuse': tofuse, 'date': date, 'description': description})
 
 
@@ -160,8 +160,8 @@ def vacancy(request, pk):
     vacancy = get_object_or_404(Vacancy, pk=pk)
     title = vacancy.name
     name = Vacancy.name
-    date = Vacancy.date
-    salary = Vacancy.salary
+    date = vacancy.date
+    salary = vacancy.salary
     description = vacancy.description
     return render(request, 'vacancy.html', {'title': title, 'name': name, 'vacancy': vacancy, 'date': date, 'salary': salary,
                                             'description': description})
