@@ -111,9 +111,10 @@ def services(request):
 def free_services(request, pk):
     fservice = get_object_or_404(FreeService, pk=pk)
     title = fservice.name
-    description = FreeService.description
+    description = fservice.description
     date = FreeService.date
-    return render(request, 'fservice.html', {'title': title, 'fservice': fservice, 'date': date, 'description': description})
+    return render(request, 'fservice.html', {'title': title, 'fservice': fservice, 'date': date,
+                                             'description': description})
 
 
 def termsofuse(request, pk):
@@ -187,8 +188,7 @@ def contacts(request):
     else:
         fback = FeedbackForm()
 
-    return render(request, 'contacts.html', {'fback': fback, 'title': title, 'biblioteki': biblioteki,
-                                             'category': category, 'description': description})
+    return render(request, 'contacts.html', {'fback': fback, 'title': title, 'biblioteki': biblioteki, 'description': description})
 
 
 def resources(request):
