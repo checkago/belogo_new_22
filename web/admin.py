@@ -191,7 +191,7 @@ class VacancyAdminForm(forms.ModelForm):
 class VacancyAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     form = VacancyAdminForm
-    list_display = ('name', 'salary',)
+    list_display = ('name', 'published', 'salary',)
 
 
 class VeteranVOVAdminForm(forms.ModelForm):
