@@ -45,7 +45,7 @@
 
             <div class="container-fluid mb-2">
                 {% for Vacancy in vacancies %}
-                    {% if published %}
+                    {% if published == True %}
                     <div class="card mb-2">
                       <div class="card-body pt-1 pb-1 mt-1 mb-1">
                         <p class="card-text">
@@ -64,6 +64,7 @@
                         <a href="{% url 'vacancy' Vacancy.pk %}" class="btn btn-primary float-right btn-sm">Подробнее</a>
                       </div>
                     </div>
+                    {% else %}
                     {% endif %}
                 {% endfor %}
 
