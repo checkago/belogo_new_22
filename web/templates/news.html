@@ -31,7 +31,7 @@
 
                       <!-- Image -->
                       <div class="view">
-                        <img src="{{ news.image.url }}" class="z-depth-3" style="max-width:400px"
+                        <img src="{{ news.image.url }}" class="z-depth-3" style="max-width:300px"
                           data-wow-delay="0.2s">
                       </div>
 
@@ -52,6 +52,7 @@
                                 {{ news.description|safe }}
                             </p>
 
+
                           </div>
                           <!-- Grid column -->
                           <div class="row">
@@ -62,7 +63,7 @@
                                 <div class="mdb-lightbox">
                                     {% for item in news.image_gallery.all %}
                                     <figure class="col-md-4">
-                                        <a href="{{ item.image.url }}" data-size="1000x750">
+                                        <a href="{{ item.image.url }}" data-size="1000x750w">
                                             <img src="{{ item.image.url }}" class="img-fluid w-100 shadow-3-strong rounded">
                                         </a>
                                     </figure>
