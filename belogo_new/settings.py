@@ -169,7 +169,7 @@ CKEDITOR_UPLOAD_PATH = 'ck-uploads/'
 CKEDITOR_ALLOW_NONIMAGE_FILES = False
 CKEDITOR_CONFIGS = {
     'awesome_ckeditor': {
-        'toolbar': 'Full',
+        'toolbar': 'full',
         'allowedContent': True,
         'forcePasteAsPlainText': True
     },
