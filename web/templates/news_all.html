@@ -27,7 +27,7 @@
                          <a class="page-link bg-yellow2" href="?page=1">Начало</a>
                        </li>
                        <li class="page-item">
-                         <a class="page-link" href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-long-arrow-left"></i></a>
+                         <a class="page-link" href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-arrow-left"></i></a>
                        </li>
                     {% endif %}
                     {% for p in paginator.page_range %}
@@ -41,7 +41,7 @@
                     {% endfor %}
                     {% if page_obj.has_next %}
                         <li class="page-item">
-                          <a class="page-link" href="?page={{ page_obj.next_page_number }}"><i class="fas fa-long-arrow-right"></i></a>
+                          <a class="page-link" href="?page={{ page_obj.next_page_number }}"><i class="fas fa-arrow-right"></i></a>
                         </li>
                         <li class="page-item">
                           <a class="page-link bg-yellow2" href="?page={{ page_obj.paginator.num_pages }}">Последняя</a>
@@ -81,7 +81,7 @@
                          <a class="page-link bg-yellow2" href="?page=1">Начало</a>
                        </li>
                        <li class="page-item">
-                         <a class="page-link" href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-long-arrow-left"></i></a>
+                         <a class="page-link" href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-arrow-left"></i></a>
                        </li>
                     {% endif %}
                     {% for p in paginator.page_range %}
@@ -95,7 +95,7 @@
                     {% endfor %}
                     {% if page_obj.has_next %}
                         <li class="page-item">
-                          <a class="page-link" href="?page={{ page_obj.next_page_number }}"><i class="fas fa-long-arrow-right"></i></a>
+                          <a class="page-link" href="?page={{ page_obj.next_page_number }}"><i class="fas fa-arrow-right"></i></a>
                         </li>
                         <li class="page-item">
                           <a class="page-link bg-yellow2" href="?page={{ page_obj.paginator.num_pages }}">Последняя</a>
