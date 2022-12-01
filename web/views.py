@@ -51,6 +51,7 @@ def news(request):
     news_list = News.objects.filter(category__in=branch_categories).distinct().order_by('-date')
     paginator = Paginator(news_list, 10)
     page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     try:
         news_list = paginator.page(page_number)
