@@ -51,10 +51,12 @@ def news(request):
     news_list = News.objects.filter(category__in=branch_categories).distinct().order_by('-date')
     paginator = Paginator(news_list, 10)
     page_number = request.GET.get('page')
-    page_obj = paginator.get_elided_page_range(page_number, on_each_side=3)
+    page_list = paginator.get_elided_page_range(page_number, on_each_side=3)
+    page_obj = paginator.get_page(page_number)
 
     return render(request, 'news_all.html', {'categories': categories, 'title': title, 'news_list': news_list,
-                                             'paginator': paginator, 'page_obj': page_obj, 'description': description})
+                                             'paginator': paginator, 'page_obj': page_obj, 'description': description,
+                                             'page_list': page_list})
 
 
 def news_view(request, pk):
