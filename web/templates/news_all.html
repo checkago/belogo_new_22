@@ -76,13 +76,13 @@
                     </li>
                       {% endif %}
                   {% for p in page_num_list %}
-                      {% if page_obj.number == p %}
-                        <li class="page-item active" aria-current="page">
-                          <a class="page-link" href="#">{{ p }} <span class="visually-hidden"></span></a>
-                        </li>
-                      {% else %}
-                        <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
-                      {% endif %}
+                          {% if page_obj.number == p %}
+                            <li class="page-item active" aria-current="page">
+                              <a class="page-link" href="#">{{ p }} <span class="visually-hidden"></span></a>
+                            </li>
+                          {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+                          {% endif %}
                   {% endfor %}
                   {% if page_obj.has_next %}
                     <li class="page-item">
