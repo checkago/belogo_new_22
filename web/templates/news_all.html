@@ -23,11 +23,14 @@
                 <nav aria-label="Page navigation example">
                   <ul class="pagination justify-content-center">
                    {% if page_obj.has_previous %}
-                    <li class="page-item">
-                      <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
-                    </li>
-                      {% endif %}
-                  {% for p in paginator.page_range %}
+                       <li class="page-item">
+                         <a class="page-link" href="?page=1">Начало</a>
+                       </li>
+                       <li class="page-item">
+                         <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                       </li>
+                    {% endif %}
+                    {% for p in paginator.page_range %}
                           {% if page_obj.number == p %}
                             <li class="page-item active" aria-current="page">
                               <a class="page-link" href="#">{{ p }} <span class="visually-hidden"></span></a>
@@ -35,12 +38,15 @@
                           {% elif p >= page_obj.number|add:-6 and p <= page_obj.number|add:6 %}
                             <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
                           {% endif %}
-                  {% endfor %}
-                  {% if page_obj.has_next %}
-                    <li class="page-item">
-                      <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a>
-                    </li>
-                   {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                          <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="?page={{ page_obj.num_pages }}">Последняя</a>
+                        </li>
+                    {% endif %}
                   </ul>
                 </nav>
 
