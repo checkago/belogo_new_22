@@ -49,7 +49,7 @@ def news(request):
     description = 'Новости и события произошедшие в библиотеках Железнодорожного'
     branch_categories = categories.get_descendants(include_self=True)
     news_list = News.objects.filter(category__in=branch_categories).distinct().order_by('-date')
-    paginator = Paginator(news_list, 20)
+    paginator = Paginator(news_list, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
