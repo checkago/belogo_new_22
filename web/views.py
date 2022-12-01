@@ -53,11 +53,11 @@ def news(request):
     page_number = request.GET.get('page')
 
     try:
-        page_obj = paginator.page(page_number)
+        news_list = paginator.page(page_number)
     except PageNotAnInteger:
-        page_obj = paginator.page(1)
+        news_list = paginator.page(1)
     except EmptyPage:
-        page_obj = paginator.page(paginator.num_pages)
+        news_list = paginator.page(paginator.num_pages)
 
     page_num_list = paginator.get_elided_page_range(page_number, on_each_side=3)
 
