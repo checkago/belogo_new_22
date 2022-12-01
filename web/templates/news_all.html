@@ -27,7 +27,7 @@
                       <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
                     </li>
                       {% endif %}
-                  {% for p in paginator.page_num_list %}
+                  {% for p in page_num_list %}
                           {% if page_obj.number == p %}
                             <li class="page-item active" aria-current="page">
                               <a class="page-link" href="#">{{ p }} <span class="visually-hidden"></span></a>
