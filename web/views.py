@@ -50,8 +50,9 @@ def news(request):
     branch_categories = categories.get_descendants(include_self=True)
     news_list = News.objects.filter(category__in=branch_categories).distinct().order_by('-date')
     paginator = Paginator(news_list, 10)
+    page = request.GET.get('page')
     try:
-        page_number = request.GET.get('page')
+        page_number = paginator.page(page)
     except PageNotAnInteger:
         page_number = paginator.page(1)
     except EmptyPage:
