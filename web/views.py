@@ -52,9 +52,11 @@ def news(request):
     paginator = Paginator(news_list, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    page_num_list = paginator.get_elided_page_range(number=1, on_each_side=3, on_ends=2)
 
     return render(request, 'news_all.html', {'categories': categories, 'title': title, 'news_list': news_list,
-                                             'paginator': paginator, 'page_obj': page_obj, 'description': description})
+                                             'paginator': paginator, 'page_obj': page_obj, 'page_num_list': page_num_list,
+                                             'description': description})
 
 
 def news_view(request, pk):
