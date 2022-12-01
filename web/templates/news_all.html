@@ -24,7 +24,7 @@
                   <ul class="pagination justify-content-center">
                    {% if page_obj.has_previous %}
                        <li class="page-item">
-                         <a class="page-link primary-color" href="?page=1">Начало</a>
+                         <a class="page-link bg-yellow2" href="?page=1">Начало</a>
                        </li>
                        <li class="page-item">
                          <a class="page-link" href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-arrow-left"></i></a>
@@ -44,7 +44,7 @@
                           <a class="page-link" href="?page={{ page_obj.next_page_number }}"><i class="fas fa-arrow-right"></i></a>
                         </li>
                         <li class="page-item">
-                          <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Последняя</a>
+                          <a class="page-link bg-yellow2" href="?page={{ page_obj.paginator.num_pages }}">Последняя</a>
                         </li>
                     {% endif %}
                   </ul>
