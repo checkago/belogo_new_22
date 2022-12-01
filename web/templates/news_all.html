@@ -32,7 +32,7 @@
                             <li class="page-item active" aria-current="page">
                               <a class="page-link" href="#">{{ p }} <span class="visually-hidden"></span></a>
                             </li>
-                          {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+                          {% elif p >= page_obj.number|add:-6 and p <= page_obj.number|add:6 %}
                             <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
                           {% endif %}
                   {% endfor %}
@@ -80,7 +80,7 @@
                             <li class="page-item active" aria-current="page">
                               <a class="page-link" href="#">{{ p }} <span class="visually-hidden"></span></a>
                             </li>
-                          {% else %}
+                          {% elif p >= page_obj.number|add:-6 and p <= page_obj.number|add:6 %}
                             <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
                           {% endif %}
                   {% endfor %}
