@@ -27,12 +27,12 @@
                       <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
                     </li>
                       {% endif %}
-                  {% for p in page_list %}
+                  {% for p in paginator.page_range %}
                           {% if page_obj.number == p %}
                             <li class="page-item active" aria-current="page">
                               <a class="page-link" href="#">{{ p }} <span class="visually-hidden"></span></a>
                             </li>
-                          {% else %}
+                          {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
                             <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
                           {% endif %}
                   {% endfor %}
@@ -75,7 +75,7 @@
                       <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
                     </li>
                       {% endif %}
-                  {% for p in page_list %}
+                  {% for p in paginator.page_range %}
                           {% if page_obj.number == p %}
                             <li class="page-item active" aria-current="page">
                               <a class="page-link" href="#">{{ p }} <span class="visually-hidden"></span></a>
