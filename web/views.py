@@ -54,8 +54,7 @@ def news(request):
     page_obj = paginator.get_page(page_number)
 
     return render(request, 'news_all.html', {'categories': categories, 'title': title, 'news_list': news_list,
-                                             'paginator': paginator, 'page_obj': page_obj, 'description': description,
-                                             'page_list': page_list})
+                                             'paginator': paginator, 'page_obj': page_obj, 'description': description})
 
 
 def news_view(request, pk):
