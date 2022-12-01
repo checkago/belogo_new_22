@@ -53,7 +53,7 @@ def news(request):
     page_number = request.GET.get('page')
 
     try:
-        page_obj = paginator.get_page(page_number)
+        page_obj = paginator.page(page_number)
     except PageNotAnInteger:
         page_obj = paginator.page(1)
     except EmptyPage:
