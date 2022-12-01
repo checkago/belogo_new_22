@@ -24,19 +24,20 @@
                   <ul class="pagination justify-content-center">
                    {% if page_obj.has_previous %}
                     <li class="page-item">
+                      <a class="page-link" href="?page={{ page_obj.start_page_number }}">Предыдущая</a>
+                    </li>
+                    <li class="page-item">
                       <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
                     </li>
                       {% endif %}
-                  {% for p in paginator.page_range %}
-                      {% if p > page_obj.number|add:-4 and p < page_obj.number|add:4 %}
+                  {% for p in paginator.get_elided_page_range %}
                           {% if page_obj.number == p %}
-                        <li class="page-item active" aria-current="page">
-                          <a class="page-link" href="#">{{ p }} <span class="visually-hidden"></span></a>
-                        </li>
-                           {% else %}
-                        <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+                            <li class="page-item active" aria-current="page">
+                              <a class="page-link" href="#">{{ p }} <span class="visually-hidden"></span></a>
+                            </li>
+                          {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
                           {% endif %}
-                      {% endif %}
                   {% endfor %}
                   {% if page_obj.has_next %}
                     <li class="page-item">
