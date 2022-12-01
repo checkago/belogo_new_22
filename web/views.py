@@ -51,14 +51,7 @@ def news(request):
     news_list = News.objects.filter(category__in=branch_categories).distinct().order_by('-date')
     paginator = Paginator(news_list, 10)
     page_number = request.GET.get('page')
-    try:
-        page_obj = paginator.get_page(page_number)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        page_obj = paginator.get_page(1)
-    except EmptyPage:
-        # If page is not an integer, deliver first page.
-        page_obj = paginator.get_page(1)
+    page_obj = paginator.get_page(page_number, allow_empty_first_page=False)
     page_num_list = paginator.get_elided_page_range(page_number, on_each_side=3)
 
     return render(request, 'news_all.html', {'categories': categories, 'title': title, 'news_list': news_list,
