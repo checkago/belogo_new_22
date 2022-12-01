@@ -6,7 +6,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('novosti/$?page=1', views.news, name='news'),
+    path('novosti/', views.news, name='news'),
     path('novosti/<int:pk>/', views.news_view, name='news_view'),
     path('biblioteki/', views.biblioteki, name='biblioteki'),
     path('biblioteki/<int:pk>/', views.biblioteka, name='biblioteka'),
