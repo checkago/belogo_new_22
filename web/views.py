@@ -357,7 +357,7 @@ def events(request):
 def shedules(request):
     title = 'Системные расписания'
     description = 'Системные библиотек "ЦБС им. А. Белого"'
-    shedules = Shedule.objects.order_by('-id')
+    shedules = Shedule.objects.order_by('id')
     return render(request, 'shedules.html', {'title': title, 'description': description, 'shedules': shedules})
 
 
