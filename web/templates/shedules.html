@@ -42,14 +42,7 @@
                 </div>
               </div>
             </div>
-
-            {% endfor %}
-        </div>
-    </div>
-</div>
-
-
-<div class="modal top fade" id="event_week_{{ Shedule.id }}" tabindex="-1" aria-labelledby="Расписание" aria-hidden="true" data-backdrop="true" data-keyboard="true">
+            <div class="modal top fade" id="event_week_{{ Shedule.id }}" tabindex="-1" aria-labelledby="Расписание" aria-hidden="true" data-backdrop="true" data-keyboard="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -82,6 +75,13 @@
     </div>
   </div>
 </div>
+
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
 {% include '_footer.html' %}
 
 {% endblock %}
