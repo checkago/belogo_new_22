@@ -354,6 +354,13 @@ def events(request):
                                            'datenow': datenow})
 
 
+def shedules(request):
+    title = 'Системные расписания'
+    description = 'Системные библиотек "ЦБС им. А. Белого"'
+    shedules = Shedule.objects.order_by('-id')
+    return render(request, 'shedules.html', {'title': title, 'description': description, 'shedules': shedules})
+
+
 def events_archive(request):
     title = 'Архив мероприятий'
     description = 'Архив прошедших в билиотеках Балашихи мероприятий'
