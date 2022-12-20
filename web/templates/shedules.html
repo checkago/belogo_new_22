@@ -9,7 +9,6 @@
     <nav class='mt-2' aria-label="breadcrumb sm-hidden" id="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'events_archive' %}">Архив мероприятий</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
       </ol>
     </nav>
@@ -22,7 +21,7 @@
                         <a href="#" data-toggle="modal" data-target="#event_week_{{ Shedule.id }}"><img class="img-responsive" src="{{ Shedule.image.url }}" alt="{{ Shedule.name }} Железнодорожный"/></a>
                     </div>
                     <div class="card-footer">
-                        <h5>{{ Shedule.name }}</h5>
+                        <h5 class="font-weight-bold">{{ Shedule.name }}</h5>
                     </div>
                 </div>
             </div>
