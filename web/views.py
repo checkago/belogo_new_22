@@ -12,7 +12,7 @@ def index(request):
     anonsy = Anons.objects.all().order_by('-id')
     categories = Category.objects.filter(name='Новости')
     category = Category.objects.all()
-    shedule = Shedule.objects.order_by('id')
+    shedule = Shedule.objects.first()
     event = Event.objects.latest('id')
     cinema = Cinema.objects.latest('id')
     partners1 = Partner.objects.filter(block='1').order_by('?')
