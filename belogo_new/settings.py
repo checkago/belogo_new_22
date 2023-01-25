@@ -89,24 +89,23 @@ WSGI_APPLICATION = 'belogo_new.wsgi.application'
 
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': env("POSTGRES_DB"),
-#         'USER': env("POSTGRES_USER"),
-#         'PASSWORD': env("POSTGRES_PASSWORD"),
-#         'HOST': env("POSTGRES_HOST"),
-#         'PORT': env("POSTGRES_PORT"),
-#         'CONN_MAX_AGE': 60 * 10,  # 10 minutes
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env("POSTGRES_DB"),
+        'USER': env("POSTGRES_USER"),
+        'PASSWORD': env("POSTGRES_PASSWORD"),
+        'HOST': env("POSTGRES_HOST"),
+        'PORT': env("POSTGRES_PORT"),
+    }
+}
 
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
