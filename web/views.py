@@ -360,6 +360,7 @@ def library_hud(request):
 class BookDetailView(generic.DetailView):
     model = Library
     template_name = 'book_view.html'
+    title = Library.title
     context_object_name = 'book'
 
     def get_context_data(self, **kwargs):
@@ -375,7 +376,7 @@ class BookDetailView(generic.DetailView):
         self.object = self.get_object()
         self.object.views += 1
         self.object.save()
-        context = self.get_context_data(object=self.object)
+        context = self.get_context_data(object=self.object, title=self.object.title)
         return self.render_to_response(context)
 
 
