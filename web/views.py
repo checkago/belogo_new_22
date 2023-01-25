@@ -369,7 +369,6 @@ class BookDetailView(generic.DetailView):
         context['image'] = Library.image
         context['description'] = Library.description
         context['link'] = Library.link
-
         return context
 
     def get(self, request, *args, **kwargs):
