@@ -4,6 +4,7 @@ from django.core.mail import send_mail
 from .forms import *
 from .models import *
 import datetime
+from django.views import generic
 
 
 def index(request):
@@ -273,6 +274,27 @@ def q_form(request):
     return render(request, 'q_form.html', {'title': title, 'qform': qform, 'sent': sent})
 
 
+def brq_form(request):
+    title = 'Комплектуем библиотеку вместе'
+    sent = False
+    if request.method == 'POST':
+        brqform = BookrequestForm(request.POST)
+        if brqform.is_valid():
+            Bookrequest = brqform.save(commit=False)
+            cd = brqform.cleaned_data
+            Bookrequest.save()
+            subject = 'Список книг от {}'.format(cd['name'])
+            message = 'Запрос книг от{} - {}'.format(cd['name'], cd['comment'])
+            send_mail(subject, message, 'site@biblioteka-belogo.ru', [cd['email'], 'okio@biblioteka-belogo.ru'])
+            sent = True
+            return redirect('/')
+
+    else:
+        brqform = BookrequestForm()
+
+    return render(request, 'brq_form.html', {'title': title, 'brqform': brqform, 'sent': sent})
+
+
 def s_form(request):
     title = 'Ваше мероприятие или аренда зала'
     sent = False
@@ -335,14 +357,28 @@ def library_hud(request):
                                               'paginator': paginator, 'page_obj': page_obj})
 
 
-def book_view(request, pk):
-    book = get_object_or_404(Library, pk=pk)
-    title = book.title
-    image = book.image
-    link = book.link
-    description = book.description
-    return render(request, 'book_view.html',
-                  {'book': book, 'title': title, 'image': image, 'description': description, 'link': link})
+class BookDetailView(generic.DetailView):
+    model = Library
+    template_name = 'book_view.html'
+    context_object_name = 'book'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = Library.title
+        context['author'] = Library.author
+        context['image'] = Library.image
+        context['title'] = Library.title
+        context['description'] = Library.description
+        context['link'] = Library.link
+
+        return context
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.views += 1
+        self.object.save()
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)
 
 
 def events(request):

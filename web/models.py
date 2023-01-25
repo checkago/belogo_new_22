@@ -1,5 +1,3 @@
-from unicodedata import category
-
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -272,6 +270,19 @@ class Feedback(models.Model):
         return self.name
 
 
+class Bookrequest(models.Model):
+    name = models.CharField(max_length=35, verbose_name='Имя')
+    email = models.EmailField(verbose_name='Е-мэйл')
+    comment = models.TextField(max_length=350, verbose_name='Список книг')
+
+    class Meta:
+        verbose_name = 'Комплектование'
+        verbose_name_plural = 'Комплектование'
+
+    def __str__(self):
+        return self.name
+
+
 class Service(models.Model):
     category = models.ForeignKey(Category, blank=True, on_delete=models.SET_NULL, related_name='services',
                                  null=True, verbose_name='Категория')
@@ -485,6 +496,7 @@ class Library(models.Model):
     image = models.ImageField(upload_to='img/books/images', blank=True, verbose_name='Изображение')
     link = models.URLField(verbose_name='Ссылка на PDF файл', blank=True)
     file = models.FileField(upload_to='img/books/files', blank=True, verbose_name='Файл')
+    views = models.IntegerField(default=0, verbose_name='Количество просмотров')
 
     class Meta:
         verbose_name = 'Электронная книга'

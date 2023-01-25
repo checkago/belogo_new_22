@@ -103,9 +103,14 @@ DATABASES = {
         'USER': env("POSTGRES_USER"),
         'PASSWORD': env("POSTGRES_PASSWORD"),
         'HOST': env("POSTGRES_HOST"),
-        'PORT': env("POSTGRES_PORT")
+        'PORT': env("POSTGRES_PORT"),
+        'CONN_MAX_AGE': 60 * 10,  # 10 minutes
     }
 }
+
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
 
 
 # Password validation

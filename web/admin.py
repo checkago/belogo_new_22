@@ -139,6 +139,10 @@ class FeedbackAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'phone', 'comment')
 
 
+class BookrequestAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'comment')
+
+
 class ServiceDopAdmin(admin.ModelAdmin):
     list_display = ('fio', 'email', 'date', 'comment')
 
@@ -275,7 +279,7 @@ class LibraryAdminForm(forms.ModelForm):
 
 class LibraryAdmin(admin.ModelAdmin):
     form = LibraryAdminForm
-    list_display = ('title',)
+    list_display = ('title', 'author', 'views')
 
 
 class AuthorAdmin(admin.ModelAdmin):
@@ -301,6 +305,7 @@ admin.site.register(Book, BookAdmin)
 admin.site.register(ImageGallery)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Feedback, FeedbackAdmin)
+admin.site.register(Bookrequest, BookrequestAdmin)
 admin.site.register(ServiceDop, ServiceDopAdmin)
 admin.site.register(Partner, PartnerAdmin)
 admin.site.register(FreeService, FreeServiceAdmin)

@@ -1,8 +1,7 @@
 from django import forms
 from .models import *
 from snowpenguin.django.recaptcha3.fields import ReCaptchaField
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit, Row, Column
+
 
 
 class BookForm(forms.ModelForm):
@@ -53,6 +52,17 @@ class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Feedback
         fields = ('name', 'phone', 'email', 'comment', 'category')
+
+
+class BookrequestForm(forms.ModelForm):
+    comment = forms.CharField(
+        label='Список книг',
+        widget=forms.Textarea(attrs={'rows': '4'})
+    )
+
+    class Meta:
+        model = Bookrequest
+        fields = ('name', 'email', 'comment')
 
 
 class ServiceDopForm(forms.ModelForm):
