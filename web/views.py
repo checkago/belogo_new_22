@@ -367,7 +367,6 @@ class BookDetailView(generic.DetailView):
         context['title'] = Library.title
         context['author'] = Library.author
         context['image'] = Library.image
-        context['title'] = Library.title
         context['description'] = Library.description
         context['link'] = Library.link
 
