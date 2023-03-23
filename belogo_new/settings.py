@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'filer',
     'import_export',
-    'snowpenguin.django.recaptcha3'
+    'snowpenguin.django.recaptcha3',
+    'rest_framework'
 ]
 
 

@@ -1,3 +1,4 @@
+from rest_framework import generics
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.core.mail import send_mail
@@ -5,6 +6,7 @@ from .forms import *
 from .models import *
 import datetime
 from django.views import generic
+from .serializers import BibliotekaSerializer, NewsSerializer, EventSerializer
 
 
 def index(request):
@@ -411,3 +413,18 @@ def events_archive(request):
 
 def page_not_found_view(request, exception):
     return render(request, '404.html', status=404)
+
+
+class BibliotekiAPIView(generics.ListAPIView):
+    queryset = Biblioteka.objects.all()
+    serializer_class = BibliotekaSerializer
+
+
+class NewsAPIView(generics.ListAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+
+
+class EventAPIView(generics.ListAPIView):
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer

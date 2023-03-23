@@ -3,6 +3,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 from django.urls import path
 from . import views
+from .views import BibliotekiAPIView, NewsAPIView, EventAPIView
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -38,12 +39,16 @@ urlpatterns = [
     path('events/', views.events, name='events'),
     path('events-archive/', views.events_archive, name='events_archive'),
     path('shedules/', views.shedules, name='shedules'),
-]
 
+    # """API List Views"""
+
+    path('api/v1/biblioteka_list/', BibliotekiAPIView.as_view()),
+    path('api/v1/news_list/', NewsAPIView.as_view()),
+    path('api/v1/event_list/', EventAPIView.as_view())
+]
 
 if settings.MEDIA_ROOT:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += staticfiles_urlpatterns()
 
 handler404 = "web.views.page_not_found_view"
-
