@@ -10,20 +10,16 @@
     {% endif %}
 {% for Anons in anonsy %}
 
-    <div class="container mb-3 pb-4 mt-1 pt-1">
-        {% if Anons.active != False %}
-      <!--Section: Features v.1-->
-      <section id="features" class="mb-5 mt-2">
-      <hr class="mb-3">
+    <div class="container mb-1 pb-2 mt-1 pt-1">
+        {% if Anons.active == True %}
+          <!--Section: Features v.1-->
+          <section id="features" class="mb-2 mt-2">
 
-        <!--Section heading-->
+            <div class="text-center mb-3 font-weight-bold">
+                {{ Anons.description|safe }}
+            </div>
 
-                <!-- ANONS -->
-        <div class="text-center mb-3 font-weight-bold">
-            {{ Anons.description|safe }}
-        </div>
-
-      </section>
+          </section>
         {% else %}
         {% endif %}
       <!--/Section: Features v.1-->
