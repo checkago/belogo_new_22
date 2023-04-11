@@ -6,7 +6,8 @@ from .forms import *
 from .models import *
 import datetime
 from django.views import generic
-from .serializers import BibliotekaSerializer, NewsSerializer, EventSerializer
+from .serializers import BibliotekaSerializer, NewsSerializer, EventSerializer, SheduleSerializer, ServiceSerializer, \
+    FreeServiceSerializer
 
 
 def index(request):
@@ -417,7 +418,7 @@ def page_not_found_view(request, exception):
 
 class BibliotekiAPIView(generics.ListAPIView):
     queryset = Biblioteka.objects.all()
-    serializer_class = BibliotekaSerializer
+    serializer_class = BibliotekaSerializer(queryset, many=True)
 
 
 class NewsAPIView(generics.ListAPIView):
@@ -428,3 +429,18 @@ class NewsAPIView(generics.ListAPIView):
 class EventAPIView(generics.ListAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+
+
+class SheduleAPIView(generics.ListAPIView):
+    queryset = Shedule.objects.all()
+    serializer_class = SheduleSerializer
+
+
+class ServiceAPIView(generics.ListAPIView):
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer
+
+
+class FreeServiceAPIView(generics.ListAPIView):
+    queryset = FreeService.objects.all()
+    serializer_class = FreeServiceSerializer
