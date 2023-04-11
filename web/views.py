@@ -423,7 +423,7 @@ class BibliotekiAPIView(generics.ListAPIView):
 
 class NewsAPIView(generics.ListAPIView):
     queryset = News.objects.all()
-    serializer_class = NewsSerializer
+    serializer = NewsSerializer(queryset, many=True)
 
 
 class EventAPIView(generics.ListAPIView):
