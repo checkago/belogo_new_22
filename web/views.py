@@ -418,27 +418,27 @@ def page_not_found_view(request, exception):
 
 class BibliotekiAPIView(generics.ListAPIView):
     queryset = Biblioteka.objects.all()
-    serializer_class = BibliotekaSerializer(queryset, many=True)
+    serializer_class = BibliotekaSerializer
 
 
 class NewsAPIView(generics.ListAPIView):
     queryset = News.objects.all()
-    serializer_class = NewsSerializer
+    serializer_class = NewsSerializer(queryset, many=True)
 
 
 class EventAPIView(generics.ListAPIView):
     queryset = Event.objects.all()
-    serializer_class = EventSerializer
+    serializer_class = EventSerializer(queryset, many=True)
 
 
 class SheduleAPIView(generics.ListAPIView):
     queryset = Shedule.objects.all()
-    serializer_class = SheduleSerializer
+    serializer_class = SheduleSerializer(queryset, many=True)
 
 
 class ServiceAPIView(generics.ListAPIView):
     queryset = Service.objects.all()
-    serializer_class = ServiceSerializer
+    serializer_class = ServiceSerializer(queryset, many=True)
 
 
 class FreeServiceAPIView(generics.ListAPIView):
