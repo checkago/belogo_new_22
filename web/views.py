@@ -423,22 +423,22 @@ class BibliotekiAPIView(generics.ListAPIView):
 
 class NewsAPIView(generics.ListAPIView):
     queryset = News.objects.all()
-    serializer_class = NewsSerializer(queryset, many=True)
+    serializer_class = NewsSerializer(many=True)
 
 
 class EventAPIView(generics.ListAPIView):
     queryset = Event.objects.all()
-    serializer_class = EventSerializer(queryset, many=True)
+    serializer_class = EventSerializer
 
 
 class SheduleAPIView(generics.ListAPIView):
     queryset = Shedule.objects.all()
-    serializer_class = SheduleSerializer(queryset, many=True)
+    serializer_class = SheduleSerializer
 
 
 class ServiceAPIView(generics.ListAPIView):
     queryset = Service.objects.all()
-    serializer_class = ServiceSerializer(queryset, many=True)
+    serializer_class = ServiceSerializer
 
 
 class FreeServiceAPIView(generics.ListAPIView):
