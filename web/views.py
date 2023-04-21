@@ -446,6 +446,6 @@ class FreeServiceAPIView(generics.ListAPIView):
     serializer_class = FreeServiceSerializer
 
 
-class BookFormsAPIView(generics.ListAPIView):
+class BookFormsAPIView(generics.ListCreateAPIView):
     queryset = Book.objects.order_by("-id")[0:20]
     serializer_class = BookFormSerializer
