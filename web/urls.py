@@ -3,7 +3,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 from django.urls import path
 from . import views
-from .views import BibliotekiAPIView, NewsAPIView, EventAPIView, SheduleAPIView, ServiceAPIView, FreeServiceAPIView
+from .views import BibliotekiAPIView, NewsAPIView, EventAPIView, SheduleAPIView, ServiceAPIView, FreeServiceAPIView, \
+    BookFormsAPIView
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -47,7 +48,8 @@ urlpatterns = [
     path('api/v1/event_list/', EventAPIView.as_view()),
     path('api/v1/shedule_list/', SheduleAPIView.as_view()),
     path('api/v1/services_list/', ServiceAPIView.as_view()),
-    path('api/v1/freeservices_list/', FreeServiceAPIView.as_view())
+    path('api/v1/freeservices_list/', FreeServiceAPIView.as_view()),
+    path('api/v1/book_forms/', BookFormsAPIView.as_view())
 ]
 
 if settings.MEDIA_ROOT:

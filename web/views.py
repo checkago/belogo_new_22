@@ -7,7 +7,7 @@ from .models import *
 import datetime
 from django.views import generic
 from .serializers import BibliotekaSerializer, NewsSerializer, EventSerializer, SheduleSerializer, ServiceSerializer, \
-    FreeServiceSerializer
+    FreeServiceSerializer, BookFormSerializer
 
 
 def index(request):
@@ -444,3 +444,8 @@ class ServiceAPIView(generics.ListAPIView):
 class FreeServiceAPIView(generics.ListAPIView):
     queryset = FreeService.objects.all()
     serializer_class = FreeServiceSerializer
+
+
+class BookFormsAPIView(generics.ListAPIView):
+    queryset = Book.objects.order_by("-id")[0:20]
+    serializer_class = BookFormSerializer

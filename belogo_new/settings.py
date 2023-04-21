@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'filer',
     'import_export',
     'snowpenguin.django.recaptcha3',
-    'rest_framework'
+    'rest_framework',
+    'email_signals'
 ]
 
 
@@ -133,6 +134,7 @@ EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'site@biblioteka-belogo.ru'
 EMAIL_HOST_PASSWORD = 'Bib5221144'
+EMAIL_SIGNAL_DEFAULT_SENDER = 'site@biblioteka-belogo.ru'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -171,6 +173,11 @@ CKEDITOR_UPLOAD_PATH = 'ck-uploads/'
 CKEDITOR_ALLOW_NONIMAGE_FILES = False
 CKEDITOR_CONFIGS = {
     'awesome_ckeditor': {
+        'toolbar': 'full',
+        'allowedContent': True,
+        'forcePasteAsPlainText': True
+    },
+    'default': {
         'toolbar': 'full',
         'allowedContent': True,
         'forcePasteAsPlainText': True
