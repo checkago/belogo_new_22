@@ -237,23 +237,18 @@ def kniga_pamyati(request):
 
 def book_form(request):
     title = 'Форма форма продления книг/и'
-    sent = False
     if request.method == 'POST':
         bform = BookForm(request.POST)
         if bform.is_valid():
             Book = bform.save(commit=False)
             cd = bform.cleaned_data
             Book.save()
-            subject = 'Запрос на продление книги с сайта, от {} выданой в {}'.format(cd['fio'], cd['library'])
-            message = '"{}". Чит.билет №{} {}'.format(cd['fio'], cd['bilet'], cd['comment'])
-            send_mail(subject, message, 'site@biblioteka-belogo.ru', [cd['email'], 'site@biblioteka-belogo.ru'])
-            sent = True
             return redirect('/')
 
     else:
         bform = BookForm()
 
-    return render(request, 'book_form.html', {'title': title, 'bform': bform, 'sent': sent})
+    return render(request, 'book_form.html', {'title': title, 'bform': bform})
 
 
 def q_form(request):
