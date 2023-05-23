@@ -27,7 +27,7 @@
                             <p><strong class="font-weight-bold">{{ biblioteka.direktor }}:</strong> {{ biblioteka.employer }}</p>
                             <p><strong class="font-weight-bold">Адрес:</strong> {{ biblioteka.adress }}</p>
                             <p><strong class="font-weight-bold">Телефон:</strong> <strong class="blue-text"><strong>{{ biblioteka.phone }}</strong></strong></p>
-                            <p><strong class="font-weight-bold">Почта:</strong> <strong class="blue-text"><strong>{{ biblioteka.email }}</strong></strong></p>
+                            <p><strong class="font-weight-bold">Почта:</strong> <strong class="blue-text"><strong><a href="mailto:{{ biblioteka.email }}"></a></strong></strong></p>
                             <h4>График работы:</h4>
                             <p><strong class="font-weight-bold"></strong>{{ biblioteka.workdays }}: {{ biblioteka.worktime }}</p>
                             <p><strong class="font-weight-bold"></strong>{{ biblioteka.workdays_alt }}: {{ biblioteka.worktime_alt }}</p>
