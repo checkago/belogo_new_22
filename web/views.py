@@ -237,6 +237,7 @@ def kniga_pamyati(request):
 
 def book_form(request):
     title = 'Форма форма продления книг/и'
+    sent = False
     if request.method == 'POST':
         bform = BookForm(request.POST)
         if bform.is_valid():
@@ -248,7 +249,7 @@ def book_form(request):
     else:
         bform = BookForm()
 
-    return render(request, 'book_form.html', {'title': title, 'bform': bform})
+    return render(request, 'book_form.html', {'title': title, 'bform': bform, 'sent': sent})
 
 
 def q_form(request):
