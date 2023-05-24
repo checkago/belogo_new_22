@@ -19,7 +19,7 @@
             <div class="col-md-4 d-flex">
                 <div class="card my-3">
                     <div class="card-body">
-                        <a href="{{ Event.image.url }}" target="_blank"><img class="img-responsive" src="{{ Event.image.url }}" alt="{{ Event.name }} {{ Event.library }} Железнодорожный"/></a>
+                        <a href="#" data-toggle="modal" data-target="#event_week_{{ Event.id }}"><img class="img-responsive" src="{{ Event.image.url }}" alt="{{ Event.name }} {{ Event.library }} Железнодорожный"/></a>
                     </div>
                     <div class="card-footer">
                         <h5>{{ Event.name }}</h5>
@@ -34,6 +34,23 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal top fade" id="event_week_{{ Shedule.id }}" tabindex="-1" aria-labelledby="Расписание" aria-hidden="true" data-backdrop="true" data-keyboard="true">
+              <div class="modal-dialog modal-xl  modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close btn-danger" data-dismiss="modal" aria-label="Закрыть"></button>
+                  </div>
+                  <div class="modal-body"><img class="img-fluid z-depth-2 rounded" src="{{ Shedule.image.url }}" /></div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                      Закрыть
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {% endfor %}
         </div>
     </div>
