@@ -130,8 +130,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_PORT = 587
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 465
 EMAIL_HOST_USER = 'site@biblioteka-belogo.ru'
 EMAIL_HOST_PASSWORD = 'Bib5221144'
 EMAIL_SIGNAL_DEFAULT_SENDER = 'site@biblioteka-belogo.ru'
