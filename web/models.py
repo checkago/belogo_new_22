@@ -147,7 +147,6 @@ class Event(models.Model):
     DB = 'Детская библиотека (Павлино)'
     B4 = 'Библиотека №4 (Павлино)'
     B3 = 'Библиотека №3 (Кучино)'
-    BSCH = 'Библиотека семейного чтения (Купавна)'
 
     BIB_CHOICES = (
         (IKC, 'Информационно-культурный центр (Пролетарская 8)'),
@@ -157,7 +156,6 @@ class Event(models.Model):
         (DB, 'Детская библиотека (Павлино)'),
         (B4, 'Библиотека №4 (Павлино)'),
         (B3, 'Библиотека №3 (Кучино)'),
-        (BSCH, 'Библиотека семейного чтения (Купавна)'),
     )
 
     name = models.CharField(max_length=100, verbose_name='Название события')
@@ -273,7 +271,7 @@ class Feedback(models.Model):
         return self.name
 
 
-class Bookrequest(models.Model):
+class Bookrequest(models.Model, EmailSignalMixin):
     name = models.CharField(max_length=35, verbose_name='Имя')
     email = models.EmailField(verbose_name='Е-мэйл')
     comment = models.TextField(max_length=350, verbose_name='Список книг')
@@ -529,6 +527,7 @@ class LibraryCategory(models.Model):
 
     def __str__(self):
         return self.name
+
 
 
 
