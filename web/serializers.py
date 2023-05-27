@@ -1,6 +1,6 @@
 from django.utils.html import strip_tags
 from rest_framework import serializers
-from web.models import Biblioteka, News, Event, Shedule, Service, FreeService, Book
+from web.models import Biblioteka, News, Event, Shedule, Service, FreeService, Book, Category
 
 
 class BibliotekaSerializer(serializers.ModelSerializer):
@@ -44,8 +44,13 @@ class FreeServiceSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class BookFormSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Book
-        fields = ['id', 'library', 'fio', 'bilet', 'phone', 'email', 'comment']
+class BookFormSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    category = serializers.HiddenField(default='Продление книг')
+    library = serializers.SlugRelatedField(slug_field='name', queryset=Category.objects)
+    fio = serializers.CharField()
+    bilet = serializers.CharField()
+    phone = serializers.CharField()
+    email = serializers.EmailField()
+    comment = serializers.CharField()
 

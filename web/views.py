@@ -2,12 +2,26 @@ from rest_framework import generics
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.core.mail import send_mail
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from .forms import *
 from .models import *
 import datetime
 from django.views import generic
 from .serializers import BibliotekaSerializer, NewsSerializer, EventSerializer, SheduleSerializer, ServiceSerializer, \
-    FreeServiceSerializer, BookFormSerializer
+    BookFormSerializer
+
+
+def getRoutes(request):
+    routes = [
+        {
+            'Endpoint': '/books/create',
+            'method': 'POST',
+            'body': {'body': ""},
+            'description': 'Новый запрос на продление книг'
+        }
+    ]
+    return Response(routes)
 
 
 def index(request):
@@ -242,14 +256,13 @@ def book_form(request):
         bform = BookForm(request.POST)
         if bform.is_valid():
             Book = bform.save(commit=False)
-            cd = bform.cleaned_data
             Book.save()
             return redirect('/')
 
     else:
         bform = BookForm()
 
-    return render(request, 'book_form.html', {'title': title, 'bform': bform, 'sent': sent})
+    return render(request, 'book_form.html', {'title': title, 'bform': bform})
 
 
 def q_form(request):
@@ -280,18 +293,13 @@ def brq_form(request):
         brqform = BookrequestForm(request.POST)
         if brqform.is_valid():
             Bookrequest = brqform.save(commit=False)
-            cd = brqform.cleaned_data
             Bookrequest.save()
-            subject = 'Список книг от {}'.format(cd['name'])
-            message = 'Запрос книг от{} - {}'.format(cd['name'], cd['comment'])
-            send_mail(subject, message, 'site@biblioteka-belogo.ru', [cd['email'], 'okio@biblioteka-belogo.ru'])
-            sent = True
             return redirect('/')
 
     else:
         brqform = BookrequestForm()
 
-    return render(request, 'brq_form.html', {'title': title, 'brqform': brqform, 'sent': sent})
+    return render(request, 'brq_form.html', {'title': title, 'brqform': brqform})
 
 
 def s_form(request):
@@ -437,6 +445,16 @@ class ServiceAPIView(generics.ListAPIView):
     serializer_class = ServiceSerializer
 
 
-class BookFormsAPIView(generics.ListCreateAPIView):
-    queryset = Book.objects.order_by("-id")[0:20]
-    serializer_class = BookFormSerializer
+@api_view(['POST'])
+def createBook(request):
+    data = request.data
+
+    book = Book.objects.create(
+        library=data['library'],
+        fio=data['fio'],
+        bilet=data['bilet'],
+        email=data['email'],
+        comment=data['comment']
+    )
+    serializer = BookFormSerializer(book, many=False)
+    return Response(serializer.data)

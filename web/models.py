@@ -222,7 +222,7 @@ class Book(models.Model, EmailSignalMixin):
     )
 
     category = models.ForeignKey(Category, default='Продление книг', blank=True, on_delete=models.SET_NULL,
-                                 related_name='books', null=True, verbose_name='Категория')
+
     library = models.CharField(max_length=150, choices=BIB_CHOICES, verbose_name='Выбор Библиотеки')
     datetime = models.DateTimeField(auto_now=True, verbose_name='Дата')
     fio = models.CharField(max_length=200, verbose_name='ФИО')
