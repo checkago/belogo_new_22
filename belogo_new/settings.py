@@ -130,11 +130,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_PORT = 465
-EMAIL_HOST_USER = 'biblioteka-belogo@yandex.ru'
-EMAIL_HOST_PASSWORD = 'Gkh747c'
-EMAIL_SIGNAL_DEFAULT_SENDER = 'biblioteka-belogo@yandex.ru'
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'site@biblioteka-belogo.ru'
+EMAIL_HOST_PASSWORD = 'wP5maMBAujPAQ0JixUUq'
+EMAIL_SIGNAL_DEFAULT_SENDER = 'site@biblioteka-belogo.ru'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
