@@ -221,7 +221,6 @@ class Book(models.Model, EmailSignalMixin):
         (B3, 'Библиотека №3 (Кучино)'),
     )
 
-    category = models.ForeignKey(Category, default='Продление книг', blank=True, on_delete=models.SET_NULL,
 
     library = models.CharField(max_length=150, choices=BIB_CHOICES, verbose_name='Выбор Библиотеки')
     datetime = models.DateTimeField(auto_now=True, verbose_name='Дата')

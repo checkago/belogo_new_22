@@ -46,8 +46,7 @@ class FreeServiceSerializer(serializers.ModelSerializer):
 
 class BookFormSerializer(serializers.Serializer):
     id = serializers.IntegerField()
-    category = serializers.HiddenField(default='Продление книг')
-    library = serializers.SlugRelatedField(slug_field='name', queryset=Category.objects)
+    library = serializers.CharField()
     fio = serializers.CharField()
     bilet = serializers.CharField()
     phone = serializers.CharField()
