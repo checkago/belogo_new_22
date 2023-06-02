@@ -42,38 +42,38 @@
               </div>
             </div>
             <div class="modal top fade" id="event_week_{{ Shedule.id }}" tabindex="-1" aria-labelledby="Расписание" aria-hidden="true" data-backdrop="true" data-keyboard="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="btn-close btn-danger" data-dismiss="modal" aria-label="Закрыть"></button>
-      </div>
+              <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close btn-danger" data-dismiss="modal" aria-label="Закрыть"></button>
+                  </div>
 
-        <div id="carouselExampleInterval" class="carousel slide" data-mdb-ride="carousel">
-          <div class="carousel-inner">
-              {% for Shedule in shedules %}
-            <div class="carousel-item active" data-mdb-interval="10000">
-              <img src="{{ Shedule.image.url }}" class="d-block w-100" alt="Wild Landscape"/>
+                    <div id="carouselExampleInterval" class="carousel slide" data-mdb-ride="carousel">
+                      <div class="carousel-inner">
+                          {% for Shedule in shedules %}
+                        <div class="carousel-item active" data-mdb-interval="10000">
+                          <img src="{{ Shedule.image.url }}" class="d-block w-100" alt="Wild Landscape"/>
+                        </div>
+                          {% endfor %}
+                      </div>
+                      <button class="carousel-control-prev" data-mdb-target="#carouselExampleInterval" type="button" data-mdb-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Предыдущий</span>
+                      </button>
+                      <button class="carousel-control-next" data-mdb-target="#carouselExampleInterval" type="button" data-mdb-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Следующий</span>
+                      </button>
+                    </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                      Закрыть
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-              {% endfor %}
-          </div>
-          <button class="carousel-control-prev" data-mdb-target="#carouselExampleInterval" type="button" data-mdb-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Предыдущий</span>
-          </button>
-          <button class="carousel-control-next" data-mdb-target="#carouselExampleInterval" type="button" data-mdb-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Следующий</span>
-          </button>
-        </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">
-          Закрыть
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
 
             {% endfor %}
         </div>
