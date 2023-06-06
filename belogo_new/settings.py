@@ -89,7 +89,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'belogo_new.wsgi.application'
 
 ADMIN_REORDER = (
-    'sites',
     # First group
     {'app': 'web', 'label': 'Расписания',
      'models': ('web.SheduleDay',
