@@ -177,7 +177,18 @@ class Event(models.Model):
         return f"{self.name} | {self.date}"
 
 
+class Cinema(models.Model):
+    name = models.CharField(max_length=100, verbose_name='тема кинозала')
+    date = models.DateField(default=date.today, verbose_name='Дата проведения')
+    image = models.ImageField(upload_to='img/events', blank=True, null=True, verbose_name='Изображение')
+    description = models.TextField(verbose_name='Описание')
 
+    class Meta:
+        verbose_name = 'Кинозал'
+        verbose_name_plural = 'Темы кинозала'
+
+    def __str__(self):
+        return f"{self.name} | {self.date}"
 
 
 class Shedule(models.Model):
