@@ -333,7 +333,7 @@ admin.site.register(Document, DocumentAdmin)
 admin.site.register(Raiting, RaitingAdmin)
 admin.site.register(Shedule, SheduleAdmin)
 admin.site.register(Event, EventAdmin)
-admin.site.register(Cinema, CinemaAdmin)
+
 admin.site.register(Biblioteka, BibliotekaAdmin)
 admin.site.register(Position, PositionAdmin)
 admin.site.register(Employers, EmployerAdmin)
