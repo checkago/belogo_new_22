@@ -1,6 +1,6 @@
 from django.utils.html import strip_tags
 from rest_framework import serializers
-from web.models import Biblioteka, News, Event, Shedule, Service, FreeService, Book, Category
+from web.models import Biblioteka, DayEvent, News, Event, Shedule, Service, FreeService, Book, Category, SheduleDay
 
 
 class BibliotekaSerializer(serializers.ModelSerializer):
@@ -53,3 +53,56 @@ class BookFormSerializer(serializers.Serializer):
     email = serializers.EmailField()
     comment = serializers.CharField()
 
+
+class DayEventSerializer(serializers.ModelSerializer): 
+    class Meta: 
+        model = DayEvent 
+        fields = ('id', 'name', 'start_time', 'end_time') 
+
+
+class SheduleDaySerializer(serializers.ModelSerializer): 
+    events_list = DayEventSerializer(many=True) 
+ 
+    class Meta: 
+        model = SheduleDay 
+        fields = ('id', 'name', 'date', 'events_list')
+
+
+class SheduleDayBERSerializer(serializers.ModelSerializer): 
+    events_list = DayEventSerializer(many=True) 
+ 
+    class Meta: 
+        model = SheduleDay 
+        fields = ('id', 'name', 'date', 'events_list')
+
+
+class SheduleDayCDSCHSerializer(serializers.ModelSerializer): 
+    events_list = DayEventSerializer(many=True) 
+ 
+    class Meta: 
+        model = SheduleDay 
+        fields = ('id', 'name', 'date', 'events_list')
+
+
+class SheduleDayF2Serializer(serializers.ModelSerializer): 
+    events_list = DayEventSerializer(many=True) 
+ 
+    class Meta: 
+        model = SheduleDay 
+        fields = ('id', 'name', 'date', 'events_list')
+
+
+class SheduleDayF3Serializer(serializers.ModelSerializer): 
+    events_list = DayEventSerializer(many=True) 
+ 
+    class Meta: 
+        model = SheduleDay 
+        fields = ('id', 'name', 'date', 'events_list')
+
+
+class SheduleDayF4Serializer(serializers.ModelSerializer): 
+    events_list = DayEventSerializer(many=True) 
+ 
+    class Meta: 
+        model = SheduleDay 
+        fields = ('id', 'name', 'date', 'events_list')

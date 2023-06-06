@@ -3,7 +3,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 from django.urls import path
 from . import views
-from .views import BibliotekiAPIView, NewsAPIView, EventAPIView, SheduleAPIView, ServiceAPIView
+from .views import BibliotekiAPIView, NewsAPIView, EventAPIView, SheduleAPIView, DayEventListView, SheduleDayListView, \
+    SheduleDayBERListView, SheduleDayCDSCHListView, SheduleDayF2ListView, SheduleDayF3ListView, SheduleDayF4ListView
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -46,7 +47,13 @@ urlpatterns = [
     path('api/v1/news_list/', NewsAPIView.as_view()),
     path('api/v1/event_list/', EventAPIView.as_view()),
     path('api/v1/shedule_list/', SheduleAPIView.as_view()),
-    path('api/v1/services_list/', ServiceAPIView.as_view()),
+    path('api/v1/dayevent_list/', DayEventListView.as_view()),
+    path('api/v1/sheduledayikc_list/', SheduleDayListView.as_view()),
+    path('api/v1/sheduledayber_list/', SheduleDayBERListView.as_view()),
+    path('api/v1/sheduledaycdsch_list/', SheduleDayCDSCHListView.as_view()),
+    path('api/v1/sheduledayf2_list/', SheduleDayF2ListView.as_view()),
+    path('api/v1/sheduledayf3_list/', SheduleDayF3ListView.as_view()),
+    path('api/v1/sheduledayf4_list/', SheduleDayF4ListView.as_view()),
     path('api/v1/book/create/', views.createBook)
 ]
 

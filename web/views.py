@@ -8,8 +8,12 @@ from .forms import *
 from .models import *
 import datetime
 from django.views import generic
-from .serializers import BibliotekaSerializer, NewsSerializer, EventSerializer, SheduleSerializer, ServiceSerializer, \
-    BookFormSerializer
+from .serializers import (BibliotekaSerializer, NewsSerializer, 
+                          EventSerializer, SheduleSerializer,
+                          ServiceSerializer, BookFormSerializer, 
+                          DayEventSerializer, SheduleDaySerializer, 
+                          SheduleDayBERSerializer, SheduleDayCDSCHSerializer, 
+                          SheduleDayF2Serializer,  SheduleDayF3Serializer, SheduleDayF4Serializer)
 
 
 def getRoutes(request):
@@ -461,3 +465,38 @@ def createBook(request):
     )
     serializer = BookFormSerializer(book, many=False)
     return Response(serializer.data)
+
+
+class DayEventListView(generics.ListAPIView):
+    queryset = DayEvent.objects.all()
+    serializer_class = DayEventSerializer
+
+
+class SheduleDayListView(generics.ListAPIView):
+    queryset = SheduleDay.objects.all()
+    serializer_class = SheduleDaySerializer
+
+
+class SheduleDayBERListView(generics.ListAPIView):
+    queryset = SheduleDay.objects.all()
+    serializer_class = SheduleDayBERSerializer
+
+
+class SheduleDayCDSCHListView(generics.ListAPIView):
+    queryset = SheduleDay.objects.all()
+    serializer_class = SheduleDayCDSCHSerializer
+
+
+class SheduleDayF2ListView(generics.ListAPIView):
+    queryset = SheduleDay.objects.all()
+    serializer_class = SheduleDayF2Serializer
+
+
+class SheduleDayF3ListView(generics.ListAPIView):
+    queryset = SheduleDay.objects.all()
+    serializer_class = SheduleDayF3Serializer
+
+
+class SheduleDayF4ListView(generics.ListAPIView):
+    queryset = SheduleDay.objects.all()
+    serializer_class = SheduleDayF4Serializer
