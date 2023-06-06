@@ -17,7 +17,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-qgj-94qz%*=o+4byxx%##qoy*wx$luxs0%_rp$#!i1_!*%)9jt'
 
@@ -47,16 +46,15 @@ INSTALLED_APPS = [
     'import_export',
     'snowpenguin.django.recaptcha3',
     'rest_framework',
-    'email_signals'
+    'email_signals',
+    'admin_reorder'
 ]
-
 
 RECAPTCHA_PRIVATE_KEY = '6LfZteggAAAAAJ99PU0qWuKImJxru8kn_iszuPPH'
 RECAPTCHA_PUBLIC_KEY = '6LfZteggAAAAAMhm41VTKqRZHBOqDgACartcdFgt'
 RECAPTCHA_DEFAULT_ACTION = 'generic'
 RECAPTCHA_SCORE_THRESHOLD = 0.5
 RECAPTCHA_LANGUAGE = 'ru'
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -66,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'admin_reorder.middleware.ModelAdminReorder',
 ]
 
 ROOT_URLCONF = 'belogo_new.urls'
@@ -89,7 +88,75 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'belogo_new.wsgi.application'
 
+ADMIN_REORDER = (
+    'sites',
+    # First group
+    {'app': 'web', 'label': 'Расписания',
+     'models': ('web.SheduleDay',
+                'web.SheduleDayBER',
+                'web.SheduleDayCDSCH',
+                'web.SheduleDayF2',
+                'web.SheduleDayF3',
+                'web.SheduleDayF4',)
+     },
 
+    {'app': 'web', 'label': 'Публикации',
+     'models': ('web.News',
+                'web.Cinema',
+                'web.Event',
+                'web.Shedule',
+                'web.Document',
+                'web.Anons',
+                'web.Vacancy',
+                'web.FreeService',
+                'web.Service',
+                )
+     },
+
+    {'app': 'web', 'label': 'Электронная библиотека',
+     'models': ('web.Library',
+                'web.Author',
+                'web.LibraryCategory',
+                )
+     },
+    {'app': 'web', 'label': 'Библиотека',
+     'models': ('web.Biblioteka',
+                'web.Position',
+                'web.Employers',
+                )
+     },
+
+    {'app': 'web', 'label': 'Формы',
+     'models': ('web.Book',
+                'web.Question',
+                'web.Feedback',
+                'web.Bookrequest',
+                )
+     },
+
+    {'app': 'web', 'label': 'РАЗНОЕ',
+     'models': ('web.Category',
+                'web.ImageGallery',
+                'web.Partner',
+                'web.Bookrequest',
+                'web.Service_dop',
+                'web.Raiting',
+                'web.TermsOfUse',
+                'web.VeteranVOV',
+                'web.VeteranTruda',
+                'web.LeningradResident',
+                'web.HeroMemoryBook',
+                )
+     },
+
+    {'app': 'email_signals', 'label': 'EMAIL Сигналы',
+     'models': ('email_signals.Signal',)
+     },
+    {'app': 'auth', 'label': 'Пользователи и группы',
+     'models': ('auth.User',
+                'auth.Group',)
+     },
+)
 
 # DATABASES = {
 #     'default': {
@@ -149,7 +216,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
 
@@ -160,7 +226,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 STATICFILES_DIRS = (
     (BASE_DIR / 'static_dev'),
 )
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

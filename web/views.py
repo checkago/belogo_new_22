@@ -28,14 +28,14 @@ def index(request):
     title = 'МБУК ЦБС им. А. Белого'
     description = 'Официальный сайт Централизованной библиотечной сети имени Андрея Белого. Библиотека Железнодорожный'
     anonsy = Anons.objects.all().order_by('-id')
-    categories = Category.objects.filter(name='Новости')
+    categories = Category.objects.prefetch_related('news')
     category = Category.objects.all()
     shedule = Shedule.objects.first()
     event = Event.objects.latest('id')
     cinema = Cinema.objects.latest('id')
     partners1 = Partner.objects.filter(block='1').order_by('?')
     partners2 = Partner.objects.filter(block='2').order_by('?')
-    branch_categories = categories.get_descendants(include_self=True)
+    branch_categories = categories.get_descendants(include_self=True).select_related('news')
     news_list = News.objects.filter(category__in=branch_categories).distinct().order_by('-date')[:6]
 
     return render(request, 'index.html', {'title': title, 'description': description, 'anonsy': anonsy, 'news': news,
@@ -55,39 +55,42 @@ def biblioteka(request, pk):
     biblioteka = get_object_or_404(Biblioteka, pk=pk)
     title = biblioteka.name
     description = biblioteka.description
-    direktor = Biblioteka.direktor
-    phone = Biblioteka.phone
+    direktor = biblioteka.direktor
+    phone = biblioteka.phone
     return render(request, 'biblioteka.html', {'title': title, 'biblioteka': biblioteka, 'direktor': direktor,
                                                'phone': phone, 'description': description})
 
 
 def news(request):
-    categories = Category.objects.filter(name='Новости')
+    categories = Category.objects.prefetch_related('news')
     title = 'Новости ЦБС им. А. Белого'
     description = 'Новости и события произошедшие в библиотеках Железнодорожного'
     branch_categories = categories.get_descendants(include_self=True)
     news_list = News.objects.filter(category__in=branch_categories).distinct().order_by('-date')
     paginator = Paginator(news_list, 10)
     page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
-    return render(request, 'news_all.html', {'categories': categories, 'title': title, 'news_list': news_list,
-                                             'paginator': paginator, 'page_obj': page_obj, 'description': description})
+    try:
+        page_obj = paginator.get_page(page_number)
+    except PageNotAnInteger:
+        page_obj = paginator.get_page(1)
+    except EmptyPage:
+        page_obj = paginator.get_page(paginator.num_pages)
+    return render(request, 'news_all.html', {'categories': categories, 'title': title, 'paginator': paginator, 'page_obj': page_obj, 'description': description})
 
 
 def news_view(request, pk):
     news = get_object_or_404(News, pk=pk)
-    category = Category.objects.filter(name='Новости')
+    category = Category.objects.prefetch_related('news')
     title = news.name
-    image = News.image
+    image = news.image
     description = news.description
-    date = News.date
+    date = news.date
     return render(request, 'news.html', {'news': news, 'title': title, 'image': image, 'description': description,
                                          'date': date, 'category': category})
 
 
 def documents(request):
-    categories = Category.objects.filter(name='Документы')
+    categories = Category.objects.prefetch_related('documents')
     title = 'Официальные документы библиотечной системы'
     description = 'Официальные документы МБУК ЦБС им. А. Белого'
     branch_categories = categories.get_descendants(include_self=True)
@@ -102,17 +105,17 @@ def documents(request):
 
 def document(request, pk):
     document = get_object_or_404(Document, pk=pk)
-    category = Document.category
+    category = document.category
     title = document.name
-    image = Document.image
-    description = Document.description
-    date = Document.date
+    image = document.image
+    description = document.description
+    date = document.date
     return render(request, 'document.html', {'title': title, 'document': document, 'date': date, 'description': description,
                                              'image': image, 'category': category})
 
 
 def services(request):
-    categories = Category.objects.filter(name='Услуги')
+    categories = Category.objects.prefetch_related('services')
     title = 'Услуги библиотечной системы'
     description = 'Список услуг предоставляемых в централизованной библиотечной системе. Услуги библиотек Железнодорожного'
     branch_categories = categories.get_descendants(include_self=True)
@@ -144,7 +147,7 @@ def termsofuse(request, pk):
 
 
 def raitings(request):
-    categories = Category.objects.filter(name='Оценка качества')
+    categories = Category.objects.prefetch_related('raitings')
     title = 'Документы оценки качества'
     branch_categories = categories.get_descendants(include_self=True)
     raitings = Raiting.objects.filter(category__in=branch_categories).distinct().order_by('-date')
@@ -177,7 +180,7 @@ def vacancies(request):
 def vacancy(request, pk):
     vacancy = get_object_or_404(Vacancy, pk=pk)
     title = vacancy.name
-    name = Vacancy.name
+    name = vacancy.name
     date = vacancy.date
     salary = vacancy.salary
     description = vacancy.description
@@ -330,7 +333,7 @@ def library_category(request):
 
 def library_imperia(request):
     title = 'Книги, изданные до 1917 года'
-    categories = LibraryCategory.objects.filter(name='Книги, изданные до 1917 года')
+    categories = Category.objects.prefetch_related('library_imperia')
     books_list = Library.objects.filter(category__in=categories).distinct().order_by('id')
     paginator = Paginator(books_list, 5)
     page_number = request.GET.get('page')
@@ -342,7 +345,7 @@ def library_imperia(request):
 
 def library_krai(request):
     title = 'Краеведческая литература'
-    categories = LibraryCategory.objects.filter(name='Краеведческая литература')
+    categories = Category.objects.prefetch_related('library_krai')
     books_list = Library.objects.filter(category__in=categories).distinct().order_by('id')
     paginator = Paginator(books_list, 5)
     page_number = request.GET.get('page')
@@ -354,7 +357,7 @@ def library_krai(request):
 
 def library_hud(request):
     title = 'Художественная литература'
-    categories = LibraryCategory.objects.filter(name='Художественная литература')
+    categories = Category.objects.prefetch_related('library_hud')
     books_list = Library.objects.filter(category__in=categories).distinct().order_by('id')
     paginator = Paginator(books_list, 5)
     page_number = request.GET.get('page')

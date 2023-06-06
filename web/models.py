@@ -41,8 +41,7 @@ class Category(MPTTModel):
 
     def get_pages(self):
         ids = self.get_descendants(include_self=True).values_list('id')
-        var = Book or News or Feedback or Document or Vacancy or Raiting or Service or Feedback
-        return var.objects.filter(category_id__in=ids).count()
+        return Book.objects.filter(category_id__in=ids).count()
 
     class Meta:
         verbose_name = 'Категория'
@@ -116,6 +115,7 @@ class News(models.Model):
     image_gallery = GenericRelation('imagegallery')
 
     class Meta:
+        default_related_name = 'news'
         verbose_name = 'Новость сайта'
         verbose_name_plural = 'Новости сайта'
 
@@ -524,6 +524,101 @@ class LibraryCategory(models.Model):
     class Meta:
         verbose_name = 'Категория электронной библиотеки'
         verbose_name_plural = 'Категории электронной библиотеки'
+
+    def __str__(self):
+        return self.name
+
+
+class DayEvent(models.Model):
+
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    start_time = models.TimeField(blank=True, verbose_name='Время начала')
+    end_time = models.TimeField(blank=True, verbose_name='Время окончания')
+
+    class Meta:
+        verbose_name = 'Дневное мероприятие'
+        verbose_name_plural = 'Дневные мероприятия'
+
+    def __str__(self):
+        return self.name
+
+
+class SheduleDay(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата')
+    events_list = GenericRelation(DayEvent)
+
+    class Meta:
+        verbose_name = 'Рабочий день ИКЦ'
+        verbose_name_plural = 'Расписание ИКЦ'
+
+    def __str__(self):
+        return self.name
+
+
+class SheduleDayBER(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата')
+    events_list = GenericRelation(DayEvent)
+
+    class Meta:
+        verbose_name = 'Рабочий день БЭР'
+        verbose_name_plural = 'Расписание БЭР'
+
+    def __str__(self):
+        return self.name
+
+
+class SheduleDayCDSCH(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата')
+    events_list = GenericRelation(DayEvent)
+
+    class Meta:
+        verbose_name = 'Рабочий день ЦДСЧ'
+        verbose_name_plural = 'Расписание ЦДСЧ'
+
+    def __str__(self):
+        return self.name
+
+
+class SheduleDayF2(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата')
+    events_list = GenericRelation(DayEvent)
+
+    class Meta:
+        verbose_name = 'Рабочий день Филиал 2'
+        verbose_name_plural = 'Расписание Филиал 2'
+
+    def __str__(self):
+        return self.name
+
+
+class SheduleDayF3(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата')
+    events_list = GenericRelation(DayEvent)
+
+    class Meta:
+        verbose_name = 'Рабочий день Филиал 3'
+        verbose_name_plural = 'Расписание Филиал 3'
+
+    def __str__(self):
+        return self.name
+
+
+class SheduleDayF4(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата')
+    events_list = GenericRelation(DayEvent)
+
+    class Meta:
+        verbose_name = 'Рабочий день Филиал 4'
+        verbose_name_plural = 'Расписание Филиал 4'
 
     def __str__(self):
         return self.name
