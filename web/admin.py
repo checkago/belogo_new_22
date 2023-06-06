@@ -13,6 +13,10 @@ class ImageGalleryInline(GenericTabularInline):
     readonly_fields = ('image_url',)
 
 
+class DayEventInline(GenericTabularInline):
+    model = DayEvent
+
+
 class CategoryAdmin(DraggableMPTTAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
@@ -290,6 +294,40 @@ class LibraryCategoryAdmin(admin.ModelAdmin):
     list_display = ('name',)
 
 
+class DayEventAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+
+class SheduleDayAdmin(admin.ModelAdmin):
+    inlines = [DayEventInline]
+    list_display = ('name',)
+
+
+class SheduleDayBERAdmin(admin.ModelAdmin):
+    inlines = [DayEventInline]
+    list_display = ('name',)
+
+
+class SheduleDayCDSCHAdmin(admin.ModelAdmin):
+    inlines = [DayEventInline]
+    list_display = ('name',)
+
+
+class SheduleDayF2Admin(admin.ModelAdmin):
+    inlines = [DayEventInline]
+    list_display = ('name',)
+
+
+class SheduleDayF3Admin(admin.ModelAdmin):
+    inlines = [DayEventInline]
+    list_display = ('name',)
+
+
+class SheduleDayF4Admin(admin.ModelAdmin):
+    inlines = [DayEventInline]
+    list_display = ('name',)
+
+
 admin.site.register(News, NewsAdmin)
 admin.site.register(Document, DocumentAdmin)
 admin.site.register(Raiting, RaitingAdmin)
@@ -319,3 +357,11 @@ admin.site.register(Anons, AnonsAdmin)
 admin.site.register(Library, LibraryAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(LibraryCategory, LibraryCategoryAdmin)
+admin.site.register(DayEvent, DayEventAdmin)
+admin.site.register(SheduleDay, SheduleDayAdmin)
+admin.site.register(SheduleDayBER, SheduleDayBERAdmin)
+admin.site.register(SheduleDayCDSCH, SheduleDayCDSCHAdmin)
+admin.site.register(SheduleDayF2, SheduleDayF2Admin)
+admin.site.register(SheduleDayF3, SheduleDayF3Admin)
+admin.site.register(SheduleDayF4, SheduleDayF4Admin)
+
