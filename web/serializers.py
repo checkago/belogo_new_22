@@ -54,15 +54,19 @@ class BookFormSerializer(serializers.Serializer):
     comment = serializers.CharField()
 
 
-class DayEventSerializer(serializers.ModelSerializer): 
-    class Meta: 
-        model = DayEvent 
-        fields = ('id', 'name', 'start_time', 'end_time') 
+class DayEventSerializer(serializers.ModelSerializer):
+    start_time = serializers.TimeField(format='%H:%M')
+    end_time = serializers.TimeField(format='%H:%M')
+
+    class Meta:
+        model = DayEvent
+        fields = ('id', 'name', 'start_time', 'end_time')
 
 
 class SheduleDaySerializer(serializers.ModelSerializer): 
-    events_list = DayEventSerializer(many=True) 
- 
+    events_list = DayEventSerializer(many=True)
+    date = serializers.DateField(format='%J %F')
+
     class Meta: 
         model = SheduleDay 
         fields = ('id', 'name', 'date', 'events_list')
