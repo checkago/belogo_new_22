@@ -468,35 +468,35 @@ def createBook(request):
 
 
 class DayEventListView(generics.ListAPIView):
-    queryset = DayEvent.objects.order_by('-id')
+    queryset = DayEvent.objects.order_by('id')
     serializer_class = DayEventSerializer
 
 
 class SheduleDayListView(generics.ListAPIView):
-    queryset = SheduleDay.objects.order_by('-id')
+    queryset = SheduleDay.objects.order_by('id')
     serializer_class = SheduleDaySerializer
 
 
 class SheduleDayBERListView(generics.ListAPIView):
-    queryset = SheduleDay.objects.order_by('-id')
+    queryset = SheduleDay.objects.order_by('id')
     serializer_class = SheduleDayBERSerializer
 
 
 class SheduleDayCDSCHListView(generics.ListAPIView):
-    queryset = SheduleDay.objects.order_by('-id')
+    queryset = SheduleDay.objects.order_by('id')
     serializer_class = SheduleDayCDSCHSerializer
 
 
 class SheduleDayF2ListView(generics.ListAPIView):
-    queryset = SheduleDay.objects.order_by('-id')
+    queryset = SheduleDay.objects.order_by('id')
     serializer_class = SheduleDayF2Serializer
 
 
 class SheduleDayF3ListView(generics.ListAPIView):
-    queryset = SheduleDay.objects.order_by('-id')
+    queryset = SheduleDay.objects.order_by('id')
     serializer_class = SheduleDayF3Serializer
 
 
 class SheduleDayF4ListView(generics.ListAPIView):
-    queryset = SheduleDay.objects.order_by('-id')
+    queryset = SheduleDay.objects.order_by('id')
     serializer_class = SheduleDayF4Serializer
