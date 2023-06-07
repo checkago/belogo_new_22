@@ -205,7 +205,7 @@ EMAIL_SIGNAL_DEFAULT_SENDER = 'site@biblioteka-belogo.ru'
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'ru-RU'
 
 TIME_ZONE = 'Europe/Moscow'
 
