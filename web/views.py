@@ -1,9 +1,12 @@
+from django.db.models import Prefetch
 from rest_framework import generics
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.core.mail import send_mail
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from .forms import *
 from .models import *
 import datetime
@@ -472,9 +475,28 @@ class DayEventListView(generics.ListAPIView):
     serializer_class = DayEventSerializer
 
 
-class SheduleDayListView(generics.ListAPIView):
-    queryset = SheduleDay.objects.order_by('id')
-    serializer_class = SheduleDaySerializer
+class SheduleDayListView(APIView):
+    def get(self, request):
+        schedule_days = SheduleDay.objects.prefetch_related(
+            Prefetch('events_list', queryset=DayEvent.objects.all().order_by('start_time'))
+        ).all()
+        data = []
+        for day in schedule_days:
+            events = []
+            for event in day.events_list.all():
+                events.append({
+                    'id': event.id,
+                    'name': event.name,
+                    'start_time': event.start_time.strftime('%H:%M'),
+                    'end_time': event.end_time.strftime('%H:%M')
+                })
+            data.append({
+                'id': day.id,
+                'name': day.name,
+                'date': day.date.strftime('%d.%m.%Y'),
+                'events_list': events
+            })
+        return Response(data)
 
 
 class SheduleDayBERListView(generics.ListAPIView):
