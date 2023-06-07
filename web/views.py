@@ -504,4 +504,4 @@ class SheduleDayF4ListView(generics.ListAPIView):
 
 def schedule(request):
     days = SheduleDay.objects.all()
-    return render(request, 'schedule.html', {'days': days})
+    return render(request, 'shedule.html', {'days': days})
