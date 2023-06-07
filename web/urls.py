@@ -41,6 +41,7 @@ urlpatterns = [
     path('events/', views.events, name='events'),
     path('events-archive/', views.events_archive, name='events_archive'),
     path('shedules/', views.shedules, name='shedules'),
+    path('schedule/', views.schedule, name='schedule'),
 
     # """API List Views"""
 
@@ -56,7 +57,7 @@ urlpatterns = [
     path('api/v1/sheduledayf2_list/', SheduleDayF2ListView.as_view()),
     path('api/v1/sheduledayf3_list/', SheduleDayF3ListView.as_view()),
     path('api/v1/sheduledayf4_list/', SheduleDayF4ListView.as_view()),
-    path('api/v1/book/create/', views.createBook)
+    path('api/v1/book/create/', views.createBook),
 ]
 
 if settings.MEDIA_ROOT:

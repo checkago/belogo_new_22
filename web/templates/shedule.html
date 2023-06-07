@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% include '_header_pages.html' %}
+
+<div class="container-fluid bg-image">
+  <div class="row">
+    <div class="col-md-4">
+      <table class="table table-fixed">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Events</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for day in days %}
+          <tr>
+            <td>{{ day.name }}</td>
+            <td>{{ day.date }}</td>
+            <td>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for event in day.events_list %}
+                  <tr>
+                    <td>{{ event.start_time }}</td>
+                    <td>{{ event.end_time }}</td>
+                    <td>{{ event.name }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

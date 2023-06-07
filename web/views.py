@@ -1,6 +1,6 @@
 from rest_framework import generics
 from django.shortcuts import render, get_object_or_404, redirect
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.core.mail import send_mail
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -500,3 +500,8 @@ class SheduleDayF3ListView(generics.ListAPIView):
 class SheduleDayF4ListView(generics.ListAPIView):
     queryset = SheduleDayF4.objects.order_by('id')
     serializer_class = SheduleDayF4Serializer
+
+
+def schedule(request):
+    days = SheduleDay.objects.all()
+    return render(request, 'schedule.html', {'days': days})
