@@ -65,7 +65,7 @@ class DayEventSerializer(serializers.ModelSerializer):
 
 class SheduleDaySerializer(serializers.ModelSerializer): 
     events_list = DayEventSerializer(many=True)
-    date = serializers.DateField(format='%d %B')
+    date = serializers.DateField(format='%d.%E.%Y')
 
     class Meta: 
         model = SheduleDay 
