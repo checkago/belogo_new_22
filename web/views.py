@@ -428,7 +428,7 @@ def page_not_found_view(request, exception):
 
 
 class BibliotekiAPIView(generics.ListAPIView):
-    queryset = Biblioteka.objects.all()
+    queryset = Biblioteka.objects.order_by('id')
     serializer_class = BibliotekaSerializer
 
 
@@ -438,7 +438,7 @@ class NewsAPIView(generics.ListAPIView):
 
 
 class EventAPIView(generics.ListAPIView):
-    queryset = Event.objects.all()
+    queryset = Event.objects.order_by('-id')[0:10]
     serializer_class = EventSerializer
 
 
@@ -448,7 +448,7 @@ class SheduleAPIView(generics.ListAPIView):
 
 
 class ServiceAPIView(generics.ListAPIView):
-    queryset = Service.objects.all()
+    queryset = Service.objects.order_by('id')
     serializer_class = ServiceSerializer
 
 
