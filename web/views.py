@@ -478,25 +478,25 @@ class SheduleDayListView(generics.ListAPIView):
 
 
 class SheduleDayBERListView(generics.ListAPIView):
-    queryset = SheduleDay.objects.order_by('id')
+    queryset = SheduleDayBER.objects.order_by('id')
     serializer_class = SheduleDayBERSerializer
 
 
 class SheduleDayCDSCHListView(generics.ListAPIView):
-    queryset = SheduleDay.objects.order_by('id')
+    queryset = SheduleDayCDSCH.objects.order_by('id')
     serializer_class = SheduleDayCDSCHSerializer
 
 
 class SheduleDayF2ListView(generics.ListAPIView):
-    queryset = SheduleDay.objects.order_by('id')
+    queryset = SheduleDayF2.objects.order_by('id')
     serializer_class = SheduleDayF2Serializer
 
 
 class SheduleDayF3ListView(generics.ListAPIView):
-    queryset = SheduleDay.objects.order_by('id')
+    queryset = SheduleDayF3.objects.order_by('id')
     serializer_class = SheduleDayF3Serializer
 
 
 class SheduleDayF4ListView(generics.ListAPIView):
-    queryset = SheduleDay.objects.order_by('id')
+    queryset = SheduleDayF4.objects.order_by('id')
     serializer_class = SheduleDayF4Serializer
