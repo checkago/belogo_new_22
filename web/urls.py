@@ -4,7 +4,8 @@ from django.conf import settings
 from django.urls import path
 from . import views
 from .views import BibliotekiAPIView, NewsAPIView, EventAPIView, SheduleAPIView, DayEventListView, SheduleDayListView, \
-    SheduleDayBERListView, SheduleDayCDSCHListView, SheduleDayF2ListView, SheduleDayF3ListView, SheduleDayF4ListView
+    SheduleDayBERListView, SheduleDayCDSCHListView, SheduleDayF2ListView, SheduleDayF3ListView, SheduleDayF4ListView, \
+    ServiceAPIView
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -47,6 +48,7 @@ urlpatterns = [
     path('api/v1/news_list/', NewsAPIView.as_view()),
     path('api/v1/event_list/', EventAPIView.as_view()),
     path('api/v1/shedule_list/', SheduleAPIView.as_view()),
+    path('api/v1/services_list/', ServiceAPIView.as_view()),
     path('api/v1/dayevent_list/', DayEventListView.as_view()),
     path('api/v1/sheduledayikc_list/', SheduleDayListView.as_view()),
     path('api/v1/sheduledayber_list/', SheduleDayBERListView.as_view()),
