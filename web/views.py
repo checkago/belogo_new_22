@@ -524,6 +524,25 @@ class SheduleDayF4ListView(generics.ListAPIView):
     serializer_class = SheduleDayF4Serializer
 
 
-def schedule(request):
-    days = SheduleDay.objects.all()
-    return render(request, 'shedule.html', {'days': days})
+def schedule_day_list(request):
+    schedule_days = SheduleDay.objects.prefetch_related(
+        Prefetch('events_list', queryset=DayEvent.objects.all().order_by('start_time'))
+    ).all()
+    data = []
+    for day in schedule_days:
+        events = []
+        for event in day.events_list.all():
+            events.append({
+                'name': event.name,
+                'start_time': event.start_time.strftime('%H:%M'),
+                'end_time': event.end_time.strftime('%H:%M')
+            })
+        data.append({
+            'name': day.name,
+            'date': day.date.strftime('%d.%m.%Y'),
+            'events_list': events
+        })
+    context = {
+        'schedule_days': data
+    }
+    return render(request, 'shedule.html', context)

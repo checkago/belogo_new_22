@@ -41,7 +41,7 @@ urlpatterns = [
     path('events/', views.events, name='events'),
     path('events-archive/', views.events_archive, name='events_archive'),
     path('shedules/', views.shedules, name='shedules'),
-    path('schedule/', views.schedule, name='schedule'),
+    path('schedule/', views.schedule_day_list, name='schedule'),
 
     # """API List Views"""
 

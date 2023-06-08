@@ -1,51 +1,50 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
 {% include '_header_pages.html' %}
-
-<div class="container-fluid bg-image">
-  <div class="row">
-    <div class="col-md-4">
-      <table class="table table-fixed">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Date</th>
-            <th>Events</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for day in days %}
-          <tr>
-            <td>{{ day.name }}</td>
-            <td>{{ day.date }}</td>
-            <td>
-              <table class="table">
+<script>
+  var container = document.querySelector('.container');
+  var fontSize = 16;
+  while (container.scrollWidth > container.clientWidth) {
+    fontSize--;
+    container.style.fontSize = fontSize + 'px';
+  }
+</script>
+<style type="text/css">
+.bgimg {
+    background-image: url({% static 'img/shedule_empty.webp' %});
+    background-size: cover;
+}
+.font-fluid {
+  font-size: 3vw;
+}
+</style>
+<div class="container pt-2 font-fluid"><img src="{% static 'img/shedule_empty.webp' %}"></div>
+<div class="container">
+    <div class="row">
+        {% for day in schedule_days %}
+        <div class="col-md-4">
+            <table class="table table-bordered">
                 <thead>
-                  <tr>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                    <th>Name</th>
-                  </tr>
+                <th><h5 class="font-weight-bold text-danger">{{ day.name }} - {{ day.date }}</h5></th>
                 </thead>
                 <tbody>
-                  {% for event in day.events_list %}
-                  <tr>
-                    <td>{{ event.start_time }}</td>
-                    <td>{{ event.end_time }}</td>
-                    <td>{{ event.name }}</td>
-                  </tr>
-                  {% endfor %}
+                    <table class="table table-responsive">
+                        <tbody>
+                            {% for event in day.events_list %}
+                            <tr>
+                                <td class="font-weight-bold">{{ event.start_time }} - {{ event.end_time }}</td>
+                                <td class="font-weight-bold"><p class="lh-1">{{ event.name }}</p></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </tbody>
-              </table>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+            </table>
+        </div>
+        {% endfor %}
     </div>
-  </div>
 </div>
 
 {% endblock %}
