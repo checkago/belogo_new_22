@@ -300,32 +300,32 @@ class DayEventAdmin(admin.ModelAdmin):
 
 class SheduleDayAdmin(admin.ModelAdmin):
     inlines = [DayEventInline]
-    list_display = ('name',)
+    list_display = ('id', 'name',)
 
 
 class SheduleDayBERAdmin(admin.ModelAdmin):
     inlines = [DayEventInline]
-    list_display = ('name',)
+    list_display = ('id', 'name',)
 
 
 class SheduleDayCDSCHAdmin(admin.ModelAdmin):
     inlines = [DayEventInline]
-    list_display = ('name',)
+    list_display = ('id', 'name',)
 
 
 class SheduleDayF2Admin(admin.ModelAdmin):
     inlines = [DayEventInline]
-    list_display = ('name',)
+    list_display = ('id', 'name',)
 
 
 class SheduleDayF3Admin(admin.ModelAdmin):
     inlines = [DayEventInline]
-    list_display = ('name',)
+    list_display = ('id', 'name',)
 
 
 class SheduleDayF4Admin(admin.ModelAdmin):
     inlines = [DayEventInline]
-    list_display = ('name',)
+    list_display = ('id', 'name',)
 
 
 admin.site.register(News, NewsAdmin)
