@@ -549,7 +549,7 @@ class DayEvent(models.Model):
 class SheduleDay(models.Model):
     name = models.CharField(max_length=15, verbose_name='День недели')
     date = models.DateField(verbose_name='Дата')
-    events_list = GenericRelation(DayEvent)
+    events_list = GenericRelation(DayEvent, related_query_name='schedule_day_events')
 
     class Meta:
         verbose_name = 'Рабочий день ИКЦ'
