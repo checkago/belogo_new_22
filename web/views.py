@@ -6,9 +6,7 @@ from django.core.mail import send_mail
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.http import HttpResponse
-from django.template.loader import get_template
-from xhtml2pdf import pisa
+
 
 from .forms import *
 from .models import *
@@ -550,28 +548,4 @@ def schedule_day_list(request):
     }
     return render(request, 'shedule.html', context)
 
-
-def generate_pdf(request):
-    template_path = 'shedule.html' # путь к вашему шаблону
-    context = {'include_shedule': True,}
-
-    # Получите шаблон с контекстом
-    template = get_template(template_path)
-    html = template.render(context)
-
-    # Создайте pdf-файл
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="schedule.pdf"'
-
-    # Установите ориентацию страницы в альбомную
-    pdf_options = {
-        "orientation": "L",
-    }
-
-    # Преобразуйте HTML в PDF
-    pisa_status = pisa.CreatePDF(html, dest=response, encoding='UTF-8', show_error_as_pdf=False, pdf_options=pdf_options)
-
-    # Если при создании PDF возникла ошибка
-    if pisa_status.err:
-        return HttpResponse('Error creating PDF file')
 
