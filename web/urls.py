@@ -41,7 +41,21 @@ urlpatterns = [
     path('events/', views.events, name='events'),
     path('events-archive/', views.events_archive, name='events_archive'),
     path('shedules/', views.shedules, name='shedules'),
-    path('schedule/', views.schedule_day_list, name='schedule'),
+
+    path('shedule_ikc/', views.schedule_day_list, name='shedule_ikc'),
+    path('shedule_cdsch/', views.schedule_day_cdsch_list, name='shedule_cdsch'),
+    path('shedule_ber/', views.schedule_day_ber_list, name='shedule_ber'),
+    path('shedule_f2/', views.schedule_day_f2_list, name='shedule_f2'),
+    path('shedule_f3/', views.schedule_day_f3_list, name='shedule_f3'),
+    path('shedule_f4/', views.schedule_day_f4_list, name='shedule_f4'),
+
+    path('schedule_ikc/', views.schedule_day_list_ikc_to_pdf, name='schedule_ikc'),
+    path('schedule_cdsch/', views.schedule_day_list_cdsch_to_pdf, name='schedule_cdsch'),
+    path('schedule_ber/', views.schedule_day_list_ber_to_pdf, name='schedule_ber'),
+    path('schedule_f2/', views.schedule_day_list_f2_to_pdf, name='schedule_f2'),
+    path('schedule_f3/', views.schedule_day_list_f3_to_pdf, name='schedule_f3'),
+    path('schedule_f4/', views.schedule_day_list_f4_to_pdf, name='schedule_f4'),
+
 
 
     # """API List Views"""

@@ -546,6 +546,266 @@ def schedule_day_list(request):
     context = {
         'schedule_days': data
     }
-    return render(request, 'shedule.html', context)
+    return render(request, 'shedule_ikc.html', context)
 
 
+def schedule_day_cdsch_list(request):
+    schedule_days = SheduleDayCDSCH.objects.prefetch_related(
+        Prefetch('events_list', queryset=DayEvent.objects.all().order_by('start_time'))
+    ).all()
+    data = []
+    for day in schedule_days:
+        events = []
+        for event in day.events_list.all():
+            events.append({
+                'name': event.name,
+                'start_time': event.start_time.strftime('%H:%M'),
+                'end_time': event.end_time.strftime('%H:%M')
+            })
+        data.append({
+            'name': day.name,
+            'date': day.date.strftime('%d.%m.%Y'),
+            'events_list': events
+        })
+    context = {
+        'schedule_days': data
+    }
+    return render(request, 'shedule_ikc.html', context)
+
+
+def schedule_day_ber_list(request):
+    schedule_days = SheduleDayBER.objects.prefetch_related(
+        Prefetch('events_list', queryset=DayEvent.objects.all().order_by('start_time'))
+    ).all()
+    data = []
+    for day in schedule_days:
+        events = []
+        for event in day.events_list.all():
+            events.append({
+                'name': event.name,
+                'start_time': event.start_time.strftime('%H:%M'),
+                'end_time': event.end_time.strftime('%H:%M')
+            })
+        data.append({
+            'name': day.name,
+            'date': day.date.strftime('%d.%m.%Y'),
+            'events_list': events
+        })
+    context = {
+        'schedule_days': data
+    }
+    return render(request, 'shedule_ikc.html', context)
+
+
+def schedule_day_f2_list(request):
+    schedule_days = SheduleDayF2.objects.prefetch_related(
+        Prefetch('events_list', queryset=DayEvent.objects.all().order_by('start_time'))
+    ).all()
+    data = []
+    for day in schedule_days:
+        events = []
+        for event in day.events_list.all():
+            events.append({
+                'name': event.name,
+                'start_time': event.start_time.strftime('%H:%M'),
+                'end_time': event.end_time.strftime('%H:%M')
+            })
+        data.append({
+            'name': day.name,
+            'date': day.date.strftime('%d.%m.%Y'),
+            'events_list': events
+        })
+    context = {
+        'schedule_days': data
+    }
+    return render(request, 'shedule_ikc.html', context)
+
+
+def schedule_day_f3_list(request):
+    schedule_days = SheduleDayF3.objects.prefetch_related(
+        Prefetch('events_list', queryset=DayEvent.objects.all().order_by('start_time'))
+    ).all()
+    data = []
+    for day in schedule_days:
+        events = []
+        for event in day.events_list.all():
+            events.append({
+                'name': event.name,
+                'start_time': event.start_time.strftime('%H:%M'),
+                'end_time': event.end_time.strftime('%H:%M')
+            })
+        data.append({
+            'name': day.name,
+            'date': day.date.strftime('%d.%m.%Y'),
+            'events_list': events
+        })
+    context = {
+        'schedule_days': data
+    }
+    return render(request, 'shedule_ikc.html', context)
+
+
+def schedule_day_f4_list(request):
+    schedule_days = SheduleDayF4.objects.prefetch_related(
+        Prefetch('events_list', queryset=DayEvent.objects.all().order_by('start_time'))
+    ).all()
+    data = []
+    for day in schedule_days:
+        events = []
+        for event in day.events_list.all():
+            events.append({
+                'name': event.name,
+                'start_time': event.start_time.strftime('%H:%M'),
+                'end_time': event.end_time.strftime('%H:%M')
+            })
+        data.append({
+            'name': day.name,
+            'date': day.date.strftime('%d.%m.%Y'),
+            'events_list': events
+        })
+    context = {
+        'schedule_days': data
+    }
+    return render(request, 'shedule_ikc.html', context)
+
+
+def schedule_day_list_ikc_to_pdf(request):
+    schedule_days = SheduleDay.objects.prefetch_related(
+        Prefetch('events_list', queryset=DayEvent.objects.all().order_by('start_time'))
+    ).all()
+    data = []
+    for day in schedule_days:
+        events = []
+        for event in day.events_list.all():
+            events.append({
+                'name': event.name,
+                'start_time': event.start_time.strftime('%H:%M'),
+                'end_time': event.end_time.strftime('%H:%M')
+            })
+        data.append({
+            'name': day.name,
+            'date': day.date.strftime('%d.%m.%Y'),
+            'events_list': events
+        })
+    context = {
+        'schedule_days': data
+    }
+    return render(request, 'schedule_ikc.html', context)
+
+
+def schedule_day_list_cdsch_to_pdf(request):
+    schedule_days = SheduleDayCDSCH.objects.prefetch_related(
+        Prefetch('events_list', queryset=DayEvent.objects.all().order_by('start_time'))
+    ).all()
+    data = []
+    for day in schedule_days:
+        events = []
+        for event in day.events_list.all():
+            events.append({
+                'name': event.name,
+                'start_time': event.start_time.strftime('%H:%M'),
+                'end_time': event.end_time.strftime('%H:%M')
+            })
+        data.append({
+            'name': day.name,
+            'date': day.date.strftime('%d.%m.%Y'),
+            'events_list': events
+        })
+    context = {
+        'schedule_days': data
+    }
+    return render(request, 'schedule_cdsch.html', context)
+
+
+def schedule_day_list_ber_to_pdf(request):
+    schedule_days = SheduleDayBER.objects.prefetch_related(
+        Prefetch('events_list', queryset=DayEvent.objects.all().order_by('start_time'))
+    ).all()
+    data = []
+    for day in schedule_days:
+        events = []
+        for event in day.events_list.all():
+            events.append({
+                'name': event.name,
+                'start_time': event.start_time.strftime('%H:%M'),
+                'end_time': event.end_time.strftime('%H:%M')
+            })
+        data.append({
+            'name': day.name,
+            'date': day.date.strftime('%d.%m.%Y'),
+            'events_list': events
+        })
+    context = {
+        'schedule_days': data
+    }
+    return render(request, 'schedule_ber.html', context)
+
+
+def schedule_day_list_f2_to_pdf(request):
+    schedule_days = SheduleDayF2.objects.prefetch_related(
+        Prefetch('events_list', queryset=DayEvent.objects.all().order_by('start_time'))
+    ).all()
+    data = []
+    for day in schedule_days:
+        events = []
+        for event in day.events_list.all():
+            events.append({
+                'name': event.name,
+                'start_time': event.start_time.strftime('%H:%M'),
+                'end_time': event.end_time.strftime('%H:%M')
+            })
+        data.append({
+            'name': day.name,
+            'date': day.date.strftime('%d.%m.%Y'),
+            'events_list': events
+        })
+    context = {
+        'schedule_days': data
+    }
+    return render(request, 'schedule_f2.html', context)
+def schedule_day_list_f3_to_pdf(request):
+    schedule_days = SheduleDayF3.objects.prefetch_related(
+        Prefetch('events_list', queryset=DayEvent.objects.all().order_by('start_time'))
+    ).all()
+    data = []
+    for day in schedule_days:
+        events = []
+        for event in day.events_list.all():
+            events.append({
+                'name': event.name,
+                'start_time': event.start_time.strftime('%H:%M'),
+                'end_time': event.end_time.strftime('%H:%M')
+            })
+        data.append({
+            'name': day.name,
+            'date': day.date.strftime('%d.%m.%Y'),
+            'events_list': events
+        })
+    context = {
+        'schedule_days': data
+    }
+    return render(request, 'schedule_f3.html', context)
+
+
+def schedule_day_list_f4_to_pdf(request):
+    schedule_days = SheduleDayF4.objects.prefetch_related(
+        Prefetch('events_list', queryset=DayEvent.objects.all().order_by('start_time'))
+    ).all()
+    data = []
+    for day in schedule_days:
+        events = []
+        for event in day.events_list.all():
+            events.append({
+                'name': event.name,
+                'start_time': event.start_time.strftime('%H:%M'),
+                'end_time': event.end_time.strftime('%H:%M')
+            })
+        data.append({
+            'name': day.name,
+            'date': day.date.strftime('%d.%m.%Y'),
+            'events_list': events
+        })
+    context = {
+        'schedule_days': data
+    }
+    return render(request, 'schedule_f4.html', context)
