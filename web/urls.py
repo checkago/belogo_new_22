@@ -5,7 +5,7 @@ from django.urls import path
 from . import views
 from .views import BibliotekiAPIView, NewsAPIView, EventAPIView, SheduleAPIView, DayEventListView, SheduleDayListView, \
     SheduleDayBERListView, SheduleDayCDSCHListView, SheduleDayF2ListView, SheduleDayF3ListView, SheduleDayF4ListView, \
-    ServiceAPIView, generate_pdf
+    ServiceAPIView
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -43,7 +43,6 @@ urlpatterns = [
     path('shedules/', views.shedules, name='shedules'),
     path('schedule/', views.schedule_day_list, name='schedule'),
 
-    path('pdf/', generate_pdf, name='generate_pdf'),
 
     # """API List Views"""
 
