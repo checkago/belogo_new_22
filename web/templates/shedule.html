@@ -3,48 +3,38 @@
 
 {% block content %}
 {% include '_header_pages.html' %}
-<script>
-  var container = document.querySelector('.container');
-  var fontSize = 16;
-  while (container.scrollWidth > container.clientWidth) {
-    fontSize--;
-    container.style.fontSize = fontSize + 'px';
-  }
-</script>
-<style type="text/css">
-.bgimg {
-    background-image: url({% static 'img/shedule_empty.webp' %});
-    background-size: cover;
-}
-.font-fluid {
-  font-size: 3vw;
-}
-</style>
-<div class="container pt-2 font-fluid"><img src="{% static 'img/shedule_empty.webp' %}"></div>
+
 <div class="container">
-    <div class="row">
-        {% for day in schedule_days %}
-        <div class="col-md-4">
-            <table class="table table-bordered">
-                <thead>
-                <th><h5 class="font-weight-bold text-danger">{{ day.name }} - {{ day.date }}</h5></th>
-                </thead>
-                <tbody>
-                    <table class="table table-responsive">
-                        <tbody>
+<form action="{% url 'generate_pdf' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Создать PDF</button>
+
+    <div id="shedule">
+        <div class="container pt-2"><img class="img-fluid" src="{% static 'img/shedule_empty.webp' %}"></div>
+
+        <div class="container">
+            <div class="row">
+            {% for day in schedule_days %}
+                <div class="col-md-4">
+                    <div class="card card-cascade wider">
+                        <div class="card-header"><h4 class="font-weight-bold text-danger">{{ day.name }} - {{ day.date }}</h4></div>
+                        <div class="card-body">
                             {% for event in day.events_list %}
-                            <tr>
-                                <td class="font-weight-bold">{{ event.start_time }} - {{ event.end_time }}</td>
-                                <td class="font-weight-bold"><p class="lh-1">{{ event.name }}</p></td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </tbody>
-            </table>
+                            <div class="row">
+                                <div class="col-md-3"><p class="font-weight-bold font-fluid ri pp mbp">{{ event.start_time }} - {{ event.end_time }}</p></div>
+                                <div class="col-md-9"><p class="font-weight-bold font-fluid ri pp mbp">{{ event.name }}</p></div>
+                            </div>
+                                <hr class="hrp">
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
         </div>
-        {% endfor %}
     </div>
+</form>
 </div>
 
+{% include '_footer.html' %}
 {% endblock %}
