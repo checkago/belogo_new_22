@@ -28,30 +28,39 @@
     </style>
 </head>
 <body>
-    <div class="container mt-3">
-        <div id="schedule">
-            <div class="container pt-2"><img class="img-fluid" src="{% static 'img/shedule_empty.webp' %}"></div>
-            <div class="container">
-                    <div class="row">
-                    {% for day in schedule_days %}
-                        <div class="col-md-4">
-                            <div class="card card-cascade wider mb-2">
-                                <div class="card-header"><h4 class="font-weight-bold text-danger">{{ day.name }} - {{ day.date }}</h4></div>
-                                <div class="card-body">
-                                    {% for event in day.events_list %}
-                                    <div class="row">
-                                        <div class="col-md-3"><p class="font-weight-bold font-fluid ri pp mbp">{{ event.start_time }} - {{ event.end_time }}</p></div>
-                                        <div class="col-md-9"><p class="font-weight-bold font-fluid ri pp mbp">{{ event.name }}</p></div>
-                                    </div>
-                                        <hr class="hrp">
-                                    {% endfor %}
+<div class="container mt-3">
+     <a href="{% url 'schedule_f4' %}" class="btn btn-outline-danger">Печать расписания</a>
+    <div id="schedule" class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-6 pt-2"><img class="img-fluid" src="{% static 'img/shedule_empty.webp' %}"></div>
+            <div class="col-md-6">
+                <h5 class="font-weight-bold">Бибилиотека №4 МБУК "ЦБС им. А. Белого"</h5>
+            </div>
+        </div>
+
+        <div class="row">
+                {% for day in schedule_days %}
+                    <div class="col-md-4">
+                        <div class="card card-cascade wider mb-2">
+                            <div class="card-header"><h4 class="font-weight-bold text-danger">{{ day.name }} - {{ day.date }}</h4></div>
+                            <div class="card-body">
+                                {% for event in day.events_list %}
+                                <div class="row">
+                                    <div class="col-md-3"><p class="font-weight-bold font-fluid ri pp mbp">{{ event.start_time }} - {{ event.end_time }}</p></div>
+                                    <div class="col-md-9"><p class="font-weight-bold font-fluid ri pp mbp">{{ event.name }}</p></div>
                                 </div>
+                                    <hr class="hrp">
+                                {% endfor %}
                             </div>
                         </div>
-                    {% endfor %}
                     </div>
+                {% endfor %}
                 </div>
+
+        <div class="row">
+            <img class="ml-auto" src="{% static 'img/shedule_empty_bottom.webp' %}">
         </div>
     </div>
+</div>
 </body>
 </html>
