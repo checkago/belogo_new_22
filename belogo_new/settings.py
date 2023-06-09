@@ -97,7 +97,8 @@ ADMIN_REORDER = (
                 'web.SheduleDayCDSCH',
                 'web.SheduleDayF2',
                 'web.SheduleDayF3',
-                'web.SheduleDayF4',)
+                'web.SheduleDayF4',
+                'web.CinemaDay',)
      },
 
     {'app': 'web', 'label': 'Публикации',
