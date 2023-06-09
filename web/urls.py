@@ -5,7 +5,7 @@ from django.urls import path
 from . import views
 from .views import BibliotekiAPIView, NewsAPIView, EventAPIView, SheduleAPIView, DayEventListView, SheduleDayListView, \
     SheduleDayBERListView, SheduleDayCDSCHListView, SheduleDayF2ListView, SheduleDayF3ListView, SheduleDayF4ListView, \
-    ServiceAPIView
+    ServiceAPIView, CinemaDayListView
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -42,6 +42,8 @@ urlpatterns = [
     path('events-archive/', views.events_archive, name='events_archive'),
     path('shedules/', views.shedules, name='shedules'),
 
+    path('cinema_ikc/', views.cinema_day_list, name='cinema_ikc'),
+
     path('shedule_ikc/', views.schedule_day_list, name='shedule_ikc'),
     path('shedule_cdsch/', views.schedule_day_cdsch_list, name='shedule_cdsch'),
     path('shedule_ber/', views.schedule_day_ber_list, name='shedule_ber'),
@@ -73,6 +75,7 @@ urlpatterns = [
     path('api/v1/sheduledayf3_list/', SheduleDayF3ListView.as_view()),
     path('api/v1/sheduledayf4_list/', SheduleDayF4ListView.as_view()),
     path('api/v1/book/create/', views.createBook),
+    path('api/v1/cinema_ikc/', CinemaDayListView.as_view()),
 ]
 
 if settings.MEDIA_ROOT:

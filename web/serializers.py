@@ -1,6 +1,7 @@
 from django.utils.html import strip_tags
 from rest_framework import serializers
-from web.models import Biblioteka, DayEvent, News, Event, Shedule, Service, FreeService, Book, Category, SheduleDay
+from web.models import Biblioteka, DayEvent, News, Event, Shedule, Service, FreeService, Book, Category, SheduleDay, \
+    Movi, CinemaDay
 
 
 class BibliotekaSerializer(serializers.ModelSerializer):
@@ -110,3 +111,20 @@ class SheduleDayF4Serializer(serializers.ModelSerializer):
     class Meta: 
         model = SheduleDay 
         fields = ('id', 'name', 'date', 'events_list')
+
+
+class MoviSerializer(serializers.ModelSerializer):
+    start_time = serializers.TimeField(format='%H:%M')
+    end_time = serializers.TimeField(format='%H:%M')
+
+    class Meta:
+        model = Movi
+        fields = ('id', 'name', 'start_time')
+
+
+class CinemaDaySerializer(serializers.ModelSerializer):
+    movies_list = MoviSerializer(many=True)
+
+    class Meta:
+        model = CinemaDay
+        fields = ('id', 'name', 'date', 'movies_list')

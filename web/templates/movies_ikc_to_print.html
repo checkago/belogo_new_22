@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap-min.css' %}" rel="stylesheet">
+    <style>
+        .font-fluid {
+            font-size: 0.75vw !important;
+        }
+        .ri {
+            line-height: 1.0 !important;
+        }
+        .pp {
+            line-height: 1.0 !important;
+        }
+        .mbp {
+            margin-bottom: 0.3rem !important;
+        }
+        .hrp {
+            margin-top: 0.3rem !important;
+            margin-bottom: 0.3rem !important;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-3">
+    <div id="schedule" class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-6 pt-2"><img class="img-fluid" src="{% static 'img/shedule_empty.webp' %}"></div>
+            <div class="col-md-6">
+                <h5 class="font-weight-bold">Библиотечный информационно-культурный центр</h5>
+            </div>
+        </div>
+
+        <div class="row">
+                {% for day in schedule_days %}
+                    <div class="col-md-4">
+                        <div class="card card-cascade wider mb-2">
+                            <div class="card-header"><h4 class="font-weight-bold text-danger">{{ day.name }} - {{ day.date }}</h4></div>
+                            <div class="card-body">
+                                {% for event in day.events_list %}
+                                <div class="row">
+                                    <div class="col-md-3"><p class="font-weight-bold font-fluid ri pp mbp">{{ event.start_time }} - {{ event.end_time }}</p></div>
+                                    <div class="col-md-9"><p class="font-weight-bold font-fluid ri pp mbp">{{ event.name }}</p></div>
+                                </div>
+                                    <hr class="hrp">
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+
+        <div class="row">
+            <img class="ml-auto" src="{% static 'img/shedule_empty_bottom.webp' %}">
+        </div>
+    </div>
+</div>
+</body>
+</html>

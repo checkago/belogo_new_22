@@ -17,6 +17,10 @@ class DayEventInline(GenericTabularInline):
     model = DayEvent
 
 
+class MoviInline(GenericTabularInline):
+    model = Movi
+
+
 class CategoryAdmin(DraggableMPTTAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
@@ -300,32 +304,41 @@ class DayEventAdmin(admin.ModelAdmin):
 
 class SheduleDayAdmin(admin.ModelAdmin):
     inlines = [DayEventInline]
-    list_display = ('id', 'name',)
+    list_display = ('name', 'id',)
 
 
 class SheduleDayBERAdmin(admin.ModelAdmin):
     inlines = [DayEventInline]
-    list_display = ('id', 'name',)
+    list_display = ('name', 'id',)
 
 
 class SheduleDayCDSCHAdmin(admin.ModelAdmin):
     inlines = [DayEventInline]
-    list_display = ('id', 'name',)
+    list_display = ('name', 'id',)
 
 
 class SheduleDayF2Admin(admin.ModelAdmin):
     inlines = [DayEventInline]
-    list_display = ('id', 'name',)
+    list_display = ('name', 'id',)
 
 
 class SheduleDayF3Admin(admin.ModelAdmin):
     inlines = [DayEventInline]
-    list_display = ('id', 'name',)
+    list_display = ('name', 'id',)
 
 
 class SheduleDayF4Admin(admin.ModelAdmin):
     inlines = [DayEventInline]
-    list_display = ('id', 'name',)
+    list_display = ('name', 'id',)
+
+
+class MoviAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+
+class CinemaDayAdmin(admin.ModelAdmin):
+    inlines = [MoviInline]
+    list_display = ('name', 'id',)
 
 
 admin.site.register(News, NewsAdmin)
@@ -364,4 +377,6 @@ admin.site.register(SheduleDayCDSCH, SheduleDayCDSCHAdmin)
 admin.site.register(SheduleDayF2, SheduleDayF2Admin)
 admin.site.register(SheduleDayF3, SheduleDayF3Admin)
 admin.site.register(SheduleDayF4, SheduleDayF4Admin)
+admin.site.register(Movi, MoviAdmin)
+admin.site.register(CinemaDay, CinemaDayAdmin)
 

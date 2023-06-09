@@ -12,12 +12,12 @@ from .forms import *
 from .models import *
 import datetime
 from django.views import generic
-from .serializers import (BibliotekaSerializer, NewsSerializer, 
+from .serializers import (BibliotekaSerializer, NewsSerializer,
                           EventSerializer, SheduleSerializer,
-                          ServiceSerializer, BookFormSerializer, 
-                          DayEventSerializer, SheduleDaySerializer, 
-                          SheduleDayBERSerializer, SheduleDayCDSCHSerializer, 
-                          SheduleDayF2Serializer,  SheduleDayF3Serializer, SheduleDayF4Serializer)
+                          ServiceSerializer, BookFormSerializer,
+                          DayEventSerializer, SheduleDaySerializer,
+                          SheduleDayBERSerializer, SheduleDayCDSCHSerializer,
+                          SheduleDayF2Serializer, SheduleDayF3Serializer, SheduleDayF4Serializer, MoviSerializer)
 
 
 def getRoutes(request):
@@ -763,6 +763,8 @@ def schedule_day_list_f2_to_pdf(request):
         'schedule_days': data
     }
     return render(request, 'schedule_f2.html', context)
+
+
 def schedule_day_list_f3_to_pdf(request):
     schedule_days = SheduleDayF3.objects.prefetch_related(
         Prefetch('events_list', queryset=DayEvent.objects.all().order_by('start_time'))
@@ -789,7 +791,7 @@ def schedule_day_list_f3_to_pdf(request):
 
 def schedule_day_list_f4_to_pdf(request):
     schedule_days = SheduleDayF4.objects.prefetch_related(
-        Prefetch('events_list', queryset=DayEvent.objects.all().order_by('start_time'))
+        Prefetch('movies_list', queryset=DayEvent.objects.all().order_by('start_time'))
     ).all()
     data = []
     for day in schedule_days:
@@ -809,3 +811,79 @@ def schedule_day_list_f4_to_pdf(request):
         'schedule_days': data
     }
     return render(request, 'schedule_f4.html', context)
+
+
+class MoviListView(generics.ListAPIView):
+    queryset = Movi.objects.order_by('id')
+    serializer_class = MoviSerializer
+
+
+class CinemaDayListView(APIView):
+    def get(self, request):
+        cinema_days = CinemaDay.objects.prefetch_related(
+            Prefetch('movies_list', queryset=Movi.objects.all().order_by('start_time'))
+        ).all()
+        data = []
+        for day in cinema_days:
+            movies = []
+            for movi in day.movies_list.all():
+                movies.append({
+                    'id': movi.id,
+                    'name': movi.name,
+                    'start_time': movi.start_time.strftime('%H:%M'),
+                })
+            data.append({
+                'id': day.id,
+                'name': day.name,
+                'date': day.date.strftime('%d.%m.%Y'),
+                'movies_list': movies
+            })
+        return Response(data)
+
+
+def cinema_day_list(request):
+    cinema_days = CinemaDay.objects.prefetch_related(
+        Prefetch('movies_list', queryset=Movi.objects.all().order_by('start_time'))
+    ).all()
+    data = []
+    for day in cinema_days:
+        movies = []
+        for movi in day.movies_list.all():
+            movies.append({
+                'name': movi.name,
+                'start_time': movi.start_time.strftime('%H:%M'),
+            })
+        data.append({
+            'id': day.id,
+            'name': day.name,
+            'date': day.date.strftime('%d.%m.%Y'),
+            'movies_list': movies
+        })
+    context = {
+        'cinema_days': data
+    }
+    return render(request, 'movies_ikc.html', context)
+
+
+def cinema_day_list_to_pdf(request):
+    cinema_days = CinemaDay.objects.prefetch_related(
+        Prefetch('movies_list', queryset=Movi.objects.all().order_by('start_time'))
+    ).all()
+    data = []
+    for day in cinema_days:
+        movies = []
+        for movi in day.movies_list.all():
+            movies.append({
+                'name': movi.name,
+                'start_time': movi.start_time.strftime('%H:%M'),
+                'end_time': movi.end_time.strftime('%H:%M')
+            })
+        data.append({
+            'name': day.name,
+            'date': day.date.strftime('%d.%m.%Y'),
+            'events_list': events
+        })
+    context = {
+        'cinema_days': data
+    }
+    return render(request, 'movies_ikc_to_print.html', context)
