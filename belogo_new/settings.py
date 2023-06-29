@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'snowpenguin.django.recaptcha3',
     'rest_framework',
     'email_signals',
-    'admin_reorder'
+    'admin_reorder',
+    'nested_inline'
 ]
 
 RECAPTCHA_PRIVATE_KEY = '6LfZteggAAAAAJ99PU0qWuKImJxru8kn_iszuPPH'
@@ -98,7 +99,10 @@ ADMIN_REORDER = (
                 'web.SheduleDayF2',
                 'web.SheduleDayF3',
                 'web.SheduleDayF4',
-                'web.CinemaDay',)
+                'web.CinemaDay',
+                'web.Week',
+                'web.Day',
+                'web.Eventy',)
      },
 
     {'app': 'web', 'label': 'Публикации',

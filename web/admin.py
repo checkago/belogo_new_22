@@ -1,11 +1,15 @@
 from django.contrib import admin
 from django import forms
+from django.template.loader import get_template
 from mptt.admin import DraggableMPTTAdmin
 from django.contrib.contenttypes.admin import GenericTabularInline
-from ckeditor.widgets import CKEditorWidget
+from nested_inline.admin import NestedStackedInline, NestedModelAdmin, NestedTabularInline
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from import_export.admin import ImportExportModelAdmin
+
 from web.models import *
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 
 class ImageGalleryInline(GenericTabularInline):
@@ -339,6 +343,38 @@ class MoviAdmin(admin.ModelAdmin):
 class CinemaDayAdmin(admin.ModelAdmin):
     inlines = [MoviInline]
     list_display = ('name', 'id',)
+
+
+class EventyInline(NestedTabularInline):
+    model = Eventy
+    extra = 3
+
+
+class DayInline(NestedTabularInline):
+    model = Day
+    inlines = [EventyInline]
+    extra = 1
+
+
+class WeekAdmin(NestedModelAdmin):
+    inlines = [DayInline]
+
+
+@receiver(pre_save, sender=Week)
+def set_active_status(sender, instance, **kwargs):
+    today = date.today()
+    if instance.start_date and instance.end_date:
+        if instance.start_date <= today <= instance.end_date:
+            instance.active = True
+        else:
+            instance.active = False
+    else:
+        instance.active = False
+
+
+admin.site.register(Week, WeekAdmin)
+admin.site.register(Eventy)
+admin.site.register(Day)
 
 
 admin.site.register(News, NewsAdmin)

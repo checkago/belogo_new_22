@@ -336,11 +336,11 @@
             switch(data.inlineType) {
             case "stacked":
                 selector = inlineOptions.name + "-group .inline-related";
-                $(selector).stackedFormset(selector, inlineOptions.options);
+                $(this).find("[id^=" + inlineOptions.name.substring(1) + "-]").stackedFormset(selector, inlineOptions.options);
                 break;
             case "tabular":
-                selector = inlineOptions.name + "-group .tabular.inline-related tbody:first > tr.form-row";
-                $(selector).tabularFormset(selector, inlineOptions.options);
+                selector = inlineOptions.name + "-group .tabular.inline-related tbody:first > tr[id^=" + inlineOptions.name.substring(1) + "-].form-row ";
+                $(this).children().tabularFormset(selector, inlineOptions.options);
                 break;
             }
         });

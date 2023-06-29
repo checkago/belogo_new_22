@@ -651,6 +651,53 @@ class CinemaDay(models.Model):
     def __str__(self):
         return self.name
 
+class Week(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Наименование')
+    start_date = models.DateField()
+    end_date = models.DateField()
+    active = models.BooleanField(default=False)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for day in self.days.filter(week=self):  # здесь было изменено
+            for event in day.events.all():  # и здесь тоже
+                event.save()
+
+    class Meta:
+        verbose_name = 'Системное расписание'
+        verbose_name_plural = 'Системные расписания'
+
+    def __str__(self):
+        return self.name
+
+class Day(models.Model):
+    name = models.CharField(max_length=100, verbose_name='День недели')
+    week = models.ForeignKey(Week, on_delete=models.CASCADE, related_name='days')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for event in self.events.all():
+            event.save()
+
+    class Meta:
+        verbose_name = 'День недели'
+        verbose_name_plural = 'Дни недели'
+
+    def __str__(self):
+        return self.name
+
+class Eventy(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Мероприятие', blank=True)
+    period = models.TimeField(blank=True)
+    day = models.ForeignKey(Day, on_delete=models.CASCADE, related_name='events')
+
+    class Meta:
+        verbose_name = 'Мероприятие/событие'
+        verbose_name_plural = 'Мероприятия'
+
+    def __str__(self):
+        return self.name
+
 
 
 
