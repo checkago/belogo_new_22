@@ -330,7 +330,7 @@ def s_form(request):
                 'Новая форма дополнительной услуги',
                 message,
                 'site@biblioteka-belogo.ru',
-                ['oit@biblioteka-belogo.ru']
+                ['bib76@biblioteka-belogo.ru']
             )
              # Добавление файла вложением
             if request.FILES.get('file'):
