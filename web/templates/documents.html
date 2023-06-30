@@ -42,7 +42,7 @@
             </nav>
             <ul class="">
                 {% for Document in page_obj %}
-                    {% if document.published %}
+                    {% if Document.published == True %}
                     <li><a href="{% url 'document' Document.pk %}"><h5><span class="font-weight-bold">{{ Document.name }}</span></h5></a></li>
                     {% endif %}
                 {% endfor %}
