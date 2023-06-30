@@ -99,10 +99,7 @@ ADMIN_REORDER = (
                 'web.SheduleDayF2',
                 'web.SheduleDayF3',
                 'web.SheduleDayF4',
-                'web.CinemaDay',
-                'web.Week',
-                'web.Day',
-                'web.Eventy',)
+                'web.CinemaDay',)
      },
 
     {'app': 'web', 'label': 'Публикации',
@@ -136,6 +133,7 @@ ADMIN_REORDER = (
                 'web.Question',
                 'web.Feedback',
                 'web.Bookrequest',
+                'web.ServiceDop',
                 )
      },
 
