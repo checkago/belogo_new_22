@@ -6,7 +6,7 @@ from django.core.mail import send_mail
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
+from django.core.mail import EmailMessage
 
 from .forms import *
 from .models import *
@@ -287,7 +287,7 @@ def q_form(request):
             Question.save()
             subject = 'Вопрос библиотекарю от {} ({})'.format(cd['name'], cd['email'])
             message = '"{}". {}'.format(cd['comment'], cd['name'])
-            send_mail(subject, message, 'site@biblioteka-belogo.ru', [cd['email'], 'bib76@yandex.ru'])
+            send_mail(subject, message, 'site@biblioteka-belogo.ru', [cd['email'], 'bib76@biblioteka-belogo.ru'])
             sent = True
             return redirect('/')
 
@@ -313,25 +313,33 @@ def brq_form(request):
     return render(request, 'brq_form.html', {'title': title, 'brqform': brqform})
 
 
+from django.core.exceptions import ValidationError
+
+
 def s_form(request):
     title = 'Ваше мероприятие или аренда зала'
     sent = False
     if request.method == 'POST':
-        sform = ServiceDopForm(request.POST)
+        sform = ServiceDopForm(request.POST, request.FILES)
         if sform.is_valid():
             ServiceDop = sform.save(commit=False)
-            cd = sform.cleaned_data
             ServiceDop.save()
-            subject = 'Запрос на "{}" от {} ({})'.format(cd['service'], cd['fio'], cd['email'])
-            message = '{} "{}". {} | {}'.format(cd['service'], cd['comment'], cd['fio'], cd['phone'])
-            send_mail(subject, message, 'site@biblioteka-belogo.ru', [cd['email'], 'bib76@yandex.ru'])
-            sent = True
+             # Отправка данных на email
+            message = f"Дата: {ServiceDop.date}\nФИО: {ServiceDop.fio}\nНомер телефона: {ServiceDop.phone}\nЕ-мэйл: {ServiceDop.email}\nКомментарий: {ServiceDop.comment}"
+            email = EmailMessage(
+                'Новая форма дополнительной услуги',
+                message,
+                'site@biblioteka-belogo.ru',
+                ['oit@biblioteka-belogo.ru']
+            )
+             # Добавление файла вложением
+            if request.FILES.get('file'):
+                email.attach(request.FILES['file'].name, request.FILES['file'].read(), request.FILES['file'].content_type)
+            email.send()
             return redirect('/')
-
     else:
         sform = ServiceDopForm()
-
-    return render(request, 's_form.html', {'title': title, 'sform': sform, 'sent': sent})
+    return render(request, 's_form.html', {'title': title, 'sform': sform})
 
 
 def library_category(request):

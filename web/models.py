@@ -1,8 +1,10 @@
+import os
+
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from datetime import date
-
+from django.utils.translation import gettext_lazy as _
 from email_signals.models import EmailSignalMixin
 from mptt.models import MPTTModel, TreeForeignKey
 from django.utils.safestring import mark_safe
@@ -314,15 +316,12 @@ class Service_dop(models.Model):
 
 
 class ServiceDop(models.Model):
-    category = models.ForeignKey(Category, default='Форма для услуг', blank=True, on_delete=models.SET_NULL, related_name='dopservices',
-                                 null=True, verbose_name='Категория')
-    service = models.ForeignKey(Service_dop, blank=True, on_delete=models.SET_NULL, null=True,
-                                verbose_name='Выбор услуги')
-    date = models.DateField(verbose_name='Дата')
+    date = models.DateField(verbose_name='Дата', default=date.today)
     fio = models.CharField(max_length=200, verbose_name='ФИО')
     phone = models.CharField(max_length=17, blank=True, verbose_name='Номер телефона')
     email = models.EmailField(verbose_name='Е-мэйл')
     comment = models.TextField(verbose_name='Комментарий')
+    file = models.FileField(upload_to='img/files', verbose_name='Файл', blank=True, null=True)
 
     class Meta:
         verbose_name = 'Форма дополнительной услуги'
@@ -688,8 +687,8 @@ class Day(models.Model):
 
 class Eventy(models.Model):
     name = models.CharField(max_length=100, verbose_name='Мероприятие', blank=True)
-    period = models.TimeField(blank=True)
-    day = models.ForeignKey(Day, on_delete=models.CASCADE, related_name='events')
+    period = models.TimeField(blank=True, null=True)
+    day = models.ForeignKey(Day, on_delete=models.CASCADE, blank=True, null=True, related_name='events')
 
     class Meta:
         verbose_name = 'Мероприятие/событие'
@@ -697,7 +696,6 @@ class Eventy(models.Model):
 
     def __str__(self):
         return self.name
-
 
 
 

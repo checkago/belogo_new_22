@@ -1,15 +1,14 @@
 from django.contrib import admin
 from django import forms
-from django.template.loader import get_template
 from mptt.admin import DraggableMPTTAdmin
 from django.contrib.contenttypes.admin import GenericTabularInline
-from nested_inline.admin import NestedStackedInline, NestedModelAdmin, NestedTabularInline
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from import_export.admin import ImportExportModelAdmin
-
-from web.models import *
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
+from web.models import ImageGallery, DayEvent, Movi, Category, News, Document, Raiting, Biblioteka, FreeService, \
+    TermsOfUse, Vacancy, VeteranVOV, VeteranTruda, LeningradResident, HeroMemoryBook, Anons, Shedule, Event, Cinema, \
+    Position, Employers, Service_dop, Service, Book, Question, Feedback, Bookrequest, ServiceDop, Partner, Library, \
+    Author, LibraryCategory, SheduleDay, SheduleDayBER, SheduleDayCDSCH, SheduleDayF2, SheduleDayF3, SheduleDayF4, \
+    CinemaDay
 
 
 class ImageGalleryInline(GenericTabularInline):
@@ -156,7 +155,7 @@ class BookrequestAdmin(admin.ModelAdmin):
 
 
 class ServiceDopAdmin(admin.ModelAdmin):
-    list_display = ('fio', 'email', 'date', 'comment')
+    list_display = ('fio', 'email', 'date', 'comment', )
 
 
 class PartnerAdmin(admin.ModelAdmin):
@@ -343,39 +342,6 @@ class MoviAdmin(admin.ModelAdmin):
 class CinemaDayAdmin(admin.ModelAdmin):
     inlines = [MoviInline]
     list_display = ('name', 'id',)
-
-
-class EventyInline(NestedTabularInline):
-    model = Eventy
-    extra = 3
-
-
-class DayInline(NestedTabularInline):
-    model = Day
-    inlines = [EventyInline]
-    extra = 1
-
-
-class WeekAdmin(NestedModelAdmin):
-    inlines = [DayInline]
-
-
-@receiver(pre_save, sender=Week)
-def set_active_status(sender, instance, **kwargs):
-    today = date.today()
-    if instance.start_date and instance.end_date:
-        if instance.start_date <= today <= instance.end_date:
-            instance.active = True
-        else:
-            instance.active = False
-    else:
-        instance.active = False
-
-
-admin.site.register(Week, WeekAdmin)
-admin.site.register(Eventy)
-admin.site.register(Day)
-
 
 admin.site.register(News, NewsAdmin)
 admin.site.register(Document, DocumentAdmin)
