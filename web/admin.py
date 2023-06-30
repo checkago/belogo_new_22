@@ -85,7 +85,7 @@ class RaitingAdminForm(forms.ModelForm):
 class DocumentAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     form = DocumentAdminForm
-    list_display = ('name',)
+    list_display = ('name', 'published')
 
 
 class CinemaAdmin(admin.ModelAdmin):
