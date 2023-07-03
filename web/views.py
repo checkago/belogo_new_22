@@ -349,7 +349,7 @@ def library_category(request):
 
 def library_imperia(request):
     title = 'Книги, изданные до 1917 года'
-    categories = Category.objects.prefetch_related('library_imperia')
+    categories = LibraryCategory.objects.prefetch_related('library_imperia')
     books_list = Library.objects.filter(category__in=categories).distinct().order_by('id')
     paginator = Paginator(books_list, 5)
     page_number = request.GET.get('page')
@@ -361,7 +361,7 @@ def library_imperia(request):
 
 def library_krai(request):
     title = 'Краеведческая литература'
-    categories = Category.objects.prefetch_related('library_krai')
+    categories = LibraryCategory.objects.prefetch_related('library_krai')
     books_list = Library.objects.filter(category__in=categories).distinct().order_by('id')
     paginator = Paginator(books_list, 5)
     page_number = request.GET.get('page')
@@ -373,7 +373,7 @@ def library_krai(request):
 
 def library_hud(request):
     title = 'Художественная литература'
-    categories = Category.objects.prefetch_related('library_hud')
+    categories = LibraryCategory.objects.prefetch_related('library_hud')
     books_list = Library.objects.filter(category__in=categories).distinct().order_by('id')
     paginator = Paginator(books_list, 5)
     page_number = request.GET.get('page')
