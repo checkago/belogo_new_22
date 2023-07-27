@@ -2,6 +2,10 @@ from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelatio
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from datetime import date
+
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+from django.utils import timezone
 from email_signals.models import EmailSignalMixin
 from mptt.models import MPTTModel, TreeForeignKey
 from django.utils.safestring import mark_safe
@@ -555,11 +559,14 @@ class CinemaDay(models.Model):
         return self.name
 
 
+"""Schedules"""
+
+
 class Week(models.Model):
     name = models.CharField(max_length=100, verbose_name='Наименование')
     start_date = models.DateField(verbose_name='Первое число недели', blank=True, null=True)
     end_date = models.DateField(verbose_name='Последнее число недели', blank=True, null=True)
-    active = models.BooleanField(default=False, verbose_name='Устанавливается автоматически(не трогать)')
+    active = models.BooleanField(default=False, verbose_name='Текущая рабочая неделя')
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -573,6 +580,16 @@ class Week(models.Model):
 
     def __str__(self):
         return self.name
+
+
+@receiver(pre_save, sender=Week)
+def update_active_field(sender, instance, **kwargs):
+    today = timezone.now().date()
+    if instance.start_date and instance.end_date:
+        if instance.start_date <= today <= instance.end_date:
+            instance.active = True
+        else:
+            instance.active = False
 
 
 class Day(models.Model):
@@ -590,6 +607,290 @@ class Day(models.Model):
 
 class Eventy(models.Model):
     day = models.ForeignKey(Day, on_delete=models.CASCADE, null=True, verbose_name='День недели', related_name='events')
+    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
+    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
+
+    class Meta:
+        verbose_name = 'Мероприятие'
+        verbose_name_plural = 'Мероприятия'
+
+    def __str__(self):
+        return self.name
+
+class WeekCDSCH(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Наименование')
+    start_date = models.DateField(verbose_name='Первое число недели', blank=True, null=True)
+    end_date = models.DateField(verbose_name='Последнее число недели', blank=True, null=True)
+    active = models.BooleanField(default=False, verbose_name='Текущая рабочая неделя')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for day in self.days.filter(week=self):
+            for event in day.events.all():
+                event.save()
+
+    class Meta:
+        verbose_name = 'Расписание ИКЦ'
+        verbose_name_plural = 'Расписание ИКЦ'
+
+    def __str__(self):
+        return self.name
+
+
+@receiver(pre_save, sender=Week)
+def update_active_field(sender, instance, **kwargs):
+    today = timezone.now().date()
+    if instance.start_date and instance.end_date:
+        if instance.start_date <= today <= instance.end_date:
+            instance.active = True
+        else:
+            instance.active = False
+
+
+class DayCDSCH(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата', blank=True, null=True)
+    week = models.ForeignKey(WeekCDSCH, on_delete=models.CASCADE, verbose_name='Неделя', related_name='days')
+
+    class Meta:
+        verbose_name = 'Рабочий день ЦДСЧ'
+        verbose_name_plural = 'Расписание ЦДСЧ'
+
+    def __str__(self):
+        return self.name
+
+
+class EventyCDSCH(models.Model):
+    day = models.ForeignKey(DayCDSCH, on_delete=models.CASCADE, null=True, verbose_name='День недели', related_name='events')
+    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
+    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
+
+    class Meta:
+        verbose_name = 'Мероприятие'
+        verbose_name_plural = 'Мероприятия'
+
+    def __str__(self):
+        return self.name
+
+
+class WeekBER(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Наименование')
+    start_date = models.DateField(verbose_name='Первое число недели', blank=True, null=True)
+    end_date = models.DateField(verbose_name='Последнее число недели', blank=True, null=True)
+    active = models.BooleanField(default=False, verbose_name='Текущая рабочая неделя')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for day in self.days.filter(week=self):
+            for event in day.events.all():
+                event.save()
+
+    class Meta:
+        verbose_name = 'Расписание БЭР'
+        verbose_name_plural = 'Расписание БЭР'
+
+    def __str__(self):
+        return self.name
+
+
+@receiver(pre_save, sender=Week)
+def update_active_field(sender, instance, **kwargs):
+    today = timezone.now().date()
+    if instance.start_date and instance.end_date:
+        if instance.start_date <= today <= instance.end_date:
+            instance.active = True
+        else:
+            instance.active = False
+
+
+class DayBER(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата', blank=True, null=True)
+    week = models.ForeignKey(WeekBER, on_delete=models.CASCADE, verbose_name='Неделя', related_name='days')
+
+    class Meta:
+        verbose_name = 'Рабочий день БЭР'
+        verbose_name_plural = 'Расписание БЭР'
+
+    def __str__(self):
+        return self.name
+
+
+class EventyBER(models.Model):
+    day = models.ForeignKey(DayBER, on_delete=models.CASCADE, null=True, verbose_name='День недели', related_name='events')
+    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
+    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
+
+    class Meta:
+        verbose_name = 'Мероприятие'
+        verbose_name_plural = 'Мероприятия'
+
+    def __str__(self):
+        return self.name
+
+
+class WeekF2(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Наименование')
+    start_date = models.DateField(verbose_name='Первое число недели', blank=True, null=True)
+    end_date = models.DateField(verbose_name='Последнее число недели', blank=True, null=True)
+    active = models.BooleanField(default=False, verbose_name='Текущая рабочая неделя')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for day in self.days.filter(week=self):
+            for event in day.events.all():
+                event.save()
+
+    class Meta:
+        verbose_name = 'Расписание Ф2'
+        verbose_name_plural = 'Расписание Ф2'
+
+    def __str__(self):
+        return self.name
+
+
+@receiver(pre_save, sender=Week)
+def update_active_field(sender, instance, **kwargs):
+    today = timezone.now().date()
+    if instance.start_date and instance.end_date:
+        if instance.start_date <= today <= instance.end_date:
+            instance.active = True
+        else:
+            instance.active = False
+
+
+class DayF2(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата', blank=True, null=True)
+    week = models.ForeignKey(WeekF2, on_delete=models.CASCADE, verbose_name='Неделя', related_name='days')
+
+    class Meta:
+        verbose_name = 'Рабочий день Ф2'
+        verbose_name_plural = 'Расписание Ф2'
+
+    def __str__(self):
+        return self.name
+
+
+class EventyF2(models.Model):
+    day = models.ForeignKey(DayF2, on_delete=models.CASCADE, null=True, verbose_name='День недели', related_name='events')
+    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
+    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
+
+    class Meta:
+        verbose_name = 'Мероприятие'
+        verbose_name_plural = 'Мероприятия'
+
+    def __str__(self):
+        return self.name
+
+
+class WeekF3(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Наименование')
+    start_date = models.DateField(verbose_name='Первое число недели', blank=True, null=True)
+    end_date = models.DateField(verbose_name='Последнее число недели', blank=True, null=True)
+    active = models.BooleanField(default=False, verbose_name='Текущая рабочая неделя')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for day in self.days.filter(week=self):
+            for event in day.events.all():
+                event.save()
+
+    class Meta:
+        verbose_name = 'Расписание Ф3'
+        verbose_name_plural = 'Расписание Ф3'
+
+    def __str__(self):
+        return self.name
+
+
+@receiver(pre_save, sender=Week)
+def update_active_field(sender, instance, **kwargs):
+    today = timezone.now().date()
+    if instance.start_date and instance.end_date:
+        if instance.start_date <= today <= instance.end_date:
+            instance.active = True
+        else:
+            instance.active = False
+
+
+class DayF3(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата', blank=True, null=True)
+    week = models.ForeignKey(WeekF3, on_delete=models.CASCADE, verbose_name='Неделя', related_name='days')
+
+    class Meta:
+        verbose_name = 'Рабочий день Ф3'
+        verbose_name_plural = 'Расписание Ф3'
+
+    def __str__(self):
+        return self.name
+
+
+class EventyF3(models.Model):
+    day = models.ForeignKey(DayF3, on_delete=models.CASCADE, null=True, verbose_name='День недели', related_name='events')
+    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
+    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
+
+    class Meta:
+        verbose_name = 'Мероприятие'
+        verbose_name_plural = 'Мероприятия'
+
+    def __str__(self):
+        return self.name
+
+
+class WeekF4(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Наименование')
+    start_date = models.DateField(verbose_name='Первое число недели', blank=True, null=True)
+    end_date = models.DateField(verbose_name='Последнее число недели', blank=True, null=True)
+    active = models.BooleanField(default=False, verbose_name='Текущая рабочая неделя')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for day in self.days.filter(week=self):
+            for event in day.events.all():
+                event.save()
+
+    class Meta:
+        verbose_name = 'Расписание Ф4'
+        verbose_name_plural = 'Расписание Ф4'
+
+    def __str__(self):
+        return self.name
+
+
+@receiver(pre_save, sender=Week)
+def update_active_field(sender, instance, **kwargs):
+    today = timezone.now().date()
+    if instance.start_date and instance.end_date:
+        if instance.start_date <= today <= instance.end_date:
+            instance.active = True
+        else:
+            instance.active = False
+
+
+class DayF4(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата', blank=True, null=True)
+    week = models.ForeignKey(WeekF4, on_delete=models.CASCADE, verbose_name='Неделя', related_name='days')
+
+    class Meta:
+        verbose_name = 'Рабочий день Ф4'
+        verbose_name_plural = 'Расписание Ф4'
+
+    def __str__(self):
+        return self.name
+
+
+class EventyF4(models.Model):
+    day = models.ForeignKey(DayF4, on_delete=models.CASCADE, null=True, verbose_name='День недели', related_name='events')
     name = models.CharField(max_length=150, blank=True, verbose_name='Название')
     start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
     end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')

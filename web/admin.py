@@ -321,7 +321,7 @@ class DayInline(NestedTabularInline):
 class WeekAdmin(NestedModelAdmin):
     inlines = [DayInline]
     exclude = ['active']
-    list_display = ('name', 'start_date', 'end_date')
+    list_display = ('name', 'start_date', 'end_date', 'active')
 
 
 

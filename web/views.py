@@ -1,4 +1,5 @@
 from django.db.models import Prefetch
+from django.views.generic import ListView
 from rest_framework import generics
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -528,25 +529,158 @@ def cinema_day_list(request):
     return render(request, 'movies_ikc.html', context)
 
 
-def cinema_day_list_to_pdf(request):
-    cinema_days = CinemaDay.objects.prefetch_related(
-        Prefetch('movies_list', queryset=Movi.objects.all().order_by('start_time'))
-    ).all()
-    data = []
-    for day in cinema_days:
-        movies = []
-        for movi in day.movies_list.all():
-            movies.append({
-                'name': movi.name,
-                'start_time': movi.start_time.strftime('%H:%M'),
-                'end_time': movi.end_time.strftime('%H:%M')
-            })
-        data.append({
-            'name': day.name,
-            'date': day.date.strftime('%d.%m.%Y'),
-            'events_list': events
-        })
-    context = {
-        'cinema_days': data
-    }
-    return render(request, 'movies_ikc_to_print.html', context)
+class WeekView(ListView):
+    model = Week
+    template_name = 'schedule_ikc.html'  # Replace 'week.html' with the actual template name
+    def get_queryset(self):
+        return Week.objects.filter(active=True)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = Day.objects.filter(week__active=True)
+        return context
+
+
+class WeekPrintView(ListView):
+    model = Week
+    template_name = 'schedule_ikc_print.html'
+
+    def get_queryset(self):
+        return Week.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = Day.objects.filter(week__active=True)
+        return context
+
+
+class WeekCDSCHView(ListView):
+    model = WeekCDSCH
+    template_name = 'schedule_cdsch.html'
+
+    def get_queryset(self):
+        return WeekCDSCH.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayCDSCH.objects.filter(week__active=True)
+        return context
+
+
+class WeekCDSCHPrintView(ListView):
+    model = WeekCDSCH
+    template_name = 'schedule_cdsch_print.html'
+
+    def get_queryset(self):
+        return WeekCDSCH.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayCDSCH.objects.filter(week__active=True)
+        return context
+
+
+class WeekBERView(ListView):
+    model = WeekBER
+    template_name = 'schedule_ber.html'
+
+    def get_queryset(self):
+        return WeekBER.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayBER.objects.filter(week__active=True)
+        return context
+
+
+class WeekBERPrintView(ListView):
+    model = WeekBER
+    template_name = 'schedule_ber_print.html'
+
+    def get_queryset(self):
+        return WeekBER.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayBER.objects.filter(week__active=True)
+        return context
+
+
+class WeekF2View(ListView):
+    model = WeekF2
+    template_name = 'schedule_f2.html'
+
+    def get_queryset(self):
+        return WeekF2.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayF2.objects.filter(week__active=True)
+        return context
+
+
+class WeekF2PrintView(ListView):
+    model = WeekF2
+    template_name = 'schedule_f2_print.html'
+
+    def get_queryset(self):
+        return WeekF2.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayF2.objects.filter(week__active=True)
+        return context
+
+
+class WeekF3View(ListView):
+    model = WeekF3
+    template_name = 'schedule_f3.html'
+
+    def get_queryset(self):
+        return WeekF3.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayF3.objects.filter(week__active=True)
+        return context
+
+
+class WeekF3PrintView(ListView):
+    model = WeekF3
+    template_name = 'schedule_f3_print.html'
+
+    def get_queryset(self):
+        return WeekF3.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayF3.objects.filter(week__active=True)
+        return context
+
+
+class WeekF4View(ListView):
+    model = WeekF4
+    template_name = 'schedule_f4.html'
+
+    def get_queryset(self):
+        return WeekF4.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayF4.objects.filter(week__active=True)
+        return context
+
+
+class WeekF4PrintView(ListView):
+    model = WeekF4
+    template_name = 'schedule_f4_print.html'
+
+    def get_queryset(self):
+        return WeekF4.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayF4.objects.filter(week__active=True)
+        return context
+
+
+
