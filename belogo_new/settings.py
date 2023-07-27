@@ -94,7 +94,12 @@ ADMIN_REORDER = (
     # First group
     {'app': 'web', 'label': 'Расписания',
      'models': ('web.CinemaDay',
-                'web.Week',)
+                'web.Week',
+                'web.WeekCDSCH',
+                'web.WeekBER',
+                'web.WeekF2',
+                'web.WeekF3',
+                'web.WeekF4',)
      },
 
     {'app': 'web', 'label': 'Публикации',
