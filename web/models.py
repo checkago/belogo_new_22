@@ -631,8 +631,8 @@ class WeekCDSCH(models.Model):
                 event.save()
 
     class Meta:
-        verbose_name = 'Расписание ИКЦ'
-        verbose_name_plural = 'Расписание ИКЦ'
+        verbose_name = 'Расписание ЦДСЧ'
+        verbose_name_plural = 'Расписание ЦДСЧ'
 
     def __str__(self):
         return self.name
