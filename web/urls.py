@@ -3,9 +3,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 from django.urls import path
 from . import views
-from .views import BibliotekiAPIView, NewsAPIView, EventAPIView, SheduleAPIView, DayEventListView, SheduleDayListView, \
-    SheduleDayBERListView, SheduleDayCDSCHListView, SheduleDayF2ListView, SheduleDayF3ListView, SheduleDayF4ListView, \
-    ServiceAPIView, CinemaDayListView
+from .views import BibliotekiAPIView, NewsAPIView, EventAPIView, SheduleAPIView, ServiceAPIView, CinemaDayListView
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -41,23 +39,7 @@ urlpatterns = [
     path('events/', views.events, name='events'),
     path('events-archive/', views.events_archive, name='events_archive'),
     path('shedules/', views.shedules, name='shedules'),
-
     path('cinema_ikc/', views.cinema_day_list, name='cinema_ikc'),
-
-    path('shedule_ikc/', views.schedule_day_list, name='shedule_ikc'),
-    path('shedule_cdsch/', views.schedule_day_cdsch_list, name='shedule_cdsch'),
-    path('shedule_ber/', views.schedule_day_ber_list, name='shedule_ber'),
-    path('shedule_f2/', views.schedule_day_f2_list, name='shedule_f2'),
-    path('shedule_f3/', views.schedule_day_f3_list, name='shedule_f3'),
-    path('shedule_f4/', views.schedule_day_f4_list, name='shedule_f4'),
-
-    path('schedule_ikc/', views.schedule_day_list_ikc_to_pdf, name='schedule_ikc'),
-    path('schedule_cdsch/', views.schedule_day_list_cdsch_to_pdf, name='schedule_cdsch'),
-    path('schedule_ber/', views.schedule_day_list_ber_to_pdf, name='schedule_ber'),
-    path('schedule_f2/', views.schedule_day_list_f2_to_pdf, name='schedule_f2'),
-    path('schedule_f3/', views.schedule_day_list_f3_to_pdf, name='schedule_f3'),
-    path('schedule_f4/', views.schedule_day_list_f4_to_pdf, name='schedule_f4'),
-
 
 
     # """API List Views"""
@@ -67,13 +49,6 @@ urlpatterns = [
     path('api/v1/event_list/', EventAPIView.as_view()),
     path('api/v1/shedule_list/', SheduleAPIView.as_view()),
     path('api/v1/services_list/', ServiceAPIView.as_view()),
-    path('api/v1/dayevent_list/', DayEventListView.as_view()),
-    path('api/v1/sheduledayikc_list/', SheduleDayListView.as_view()),
-    path('api/v1/sheduledayber_list/', SheduleDayBERListView.as_view()),
-    path('api/v1/sheduledaycdsch_list/', SheduleDayCDSCHListView.as_view()),
-    path('api/v1/sheduledayf2_list/', SheduleDayF2ListView.as_view()),
-    path('api/v1/sheduledayf3_list/', SheduleDayF3ListView.as_view()),
-    path('api/v1/sheduledayf4_list/', SheduleDayF4ListView.as_view()),
     path('api/v1/book/create/', views.createBook),
     path('api/v1/cinema_ikc/', CinemaDayListView.as_view()),
 ]

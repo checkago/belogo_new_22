@@ -4,20 +4,15 @@ from mptt.admin import DraggableMPTTAdmin
 from django.contrib.contenttypes.admin import GenericTabularInline
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from import_export.admin import ImportExportModelAdmin
-from web.models import ImageGallery, DayEvent, Movi, Category, News, Document, Raiting, Biblioteka, FreeService, \
+from web.models import ImageGallery, Movi, Category, News, Document, Raiting, Biblioteka, FreeService, \
     TermsOfUse, Vacancy, VeteranVOV, VeteranTruda, LeningradResident, HeroMemoryBook, Anons, Shedule, Event, Cinema, \
     Position, Employers, Service_dop, Service, Book, Question, Feedback, Bookrequest, ServiceDop, Partner, Library, \
-    Author, LibraryCategory, SheduleDay, SheduleDayBER, SheduleDayCDSCH, SheduleDayF2, SheduleDayF3, SheduleDayF4, \
-    CinemaDay
+    Author, LibraryCategory, CinemaDay
 
 
 class ImageGalleryInline(GenericTabularInline):
     model = ImageGallery
     readonly_fields = ('image_url',)
-
-
-class DayEventInline(GenericTabularInline):
-    model = DayEvent
 
 
 class MoviInline(GenericTabularInline):
@@ -301,40 +296,6 @@ class LibraryCategoryAdmin(admin.ModelAdmin):
     list_display = ('name',)
 
 
-class DayEventAdmin(admin.ModelAdmin):
-    list_display = ('name',)
-
-
-class SheduleDayAdmin(admin.ModelAdmin):
-    inlines = [DayEventInline]
-    list_display = ('name', 'id',)
-
-
-class SheduleDayBERAdmin(admin.ModelAdmin):
-    inlines = [DayEventInline]
-    list_display = ('name', 'id',)
-
-
-class SheduleDayCDSCHAdmin(admin.ModelAdmin):
-    inlines = [DayEventInline]
-    list_display = ('name', 'id',)
-
-
-class SheduleDayF2Admin(admin.ModelAdmin):
-    inlines = [DayEventInline]
-    list_display = ('name', 'id',)
-
-
-class SheduleDayF3Admin(admin.ModelAdmin):
-    inlines = [DayEventInline]
-    list_display = ('name', 'id',)
-
-
-class SheduleDayF4Admin(admin.ModelAdmin):
-    inlines = [DayEventInline]
-    list_display = ('name', 'id',)
-
-
 class MoviAdmin(admin.ModelAdmin):
     list_display = ('name',)
 
@@ -372,13 +333,6 @@ admin.site.register(Anons, AnonsAdmin)
 admin.site.register(Library, LibraryAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(LibraryCategory, LibraryCategoryAdmin)
-admin.site.register(DayEvent, DayEventAdmin)
-admin.site.register(SheduleDay, SheduleDayAdmin)
-admin.site.register(SheduleDayBER, SheduleDayBERAdmin)
-admin.site.register(SheduleDayCDSCH, SheduleDayCDSCHAdmin)
-admin.site.register(SheduleDayF2, SheduleDayF2Admin)
-admin.site.register(SheduleDayF3, SheduleDayF3Admin)
-admin.site.register(SheduleDayF4, SheduleDayF4Admin)
 admin.site.register(Movi, MoviAdmin)
 admin.site.register(CinemaDay, CinemaDayAdmin)
 
