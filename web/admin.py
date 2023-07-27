@@ -9,7 +9,7 @@ from nested_admin.nested import NestedModelAdmin, NestedTabularInline, NestedInl
 from web.models import ImageGallery, Movi, Category, News, Document, Raiting, Biblioteka, FreeService, \
     TermsOfUse, Vacancy, VeteranVOV, VeteranTruda, LeningradResident, HeroMemoryBook, Anons, Shedule, Event, Cinema, \
     Position, Employers, Service_dop, Service, Book, Question, Feedback, Bookrequest, ServiceDop, Partner, Library, \
-    Author, LibraryCategory, CinemaDay, Week, Eventy, Day
+    Author, LibraryCategory, CinemaDay, Week, Eventy, Day, WeekCDSCH, WeekBER, WeekF2, WeekF3, WeekF4
 
 
 class ImageGalleryInline(GenericTabularInline):
@@ -324,8 +324,43 @@ class WeekAdmin(NestedModelAdmin):
     list_display = ('name', 'start_date', 'end_date', 'active')
 
 
+class WeekCDSCHAdmin(NestedModelAdmin):
+    inlines = [DayInline]
+    exclude = ['active']
+    list_display = ('name', 'start_date', 'end_date', 'active')
+
+
+class WeekBERAdmin(NestedModelAdmin):
+    inlines = [DayInline]
+    exclude = ['active']
+    list_display = ('name', 'start_date', 'end_date', 'active')
+
+
+class WeekF2Admin(NestedModelAdmin):
+    inlines = [DayInline]
+    exclude = ['active']
+    list_display = ('name', 'start_date', 'end_date', 'active')
+
+
+class WeekF3Admin(NestedModelAdmin):
+    inlines = [DayInline]
+    exclude = ['active']
+    list_display = ('name', 'start_date', 'end_date', 'active')
+
+
+class WeekF4Admin(NestedModelAdmin):
+    inlines = [DayInline]
+    exclude = ['active']
+    list_display = ('name', 'start_date', 'end_date', 'active')
+
+
 
 admin.site.register(Week, WeekAdmin)
+admin.site.register(WeekCDSCH, WeekCDSCHAdmin)
+admin.site.register(WeekBER, WeekBERAdmin)
+admin.site.register(WeekF2, WeekF2Admin)
+admin.site.register(WeekF3, WeekF3Admin)
+admin.site.register(WeekF4, WeekF4Admin)
 admin.site.register(News, NewsAdmin)
 admin.site.register(Document, DocumentAdmin)
 admin.site.register(Raiting, RaitingAdmin)
