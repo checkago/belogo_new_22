@@ -9,7 +9,8 @@ from nested_admin.nested import NestedModelAdmin, NestedTabularInline, NestedInl
 from web.models import ImageGallery, Movi, Category, News, Document, Raiting, Biblioteka, FreeService, \
     TermsOfUse, Vacancy, VeteranVOV, VeteranTruda, LeningradResident, HeroMemoryBook, Anons, Shedule, Event, Cinema, \
     Position, Employers, Service_dop, Service, Book, Question, Feedback, Bookrequest, ServiceDop, Partner, Library, \
-    Author, LibraryCategory, CinemaDay, Week, Eventy, Day, WeekCDSCH, WeekBER, WeekF2, WeekF3, WeekF4
+    Author, LibraryCategory, CinemaDay, Week, Eventy, Day, WeekCDSCH, WeekBER, WeekF2, WeekF3, WeekF4, DayCDSCH, \
+    EventyCDSCH, EventyBER, DayBER, EventyF2, DayF2, EventyF3, DayF3, EventyF4, DayF4
 
 
 class ImageGalleryInline(GenericTabularInline):
@@ -318,6 +319,61 @@ class DayInline(NestedTabularInline):
     extra = 1
 
 
+class EventyCDSCHInline(NestedTabularInline):
+    model = EventyCDSCH
+    extra = 1
+
+
+class DayCDSCHInline(NestedTabularInline):
+    model = DayCDSCH
+    inlines = [EventyCDSCHInline]
+    extra = 1
+
+
+class EventyBERInline(NestedTabularInline):
+    model = EventyBER
+    extra = 1
+
+
+class DayBERInline(NestedTabularInline):
+    model = DayBER
+    inlines = [EventyBERInline]
+    extra = 1
+
+
+class EventyF2Inline(NestedTabularInline):
+    model = EventyF2
+    extra = 1
+
+
+class DayF2Inline(NestedTabularInline):
+    model = DayF2
+    inlines = [EventyF2Inline]
+    extra = 1
+
+
+class EventyF3Inline(NestedTabularInline):
+    model = EventyF3
+    extra = 1
+
+
+class DayF3Inline(NestedTabularInline):
+    model = DayF3
+    inlines = [EventyF3Inline]
+    extra = 1
+
+
+class EventyF4Inline(NestedTabularInline):
+    model = EventyF4
+    extra = 1
+
+
+class DayF4Inline(NestedTabularInline):
+    model = DayF4
+    inlines = [EventyF4Inline]
+    extra = 1
+
+
 class WeekAdmin(NestedModelAdmin):
     inlines = [DayInline]
     exclude = ['active']
@@ -325,7 +381,7 @@ class WeekAdmin(NestedModelAdmin):
 
 
 class WeekCDSCHAdmin(NestedModelAdmin):
-    inlines = [DayInline]
+    inlines = [DayCDSCHInline]
     exclude = ['active']
     list_display = ('name', 'start_date', 'end_date', 'active')
 
