@@ -235,7 +235,7 @@ class Book(models.Model, EmailSignalMixin):
 
 
     library = models.CharField(max_length=150, choices=BIB_CHOICES, verbose_name='Выбор Библиотеки')
-    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, verbose_name='Выбор возраста')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, null=True, verbose_name='Выбор возраста')
     datetime = models.DateTimeField(auto_now=True, verbose_name='Дата')
     fio = models.CharField(max_length=200, verbose_name='ФИО')
     bilet = models.CharField(max_length=18, verbose_name='№ читательского билета', blank=True)
