@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'email_signals',
     'admin_reorder',
-    'nested_inline'
+    'nested_admin'
 ]
 
 RECAPTCHA_PRIVATE_KEY = '6LfZteggAAAAAJ99PU0qWuKImJxru8kn_iszuPPH'
@@ -93,13 +93,8 @@ WSGI_APPLICATION = 'belogo_new.wsgi.application'
 ADMIN_REORDER = (
     # First group
     {'app': 'web', 'label': 'Расписания',
-     'models': ('web.SheduleDay',
-                'web.SheduleDayBER',
-                'web.SheduleDayCDSCH',
-                'web.SheduleDayF2',
-                'web.SheduleDayF3',
-                'web.SheduleDayF4',
-                'web.CinemaDay',)
+     'models': ('web.CinemaDay',
+                'web.Week',)
      },
 
     {'app': 'web', 'label': 'Публикации',
@@ -218,6 +213,9 @@ USE_I18N = True
 USE_L10N = False
 
 USE_TZ = True
+
+DATE_INPUT_FORMATS = ['%d.%m.%Y',]
+TIME_INPUT_FORMATS = ['%H:%M',]
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
