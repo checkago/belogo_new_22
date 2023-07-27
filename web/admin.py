@@ -387,25 +387,25 @@ class WeekCDSCHAdmin(NestedModelAdmin):
 
 
 class WeekBERAdmin(NestedModelAdmin):
-    inlines = [DayInline]
+    inlines = [DayBERInline]
     exclude = ['active']
     list_display = ('name', 'start_date', 'end_date', 'active')
 
 
 class WeekF2Admin(NestedModelAdmin):
-    inlines = [DayInline]
+    inlines = [DayF2Inline]
     exclude = ['active']
     list_display = ('name', 'start_date', 'end_date', 'active')
 
 
 class WeekF3Admin(NestedModelAdmin):
-    inlines = [DayInline]
+    inlines = [DayF3Inline]
     exclude = ['active']
     list_display = ('name', 'start_date', 'end_date', 'active')
 
 
 class WeekF4Admin(NestedModelAdmin):
-    inlines = [DayInline]
+    inlines = [DayF4Inline]
     exclude = ['active']
     list_display = ('name', 'start_date', 'end_date', 'active')
 

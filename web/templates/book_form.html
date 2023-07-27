@@ -34,6 +34,11 @@
                                     {% crispy_field bform.library 'class' 'form-control select-input' 'placeholder' '' %}
                                 </div>
 
+                                <div class="md-form" id="id_age">
+                                    <span>Выбор возраста</span>
+                                    {% crispy_field bform.age 'class' 'form-control select-input' 'placeholder' '' %}
+                                </div>
+
                                 <div class="md-form">
                                     <i class="fas fa-user prefix grey-text"></i>
                                     {% crispy_field bform.fio 'class' 'form-control' 'placeholder' '' %}

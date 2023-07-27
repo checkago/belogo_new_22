@@ -1,5 +1,3 @@
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
 from django import forms
 from .models import *
 from snowpenguin.django.recaptcha3.fields import ReCaptchaField
@@ -15,7 +13,7 @@ class BookForm(forms.ModelForm):
 
     class Meta:
         model = Book
-        fields = ('library', 'fio', 'bilet', 'phone', 'email', 'comment')
+        fields = ('library', 'age', 'fio', 'bilet', 'phone', 'email', 'comment')
 
 
 class QuestionForm(forms.ModelForm):

@@ -95,31 +95,51 @@
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="{% static 'js/modules/accordion-extended.min.js' %}"></script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var libraryField = document.getElementById('id_library');
+  var ageField = document.getElementById('id_age');
+   // Function to toggle visibility and required attribute of age field
+  function toggleAgeField() {
+    if (libraryField.value === 'Центр детского и семейного чтения (Пролетарская 8)') {
+      ageField.style.display = 'block';
+      ageField.setAttribute('required', 'required');
+    } else {
+      ageField.style.display = 'none';
+      ageField.removeAttribute('required');
+    }
+  }
+   // Initial toggle on page load
+  toggleAgeField();
+   // Toggle age field on library field change
+  libraryField.addEventListener('change', toggleAgeField);
+});
+</script>
 
-    <script>
-        $('.carousel.carousel-multi-item.v-2 .carousel-item').each(function(){
-          var next = $(this).next();
-          if (!next.length) {
-            next = $(this).siblings(':first');
-          }
-          next.children(':first-child').clone().appendTo($(this));
+<script>
+    $('.carousel.carousel-multi-item.v-2 .carousel-item').each(function(){
+      var next = $(this).next();
+      if (!next.length) {
+        next = $(this).siblings(':first');
+      }
+      next.children(':first-child').clone().appendTo($(this));
 
-          for (var i=0;i<6;i++) {
-            next=next.next();
-            if (!next.length) {
-              next=$(this).siblings(':first');
-            }
-            next.children(':first-child').clone().appendTo($(this));
-          }
-        });
-    </script>
+      for (var i=0;i<6;i++) {
+        next=next.next();
+        if (!next.length) {
+          next=$(this).siblings(':first');
+        }
+        next.children(':first-child').clone().appendTo($(this));
+      }
+    });
+</script>
 
-    <script>
-         // MDB Lightbox Init
-        $(function () {
-        $("#mdb-lightbox-ui").load("mdb-addons/mdb-lightbox-ui.html");
-        });
-    </script>
+<script>
+     // MDB Lightbox Init
+    $(function () {
+    $("#mdb-lightbox-ui").load("mdb-addons/mdb-lightbox-ui.html");
+    });
+</script>
 
 
 
