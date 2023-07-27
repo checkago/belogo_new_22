@@ -1,13 +1,12 @@
-import os
-
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from datetime import date
-from django.utils.translation import gettext_lazy as _
 from email_signals.models import EmailSignalMixin
 from mptt.models import MPTTModel, TreeForeignKey
 from django.utils.safestring import mark_safe
+
+
 from utils import upload_function
 
 
@@ -555,11 +554,12 @@ class CinemaDay(models.Model):
     def __str__(self):
         return self.name
 
+
 class Week(models.Model):
     name = models.CharField(max_length=100, verbose_name='Наименование')
-    start_date = models.DateField()
-    end_date = models.DateField()
-    active = models.BooleanField(default=False)
+    start_date = models.DateField(verbose_name='Первое число недели', blank=True, null=True)
+    end_date = models.DateField(verbose_name='Последнее число недели', blank=True, null=True)
+    active = models.BooleanField(default=False, verbose_name='Устанавливается автоматически(не трогать)')
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -568,35 +568,34 @@ class Week(models.Model):
                 event.save()
 
     class Meta:
-        verbose_name = 'Системное расписание'
-        verbose_name_plural = 'Системные расписания'
+        verbose_name = 'Расписание ИКЦ'
+        verbose_name_plural = 'Расписание ИКЦ'
 
     def __str__(self):
         return self.name
+
 
 class Day(models.Model):
-    name = models.CharField(max_length=100, verbose_name='День недели')
-    week = models.ForeignKey(Week, on_delete=models.CASCADE, related_name='days')
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        for event in self.events.all():
-            event.save()
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата', blank=True, null=True)
+    week = models.ForeignKey(Week, on_delete=models.CASCADE, verbose_name='Неделя', related_name='days')
 
     class Meta:
-        verbose_name = 'День недели'
-        verbose_name_plural = 'Дни недели'
+        verbose_name = 'Рабочий день ИКЦ'
+        verbose_name_plural = 'Расписание ИКЦ'
 
     def __str__(self):
         return self.name
 
+
 class Eventy(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Мероприятие', blank=True)
-    period = models.TimeField(blank=True, null=True)
-    day = models.ForeignKey(Day, on_delete=models.CASCADE, blank=True, null=True, related_name='events')
+    day = models.ForeignKey(Day, on_delete=models.CASCADE, null=True, verbose_name='День недели', related_name='events')
+    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
+    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
 
     class Meta:
-        verbose_name = 'Мероприятие/событие'
+        verbose_name = 'Мероприятие'
         verbose_name_plural = 'Мероприятия'
 
     def __str__(self):

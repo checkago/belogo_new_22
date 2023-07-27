@@ -4,10 +4,12 @@ from mptt.admin import DraggableMPTTAdmin
 from django.contrib.contenttypes.admin import GenericTabularInline
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from import_export.admin import ImportExportModelAdmin
+from nested_admin.nested import NestedModelAdmin, NestedTabularInline, NestedInlineModelAdmin
+
 from web.models import ImageGallery, Movi, Category, News, Document, Raiting, Biblioteka, FreeService, \
     TermsOfUse, Vacancy, VeteranVOV, VeteranTruda, LeningradResident, HeroMemoryBook, Anons, Shedule, Event, Cinema, \
     Position, Employers, Service_dop, Service, Book, Question, Feedback, Bookrequest, ServiceDop, Partner, Library, \
-    Author, LibraryCategory, CinemaDay
+    Author, LibraryCategory, CinemaDay, Week, Eventy, Day
 
 
 class ImageGalleryInline(GenericTabularInline):
@@ -304,6 +306,26 @@ class CinemaDayAdmin(admin.ModelAdmin):
     inlines = [MoviInline]
     list_display = ('name', 'id',)
 
+
+class EventyInline(NestedTabularInline):
+    model = Eventy
+    extra = 1
+
+
+class DayInline(NestedTabularInline):
+    model = Day
+    inlines = [EventyInline]
+    extra = 1
+
+
+class WeekAdmin(NestedModelAdmin):
+    inlines = [DayInline]
+    exclude = ['active']
+    list_display = ('name', 'start_date', 'end_date')
+
+
+
+admin.site.register(Week, WeekAdmin)
 admin.site.register(News, NewsAdmin)
 admin.site.register(Document, DocumentAdmin)
 admin.site.register(Raiting, RaitingAdmin)
