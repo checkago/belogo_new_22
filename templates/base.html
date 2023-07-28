@@ -96,24 +96,29 @@
   <script type="text/javascript" src="{% static 'js/modules/accordion-extended.min.js' %}"></script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  var libraryField = document.getElementById('id_library');
-  var ageField = document.getElementById('id_age');
-   // Function to toggle visibility and required attribute of age field
-  function toggleAgeField() {
-    if (libraryField.value === 'Центр детского и семейного чтения (Пролетарская 8)') {
-      ageField.style.display = 'block';
-      ageField.setAttribute('required', 'required');
-    } else {
-      ageField.style.display = 'none';
-      ageField.removeAttribute('required');
+  var libraryField;
+  var ageField;
+  document.addEventListener('DOMContentLoaded', function() {
+    libraryField = document.getElementById('id_library');
+    ageField = document.getElementById('id_age');
+    function toggleAgeField() {
+      if (libraryField.value === 'Центр детского и семейного чтения (Пролетарская 8)') {
+        ageField.style.display = 'block';
+        ageField.setAttribute('required', 'required');
+      } else {
+        ageField.style.display = 'none';
+        ageField.removeAttribute('required');
+      }
     }
-  }
-   // Initial toggle on page load
-  toggleAgeField();
-   // Toggle age field on library field change
-  libraryField.addEventListener('change', toggleAgeField);
-});
+    toggleAgeField();
+    libraryField.addEventListener('change', toggleAgeField);
+  });
+   document.getElementById('bookform').addEventListener('submit', function(e) {
+    if (libraryField.value === 'Центр детского и семейного чтения (Пролетарская 8)' && (ageField.value !== 'Начальные классы' && ageField.value !== 'Старшие классы')) {
+      e.preventDefault();
+      alert('Пожалуйста, выберите возрастную группу в поле возраста.');
+    }
+  });
 </script>
 
 <script>
