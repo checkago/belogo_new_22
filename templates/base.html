@@ -96,29 +96,36 @@
   <script type="text/javascript" src="{% static 'js/modules/accordion-extended.min.js' %}"></script>
 
 <script>
-  var libraryField;
-  var ageField;
-  document.addEventListener('DOMContentLoaded', function() {
+var libraryField;
+var ageField;
+var initialAgeValue;
+ document.addEventListener('DOMContentLoaded', function() {
     libraryField = document.getElementById('id_library');
     ageField = document.getElementById('id_age');
-    function toggleAgeField() {
-      if (libraryField.value === 'Центр детского и семейного чтения (Пролетарская 8)') {
-        ageField.style.display = 'block';
-        ageField.setAttribute('required', 'required');
-      } else {
-        ageField.style.display = 'none';
-        ageField.removeAttribute('required');
-      }
+    initialAgeValue = ageField.value;
+     function toggleAgeField() {
+        if (libraryField.value === 'Центр детского и семейного чтения (Пролетарская 8)' || libraryField.value === 'CDSCH') {
+            ageField.style.display = 'block';
+            ageField.setAttribute('required', 'required');
+            ageField.removeAttribute('disabled');
+        } else {
+            ageField.style.display = 'none';
+            ageField.removeAttribute('required');
+            ageField.setAttribute('disabled', 'disabled');
+        }
     }
-    toggleAgeField();
+     toggleAgeField();
     libraryField.addEventListener('change', toggleAgeField);
-  });
-   document.getElementById('bookform').addEventListener('submit', function(e) {
-    if (libraryField.value === 'Центр детского и семейного чтения (Пролетарская 8)' && (ageField.value !== 'Начальные классы' && ageField.value !== 'Старшие классы')) {
-      e.preventDefault();
-      alert('Пожалуйста, выберите возрастную группу в поле возраста.');
-    }
-  });
+     document.getElementById('id_bookform').addEventListener('submit', function(event) {
+        var libraryValue = libraryField.value;
+        var ageText = ageField.options[ageField.selectedIndex].text;
+         if ((libraryValue === 'Центр детского и семейного чтения (Пролетарская 8)' || libraryValue === 'CDSCH') && (ageText !== 'Начальные классы' && ageText !== 'Старшие классы')) {
+            event.preventDefault();
+            alert('Заполните поле "Возрастная группа"');
+            ageField.value = initialAgeValue;
+        }
+    });
+});
 </script>
 
 <script>
