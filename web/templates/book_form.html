@@ -31,12 +31,12 @@
                                   </div>
                                 <div class="md-form">
                                     <span>Выбор библиотеки</span>
-                                    {% crispy_field bform.library 'class' 'form-control select-input' 'placeholder' '' %}
+                                    {% crispy_field bform.library 'class' 'form-control select-input' 'placeholder' '' 'id' 'id_library'%}
                                 </div>
 
-                                <div class="md-form">
-                                    <span>Выбор возраста</span>
-                                    {% crispy_field bform.age 'class' 'form-control select-input' 'placeholder' '' required %}
+                                <div class="md-form" id="age-block">
+                                    <span>Выбор возрастной группы</span>
+                                    {% crispy_field bform.age 'class' 'form-control select-input' 'placeholder' '' 'id' 'id_age' required %}
                                 </div>
 
                                 <div class="md-form">

@@ -1,7 +1,7 @@
 from django import forms
-from .models import *
 from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 
+from web.models import Book, Question, Feedback, Bookrequest, ServiceDop
 
 
 class BookForm(forms.ModelForm):

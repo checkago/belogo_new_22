@@ -95,21 +95,23 @@
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="{% static 'js/modules/accordion-extended.min.js' %}"></script>
 
-<script>
+ <script>
 var libraryField;
 var ageField;
 var initialAgeValue;
+var ageBlock;
  document.addEventListener('DOMContentLoaded', function() {
     libraryField = document.getElementById('id_library');
     ageField = document.getElementById('id_age');
     initialAgeValue = ageField.value;
+    ageBlock = document.getElementById('age-block');
      function toggleAgeField() {
         if (libraryField.value === 'Центр детского и семейного чтения (Пролетарская 8)' || libraryField.value === 'CDSCH') {
-            ageField.style.display = 'block';
+            ageBlock.style.display = 'block';
             ageField.setAttribute('required', 'required');
             ageField.removeAttribute('disabled');
         } else {
-            ageField.style.display = 'none';
+            ageBlock.style.display = 'none';
             ageField.removeAttribute('required');
             ageField.setAttribute('disabled', 'disabled');
         }
@@ -119,7 +121,7 @@ var initialAgeValue;
      document.getElementById('id_bookform').addEventListener('submit', function(event) {
         var libraryValue = libraryField.value;
         var ageText = ageField.options[ageField.selectedIndex].text;
-         if ((libraryValue === 'Центр детского и семейного чтения (Пролетарская 8)' || libraryValue === 'CDSCH') && (ageText !== 'Начальные классы' && ageText !== 'Старшие классы')) {
+         if ((libraryValue === 'Центр детского и семейного чтения (Пролетарская 8)' || libraryValue === 'CDSCH') && (ageText !== 'Дошкольники' && ageText !== 'Начальные классы' && ageText !== 'Старшие классы')) {
             event.preventDefault();
             alert('Заполните поле "Возрастная группа"');
             ageField.value = initialAgeValue;

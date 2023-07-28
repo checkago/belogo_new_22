@@ -217,6 +217,7 @@ class Book(models.Model, EmailSignalMixin):
     B2 = 'Библиотека №2 (Саввино)'
     B4 = 'Библиотека №4 (Павлино)'
     B3 = 'Библиотека №3 (Кучино)'
+    CHILD = 'Дошкольники'
     YOUNG = 'Начальные классы'
     OLD = 'Старшие классы'
 
@@ -229,6 +230,7 @@ class Book(models.Model, EmailSignalMixin):
         (B3, 'Библиотека №3 (Кучино)'),
     )
     AGE_CHOICES = (
+        (CHILD, 'Дошкольники'),
         (YOUNG, 'Начальные классы'),
         (OLD, 'Старшие классы')
     )
