@@ -228,6 +228,7 @@ class Book(models.Model, EmailSignalMixin):
     SC10 = 'Школа №10'
     SC14 = 'Школа №14'
     SC15 = 'Школа №15'
+    PR = 'Прочие'
 
     BIB_CHOICES = (
         (IKC, 'Информационно-культурный центр (Пролетарская 8)'),
@@ -250,7 +251,8 @@ class Book(models.Model, EmailSignalMixin):
         (SC7, 'Школа №7'),
         (SC10, 'Школа №10'),
         (SC14, 'Школа №14'),
-        (SC15, 'Школа №15')
+        (SC15, 'Школа №15'),
+        (PR, 'Прочие')
     )
 
 

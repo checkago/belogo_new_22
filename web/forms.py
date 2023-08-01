@@ -13,7 +13,7 @@ class BookForm(forms.ModelForm):
 
     class Meta:
         model = Book
-        fields = ('library', 'age', 'fio', 'bilet', 'phone', 'email', 'comment')
+        fields = ('library', 'age', 'school', 'fio', 'bilet', 'phone', 'email', 'comment')
 
 
 class QuestionForm(forms.ModelForm):
