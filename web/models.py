@@ -220,6 +220,14 @@ class Book(models.Model, EmailSignalMixin):
     CHILD = 'Дошкольники'
     YOUNG = 'Начальные классы'
     OLD = 'Старшие классы'
+    G1 = 'Гимназия №1'
+    G2 = 'Гимназия №2'
+    G11 = 'Гимназия №11'
+    SC5 = 'Школа №5'
+    SC7 = 'Школа №7'
+    SC10 = 'Школа №10'
+    SC14 = 'Школа №14'
+    SC15 = 'Школа №15'
 
     BIB_CHOICES = (
         (IKC, 'Информационно-культурный центр (Пролетарская 8)'),
@@ -234,10 +242,21 @@ class Book(models.Model, EmailSignalMixin):
         (YOUNG, 'Начальные классы'),
         (OLD, 'Старшие классы')
     )
+    SCHOOL_CHOICES = (
+        (G1, 'Гимназия №1'),
+        (G2, 'Гимназия №2'),
+        (G11, 'Гимназия №11'),
+        (SC5, 'Школа №5'),
+        (SC7, 'Школа №7'),
+        (SC10, 'Школа №10'),
+        (SC14, 'Школа №14'),
+        (SC15, 'Школа №15')
+    )
 
 
     library = models.CharField(max_length=150, choices=BIB_CHOICES, verbose_name='Выбор Библиотеки')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, verbose_name='Выбор возраста')
+    school = models.CharField(max_length=50, choices=SCHOOL_CHOICES, blank=True, verbose_name='Выбор школы/гимназии')
     datetime = models.DateTimeField(auto_now=True, verbose_name='Дата')
     fio = models.CharField(max_length=200, verbose_name='ФИО')
     bilet = models.CharField(max_length=18, verbose_name='№ читательского билета', blank=True)

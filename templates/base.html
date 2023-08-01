@@ -95,33 +95,55 @@
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="{% static 'js/modules/accordion-extended.min.js' %}"></script>
 
- <script>
+<script>
 var libraryField;
 var ageField;
+var schoolField;
 var initialAgeValue;
 var ageBlock;
- document.addEventListener('DOMContentLoaded', function() {
+var schoolBlock;
+document.addEventListener('DOMContentLoaded', function() {
     libraryField = document.getElementById('id_library');
     ageField = document.getElementById('id_age');
+    schoolField = document.getElementById('id_school');
     initialAgeValue = ageField.value;
     ageBlock = document.getElementById('age-block');
-     function toggleAgeField() {
+    schoolBlock = document.getElementById('school-block');
+    function toggleAgeField() {
         if (libraryField.value === 'Центр детского и семейного чтения (Пролетарская 8)' || libraryField.value === 'CDSCH') {
             ageBlock.style.display = 'block';
             ageField.setAttribute('required', 'required');
             ageField.removeAttribute('disabled');
+            schoolField.style.display = 'block';
+            schoolField.setAttribute('required', 'required');
+            schoolField.removeAttribute('disabled');
         } else {
             ageBlock.style.display = 'none';
             ageField.removeAttribute('required');
             ageField.setAttribute('disabled', 'disabled');
+            schoolBlock.style.display = 'none';
+            schoolField.removeAttribute('required');
+            schoolField.setAttribute('disabled', 'disabled');
         }
     }
-     toggleAgeField();
+    function toggleSchoolField() {
+        if (ageField.value === 'Начальные классы' || ageField.value === 'Старшие классы' || libraryField.value === '') {
+            schoolBlock.style.display = 'block';
+            schoolField.setAttribute('required', 'required');
+            schoolField.removeAttribute('disabled');
+        } else {
+            schoolBlock.style.display = 'none';
+            schoolField.removeAttribute('required');
+            schoolField.setAttribute('disabled', 'disabled');
+        }
+    }
+    toggleAgeField();
     libraryField.addEventListener('change', toggleAgeField);
-     document.getElementById('id_bookform').addEventListener('submit', function(event) {
+    ageField.addEventListener('change', toggleSchoolField);
+    document.getElementById('id_bookform').addEventListener('submit', function(event) {
         var libraryValue = libraryField.value;
         var ageText = ageField.options[ageField.selectedIndex].text;
-         if ((libraryValue === 'Центр детского и семейного чтения (Пролетарская 8)' || libraryValue === 'CDSCH') && (ageText !== 'Дошкольники' && ageText !== 'Начальные классы' && ageText !== 'Старшие классы')) {
+        if ((libraryValue === 'Центр детского и семейного чтения (Пролетарская 8)' || libraryValue === 'CDSCH') && (ageText !== 'Дошкольники' && ageText !== 'Начальные классы' && ageText !== 'Старшие классы')) {
             event.preventDefault();
             alert('Заполните поле "Возрастная группа"');
             ageField.value = initialAgeValue;
