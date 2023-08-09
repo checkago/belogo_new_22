@@ -612,18 +612,6 @@ class Week(models.Model):
         return self.name
 
 
-@receiver(pre_save)
-def update_active_field(sender, instance, **kwargs):
-    if sender.__name__ == 'Week' or sender.__name__ == 'WeekCDSCH' or sender.__name__ == 'WeekBER' or sender.__name__ == 'WeekF2'\
-            or sender.__name__ == 'WeekF3' or sender.__name__ == 'WeekF4':
-        today = timezone.now().date()
-        if instance.start_date and instance.end_date:
-            if instance.start_date <= today <= instance.end_date:
-                instance.active = True
-            else:
-                instance.active = False
-
-
 class Day(models.Model):
     name = models.CharField(max_length=15, verbose_name='День недели')
     date = models.DateField(verbose_name='Дата', blank=True, null=True)
@@ -670,16 +658,6 @@ class WeekCDSCH(models.Model):
         return self.name
 
 
-@receiver(pre_save, sender=Week)
-def update_active_field(sender, instance, **kwargs):
-    today = timezone.now().date()
-    if instance.start_date and instance.end_date:
-        if instance.start_date <= today <= instance.end_date:
-            instance.active = True
-        else:
-            instance.active = False
-
-
 class DayCDSCH(models.Model):
     name = models.CharField(max_length=15, verbose_name='День недели')
     date = models.DateField(verbose_name='Дата', blank=True, null=True)
@@ -694,7 +672,8 @@ class DayCDSCH(models.Model):
 
 
 class EventyCDSCH(models.Model):
-    day = models.ForeignKey(DayCDSCH, on_delete=models.CASCADE, null=True, verbose_name='День недели', related_name='events')
+    day = models.ForeignKey(DayCDSCH, on_delete=models.CASCADE, null=True, verbose_name='День недели',
+                            related_name='events')
     name = models.CharField(max_length=150, blank=True, verbose_name='Название')
     start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
     end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
@@ -725,17 +704,6 @@ class WeekBER(models.Model):
 
     def __str__(self):
         return self.name
-
-
-@receiver(pre_save, sender=Week)
-def update_active_field(sender, instance, **kwargs):
-    today = timezone.now().date()
-    if instance.start_date and instance.end_date:
-        if instance.start_date <= today <= instance.end_date:
-            instance.active = True
-        else:
-            instance.active = False
-
 
 class DayBER(models.Model):
     name = models.CharField(max_length=15, verbose_name='День недели')
@@ -783,15 +751,6 @@ class WeekF2(models.Model):
     def __str__(self):
         return self.name
 
-
-@receiver(pre_save, sender=Week)
-def update_active_field(sender, instance, **kwargs):
-    today = timezone.now().date()
-    if instance.start_date and instance.end_date:
-        if instance.start_date <= today <= instance.end_date:
-            instance.active = True
-        else:
-            instance.active = False
 
 
 class DayF2(models.Model):
@@ -841,16 +800,6 @@ class WeekF3(models.Model):
         return self.name
 
 
-@receiver(pre_save, sender=Week)
-def update_active_field(sender, instance, **kwargs):
-    today = timezone.now().date()
-    if instance.start_date and instance.end_date:
-        if instance.start_date <= today <= instance.end_date:
-            instance.active = True
-        else:
-            instance.active = False
-
-
 class DayF3(models.Model):
     name = models.CharField(max_length=15, verbose_name='День недели')
     date = models.DateField(verbose_name='Дата', blank=True, null=True)
@@ -898,16 +847,6 @@ class WeekF4(models.Model):
         return self.name
 
 
-@receiver(pre_save, sender=Week)
-def update_active_field(sender, instance, **kwargs):
-    today = timezone.now().date()
-    if instance.start_date and instance.end_date:
-        if instance.start_date <= today <= instance.end_date:
-            instance.active = True
-        else:
-            instance.active = False
-
-
 class DayF4(models.Model):
     name = models.CharField(max_length=15, verbose_name='День недели')
     date = models.DateField(verbose_name='Дата', blank=True, null=True)
@@ -933,6 +872,7 @@ class EventyF4(models.Model):
 
     def __str__(self):
         return self.name
+
 
 
 

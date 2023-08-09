@@ -14,6 +14,8 @@ import os
 import environ
 from pathlib import Path
 
+from celery.schedules import crontab
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -178,6 +180,26 @@ DATABASES = {
         'PORT': env("POSTGRES_PORT"),
         'CONN_MAX_AGE': 60 * 10,  # 10 minutes
     }
+}
+
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+CELERY_BROKER_URL = 'redis://redis:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+CELERY_BEAT_SCHEDULE = {
+    'update_active_field': {
+        'task': 'web.tasks.update_active_field',
+        'schedule': crontab(hour=0, minute=0),  # Запускать каждый день в полночь
+    },
 }
 
 
