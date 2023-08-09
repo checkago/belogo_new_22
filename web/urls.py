@@ -4,8 +4,7 @@ from django.conf import settings
 from django.urls import path
 from . import views
 from .views import BibliotekiAPIView, NewsAPIView, EventAPIView, SheduleAPIView, ServiceAPIView, CinemaDayListView, \
-    WeekView, WeekPrintView, WeekCDSCHView, WeekCDSCHPrintView, WeekBERView, WeekBERPrintView, WeekF2View, \
-    WeekF2PrintView, WeekF3View, WeekF3PrintView, WeekF4View, WeekF4PrintView
+    WeekView, WeekCDSCHView, WeekBERView, WeekF2View, WeekF3View, WeekF4View
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -47,17 +46,11 @@ urlpatterns = [
     # """Schedules"""
 
     path('schedule_ikc/', WeekView.as_view(), name='schedule_ikc'),
-    path('schedule_ikc_print/', WeekPrintView.as_view(), name='schedule_ikc_print'),
     path('schedule_cdsch/', WeekCDSCHView.as_view(), name='schedule_cdsch'),
-    path('schedule_cdsch_print/', WeekCDSCHPrintView.as_view(), name='schedule_cdsch_print'),
     path('schedule_ber/', WeekBERView.as_view(), name='schedule_ber'),
-    path('schedule_ber_print/', WeekBERPrintView.as_view(), name='schedule_ber_print'),
     path('schedule_f2/', WeekF2View.as_view(), name='schedule_ber'),
-    path('schedule_f2_print/', WeekF2PrintView.as_view(), name='schedule_f2_print'),
     path('schedule_f3/', WeekF3View.as_view(), name='schedule_ber'),
-    path('schedule_f3_print/', WeekF3PrintView.as_view(), name='schedule_f3_print'),
     path('schedule_f4/', WeekF4View.as_view(), name='schedule_ber'),
-    path('schedule_f4_print/', WeekF4PrintView.as_view(), name='schedule_f4_print'),
 
 
     # """API List Views"""

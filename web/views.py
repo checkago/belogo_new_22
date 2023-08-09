@@ -540,35 +540,9 @@ class WeekView(ListView):
         return context
 
 
-class WeekPrintView(ListView):
-    model = Week
-    template_name = 'schedule_ikc_print.html'
-
-    def get_queryset(self):
-        return Week.objects.filter(active=True)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['weekdays'] = Day.objects.filter(week__active=True)
-        return context
-
-
 class WeekCDSCHView(ListView):
     model = WeekCDSCH
     template_name = 'schedule_cdsch.html'
-
-    def get_queryset(self):
-        return WeekCDSCH.objects.filter(active=True)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['weekdays'] = DayCDSCH.objects.filter(week__active=True)
-        return context
-
-
-class WeekCDSCHPrintView(ListView):
-    model = WeekCDSCH
-    template_name = 'schedule_cdsch_print.html'
 
     def get_queryset(self):
         return WeekCDSCH.objects.filter(active=True)
@@ -592,35 +566,9 @@ class WeekBERView(ListView):
         return context
 
 
-class WeekBERPrintView(ListView):
-    model = WeekBER
-    template_name = 'schedule_ber_print.html'
-
-    def get_queryset(self):
-        return WeekBER.objects.filter(active=True)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['weekdays'] = DayBER.objects.filter(week__active=True)
-        return context
-
-
 class WeekF2View(ListView):
     model = WeekF2
     template_name = 'schedule_f2.html'
-
-    def get_queryset(self):
-        return WeekF2.objects.filter(active=True)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['weekdays'] = DayF2.objects.filter(week__active=True)
-        return context
-
-
-class WeekF2PrintView(ListView):
-    model = WeekF2
-    template_name = 'schedule_f2_print.html'
 
     def get_queryset(self):
         return WeekF2.objects.filter(active=True)
@@ -644,19 +592,6 @@ class WeekF3View(ListView):
         return context
 
 
-class WeekF3PrintView(ListView):
-    model = WeekF3
-    template_name = 'schedule_f3_print.html'
-
-    def get_queryset(self):
-        return WeekF3.objects.filter(active=True)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['weekdays'] = DayF3.objects.filter(week__active=True)
-        return context
-
-
 class WeekF4View(ListView):
     model = WeekF4
     template_name = 'schedule_f4.html'
@@ -669,18 +604,6 @@ class WeekF4View(ListView):
         context['weekdays'] = DayF4.objects.filter(week__active=True)
         return context
 
-
-class WeekF4PrintView(ListView):
-    model = WeekF4
-    template_name = 'schedule_f4_print.html'
-
-    def get_queryset(self):
-        return WeekF4.objects.filter(active=True)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['weekdays'] = DayF4.objects.filter(week__active=True)
-        return context
 
 
 

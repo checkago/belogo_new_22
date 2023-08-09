@@ -20,9 +20,22 @@
         margin-top: 0.3rem !important;
         margin-bottom: 0.3rem !important;
     }
+
+    @media (max-width: 768px) {
+        /* Применить новый размер шрифта только на мобильных устройствах (col) */
+        .font-fluid {
+            font-size: 2vw !important;
+        }
+    }
+    @media (max-width: 540px) {
+        /* Применить новый размер шрифта только на мобильных устройствах (col) */
+        .font-fluid {
+            font-size: 3vw !important;
+        }
+    }
 </style>
 <div class="container mt-3">
-     <a href="{% url 'schedule_ikc_print' %}" target="_blank" class="btn btn-outline-danger">Печать расписания</a>
+    <button id="save-button" class="btn btn-yellow text-dark">Сохранить расписание</button>
     <div id="schedule" class="container">
         <div class="row justify-content-center align-items-center">
             <div class="col-md-6 pt-2"><img class="img-fluid" src="{% static 'img/shedule_empty.webp' %}"></div>
@@ -39,8 +52,8 @@
                             <div class="card-body">
                                 {% for event in weekday.events.all %}
                                 <div class="row">
-                                    <div class="col-md-3"><p class="font-weight-bold font-fluid ri pp mbp">{{ event.start_time|time:"H:i" }} - {{ event.end_time|time:"H:i" }}</p></div>
-                                    <div class="col-md-9"><p class="font-weight-bold font-fluid ri pp mbp">{{ event.name }}</p></div>
+                                    <div class="col-md-3 col-3 col-sm-3 col-lg-3"><p class="font-weight-bold font-fluid ri pp mbp">{{ event.start_time|time:"H:i" }} - {{ event.end_time|time:"H:i" }}</p></div>
+                                    <div class="col-md-9 col-9 col-sm-9 col-lg-9"><p class="font-weight-bold font-fluid ri pp mbp">{{ event.name }}</p></div>
                                 </div>
                                     <hr class="hrp">
                                 {% endfor %}
@@ -55,6 +68,20 @@
         </div>
     </div>
 </div>
+<script>
+// Получение кнопки по ее идентификатору и добавление обработчика событий
+document.getElementById("save-button").addEventListener("click", function() {
+  // Код для сохранения фрагмента HTML-страницы в виде изображения
+  html2canvas(document.querySelector("#schedule")).then(canvas => {
+    var link = document.createElement("a");
+    document.body.appendChild(link);
+    link.download = "Системное расписание ИКЦ.jpg";
+    link.href = canvas.toDataURL();
+    link.target = '_blank';
+    link.click();
+  });
+});
 
+</script>
 {% include '_footer.html' %}
 {% endblock %}
