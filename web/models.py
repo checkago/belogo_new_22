@@ -612,14 +612,16 @@ class Week(models.Model):
         return self.name
 
 
-@receiver(pre_save, sender=Week)
+@receiver(pre_save)
 def update_active_field(sender, instance, **kwargs):
-    today = timezone.now().date()
-    if instance.start_date and instance.end_date:
-        if instance.start_date <= today <= instance.end_date:
-            instance.active = True
-        else:
-            instance.active = False
+    if sender.__name__ == 'Week' or sender.__name__ == 'WeekCDSCH' or sender.__name__ == 'WeekBER' or sender.__name__ == 'WeekF2'\
+            or sender.__name__ == 'WeekF3' or sender.__name__ == 'WeekF4':
+        today = timezone.now().date()
+        if instance.start_date and instance.end_date:
+            if instance.start_date <= today <= instance.end_date:
+                instance.active = True
+            else:
+                instance.active = False
 
 
 class Day(models.Model):

@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.contrib import admin
 from django import forms
 from mptt.admin import DraggableMPTTAdmin
@@ -374,37 +376,83 @@ class DayF4Inline(NestedTabularInline):
     extra = 1
 
 
+def dublicate_week(modeladmin, request, queryset):
+    for week in queryset:
+        # Получение последнего номера недели
+        last_week = week.__class__.objects.order_by('-name').first()
+        if last_week:
+            last_week_number = int(last_week.name.split()[-1])  # Получить последнее число из названия
+            new_week_number = last_week_number + 1
+        else:
+            new_week_number = 1
+
+        # Вычисление новых дат начала и конца недели
+        start_date = week.start_date + timedelta(days=7)
+        end_date = week.end_date + timedelta(days=7)
+
+        # Создание копии объекта Week
+        new_week = week.__class__.objects.create(
+            name=f"Неделя {new_week_number}",  # Изменить название нового объекта
+            start_date=start_date,
+            end_date=end_date,
+            active=week.active
+        )
+
+        # Создание копий связанных объектов Day
+        for day in week.days.all():
+            new_day = day.__class__.objects.create(
+                name=day.name,
+                date=day.date + timedelta(days=7),
+                week=new_week
+            )
+
+            # Создание копий связанных объектов Eventy
+            for event in day.events.all():
+                event.__class__.objects.create(
+                    day=new_day,
+                    name=event.name,
+                    start_time=event.start_time,
+                    end_time=event.end_time
+                )
+
+dublicate_week.short_description = "Дублировать объект"
 class WeekAdmin(NestedModelAdmin):
+    actions = [dublicate_week]
     inlines = [DayInline]
     exclude = ['active']
     list_display = ('name', 'start_date', 'end_date', 'active')
 
 
 class WeekCDSCHAdmin(NestedModelAdmin):
+    actions = [dublicate_week]
     inlines = [DayCDSCHInline]
     exclude = ['active']
     list_display = ('name', 'start_date', 'end_date', 'active')
 
 
 class WeekBERAdmin(NestedModelAdmin):
+    actions = [dublicate_week]
     inlines = [DayBERInline]
     exclude = ['active']
     list_display = ('name', 'start_date', 'end_date', 'active')
 
 
 class WeekF2Admin(NestedModelAdmin):
+    actions = [dublicate_week]
     inlines = [DayF2Inline]
     exclude = ['active']
     list_display = ('name', 'start_date', 'end_date', 'active')
 
 
 class WeekF3Admin(NestedModelAdmin):
+    actions = [dublicate_week]
     inlines = [DayF3Inline]
     exclude = ['active']
     list_display = ('name', 'start_date', 'end_date', 'active')
 
 
 class WeekF4Admin(NestedModelAdmin):
+    actions = [dublicate_week]
     inlines = [DayF4Inline]
     exclude = ['active']
     list_display = ('name', 'start_date', 'end_date', 'active')
