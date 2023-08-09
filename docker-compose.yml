@@ -23,6 +23,11 @@ services:
     depends_on:
       - postgresdb
 
+  redis-server:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
   nginx:
     build:
       context: ./docker/nginx

@@ -186,15 +186,15 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://0.0.0.0:6379",
+        "LOCATION": "redis://redis-server:6379",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     }
 }
 
-CELERY_BROKER_URL = 'redis://0.0.0.0:6379/0'
-CELERY_RESULT_BACKEND = 'redis://0.0.0.0:6379/0'
+CELERY_BROKER_URL = 'redis://redis-server:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis-server:6379/0'
 CELERY_BEAT_SCHEDULE = {
     'update_active_field': {
         'task': 'web.tasks.update_active_field',
