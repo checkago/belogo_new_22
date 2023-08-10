@@ -12,7 +12,7 @@ from web.models import ImageGallery, Category, News, Document, Raiting, Bibliote
     TermsOfUse, Vacancy, VeteranVOV, VeteranTruda, LeningradResident, HeroMemoryBook, Anons, Shedule, Event, Cinema, \
     Position, Employers, Service_dop, Service, Book, Question, Feedback, Bookrequest, ServiceDop, Partner, Library, \
     Author, LibraryCategory, Week, Eventy, Day, WeekCDSCH, WeekBER, WeekF2, WeekF3, WeekF4, DayCDSCH, \
-    EventyCDSCH, EventyBER, DayBER, EventyF2, DayF2, EventyF3, DayF3, EventyF4, DayF4
+    EventyCDSCH, EventyBER, DayBER, EventyF2, DayF2, EventyF3, DayF3, EventyF4, DayF4, Movie, CinemaDay, CinemaWeek
 
 
 class ImageGalleryInline(GenericTabularInline):
@@ -297,6 +297,17 @@ class LibraryCategoryAdmin(admin.ModelAdmin):
     list_display = ('name',)
 
 
+class MovieInline(NestedTabularInline):
+    model = Movie
+    extra = 1
+
+
+class CinemaDayInline(NestedTabularInline):
+    model = CinemaDay
+    inlines = [MovieInline]
+    extra = 1
+
+
 class EventyInline(NestedTabularInline):
     model = Eventy
     extra = 1
@@ -403,6 +414,15 @@ def dublicate_week(modeladmin, request, queryset):
                 )
 
 dublicate_week.short_description = "Дублировать объект"
+
+
+class CinemaWeekAdmin(NestedModelAdmin):
+
+    inlines = [CinemaDayInline]
+    exclude = ['active']
+    list_display = ('name', 'start_date', 'end_date', 'active')
+
+
 class WeekAdmin(NestedModelAdmin):
     actions = [dublicate_week]
     inlines = [DayInline]
@@ -445,7 +465,7 @@ class WeekF4Admin(NestedModelAdmin):
     list_display = ('name', 'start_date', 'end_date', 'active')
 
 
-
+admin.site.register(CinemaWeek, CinemaWeekAdmin)
 admin.site.register(Week, WeekAdmin)
 admin.site.register(WeekCDSCH, WeekCDSCHAdmin)
 admin.site.register(WeekBER, WeekBERAdmin)

@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'belogo_new.wsgi.application'
 ADMIN_REORDER = (
     # First group
     {'app': 'web', 'label': 'Расписания',
-     'models': ('web.CinemaDay',
+     'models': ('web.CinemaWeek',
                 'web.Week',
                 'web.WeekCDSCH',
                 'web.WeekBER',

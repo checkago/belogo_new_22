@@ -561,6 +561,51 @@ class LibraryCategory(models.Model):
         return self.name
 
 
+class CinemaWeek(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Наименование')
+    start_date = models.DateField(verbose_name='Первое число недели', blank=True, null=True)
+    end_date = models.DateField(verbose_name='Последнее число недели', blank=True, null=True)
+    active = models.BooleanField(default=False, verbose_name='Текущая рабочая неделя')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for cinemaday in self.cinemadays.filter(cinemaweek=self):
+            for movie in cinemaday.movies.all():
+                movie.save()
+
+    class Meta:
+        verbose_name = 'Неделя киносеансов'
+        verbose_name_plural = 'Недели киносеансов'
+
+    def __str__(self):
+        return self.name
+
+
+class CinemaDay(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День киносеанса')
+    date = models.DateField(verbose_name='Дата')
+    cinemaweek = models.ForeignKey(CinemaWeek, on_delete=models.CASCADE, verbose_name='Неделя киноафишы', related_name='cinemadays')
+
+    class Meta:
+        verbose_name = 'День сеансов'
+        verbose_name_plural = 'Дни сеансов'
+
+    def __str__(self):
+        return self.name
+
+
+class Movie(models.Model):
+    cinemaday = models.ForeignKey(CinemaDay, on_delete=models.CASCADE, null=True, verbose_name='День недели', related_name='movies')
+    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
+
+    class Meta:
+        verbose_name = 'Фильм'
+        verbose_name_plural = 'Фильмы'
+
+    def __str__(self):
+        return self.name
+
 """Schedules"""
 
 
