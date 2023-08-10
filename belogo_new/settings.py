@@ -163,24 +163,24 @@ ADMIN_REORDER = (
      },
 )
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("POSTGRES_DB"),
-        'USER': env("POSTGRES_USER"),
-        'PASSWORD': env("POSTGRES_PASSWORD"),
-        'HOST': env("POSTGRES_HOST"),
-        'PORT': env("POSTGRES_PORT"),
-        'CONN_MAX_AGE': 60 * 10,  # 10 minutes
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': env("POSTGRES_DB"),
+#         'USER': env("POSTGRES_USER"),
+#         'PASSWORD': env("POSTGRES_PASSWORD"),
+#         'HOST': env("POSTGRES_HOST"),
+#         'PORT': env("POSTGRES_PORT"),
+#         'CONN_MAX_AGE': 60 * 10,  # 10 minutes
+#     }
+# }
 
 
 CACHES = {
@@ -245,17 +245,16 @@ FIRST_DAY_OF_WEEK = 1
 DATE_INPUT_FORMATS = ['%d.%m.%Y', ]
 TIME_INPUT_FORMATS = ['%H:%M', ]
 
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
 STATIC_URL = '/static/'
-STATIC_ROOT = '/static'
+STATIC_ROOT = BASE_DIR / 'static'
 
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+STATICFILES_DIRS = (
+    (BASE_DIR / 'static_dev'),
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
