@@ -416,8 +416,48 @@ def dublicate_week(modeladmin, request, queryset):
 dublicate_week.short_description = "Дублировать объект"
 
 
-class CinemaWeekAdmin(NestedModelAdmin):
+def duplicate_cinema_week(modeladmin, request, queryset):
+    for cinema_week in queryset:
+        # Получение последнего номера недели
+        last_cinema_week = cinema_week.__class__.objects.order_by('-name').first()
+        if last_cinema_week:
+            last_cinema_week_number = int(last_cinema_week.name.split()[-1])  # Получить последнее число из названия
+            new_cinema_week_number = last_cinema_week_number + 1
+        else:
+            new_cinema_week_number = 1
 
+        # Вычисление новых дат начала и конца недели
+        start_date = cinema_week.start_date + timedelta(days=7)
+        end_date = cinema_week.end_date + timedelta(days=7)
+
+        # Создание копии объекта CinemaWeek
+        new_cinema_week = cinema_week.__class__.objects.create(
+            name=f"Неделя {new_cinema_week_number}",  # Изменить название нового объекта
+            start_date=start_date,
+            end_date=end_date,
+            active=cinema_week.active
+        )
+
+        # Создание копий связанных объектов CinemaDay и Movie
+        for cinema_day in cinema_week.cinemadays.all():
+            new_cinema_day = cinema_day.__class__.objects.create(
+                name=cinema_day.name,
+                date=cinema_day.date + timedelta(days=7),
+                cinemaweek=new_cinema_week
+            )
+
+            for movie in cinema_day.movies.all():
+                movie.__class__.objects.create(
+                    cinemaday=new_cinema_day,
+                    name=movie.name,
+                    start_time=movie.start_time
+                )
+
+duplicate_cinema_week.short_description = "Дублировать объект"
+
+
+class CinemaWeekAdmin(NestedModelAdmin):
+    actions = [duplicate_cinema_week]
     inlines = [CinemaDayInline]
     exclude = ['active']
     list_display = ('name', 'start_date', 'end_date', 'active')
