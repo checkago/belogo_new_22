@@ -1,6 +1,6 @@
 from django.utils.html import strip_tags
 from rest_framework import serializers
-from web.models import Biblioteka, News, Event, Shedule, Service, FreeService, Movi, CinemaDay
+from web.models import Biblioteka, News, Event, Shedule, Service, FreeService
 
 
 class BibliotekaSerializer(serializers.ModelSerializer):
@@ -53,19 +53,3 @@ class BookFormSerializer(serializers.Serializer):
     email = serializers.EmailField()
     comment = serializers.CharField()
 
-
-class MoviSerializer(serializers.ModelSerializer):
-    start_time = serializers.TimeField(format='%H:%M')
-    end_time = serializers.TimeField(format='%H:%M')
-
-    class Meta:
-        model = Movi
-        fields = ('id', 'name', 'start_time')
-
-
-class CinemaDaySerializer(serializers.ModelSerializer):
-    movies_list = MoviSerializer(many=True)
-
-    class Meta:
-        model = CinemaDay
-        fields = ('id', 'name', 'date', 'movies_list')

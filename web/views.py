@@ -15,7 +15,7 @@ import datetime
 from django.views import generic
 from .serializers import (BibliotekaSerializer, NewsSerializer,
                           EventSerializer, SheduleSerializer,
-                          ServiceSerializer, BookFormSerializer, MoviSerializer)
+                          ServiceSerializer, BookFormSerializer)
 
 
 def getRoutes(request):
@@ -475,58 +475,6 @@ def createBook(request):
     )
     serializer = BookFormSerializer(book, many=False)
     return Response(serializer.data)
-
-
-class MoviListView(generics.ListAPIView):
-    queryset = Movi.objects.order_by('id')
-    serializer_class = MoviSerializer
-
-
-class CinemaDayListView(APIView):
-    def get(self, request):
-        cinema_days = CinemaDay.objects.prefetch_related(
-            Prefetch('movies_list', queryset=Movi.objects.all().order_by('start_time'))
-        ).all()
-        data = []
-        for day in cinema_days:
-            movies = []
-            for movi in day.movies_list.all():
-                movies.append({
-                    'id': movi.id,
-                    'name': movi.name,
-                    'start_time': movi.start_time.strftime('%H:%M'),
-                })
-            data.append({
-                'id': day.id,
-                'name': day.name,
-                'date': day.date.strftime('%d.%m.%Y'),
-                'movies_list': movies
-            })
-        return Response(data)
-
-
-def cinema_day_list(request):
-    cinema_days = CinemaDay.objects.prefetch_related(
-        Prefetch('movies_list', queryset=Movi.objects.all().order_by('start_time'))
-    ).all()
-    data = []
-    for day in cinema_days:
-        movies = []
-        for movi in day.movies_list.all():
-            movies.append({
-                'name': movi.name,
-                'start_time': movi.start_time.strftime('%H:%M'),
-            })
-        data.append({
-            'id': day.id,
-            'name': day.name,
-            'date': day.date.strftime('%d.%m.%Y'),
-            'movies_list': movies
-        })
-    context = {
-        'cinema_days': data
-    }
-    return render(request, 'movies_ikc.html', context)
 
 
 class WeekView(ListView):

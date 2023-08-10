@@ -561,34 +561,6 @@ class LibraryCategory(models.Model):
         return self.name
 
 
-class Movi(models.Model):
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey('content_type', 'object_id')
-    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
-    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
-
-    class Meta:
-        verbose_name = 'Фильм'
-        verbose_name_plural = 'Фильмы'
-
-    def __str__(self):
-        return self.name
-
-
-class CinemaDay(models.Model):
-    name = models.CharField(max_length=15, verbose_name='День киносеанса')
-    date = models.DateField(verbose_name='Дата')
-    movies_list = GenericRelation(Movi, related_query_name='cinema_day_movies')
-
-    class Meta:
-        verbose_name = 'Афиша кинозала'
-        verbose_name_plural = 'Афиша кинозала'
-
-    def __str__(self):
-        return self.name
-
-
 """Schedules"""
 
 

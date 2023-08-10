@@ -3,7 +3,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 from django.urls import path
 from . import views
-from .views import BibliotekiAPIView, NewsAPIView, EventAPIView, SheduleAPIView, ServiceAPIView, CinemaDayListView, \
+from .views import BibliotekiAPIView, NewsAPIView, EventAPIView, SheduleAPIView, ServiceAPIView, \
     WeekView, WeekCDSCHView, WeekBERView, WeekF2View, WeekF3View, WeekF4View
 
 urlpatterns = [
@@ -40,7 +40,6 @@ urlpatterns = [
     path('events/', views.events, name='events'),
     path('events-archive/', views.events_archive, name='events_archive'),
     path('shedules/', views.shedules, name='shedules'),
-    path('cinema_ikc/', views.cinema_day_list, name='cinema_ikc'),
 
 
     # """Schedules"""
@@ -61,7 +60,6 @@ urlpatterns = [
     path('api/v1/shedule_list/', SheduleAPIView.as_view()),
     path('api/v1/services_list/', ServiceAPIView.as_view()),
     path('api/v1/book/create/', views.createBook),
-    path('api/v1/cinema_ikc/', CinemaDayListView.as_view()),
 ]
 
 if settings.MEDIA_ROOT:

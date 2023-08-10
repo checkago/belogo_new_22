@@ -8,20 +8,16 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from import_export.admin import ImportExportModelAdmin
 from nested_admin.nested import NestedModelAdmin, NestedTabularInline, NestedInlineModelAdmin
 
-from web.models import ImageGallery, Movi, Category, News, Document, Raiting, Biblioteka, FreeService, \
+from web.models import ImageGallery, Category, News, Document, Raiting, Biblioteka, FreeService, \
     TermsOfUse, Vacancy, VeteranVOV, VeteranTruda, LeningradResident, HeroMemoryBook, Anons, Shedule, Event, Cinema, \
     Position, Employers, Service_dop, Service, Book, Question, Feedback, Bookrequest, ServiceDop, Partner, Library, \
-    Author, LibraryCategory, CinemaDay, Week, Eventy, Day, WeekCDSCH, WeekBER, WeekF2, WeekF3, WeekF4, DayCDSCH, \
+    Author, LibraryCategory, Week, Eventy, Day, WeekCDSCH, WeekBER, WeekF2, WeekF3, WeekF4, DayCDSCH, \
     EventyCDSCH, EventyBER, DayBER, EventyF2, DayF2, EventyF3, DayF3, EventyF4, DayF4
 
 
 class ImageGalleryInline(GenericTabularInline):
     model = ImageGallery
     readonly_fields = ('image_url',)
-
-
-class MoviInline(GenericTabularInline):
-    model = Movi
 
 
 class CategoryAdmin(DraggableMPTTAdmin):
@@ -301,15 +297,6 @@ class LibraryCategoryAdmin(admin.ModelAdmin):
     list_display = ('name',)
 
 
-class MoviAdmin(admin.ModelAdmin):
-    list_display = ('name',)
-
-
-class CinemaDayAdmin(admin.ModelAdmin):
-    inlines = [MoviInline]
-    list_display = ('name', 'id',)
-
-
 class EventyInline(NestedTabularInline):
     model = Eventy
     extra = 1
@@ -494,6 +481,5 @@ admin.site.register(Anons, AnonsAdmin)
 admin.site.register(Library, LibraryAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(LibraryCategory, LibraryCategoryAdmin)
-admin.site.register(Movi, MoviAdmin)
-admin.site.register(CinemaDay, CinemaDayAdmin)
+
 
