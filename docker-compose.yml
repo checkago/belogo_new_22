@@ -32,10 +32,10 @@ services:
 
   worker:
     build:
-      context: .
+      context: ./belogo_new_22
     hostname: worker
     entrypoint: celery
-    command: -A belogo_new.celery.app worker -l INFO
+    command: celery worker --app=belogo_new --loglevel=info
     volumes:
       - ./service:/service
     links:
@@ -54,22 +54,17 @@ services:
       - web
 
   flower:
-    image: mher/flower
-    build:
-      context: .
-    hostname: flower
-    entrypoint: celery
-    command: -A belogo_new.celery.app flower
-    volumes:
-      - ./service:/service
-    links:
-      - redis-server
-      - worker
-    depends_on:
-      - redis-server
-      - worker
+    build: ./belogo_new_22
+    command:  flower -A belogo_new --port=5555 --broker=redis://redis-server:6379/0
     ports:
-      - "5555:5555"
+      - 5555:5555
+    environment:
+      - CELERY_BROKER=redis://redis-server:6379/0
+      - CELERY_BACKEND=redis://redis-server:6379/0
+    depends_on:
+      - web
+      - redis-server
+      - worker
 
 
 
