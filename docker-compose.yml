@@ -54,20 +54,12 @@ services:
       - web
 
   flower:
-    build:
-      context: .
-    hostname: flower
-    entrypoint: celery
-    command: -A belogo_new.celery flower
-    volumes:
-      - ./service:/service
-    links:
-      - redis-server
-    depends_on:
-      - redis-server
-      - worker
+    image: mher/flower
+    environment:
+      - CELERY_BROKER_URL=redis://redis-server:6379/0
+      - FLOWER_PORT=8888
     ports:
-      - "5555:5555"
+      - 8888:8888
 
 
 
