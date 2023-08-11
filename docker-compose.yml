@@ -35,7 +35,7 @@ services:
       context: .
     hostname: worker
     entrypoint: celery
-    command: celery -A belogo_new worker -l INFO
+    command: -A belogo_new.celery worker -l INFO
     volumes:
       - ./service:/service
     links:
@@ -58,7 +58,7 @@ services:
       context: .
     hostname: flower
     entrypoint: celery
-    command: celery -A belogo_new flower
+    command: -A belogo_new.celery flower
     volumes:
       - ./service:/service
     links:
