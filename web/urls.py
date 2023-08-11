@@ -62,8 +62,8 @@ urlpatterns = [
     path('api/v1/book/create/', views.createBook),
 ]
 
-if settings.MEDIA_ROOT:
+if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += staticfiles_urlpatterns()
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 handler404 = "web.views.page_not_found_view"
