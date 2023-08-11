@@ -65,6 +65,7 @@ services:
       - redis-server
     depends_on:
       - redis-server
+      - worker
     ports:
       - "5555:5555"
 
