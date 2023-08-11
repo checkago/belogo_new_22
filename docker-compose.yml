@@ -53,4 +53,21 @@ services:
     depends_on:
       - web
 
+  flower:
+    build:
+      context: .
+    hostname: flower
+    entrypoint: celery
+    command: -A belogo_new.flower_app flower
+    volumes:
+      - ./service:/service
+    links:
+      - redis-server
+    depends_on:
+      - redis-server
+    ports:
+      - "5555:5555"
+
+
+
 
