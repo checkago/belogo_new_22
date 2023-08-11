@@ -193,16 +193,10 @@ CACHES = {
     }
 }
 
-CELERY_BROKER_URL = 'redis://redis-server:6379/0'
-CELERY_RESULT_BACKEND = 'redis://redis-server:6379/0'
+CELERY_BROKER_URL = 'redis://redis-server:6379'
+CELERY_RESULT_BACKEND = 'redis://redis-server:6379'
 CELERY_TIMEZONE = 'Europe/Moscow'
 CELERY_TASK_TRACK_STARTED = True
-CELERY_BEAT_SCHEDULE = {
-    'update_active_field': {
-        'task': 'web.tasks.update_active_field',
-        'schedule': crontab(hour=0, minute=1),  # Запускать каждый день в полночь
-    },
-}
 
 
 # Password validation
