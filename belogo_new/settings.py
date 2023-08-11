@@ -242,10 +242,7 @@ DATE_INPUT_FORMATS = ['%d.%m.%Y', ]
 TIME_INPUT_FORMATS = ['%H:%M', ]
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static/'),
-)
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = BASE_DIR / 'static'
 
 # Media files
 MEDIA_URL = '/media/'
