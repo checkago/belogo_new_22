@@ -58,7 +58,7 @@ services:
       context: .
     hostname: flower
     entrypoint: celery
-    command: -A belogo_new.flower_app flower
+    command: -A belogo_new.celery_app flower
     volumes:
       - ./service:/service
     links:
