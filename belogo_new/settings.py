@@ -14,7 +14,7 @@ import os
 import environ
 from pathlib import Path
 
-from belogo_new.celery import crontab
+from datetime import time
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -200,7 +200,7 @@ CELERY_TASK_TRACK_STARTED = True
 CELERY_BEAT_SCHEDULE = {
     'update-cinema-week-status': {
         'task': 'web.tasks.update_cinema_week_status',
-        'schedule': crontab(minute=1, hour=0),
+        'schedule': time(minute=1, hour=0),
     },
 }
 
