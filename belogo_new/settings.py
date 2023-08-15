@@ -199,7 +199,7 @@ CELERY_TIMEZONE = 'Europe/Moscow'
 CELERY_TASK_TRACK_STARTED = True
 CELERY_BEAT_SCHEDULE = {
     'update-cinema-week-status': {
-        'task': 'belogo_new.tasks.update_cinema_week_status',
+        'task': 'web.tasks.update_cinema_week_status',
         'schedule': time(minute=1, hour=0),
     },
 }
