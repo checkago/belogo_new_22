@@ -197,6 +197,7 @@ CELERY_BROKER_URL = 'redis://redis-server:6379'
 CELERY_RESULT_BACKEND = 'redis://redis-server:6379'
 CELERY_TIMEZONE = 'Europe/Moscow'
 CELERY_TASK_TRACK_STARTED = True
+CELERY_IMPORTS = ['web.tasks']
 CELERY_BEAT_SCHEDULE = {
     'update-cinema-week-status': {
         'task': 'web.tasks.update_cinema_week_status',
