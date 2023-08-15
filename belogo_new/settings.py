@@ -14,7 +14,7 @@ import os
 import environ
 from pathlib import Path
 
-from celery.schedules import crontab
+from belogo_new.celery import crontab
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -197,7 +197,12 @@ CELERY_BROKER_URL = 'redis://redis-server:6379'
 CELERY_RESULT_BACKEND = 'redis://redis-server:6379'
 CELERY_TIMEZONE = 'Europe/Moscow'
 CELERY_TASK_TRACK_STARTED = True
-
+CELERY_BEAT_SCHEDULE = {
+    'update-cinema-week-status': {
+        'task': 'web.tasks.update_cinema_week_status',
+        'schedule': crontab(minute=1, hour=0),
+    },
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
