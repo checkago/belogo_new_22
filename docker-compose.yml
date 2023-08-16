@@ -37,7 +37,7 @@ services:
     hostname: redis-server
 
   celery:
-    build: ./belego_new_22
+    build: .
     command: celery -A belogo_new worker -l info
     volumes:
       - ./belego_new_22/:/usr/src/app/
@@ -45,7 +45,7 @@ services:
       - redis-server
 
   celery-beat:
-    build: ./belogo_new_22
+    build: .
     command: celery -A belogo_new beat -l info
     volumes:
       - ./belogo_new/:/usr/src/app/
@@ -53,7 +53,7 @@ services:
       - redis-server
 
   flower:
-    build: ./belogo_new_22
+    build: .
     hostname: flower
     command: celery -A belogo_new flower
     volumes:
