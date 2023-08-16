@@ -39,14 +39,14 @@ services:
   worker:
     build:
       context: .
-    command: celery -A belogo_new worker -l info
+    command: -A belogo_new.celery worker -l info
     depends_on:
       - redis-server
 
   celery-beat:
     build:
       context: .
-    command: celery -A belogo_new beat -l info
+    command: -A belogo_new.celery beat -l info
     depends_on:
       - redis-server
 
