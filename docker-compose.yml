@@ -36,7 +36,7 @@ services:
     image: redis:alpine
     hostname: redis-server
 
-  celery:
+  worker:
     build:
       context: .
     command: celery -A belogo_new worker -l info
