@@ -23,27 +23,6 @@ services:
     depends_on:
       - postgresdb
 
-  redis-server:
-    image: redis:latest
-    hostname: redis-server
-    ports:
-      - "6379:6379"
-
-
-  worker:
-    build:
-      context: .
-    hostname: worker
-    entrypoint: celery
-    command: -A belogo_new.celery worker -l info -B
-    volumes:
-      - ./service:/service
-    links:
-      - redis-server
-    depends_on:
-      - redis-server
-
-
   nginx:
     build:
       context: ./docker/nginx
@@ -52,21 +31,35 @@ services:
     - "80:80"
     depends_on:
       - web
-      - flower
 
-  flower:
-    build:
-      context: .
-    hostname: flower
-    entrypoint: celery
-    command: -A belogo_new.celery flower
+  redis-server:
+    image: redis:alpine
+    hostname: redis-server
+
+  celery:
+    build: ./belego_new_22
+    command: celery -A belogo_new worker -l info
     volumes:
-      - ./service:/service
-    links:
-      - redis-server
+      - ./belego_new_22/:/usr/src/app/
     depends_on:
       - redis-server
-      - worker
+
+  celery-beat:
+    build: ./belogo_new_22
+    command: celery -A belogo_new beat -l info
+    volumes:
+      - ./belogo_new/:/usr/src/app/
+    depends_on:
+      - redis-server
+
+  flower:
+    build: ./belogo_new_22
+    hostname: flower
+    command: celery -A belogo_new flower
+    volumes:
+      - ./service:/service
+    depends_on:
+      - redis-server
     ports:
       - "5555:5555"
 
