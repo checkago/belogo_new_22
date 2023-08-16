@@ -50,16 +50,6 @@ services:
     depends_on:
       - redis-server
 
-  flower:
-    build:
-      context: .
-    hostname: flower
-    command: celery -A belogo_new flower
-    depends_on:
-      - redis-server
-    ports:
-      - "5555:5555"
-
 
 
 
