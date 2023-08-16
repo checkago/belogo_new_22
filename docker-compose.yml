@@ -39,14 +39,26 @@ services:
   worker:
     build:
       context: .
+    hostname: worker
+    entrypoint: celery
     command: -A belogo_new.celery worker -l info
+    volumes:
+      - ./service:/service
+    links:
+      - redis-server
     depends_on:
       - redis-server
 
   celery-beat:
     build:
       context: .
+    hostname: worker
+    entrypoint: celery
     command: -A belogo_new.celery beat -l info
+    volumes:
+      - ./service:/service
+    links:
+      - redis-server
     depends_on:
       - redis-server
 
