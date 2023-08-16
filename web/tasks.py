@@ -1,9 +1,9 @@
 from celery import shared_task
 from django.utils import timezone
-from .models import CinemaWeek
 
 @shared_task
 def update_cinema_week_status():
+    from .models import CinemaWeek
     current_date = timezone.now().date()
     cinema_weeks = CinemaWeek.objects.all()
 
