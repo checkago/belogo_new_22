@@ -40,8 +40,6 @@ services:
     build:
       context: .
     command: celery -A belogo_new worker -l info
-    volumes:
-      - ./belego_new_22/:/usr/src/app/
     depends_on:
       - redis-server
 
@@ -49,8 +47,6 @@ services:
     build:
       context: .
     command: celery -A belogo_new beat -l info
-    volumes:
-      - ./belogo_new/:/usr/src/app/
     depends_on:
       - redis-server
 
@@ -59,8 +55,6 @@ services:
       context: .
     hostname: flower
     command: celery -A belogo_new flower
-    volumes:
-      - ./service:/service
     depends_on:
       - redis-server
     ports:
