@@ -18,12 +18,12 @@
             <div class="container-fluid mb-5">
                 <div class="row">
                     <div class="col-md-12 col-lg-4">
-                        <h3 class="text-white text-center wow fadeIn"><strong class="font-weight-bold">Системное расписание</strong></h3>
-                        <a href="{% url 'shedules' %}"><img class="img-fluid z-depth-3 rounded" src="{{ shedule.image.url }}" /></a>
+                        <h3 class="text-white text-center wow fadeIn"><strong class="font-weight-bold">Системные расписания</strong></h3>
+                        <a href="{% url 'shedules' %}"><img class="img-fluid z-depth-3 rounded" src="{% static 'img/schedule_images/ikc.webp' %}" /></a>
                     </div>
                     <div class="col-md-12 col-lg-4">
                         <h3 class="text-white text-center wow fadeIn"><strong class="font-weight-bold">Кинозал</strong></h3>
-                        <a href="#" data-toggle="modal" data-target="#event_cinema"><img class="img-fluid z-depth-3 rounded" src="{{ cinema.image.url }}" /></a>
+                        <a href="{% url 'cinema' %}"><img class="img-fluid z-depth-3 rounded" src="{% static 'img/schedule_images/cinema_index.webp'%}" /></a>
                     </div>
                     <div class="col-md-12 col-lg-4">
                         <h3 class="text-white text-center wow fadeIn"><strong class="font-weight-bold">Событие недели</strong></h3>

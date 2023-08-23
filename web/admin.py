@@ -393,7 +393,7 @@ def dublicate_week(modeladmin, request, queryset):
             name=f"Неделя {new_week_number}",  # Изменить название нового объекта
             start_date=start_date,
             end_date=end_date,
-            active=week.active
+            active=False
         )
 
         # Создание копий связанных объектов Day
@@ -435,7 +435,7 @@ def duplicate_cinema_week(modeladmin, request, queryset):
             name=f"Неделя {new_cinema_week_number}",  # Изменить название нового объекта
             start_date=start_date,
             end_date=end_date,
-            active=cinema_week.active
+            active=False
         )
 
         # Создание копий связанных объектов CinemaDay и Movie

@@ -3,8 +3,9 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 from django.urls import path
 from . import views
-from .views import BibliotekiAPIView, NewsAPIView, EventAPIView, SheduleAPIView, ServiceAPIView, \
-    WeekView, WeekCDSCHView, WeekBERView, WeekF2View, WeekF3View, WeekF4View
+from .views import BibliotekiAPIView, NewsAPIView, EventAPIView, ServiceAPIView, \
+    WeekView, WeekCDSCHView, WeekBERView, WeekF2View, WeekF3View, WeekF4View, CinemaWeekView, ActiveWeeksAPIView, \
+    WeekAPIView, CinemaWeekAPIView
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -47,9 +48,10 @@ urlpatterns = [
     path('schedule_ikc/', WeekView.as_view(), name='schedule_ikc'),
     path('schedule_cdsch/', WeekCDSCHView.as_view(), name='schedule_cdsch'),
     path('schedule_ber/', WeekBERView.as_view(), name='schedule_ber'),
-    path('schedule_f2/', WeekF2View.as_view(), name='schedule_ber'),
-    path('schedule_f3/', WeekF3View.as_view(), name='schedule_ber'),
-    path('schedule_f4/', WeekF4View.as_view(), name='schedule_ber'),
+    path('schedule_f2/', WeekF2View.as_view(), name='schedule_f2'),
+    path('schedule_f3/', WeekF3View.as_view(), name='schedule_f3'),
+    path('schedule_f4/', WeekF4View.as_view(), name='schedule_f4'),
+    path('cinema/', CinemaWeekView.as_view(), name='cinema'),
 
 
     # """API List Views"""
@@ -57,7 +59,9 @@ urlpatterns = [
     path('api/v1/biblioteka_list/', BibliotekiAPIView.as_view()),
     path('api/v1/news_list/', NewsAPIView.as_view()),
     path('api/v1/event_list/', EventAPIView.as_view()),
-    path('api/v1/shedule_list/', SheduleAPIView.as_view()),
+    path('api/v1/active-weeks/', ActiveWeeksAPIView.as_view(), name='active-weeks'),
+    path('api/v1/week/', WeekAPIView.as_view(), name='week'),
+    path('api/v1/cinema-week/', CinemaWeekAPIView.as_view(), name='cinema-week'),
     path('api/v1/services_list/', ServiceAPIView.as_view()),
     path('api/v1/book/create/', views.createBook),
 ]

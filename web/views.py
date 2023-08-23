@@ -1,4 +1,3 @@
-from django.db.models import Prefetch
 from django.views.generic import ListView
 from rest_framework import generics
 from django.shortcuts import render, get_object_or_404, redirect
@@ -14,8 +13,9 @@ from .models import *
 import datetime
 from django.views import generic
 from .serializers import (BibliotekaSerializer, NewsSerializer,
-                          EventSerializer, SheduleSerializer,
-                          ServiceSerializer, BookFormSerializer)
+                          EventySerializer, ServiceSerializer, BookFormSerializer, ActiveWeeksSerializer,
+                          WeekSerializer, EventSerializer, WeekCDSCHSerializer, WeekBERSerializer, WeekF2Serializer,
+                          WeekF3Serializer, WeekF4Serializer, CinemaWeekSerializer)
 
 
 def getRoutes(request):
@@ -36,7 +36,6 @@ def index(request):
     anonsy = Anons.objects.all().order_by('-id')
     categories = Category.objects.prefetch_related('news')
     category = Category.objects.all()
-    shedule = Shedule.objects.first()
     event = Event.objects.latest('id')
     cinema = Cinema.objects.latest('id')
     partners1 = Partner.objects.filter(block='1').order_by('?')
@@ -46,8 +45,8 @@ def index(request):
 
     return render(request, 'index.html', {'title': title, 'description': description, 'anonsy': anonsy, 'news': news,
                                           'category': category, 'categories': categories, 'news_list': news_list,
-                                          'partners1': partners1, 'partners2': partners2, 'shedule': shedule,
-                                          'event': event, 'cinema': cinema})
+                                          'partners1': partners1, 'partners2': partners2, 'event': event,
+                                          'cinema': cinema})
 
 
 def biblioteki(request):
@@ -416,8 +415,16 @@ def events(request):
 def shedules(request):
     title = 'Системные расписания'
     description = 'Системные библиотек "ЦБС им. А. Белого"'
-    shedules = Shedule.objects.order_by('id')
-    return render(request, 'shedules.html', {'title': title, 'description': description, 'shedules': shedules})
+    schedule_ikc = Week.objects.filter(active=True)
+    schedule_cdsch = WeekCDSCH.objects.filter(active=True)
+    schedule_ber = WeekBER.objects.filter(active=True)
+    schedule_f2 = WeekF2.objects.filter(active=True)
+    schedule_f3 = WeekF3.objects.filter(active=True)
+    schedule_f4 = WeekF4.objects.filter(active=True)
+    return render(request, 'shedules.html', {'title': title, 'description': description, 'schedule_ikc': schedule_ikc,
+                                             'schedule_cdsch':schedule_cdsch, 'schedule_ber':schedule_ber,
+                                             'schedule_f2':schedule_f2, 'schedule_f3':schedule_f3,
+                                             'schedule_f4':schedule_f4})
 
 
 def events_archive(request):
@@ -452,11 +459,6 @@ class EventAPIView(generics.ListAPIView):
     serializer_class = EventSerializer
 
 
-class SheduleAPIView(generics.ListAPIView):
-    queryset = Shedule.objects.all()
-    serializer_class = SheduleSerializer
-
-
 class ServiceAPIView(generics.ListAPIView):
     queryset = Service.objects.order_by('id')
     serializer_class = ServiceSerializer
@@ -475,6 +477,17 @@ def createBook(request):
     )
     serializer = BookFormSerializer(book, many=False)
     return Response(serializer.data)
+
+
+class CinemaWeekView(ListView):
+    model = CinemaWeek
+    template_name = 'cinema.html'  # Replace 'week.html' with the actual template name
+    def get_queryset(self):
+        return CinemaWeek.objects.filter(active=True)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cinemadays'] = CinemaDay.objects.filter(cinemaweek__active=True)
+        return context
 
 
 class WeekView(ListView):
@@ -551,6 +564,66 @@ class WeekF4View(ListView):
         context = super().get_context_data(**kwargs)
         context['weekdays'] = DayF4.objects.filter(week__active=True)
         return context
+
+
+class ActiveWeeksAPIView(APIView):
+    def get(self, request):
+        weeks = []
+
+        # Блок 1
+        queryset_week = Week.objects.filter(active=True)
+        title_week = Week._meta.verbose_name
+        serializer_week = WeekSerializer(queryset_week, many=True)
+        weeks.extend(self.add_title(serializer_week.data, title_week))
+
+        # Блок 2
+        queryset_week_cdsch = WeekCDSCH.objects.filter(active=True)
+        title_week_cdsch = WeekCDSCH._meta.verbose_name
+        serializer_week_cdsch = WeekCDSCHSerializer(queryset_week_cdsch, many=True)
+        weeks.extend(self.add_title(serializer_week_cdsch.data, title_week_cdsch))
+
+        # Блок 3
+        queryset_week_ber = WeekBER.objects.filter(active=True)
+        title_week_ber = WeekBER._meta.verbose_name
+        serializer_week_ber = WeekBERSerializer(queryset_week_ber, many=True)
+        weeks.extend(self.add_title(serializer_week_ber.data, title_week_ber))
+
+        # Блок 4
+        queryset_week_f2 = WeekF2.objects.filter(active=True)
+        title_week_f2 = WeekF2._meta.verbose_name
+        serializer_week_f2 = WeekF2Serializer(queryset_week_f2, many=True)
+        weeks.extend(self.add_title(serializer_week_f2.data, title_week_f2))
+
+        # Блок 5
+        queryset_week_f3 = WeekF3.objects.filter(active=True)
+        title_week_f3 = WeekF3._meta.verbose_name
+        serializer_week_f3 = WeekF3Serializer(queryset_week_f3, many=True)
+        weeks.extend(self.add_title(serializer_week_f3.data, title_week_f3))
+
+        # Блок 6
+        queryset_week_f4 = WeekF4.objects.filter(active=True)
+        title_week_f4 = WeekF4._meta.verbose_name
+        serializer_week_f4 = WeekF4Serializer(queryset_week_f4, many=True)
+        weeks.extend(self.add_title(serializer_week_f4.data, title_week_f4))
+
+        return Response(weeks)
+
+    def add_title(self, data, title):
+        return [{'title': title, 'data': data}]
+
+
+class WeekAPIView(APIView):
+    def get(self, request):
+        queryset = Week.objects.filter(active=True)
+        serializer = WeekSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class CinemaWeekAPIView(APIView):
+    def get(self, request):
+        queryset = CinemaWeek.objects.filter(active=True)
+        serializer = CinemaWeekSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 

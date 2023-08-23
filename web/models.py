@@ -649,8 +649,8 @@ class Eventy(models.Model):
     end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
 
     class Meta:
-        verbose_name = 'Мероприятие'
-        verbose_name_plural = 'Мероприятия'
+        verbose_name = 'Мероприятие ИКЦ'
+        verbose_name_plural = 'Мероприятия ИКЦ'
 
     def __str__(self):
         return self.name
