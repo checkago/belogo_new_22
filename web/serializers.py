@@ -47,7 +47,7 @@ class BookFormSerializer(serializers.Serializer):
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ('id', 'name', 'library', 'date', 'description', 'image', 'is_past_due')
+        fields = ('id', 'name', 'library', 'date', 'description', 'image')
 
 
 class EventySerializer(serializers.ModelSerializer):

@@ -25,6 +25,7 @@
         <nav class='mt-2' aria-label="breadcrumb sm-hidden" id="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'shedules' %}">Системные расписания</a></li>
             <li class="breadcrumb-item active" aria-current="page">Библиотечный информационно-культурный центр</li>
           </ol>
         </nav>
@@ -57,8 +58,10 @@
                     {% endfor %}
                     </div>
 
-            <div class="row">
-                <img class="ml-auto" src="{% static 'img/shedule_empty_bottom.webp' %}">
+            <div class="text-right">
+                <h5 class="font-fluid font-weight-bold">Рабочие дни: {{ biblioteka.workdays }}{% if biblioteka.workdays_alt %} | {{ biblioteka.workdays_alt }}{% endif %}</h5>
+                <h6 class="font-fluid font-weight-bold">Время работы: {{ biblioteka.worktime }}{% if biblioteka.worktime_alt %} | {{ biblioteka.worktime_alt }}{% endif %}</h6>
+                <h6 class="font-fluid font-weight-bold">Выходной: {{ biblioteka.weekend }}</h6>
             </div>
         </div>
     </div>
