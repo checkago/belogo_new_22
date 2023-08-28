@@ -35,23 +35,23 @@
         </div>
 
         <div class="row">
-                {% for day in cinema_days %}
-                    <div class="col-md-4">
-                        <div class="card card-cascade wider mb-2">
-                            <div class="card-header"><h4 class="font-weight-bold text-danger">{{ day.name }} - {{ day.date }}</h4></div>
-                            <div class="card-body">
-                                {% for movi in day.movies_list %}
-                                <div class="row">
-                                    <div class="col-md-3"><p class="font-weight-bold font-fluid ri pp mbp">{{ movi.start_time }}</p></div>
-                                    <div class="col-md-9"><p class="font-weight-bold font-fluid ri pp mbp">{{ movi.name }}</p></div>
-                                </div>
-                                    <hr class="hrp">
-                                {% endfor %}
-                            </div>
+        {% for day in cinema_days %}
+            <div class="mb-3">
+                <div class="card card-cascade wider mb-2">
+                    <div class="card-header"><h4 class="font-weight-bold text-danger">{{ day.name }} - {{ day.date }}</h4></div>
+                    <div class="card-body">
+                        {% for movi in day.movies_list %}
+                        <div class="row">
+                            <div class="col-md-3"><p class="font-weight-bold font-fluid ri pp mbp">{{ movi.start_time }}</p></div>
+                            <div class="col-md-9"><p class="font-weight-bold font-fluid ri pp mbp">{{ movi.name }}</p></div>
                         </div>
+                            <hr class="hrp">
+                        {% endfor %}
                     </div>
-                {% endfor %}
                 </div>
+            </div>
+        {% endfor %}
+        </div>
 
         <div class="row">
             <img class="ml-auto" src="{% static 'img/shedule_empty_bottom.webp' %}">
