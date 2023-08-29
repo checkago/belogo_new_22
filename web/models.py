@@ -574,8 +574,8 @@ class CinemaWeek(models.Model):
                 movie.save()
 
     class Meta:
-        verbose_name = 'Неделя киносеансов'
-        verbose_name_plural = 'Недели киносеансов'
+        verbose_name = 'Неделя киносеансов ИКЦ'
+        verbose_name_plural = 'Недели киносеансов ИКЦ'
 
     def __str__(self):
         return self.name
@@ -587,8 +587,8 @@ class CinemaDay(models.Model):
     cinemaweek = models.ForeignKey(CinemaWeek, on_delete=models.CASCADE, verbose_name='Неделя киноафишы', related_name='cinemadays')
 
     class Meta:
-        verbose_name = 'День сеансов'
-        verbose_name_plural = 'Дни сеансов'
+        verbose_name = 'День сеансов ИКЦ'
+        verbose_name_plural = 'Дни сеансов ИКЦ'
 
     def __str__(self):
         return self.name
@@ -600,8 +600,8 @@ class Movie(models.Model):
     start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
 
     class Meta:
-        verbose_name = 'Фильм'
-        verbose_name_plural = 'Фильмы'
+        verbose_name = 'Фильм ИКЦ'
+        verbose_name_plural = 'Фильмы ИКЦ'
 
     def __str__(self):
         return self.name
