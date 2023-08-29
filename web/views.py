@@ -634,5 +634,12 @@ class CinemaWeekAPIView(APIView):
         return Response(serializer.data)
 
 
+def mobile(request):
+    title = 'Скачать мобильное приложение'
+    description = 'Мобильное приложение МБУК "ЦБС им. А. Белого" - БИБЛИОТЕКА В КАРМАНЕ'
+    return render(request, 'mobile.html', {'title': title, 'description': description})
+
+
+
 
 
