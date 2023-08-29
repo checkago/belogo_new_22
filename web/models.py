@@ -622,8 +622,8 @@ class Week(models.Model):
                 event.save()
 
     class Meta:
-        verbose_name = 'Расписание ИКЦ'
-        verbose_name_plural = 'Расписание ИКЦ'
+        verbose_name = 'Неделя ИКЦ'
+        verbose_name_plural = 'Неделя ИКЦ'
 
     def __str__(self):
         return self.name
@@ -636,7 +636,7 @@ class Day(models.Model):
 
     class Meta:
         verbose_name = 'Рабочий день ИКЦ'
-        verbose_name_plural = 'Расписание ИКЦ'
+        verbose_name_plural = 'Рабочий день ИКЦ'
 
     def __str__(self):
         return self.name
@@ -668,8 +668,8 @@ class WeekCDSCH(models.Model):
                 event.save()
 
     class Meta:
-        verbose_name = 'Расписание ЦДСЧ'
-        verbose_name_plural = 'Расписание ЦДСЧ'
+        verbose_name = 'Неделя ЦДСЧ'
+        verbose_name_plural = 'Неделя ЦДСЧ'
 
     def __str__(self):
         return self.name
@@ -682,7 +682,7 @@ class DayCDSCH(models.Model):
 
     class Meta:
         verbose_name = 'Рабочий день ЦДСЧ'
-        verbose_name_plural = 'Расписание ЦДСЧ'
+        verbose_name_plural = 'Рабочий день ЦДСЧ'
 
     def __str__(self):
         return self.name
@@ -696,8 +696,8 @@ class EventyCDSCH(models.Model):
     end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
 
     class Meta:
-        verbose_name = 'Мероприятие'
-        verbose_name_plural = 'Мероприятия'
+        verbose_name = 'Мероприятие ЦДСЧ'
+        verbose_name_plural = 'Мероприятия ЦДСЧ'
 
     def __str__(self):
         return self.name
@@ -716,8 +716,8 @@ class WeekBER(models.Model):
                 event.save()
 
     class Meta:
-        verbose_name = 'Расписание БЭР'
-        verbose_name_plural = 'Расписание БЭР'
+        verbose_name = 'Неделя БЭР'
+        verbose_name_plural = 'Неделя БЭР'
 
     def __str__(self):
         return self.name
@@ -729,7 +729,7 @@ class DayBER(models.Model):
 
     class Meta:
         verbose_name = 'Рабочий день БЭР'
-        verbose_name_plural = 'Расписание БЭР'
+        verbose_name_plural = 'Рабочий день БЭР'
 
     def __str__(self):
         return self.name
@@ -742,8 +742,8 @@ class EventyBER(models.Model):
     end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
 
     class Meta:
-        verbose_name = 'Мероприятие'
-        verbose_name_plural = 'Мероприятия'
+        verbose_name = 'Мероприятие БЭР'
+        verbose_name_plural = 'Мероприятия БЭР'
 
     def __str__(self):
         return self.name
@@ -762,8 +762,8 @@ class WeekF2(models.Model):
                 event.save()
 
     class Meta:
-        verbose_name = 'Расписание Ф2'
-        verbose_name_plural = 'Расписание Ф2'
+        verbose_name = 'Неделя Ф2'
+        verbose_name_plural = 'Неделя Ф2'
 
     def __str__(self):
         return self.name
@@ -777,7 +777,7 @@ class DayF2(models.Model):
 
     class Meta:
         verbose_name = 'Рабочий день Ф2'
-        verbose_name_plural = 'Расписание Ф2'
+        verbose_name_plural = 'Рабочие дни Ф2'
 
     def __str__(self):
         return self.name
@@ -790,8 +790,8 @@ class EventyF2(models.Model):
     end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
 
     class Meta:
-        verbose_name = 'Мероприятие'
-        verbose_name_plural = 'Мероприятия'
+        verbose_name = 'Мероприятие Ф2'
+        verbose_name_plural = 'Мероприятия Ф2'
 
     def __str__(self):
         return self.name
@@ -810,8 +810,8 @@ class WeekF3(models.Model):
                 event.save()
 
     class Meta:
-        verbose_name = 'Расписание Ф3'
-        verbose_name_plural = 'Расписание Ф3'
+        verbose_name = 'Неделя Ф3'
+        verbose_name_plural = 'Неделя Ф3'
 
     def __str__(self):
         return self.name
@@ -824,7 +824,7 @@ class DayF3(models.Model):
 
     class Meta:
         verbose_name = 'Рабочий день Ф3'
-        verbose_name_plural = 'Расписание Ф3'
+        verbose_name_plural = 'Рабочий день Ф3'
 
     def __str__(self):
         return self.name
@@ -837,8 +837,8 @@ class EventyF3(models.Model):
     end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
 
     class Meta:
-        verbose_name = 'Мероприятие'
-        verbose_name_plural = 'Мероприятия'
+        verbose_name = 'Мероприятие Ф3'
+        verbose_name_plural = 'Мероприятия Ф3'
 
     def __str__(self):
         return self.name
@@ -857,8 +857,8 @@ class WeekF4(models.Model):
                 event.save()
 
     class Meta:
-        verbose_name = 'Расписание Ф4'
-        verbose_name_plural = 'Расписание Ф4'
+        verbose_name = 'Неделя Ф4'
+        verbose_name_plural = 'Неделя Ф4'
 
     def __str__(self):
         return self.name
@@ -871,7 +871,7 @@ class DayF4(models.Model):
 
     class Meta:
         verbose_name = 'Рабочий день Ф4'
-        verbose_name_plural = 'Расписание Ф4'
+        verbose_name_plural = 'Рабочий день Ф4'
 
     def __str__(self):
         return self.name
@@ -884,8 +884,8 @@ class EventyF4(models.Model):
     end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
 
     class Meta:
-        verbose_name = 'Мероприятие'
-        verbose_name_plural = 'Мероприятия'
+        verbose_name = 'Мероприятие Ф4'
+        verbose_name_plural = 'Мероприятия Ф4'
 
     def __str__(self):
         return self.name
