@@ -622,8 +622,8 @@ class Week(models.Model):
                 event.save()
 
     class Meta:
-        verbose_name = 'Неделя ИКЦ'
-        verbose_name_plural = 'Неделя ИКЦ'
+        verbose_name = 'Расписание ИКЦ'
+        verbose_name_plural = 'Расписания ИКЦ'
 
     def __str__(self):
         return self.name
@@ -668,8 +668,8 @@ class WeekCDSCH(models.Model):
                 event.save()
 
     class Meta:
-        verbose_name = 'Неделя ЦДСЧ'
-        verbose_name_plural = 'Неделя ЦДСЧ'
+        verbose_name = 'Расписание ЦДСЧ'
+        verbose_name_plural = 'Расписания ЦДСЧ'
 
     def __str__(self):
         return self.name
@@ -716,8 +716,8 @@ class WeekBER(models.Model):
                 event.save()
 
     class Meta:
-        verbose_name = 'Неделя БЭР'
-        verbose_name_plural = 'Неделя БЭР'
+        verbose_name = 'Расписание БЭР'
+        verbose_name_plural = 'Расписания БЭР'
 
     def __str__(self):
         return self.name
@@ -762,8 +762,8 @@ class WeekF2(models.Model):
                 event.save()
 
     class Meta:
-        verbose_name = 'Неделя Ф2'
-        verbose_name_plural = 'Неделя Ф2'
+        verbose_name = 'Расписание Ф2'
+        verbose_name_plural = 'Расписания Ф2'
 
     def __str__(self):
         return self.name
@@ -810,8 +810,8 @@ class WeekF3(models.Model):
                 event.save()
 
     class Meta:
-        verbose_name = 'Неделя Ф3'
-        verbose_name_plural = 'Неделя Ф3'
+        verbose_name = 'Расписание Ф3'
+        verbose_name_plural = 'Расписания Ф3'
 
     def __str__(self):
         return self.name
@@ -857,8 +857,8 @@ class WeekF4(models.Model):
                 event.save()
 
     class Meta:
-        verbose_name = 'Неделя Ф4'
-        verbose_name_plural = 'Неделя Ф4'
+        verbose_name = 'Расписание Ф4'
+        verbose_name_plural = 'Расписания Ф4'
 
     def __str__(self):
         return self.name
