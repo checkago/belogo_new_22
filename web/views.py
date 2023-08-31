@@ -500,6 +500,8 @@ class WeekView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['weekdays'] = Day.objects.filter(week__active=True)
+        context['start_date'] = self.get_queryset().first().start_date
+        context['end_date'] = self.get_queryset().first().end_date
         context['biblioteka'] = Biblioteka.objects.get(id=1)
         return context
 
@@ -514,6 +516,8 @@ class WeekCDSCHView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['weekdays'] = DayCDSCH.objects.filter(week__active=True)
+        context['start_date'] = self.get_queryset().first().start_date
+        context['end_date'] = self.get_queryset().first().end_date
         context['biblioteka'] = Biblioteka.objects.get(id=2)
         return context
 
@@ -528,6 +532,8 @@ class WeekBERView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['weekdays'] = DayBER.objects.filter(week__active=True)
+        context['start_date'] = self.get_queryset().first().start_date
+        context['end_date'] = self.get_queryset().first().end_date
         context['biblioteka'] = Biblioteka.objects.get(id=3)
         return context
 
@@ -542,6 +548,8 @@ class WeekF2View(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['weekdays'] = DayF2.objects.filter(week__active=True)
+        context['start_date'] = self.get_queryset().first().start_date
+        context['end_date'] = self.get_queryset().first().end_date
         context['biblioteka'] = Biblioteka.objects.get(id=4)
         return context
 
@@ -556,6 +564,8 @@ class WeekF3View(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['weekdays'] = DayF3.objects.filter(week__active=True)
+        context['start_date'] = self.get_queryset().first().start_date
+        context['end_date'] = self.get_queryset().first().end_date
         context['biblioteka'] = Biblioteka.objects.get(id=5)
         return context
 
@@ -570,6 +580,8 @@ class WeekF4View(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['weekdays'] = DayF4.objects.filter(week__active=True)
+        context['start_date'] = self.get_queryset().first().start_date
+        context['end_date'] = self.get_queryset().first().end_date
         context['biblioteka'] = Biblioteka.objects.get(id=6)
         return context
 

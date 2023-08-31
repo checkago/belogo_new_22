@@ -35,7 +35,8 @@
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-6 pt-2"><img class="img-fluid" src="{% static 'img/shedule_empty.webp' %}"></div>
                 <div class="col-md-6">
-                    <h5 class="font-weight-bold">Библиотечный информационно-культурный центр</h5>
+                    <h5 class="font-resposive font-weight-bold">Библиотечный информационно-культурный центр</h5>
+                    <h6 class="font-responsive font-weight-bold">{{ start_date }} - {{ end_date }}</h6>
                 </div>
             </div>
 
@@ -43,7 +44,7 @@
                     {% for weekday in weekdays %}
                         <div class="col-md-4">
                             <div class="card card-cascade wider mb-2">
-                                <div class="card-header"><h4 class="font-weight-bold text-danger">{{ weekday.name }} - {{ weekday.date|date:"d.m.y" }}</h4></div>
+                                <div class="card-header"><h4 class="font-responsive font-weight-bold text-danger">{{ weekday.name }} - {{ weekday.date|date:"d.m.y" }}</h4></div>
                                 <div class="card-body">
                                     {% for event in weekday.events.all %}
                                     <div class="row">
@@ -59,9 +60,9 @@
                     </div>
 
             <div class="text-right">
-                <h5 class="font-fluid font-weight-bold">Рабочие дни: {{ biblioteka.workdays }}{% if biblioteka.workdays_alt %} | {{ biblioteka.workdays_alt }}{% endif %}</h5>
-                <h6 class="font-fluid font-weight-bold">Время работы: {{ biblioteka.worktime }}{% if biblioteka.worktime_alt %} | {{ biblioteka.worktime_alt }}{% endif %}</h6>
-                <h6 class="font-fluid font-weight-bold">Выходной: {{ biblioteka.weekend }}</h6>
+                <h5 class="font-responsive font-weight-bold">Рабочие дни: {{ biblioteka.workdays }}{% if biblioteka.workdays_alt %} | {{ biblioteka.workdays_alt }}{% endif %}</h5>
+                <h6 class="font-responsive font-weight-bold">Время работы: {{ biblioteka.worktime }}{% if biblioteka.worktime_alt %} | {{ biblioteka.worktime_alt }}{% endif %}</h6>
+                <h6 class="font-responsive font-weight-bold">Выходной: {{ biblioteka.weekend }}</h6>
             </div>
         </div>
     </div>
