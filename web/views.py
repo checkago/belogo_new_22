@@ -693,6 +693,86 @@ class WeekCDSCHPrint(ListView):
         return context
 
 
+class WeekBERPrint(ListView):
+    model = WeekBER
+    template_name = 'schedule_ber.html'
+
+    def get_queryset(self):
+        active_week = WeekBER.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekBER.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekBER.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayBER.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=3)
+        return context
+
+
+class WeekF2Print(ListView):
+    model = WeekF2
+    template_name = 'schedule_f2.html'
+
+    def get_queryset(self):
+        active_week = WeekF2.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekF2.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekF2.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayF2.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=4)
+        return context
+
+
+class WeekF3Print(ListView):
+    model = WeekF3
+    template_name = 'schedule_f3.html'
+
+    def get_queryset(self):
+        active_week = WeekF3.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekF3.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekF3.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayF3.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=5)
+        return context
+
+
+class WeekF4Print(ListView):
+    model = WeekF4
+    template_name = 'schedule_f4.html'
+
+    def get_queryset(self):
+        active_week = WeekF4.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekF4.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekF4.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayF4.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=6)
+        return context
+
+
 
 
 
