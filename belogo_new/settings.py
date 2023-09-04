@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-qgj-94qz%*=o+4byxx%##qoy*wx$luxs0%_rp$#!i1_!*%)9jt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['biblioteka-belogo.ru', '213.141.153.187', '127.0.0.1']
+ALLOWED_HOSTS = ['biblioteka-belogo.ru', '213.141.153.187', '127.0.0.1', '192.168.88.111']
 
 env = environ.Env()
 environ.Env.read_env('.env')
@@ -195,6 +195,7 @@ CACHES = {
 CELERY_BROKER_URL = 'redis://redis-server:6379'
 CELERY_RESULT_BACKEND = 'redis://redis-server:6379'
 CELERY_TIMEZONE = 'Europe/Moscow'
+USE_TZ = True
 CELERY_TASK_TRACK_STARTED = True
 CELERY_IMPORTS = ['web.tasks']
 

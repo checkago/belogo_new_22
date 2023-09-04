@@ -467,7 +467,7 @@ class WeekAdmin(NestedModelAdmin):
     actions = [dublicate_week]
     inlines = [DayInline]
     exclude = ['active']
-    list_display = ('name', 'start_date', 'end_date', 'active')
+    list_display = ('id', 'name', 'start_date', 'end_date', 'active')
 
 
 class WeekCDSCHAdmin(NestedModelAdmin):

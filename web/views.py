@@ -7,6 +7,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.core.mail import EmailMessage
+from datetime import datetime, timedelta
 
 from .forms import *
 from .models import *
@@ -650,6 +651,46 @@ def mobile(request):
     title = 'Скачать мобильное приложение'
     description = 'Мобильное приложение МБУК "ЦБС им. А. Белого" - БИБЛИОТЕКА В КАРМАНЕ'
     return render(request, 'mobile.html', {'title': title, 'description': description})
+
+
+class WeekPrint(ListView):
+    model = Week
+    template_name = 'schedule_ikc.html'
+
+    def get_queryset(self):
+        active_week = Week.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return Week.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = Week.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = Day.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=1)
+        return context
+
+
+class WeekCDSCHPrint(ListView):
+    model = WeekCDSCH
+    template_name = 'schedule_cdsch.html'
+
+    def get_queryset(self):
+        active_week = WeekCDSCH.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekCDSCH.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekCDSCH.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayCDSCH.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=2)
+        return context
 
 
 

@@ -5,7 +5,7 @@ from django.urls import path
 from . import views
 from .views import BibliotekiAPIView, NewsAPIView, EventAPIView, ServiceAPIView, \
     WeekView, WeekCDSCHView, WeekBERView, WeekF2View, WeekF3View, WeekF4View, CinemaWeekView, ActiveWeeksAPIView, \
-    WeekAPIView, CinemaWeekAPIView
+    WeekAPIView, CinemaWeekAPIView, WeekPrint, WeekCDSCHPrint
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -47,7 +47,9 @@ urlpatterns = [
     # """Schedules"""
 
     path('schedule_ikc/', WeekView.as_view(), name='schedule_ikc'),
+    path('schedule-ikc-print/', WeekPrint.as_view(), name='schedule-ikc-print'),
     path('schedule_cdsch/', WeekCDSCHView.as_view(), name='schedule_cdsch'),
+    path('schedule-cdsch-print/', WeekCDSCHPrint.as_view(), name='schedule-cdsch-print'),
     path('schedule_ber/', WeekBERView.as_view(), name='schedule_ber'),
     path('schedule_f2/', WeekF2View.as_view(), name='schedule_f2'),
     path('schedule_f3/', WeekF3View.as_view(), name='schedule_f3'),
