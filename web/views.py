@@ -773,6 +773,19 @@ class WeekF4Print(ListView):
         return context
 
 
+class CinemaWeekPrint(ListView):
+    model = CinemaWeek
+    template_name = 'cinema.html'  # Replace 'week.html' with the actual template name
+    def get_queryset(self):
+        active_week = CinemaWeek.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return CinemaWeek.objects.filter(start_date=next_week_start_date)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cinemadays'] = CinemaDay.objects.filter(cinemaweek__active=True)
+        return context
+
+
 
 
 
