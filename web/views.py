@@ -496,7 +496,6 @@ class CinemaWeekView(ListView):
         return context
 
 
-@cache_page(timedelta(minutes=15))
 class WeekView(ListView):
     model = Week
     template_name = 'schedule_ikc.html'  # Replace 'week.html' with the actual template name
@@ -513,7 +512,6 @@ class WeekView(ListView):
         return context
 
 
-@cache_page(timedelta(minutes=15))
 class WeekCDSCHView(ListView):
     model = WeekCDSCH
     template_name = 'schedule_cdsch.html'
