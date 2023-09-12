@@ -484,7 +484,6 @@ def createBook(request):
     return Response(serializer.data)
 
 
-@cache_page(timedelta(minutes=15))
 class CinemaWeekView(ListView):
     model = CinemaWeek
     template_name = 'cinema.html'  # Replace 'week.html' with the actual template name
