@@ -665,7 +665,6 @@ def mobile(request):
     return render(request, 'mobile.html', {'title': title, 'description': description})
 
 
-@cache_page(timedelta(minutes=15))
 class WeekPrint(ListView):
     model = Week
     template_name = 'schedule_ikc.html'
