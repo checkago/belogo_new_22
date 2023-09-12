@@ -7,6 +7,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.core.mail import EmailMessage
+from django.views.decorators.cache import cache_page
 from datetime import datetime, timedelta
 
 from .forms import *
@@ -30,7 +31,7 @@ def getRoutes(request):
     ]
     return Response(routes)
 
-
+@cache_page(timedelta(minutes=15))
 def index(request):
     title = 'МБУК ЦБС им. А. Белого'
     description = 'Официальный сайт Централизованной библиотечной сети имени Андрея Белого. Библиотека Железнодорожный'
@@ -49,14 +50,14 @@ def index(request):
                                           'partners1': partners1, 'partners2': partners2, 'event': event,
                                           'cinema': cinema})
 
-
+@cache_page(timedelta(minutes=15))
 def biblioteki(request):
     title = 'Состав централизованной библиотечной системы'
     description = 'Состав централизованной библиотечной системы. Список библиотек в микрорайоне Железнодорожный'
     biblioteki = Biblioteka.objects.all()
     return render(request, 'biblioteki.html', {'title': title, 'biblioteki': biblioteki})
 
-
+@cache_page(timedelta(minutes=15))
 def biblioteka(request, pk):
     biblioteka = get_object_or_404(Biblioteka, pk=pk)
     title = biblioteka.name
@@ -66,7 +67,7 @@ def biblioteka(request, pk):
     return render(request, 'biblioteka.html', {'title': title, 'biblioteka': biblioteka, 'direktor': direktor,
                                                'phone': phone, 'description': description})
 
-
+@cache_page(timedelta(minutes=15))
 def news(request):
     categories = Category.objects.prefetch_related('news')
     title = 'Новости ЦБС им. А. Белого'
@@ -83,7 +84,7 @@ def news(request):
         page_obj = paginator.get_page(paginator.num_pages)
     return render(request, 'news_all.html', {'categories': categories, 'title': title, 'paginator': paginator, 'page_obj': page_obj, 'description': description})
 
-
+@cache_page(timedelta(minutes=15))
 def news_view(request, pk):
     news = get_object_or_404(News, pk=pk)
     category = Category.objects.prefetch_related('news')
@@ -94,7 +95,7 @@ def news_view(request, pk):
     return render(request, 'news.html', {'news': news, 'title': title, 'image': image, 'description': description,
                                          'date': date, 'category': category})
 
-
+@cache_page(timedelta(minutes=15))
 def documents(request):
     categories = Category.objects.prefetch_related('documents')
     title = 'Официальные документы библиотечной системы'
@@ -108,7 +109,7 @@ def documents(request):
     return render(request, 'documents.html', {'categories': categories, 'title': title, 'docs_list': docs_list,
                                               'paginator': paginator, 'page_obj': page_obj, 'description': description})
 
-
+@cache_page(timedelta(minutes=15))
 def document(request, pk):
     document = get_object_or_404(Document, pk=pk)
     category = document.category
@@ -119,7 +120,7 @@ def document(request, pk):
     return render(request, 'document.html', {'title': title, 'document': document, 'date': date, 'description': description,
                                              'image': image, 'category': category})
 
-
+@cache_page(timedelta(minutes=15))
 def services(request):
     categories = Category.objects.prefetch_related('services')
     title = 'Услуги библиотечной системы'
@@ -134,7 +135,7 @@ def services(request):
                                                  'services_list': services_list, 'paginator': paginator,
                                                  'page_obj': page_obj, 'description': description})
 
-
+@cache_page(timedelta(minutes=15))
 def free_services(request, pk):
     fservice = get_object_or_404(FreeService, pk=pk)
     title = fservice.name
@@ -143,7 +144,7 @@ def free_services(request, pk):
     return render(request, 'fservice.html', {'title': title, 'fservice': fservice, 'date': date,
                                              'description': description})
 
-
+@cache_page(timedelta(minutes=15))
 def termsofuse(request, pk):
     tofuse = get_object_or_404(TermsOfUse, pk=pk)
     title = tofuse.name
@@ -151,7 +152,7 @@ def termsofuse(request, pk):
     date = tofuse.date
     return render(request, 'termsofuse.html', {'title': title, 'tofuse': tofuse, 'date': date, 'description': description})
 
-
+@cache_page(timedelta(minutes=15))
 def raitings(request):
     categories = Category.objects.prefetch_related('raitings')
     title = 'Документы оценки качества'
@@ -163,7 +164,7 @@ def raitings(request):
     return render(request, 'qualitys.html', {'categories': categories, 'title': title, 'raitings': raitings,
                                              'paginator': paginator, 'page_obj': page_obj})
 
-
+@cache_page(timedelta(minutes=15))
 def raiting(request, pk):
     quality = get_object_or_404(Raiting, pk=pk)
     title = quality.name
@@ -172,7 +173,7 @@ def raiting(request, pk):
     description = quality.description
     return render(request, 'quality.html', {'title': title, 'date': date, 'name': name, 'description': description})
 
-
+@cache_page(timedelta(minutes=15))
 def vacancies(request):
     title = 'Вакансии МБУК "ЦБС им. А. Белого'
     vacancies = Vacancy.objects.all()
@@ -182,7 +183,7 @@ def vacancies(request):
     return render(request, 'vacancies.html', {'title': title, 'vacancies': vacancies,
                                               'paginator': paginator, 'page_obj': page_obj})
 
-
+@cache_page(timedelta(minutes=15))
 def vacancy(request, pk):
     vacancy = get_object_or_404(Vacancy, pk=pk)
     title = vacancy.name
@@ -193,7 +194,7 @@ def vacancy(request, pk):
     return render(request, 'vacancy.html', {'title': title, 'name': name, 'vacancy': vacancy, 'date': date, 'salary': salary,
                                             'description': description})
 
-
+@cache_page(timedelta(minutes=15))
 def contacts(request):
     title = 'Контакты'
     biblioteki = Biblioteka.objects.all()
@@ -223,13 +224,13 @@ def resources(request):
     text = 'Раздел находится в процессе доработки и наполнения материалами. Попробуйте вернутся позже'
     return render(request, 'empty.html', {'title': title, 'text': text})
 
-
+@cache_page(timedelta(minutes=15))
 def projects(request):
     title = 'Данный раздел на данный момент не доступен'
     text = 'Раздел находится в процессе доработки и наполнения материалами. Попробуйте вернутся позже'
     return render(request, 'empty.html', {'title': title, 'text': text})
 
-
+@cache_page(timedelta(minutes=15))
 def veterany_vov(request):
     title = 'Жители Железнодорожного - участники Великой Отечественной войны'
     veterans = VeteranVOV.objects.all()
@@ -239,7 +240,7 @@ def veterany_vov(request):
     return render(request, 'veterany_vov.html', {'title': title, 'veterans': veterans, 'paginator': paginator,
                                                  'page_obj': page_obj})
 
-
+@cache_page(timedelta(minutes=15))
 def veterany_tyla(request):
     title = 'Труженики тыла'
     veterans = VeteranTruda.objects.all()
@@ -339,12 +340,12 @@ def s_form(request):
         sform = ServiceDopForm()
     return render(request, 's_form.html', {'title': title, 'sform': sform})
 
-
+@cache_page(timedelta(minutes=15))
 def library_category(request):
     title = 'Разделы электронной библиотеки'
     return render(request, 'library_category.html', {'title': title})
 
-
+@cache_page(timedelta(minutes=15))
 def library_imperia(request):
     title = 'Книги, изданные до 1917 года'
     categories = LibraryCategory.objects.prefetch_related('library_imperia')
@@ -356,7 +357,7 @@ def library_imperia(request):
     return render(request, 'book_list.html', {'categories': categories, 'title': title,
                                              'books_list': books_list, 'paginator': paginator, 'page_obj': page_obj})
 
-
+@cache_page(timedelta(minutes=15))
 def library_krai(request):
     title = 'Краеведческая литература'
     categories = LibraryCategory.objects.prefetch_related('library_krai')
@@ -368,7 +369,7 @@ def library_krai(request):
     return render(request, 'book_list.html', {'categories': categories, 'title': title,
                                              'books_list': books_list, 'paginator': paginator, 'page_obj': page_obj})
 
-
+@cache_page(timedelta(minutes=15))
 def library_hud(request):
     title = 'Художественная литература'
     categories = LibraryCategory.objects.prefetch_related('library_hud')
@@ -380,7 +381,7 @@ def library_hud(request):
     return render(request, 'book_list.html', {'categories': categories, 'title': title, 'books_list': books_list,
                                               'paginator': paginator, 'page_obj': page_obj})
 
-
+@cache_page(timedelta(minutes=15))
 class BookDetailView(generic.DetailView):
     model = Library
     template_name = 'book_view.html'
@@ -403,7 +404,7 @@ class BookDetailView(generic.DetailView):
         context = self.get_context_data(object=self.object, title=self.object.title)
         return self.render_to_response(context)
 
-
+@cache_page(timedelta(minutes=15))
 def events(request):
     title = 'Мероприятия и события'
     description = 'Ожидаемые и недавно прошедшие мероприятия и события в библиотеках Балашихи в микрорайоне Железнодорожный'
@@ -412,7 +413,7 @@ def events(request):
     return render(request, 'events.html', {'title': title, 'description': description, 'events': events,
                                            'datenow': datenow})
 
-
+@cache_page(timedelta(minutes=15))
 def shedules(request):
     title = 'Системные расписания'
     description = 'Системные библиотек "ЦБС им. А. Белого"'
@@ -427,7 +428,7 @@ def shedules(request):
                                              'schedule_f2':schedule_f2, 'schedule_f3':schedule_f3,
                                              'schedule_f4':schedule_f4})
 
-
+@cache_page(timedelta(minutes=15))
 def events_archive(request):
     title = 'Архив мероприятий'
     description = 'Архив прошедших в билиотеках Балашихи мероприятий'
@@ -479,7 +480,7 @@ def createBook(request):
     serializer = BookFormSerializer(book, many=False)
     return Response(serializer.data)
 
-
+@cache_page(timedelta(minutes=15))
 class CinemaWeekView(ListView):
     model = CinemaWeek
     template_name = 'cinema.html'  # Replace 'week.html' with the actual template name
@@ -490,7 +491,7 @@ class CinemaWeekView(ListView):
         context['cinemadays'] = CinemaDay.objects.filter(cinemaweek__active=True)
         return context
 
-
+@cache_page(timedelta(minutes=15))
 class WeekView(ListView):
     model = Week
     template_name = 'schedule_ikc.html'  # Replace 'week.html' with the actual template name
@@ -506,7 +507,7 @@ class WeekView(ListView):
         context['biblioteka'] = Biblioteka.objects.get(id=1)
         return context
 
-
+@cache_page(timedelta(minutes=15))
 class WeekCDSCHView(ListView):
     model = WeekCDSCH
     template_name = 'schedule_cdsch.html'
@@ -522,7 +523,7 @@ class WeekCDSCHView(ListView):
         context['biblioteka'] = Biblioteka.objects.get(id=2)
         return context
 
-
+@cache_page(timedelta(minutes=15))
 class WeekBERView(ListView):
     model = WeekBER
     template_name = 'schedule_ber.html'
@@ -538,7 +539,7 @@ class WeekBERView(ListView):
         context['biblioteka'] = Biblioteka.objects.get(id=3)
         return context
 
-
+@cache_page(timedelta(minutes=15))
 class WeekF2View(ListView):
     model = WeekF2
     template_name = 'schedule_f2.html'
@@ -554,7 +555,7 @@ class WeekF2View(ListView):
         context['biblioteka'] = Biblioteka.objects.get(id=4)
         return context
 
-
+@cache_page(timedelta(minutes=15))
 class WeekF3View(ListView):
     model = WeekF3
     template_name = 'schedule_f3.html'
@@ -570,7 +571,7 @@ class WeekF3View(ListView):
         context['biblioteka'] = Biblioteka.objects.get(id=5)
         return context
 
-
+@cache_page(timedelta(minutes=15))
 class WeekF4View(ListView):
     model = WeekF4
     template_name = 'schedule_f4.html'
@@ -586,7 +587,7 @@ class WeekF4View(ListView):
         context['biblioteka'] = Biblioteka.objects.get(id=6)
         return context
 
-
+@cache_page(timedelta(minutes=15))
 class ActiveWeeksAPIView(APIView):
     def get(self, request):
         weeks = []
@@ -632,14 +633,14 @@ class ActiveWeeksAPIView(APIView):
     def add_title(self, data, title):
         return [{'title': title, 'data': data}]
 
-
+@cache_page(timedelta(minutes=15))
 class WeekAPIView(APIView):
     def get(self, request):
         queryset = Week.objects.filter(active=True)
         serializer = WeekSerializer(queryset, many=True)
         return Response(serializer.data)
 
-
+@cache_page(timedelta(minutes=15))
 class CinemaWeekAPIView(APIView):
     def get(self, request):
         queryset = CinemaWeek.objects.filter(active=True)
@@ -652,7 +653,7 @@ def mobile(request):
     description = 'Мобильное приложение МБУК "ЦБС им. А. Белого" - БИБЛИОТЕКА В КАРМАНЕ'
     return render(request, 'mobile.html', {'title': title, 'description': description})
 
-
+@cache_page(timedelta(minutes=15))
 class WeekPrint(ListView):
     model = Week
     template_name = 'schedule_ikc.html'
@@ -672,7 +673,7 @@ class WeekPrint(ListView):
         context['biblioteka'] = Biblioteka.objects.get(id=1)
         return context
 
-
+@cache_page(timedelta(minutes=15))
 class WeekCDSCHPrint(ListView):
     model = WeekCDSCH
     template_name = 'schedule_cdsch.html'
@@ -692,7 +693,7 @@ class WeekCDSCHPrint(ListView):
         context['biblioteka'] = Biblioteka.objects.get(id=2)
         return context
 
-
+@cache_page(timedelta(minutes=15))
 class WeekBERPrint(ListView):
     model = WeekBER
     template_name = 'schedule_ber.html'
@@ -712,7 +713,7 @@ class WeekBERPrint(ListView):
         context['biblioteka'] = Biblioteka.objects.get(id=3)
         return context
 
-
+@cache_page(timedelta(minutes=15))
 class WeekF2Print(ListView):
     model = WeekF2
     template_name = 'schedule_f2.html'
@@ -732,7 +733,7 @@ class WeekF2Print(ListView):
         context['biblioteka'] = Biblioteka.objects.get(id=4)
         return context
 
-
+@cache_page(timedelta(minutes=15))
 class WeekF3Print(ListView):
     model = WeekF3
     template_name = 'schedule_f3.html'
@@ -752,7 +753,7 @@ class WeekF3Print(ListView):
         context['biblioteka'] = Biblioteka.objects.get(id=5)
         return context
 
-
+@cache_page(timedelta(minutes=15))
 class WeekF4Print(ListView):
     model = WeekF4
     template_name = 'schedule_f4.html'
@@ -773,6 +774,7 @@ class WeekF4Print(ListView):
         return context
 
 
+@cache_page(timedelta(minutes=15))
 class CinemaWeekPrint(ListView):
     model = CinemaWeek
     template_name = 'cinema.html'  # Replace 'week.html' with the actual template name
