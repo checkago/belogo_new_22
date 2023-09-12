@@ -528,7 +528,6 @@ class WeekCDSCHView(ListView):
         return context
 
 
-@cache_page(timedelta(minutes=15))
 class WeekBERView(ListView):
     model = WeekBER
     template_name = 'schedule_ber.html'
@@ -545,7 +544,6 @@ class WeekBERView(ListView):
         return context
 
 
-@cache_page(timedelta(minutes=15))
 class WeekF2View(ListView):
     model = WeekF2
     template_name = 'schedule_f2.html'
@@ -562,7 +560,6 @@ class WeekF2View(ListView):
         return context
 
 
-@cache_page(timedelta(minutes=15))
 class WeekF3View(ListView):
     model = WeekF3
     template_name = 'schedule_f3.html'
@@ -579,7 +576,6 @@ class WeekF3View(ListView):
         return context
 
 
-@cache_page(timedelta(minutes=15))
 class WeekF4View(ListView):
     model = WeekF4
     template_name = 'schedule_f4.html'
