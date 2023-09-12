@@ -192,6 +192,9 @@ CACHES = {
     }
 }
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_CACHE_ALIAS = 'default'
+
 CELERY_BROKER_URL = 'redis://redis-server:6379'
 CELERY_RESULT_BACKEND = 'redis://redis-server:6379'
 CELERY_TIMEZONE = 'Europe/Moscow'
