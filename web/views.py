@@ -591,7 +591,6 @@ class WeekF4View(ListView):
         return context
 
 
-@cache_page(timedelta(minutes=15))
 class ActiveWeeksAPIView(APIView):
     def get(self, request):
         weeks = []
@@ -638,7 +637,6 @@ class ActiveWeeksAPIView(APIView):
         return [{'title': title, 'data': data}]
 
 
-@cache_page(timedelta(minutes=15))
 class WeekAPIView(APIView):
     def get(self, request):
         queryset = Week.objects.filter(active=True)
@@ -646,7 +644,6 @@ class WeekAPIView(APIView):
         return Response(serializer.data)
 
 
-@cache_page(timedelta(minutes=15))
 class CinemaWeekAPIView(APIView):
     def get(self, request):
         queryset = CinemaWeek.objects.filter(active=True)
