@@ -685,7 +685,6 @@ class WeekPrint(ListView):
         return context
 
 
-@cache_page(timedelta(minutes=15))
 class WeekCDSCHPrint(ListView):
     model = WeekCDSCH
     template_name = 'schedule_cdsch.html'
@@ -706,7 +705,6 @@ class WeekCDSCHPrint(ListView):
         return context
 
 
-@cache_page(timedelta(minutes=15))
 class WeekBERPrint(ListView):
     model = WeekBER
     template_name = 'schedule_ber.html'
@@ -727,7 +725,6 @@ class WeekBERPrint(ListView):
         return context
 
 
-@cache_page(timedelta(minutes=15))
 class WeekF2Print(ListView):
     model = WeekF2
     template_name = 'schedule_f2.html'
@@ -748,7 +745,6 @@ class WeekF2Print(ListView):
         return context
 
 
-@cache_page(timedelta(minutes=15))
 class WeekF3Print(ListView):
     model = WeekF3
     template_name = 'schedule_f3.html'
@@ -769,7 +765,6 @@ class WeekF3Print(ListView):
         return context
 
 
-@cache_page(timedelta(minutes=15))
 class WeekF4Print(ListView):
     model = WeekF4
     template_name = 'schedule_f4.html'
@@ -790,7 +785,6 @@ class WeekF4Print(ListView):
         return context
 
 
-@cache_page(timedelta(minutes=15))
 class CinemaWeekPrint(ListView):
     model = CinemaWeek
     template_name = 'cinema.html'  # Replace 'week.html' with the actual template name
