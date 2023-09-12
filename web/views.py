@@ -483,6 +483,7 @@ def createBook(request):
     serializer = BookFormSerializer(book, many=False)
     return Response(serializer.data)
 
+
 @cache_page(timedelta(minutes=15))
 class CinemaWeekView(ListView):
     model = CinemaWeek
@@ -493,6 +494,7 @@ class CinemaWeekView(ListView):
         context = super().get_context_data(**kwargs)
         context['cinemadays'] = CinemaDay.objects.filter(cinemaweek__active=True)
         return context
+
 
 @cache_page(timedelta(minutes=15))
 class WeekView(ListView):
@@ -510,6 +512,7 @@ class WeekView(ListView):
         context['biblioteka'] = Biblioteka.objects.get(id=1)
         return context
 
+
 @cache_page(timedelta(minutes=15))
 class WeekCDSCHView(ListView):
     model = WeekCDSCH
@@ -525,6 +528,7 @@ class WeekCDSCHView(ListView):
         context['end_date'] = self.get_queryset().first().end_date
         context['biblioteka'] = Biblioteka.objects.get(id=2)
         return context
+
 
 @cache_page(timedelta(minutes=15))
 class WeekBERView(ListView):
@@ -542,6 +546,7 @@ class WeekBERView(ListView):
         context['biblioteka'] = Biblioteka.objects.get(id=3)
         return context
 
+
 @cache_page(timedelta(minutes=15))
 class WeekF2View(ListView):
     model = WeekF2
@@ -557,6 +562,7 @@ class WeekF2View(ListView):
         context['end_date'] = self.get_queryset().first().end_date
         context['biblioteka'] = Biblioteka.objects.get(id=4)
         return context
+
 
 @cache_page(timedelta(minutes=15))
 class WeekF3View(ListView):
@@ -574,6 +580,7 @@ class WeekF3View(ListView):
         context['biblioteka'] = Biblioteka.objects.get(id=5)
         return context
 
+
 @cache_page(timedelta(minutes=15))
 class WeekF4View(ListView):
     model = WeekF4
@@ -589,6 +596,7 @@ class WeekF4View(ListView):
         context['end_date'] = self.get_queryset().first().end_date
         context['biblioteka'] = Biblioteka.objects.get(id=6)
         return context
+
 
 @cache_page(timedelta(minutes=15))
 class ActiveWeeksAPIView(APIView):
@@ -636,12 +644,14 @@ class ActiveWeeksAPIView(APIView):
     def add_title(self, data, title):
         return [{'title': title, 'data': data}]
 
+
 @cache_page(timedelta(minutes=15))
 class WeekAPIView(APIView):
     def get(self, request):
         queryset = Week.objects.filter(active=True)
         serializer = WeekSerializer(queryset, many=True)
         return Response(serializer.data)
+
 
 @cache_page(timedelta(minutes=15))
 class CinemaWeekAPIView(APIView):
@@ -655,6 +665,7 @@ def mobile(request):
     title = 'Скачать мобильное приложение'
     description = 'Мобильное приложение МБУК "ЦБС им. А. Белого" - БИБЛИОТЕКА В КАРМАНЕ'
     return render(request, 'mobile.html', {'title': title, 'description': description})
+
 
 @cache_page(timedelta(minutes=15))
 class WeekPrint(ListView):
@@ -676,6 +687,7 @@ class WeekPrint(ListView):
         context['biblioteka'] = Biblioteka.objects.get(id=1)
         return context
 
+
 @cache_page(timedelta(minutes=15))
 class WeekCDSCHPrint(ListView):
     model = WeekCDSCH
@@ -695,6 +707,7 @@ class WeekCDSCHPrint(ListView):
         context['end_date'] = next_week_start_date + timedelta(days=6)
         context['biblioteka'] = Biblioteka.objects.get(id=2)
         return context
+
 
 @cache_page(timedelta(minutes=15))
 class WeekBERPrint(ListView):
@@ -716,6 +729,7 @@ class WeekBERPrint(ListView):
         context['biblioteka'] = Biblioteka.objects.get(id=3)
         return context
 
+
 @cache_page(timedelta(minutes=15))
 class WeekF2Print(ListView):
     model = WeekF2
@@ -736,6 +750,7 @@ class WeekF2Print(ListView):
         context['biblioteka'] = Biblioteka.objects.get(id=4)
         return context
 
+
 @cache_page(timedelta(minutes=15))
 class WeekF3Print(ListView):
     model = WeekF3
@@ -755,6 +770,7 @@ class WeekF3Print(ListView):
         context['end_date'] = next_week_start_date + timedelta(days=6)
         context['biblioteka'] = Biblioteka.objects.get(id=5)
         return context
+
 
 @cache_page(timedelta(minutes=15))
 class WeekF4Print(ListView):
