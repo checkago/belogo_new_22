@@ -404,6 +404,7 @@ class BookDetailView(generic.DetailView):
         context = self.get_context_data(object=self.object, title=self.object.title)
         return self.render_to_response(context)
 
+
 @cache_page(timedelta(minutes=15))
 def events(request):
     title = 'Мероприятия и события'
@@ -412,6 +413,7 @@ def events(request):
     datenow = datetime.date.today()
     return render(request, 'events.html', {'title': title, 'description': description, 'events': events,
                                            'datenow': datenow})
+
 
 @cache_page(timedelta(minutes=15))
 def shedules(request):
@@ -427,6 +429,7 @@ def shedules(request):
                                              'schedule_cdsch':schedule_cdsch, 'schedule_ber':schedule_ber,
                                              'schedule_f2':schedule_f2, 'schedule_f3':schedule_f3,
                                              'schedule_f4':schedule_f4})
+
 
 @cache_page(timedelta(minutes=15))
 def events_archive(request):
