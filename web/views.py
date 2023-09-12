@@ -381,7 +381,7 @@ def library_hud(request):
     return render(request, 'book_list.html', {'categories': categories, 'title': title, 'books_list': books_list,
                                               'paginator': paginator, 'page_obj': page_obj})
 
-@cache_page(timedelta(minutes=15))
+
 class BookDetailView(generic.DetailView):
     model = Library
     template_name = 'book_view.html'
