@@ -90,6 +90,11 @@ class DayCDSCHSerializer(serializers.ModelSerializer):
         model = DayCDSCH
         fields = ('id', 'name', 'date', 'events')
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['events'] = sorted(representation['events'], key=lambda x: x['start_time'])
+        return representation
+
 
 class WeekCDSCHSerializer(serializers.ModelSerializer):
     days = DayCDSCHSerializer(many=True)
@@ -111,6 +116,11 @@ class DayBERSerializer(serializers.ModelSerializer):
     class Meta:
         model = DayBER
         fields = ('id', 'name', 'date', 'events')
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['events'] = sorted(representation['events'], key=lambda x: x['start_time'])
+        return representation
 
 
 class WeekBERSerializer(serializers.ModelSerializer):
@@ -134,6 +144,11 @@ class DayF2Serializer(serializers.ModelSerializer):
         model = DayF2
         fields = ('id', 'name', 'date', 'events')
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['events'] = sorted(representation['events'], key=lambda x: x['start_time'])
+        return representation
+
 
 class WeekF2Serializer(serializers.ModelSerializer):
     days = DayF2Serializer(many=True)
@@ -156,6 +171,11 @@ class DayF3Serializer(serializers.ModelSerializer):
         model = DayF3
         fields = ('id', 'name', 'date', 'events')
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['events'] = sorted(representation['events'], key=lambda x: x['start_time'])
+        return representation
+
 
 class WeekF3Serializer(serializers.ModelSerializer):
     days = DayF3Serializer(many=True)
@@ -177,6 +197,11 @@ class DayF4Serializer(serializers.ModelSerializer):
     class Meta:
         model = DayF4
         fields = ('id', 'name', 'date', 'events')
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['events'] = sorted(representation['events'], key=lambda x: x['start_time'])
+        return representation
 
 
 class WeekF4Serializer(serializers.ModelSerializer):
