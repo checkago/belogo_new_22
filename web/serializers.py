@@ -63,6 +63,11 @@ class DaySerializer(serializers.ModelSerializer):
         model = Day
         fields = ('id', 'name', 'date', 'events')
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['events'] = sorted(representation['events'], key=lambda x: x['start_time'])
+        return representation
+
 
 class WeekSerializer(serializers.ModelSerializer):
     days = DaySerializer(many=True)
