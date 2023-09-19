@@ -57,12 +57,12 @@
                     {% for weekday in weekdays %}
                         <div class="col-md-4">
                             <div class="card card-cascade wider mb-2">
-                                <div class="card-header"><h4 class="font-weight-bold text-danger">{{ weekday.name }} - {{ weekday.date|date:"d.m.y" }}</h4></div>
+                                <div class="card-header"><h4 class="font-responsive font-weight-bold text-danger">{{ weekday.name }} - {{ weekday.date|date:"d.m.y" }}</h4></div>
                                 <div class="card-body">
                                     {% for event in weekday.events.all|dictsort:"start_time" %}
                                     <div class="row">
-                                        <div class="col-md-3 col-3 col-sm-3 col-lg-3"><p class="font-weight-bold font-fluid ri pp mbp">{{ event.start_time|time:"H:i" }} - {{ event.end_time|time:"H:i" }}</p></div>
-                                        <div class="col-md-9 col-9 col-sm-9 col-lg-9"><p class="font-weight-bold font-fluid ri pp mbp">{{ event.name }}</p></div>
+                                        <div class="col-md-3 col-3 col-sm-3 col-lg-3"><p class="font-weight-bold font-responsive ri pp mbp">{{ event.start_time|time:"H:i" }} - {{ event.end_time|time:"H:i" }}</p></div>
+                                        <div class="col-md-9 col-9 col-sm-9 col-lg-9"><p class="font-weight-bold font-responsive ri pp mbp">{{ event.name }}</p></div>
                                     </div>
                                     <hr class="hrp">
                                     {% endfor %}
