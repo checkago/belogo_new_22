@@ -643,8 +643,34 @@ class Day(models.Model):
 
 
 class Eventy(models.Model):
+
+    ZERO = '0+'
+    SIX = '6+'
+    TWELVE = '12+'
+    FOURTEEN = '14+'
+    SIXTEEN = '16+'
+    EIGHTEEN = '18+'
+    FIFTYFIVE = '55+'
+    SIXTY = '60+'
+    SIXTYFIVE = '65+'
+
+    AGE_CHOICES = (
+        (ZERO, '0+'),
+        (SIX, '6+'),
+        (TWELVE, '12+'),
+        (FOURTEEN, '14+'),
+        (SIXTEEN, '16+'),
+        (EIGHTEEN, '18+'),
+        (FIFTYFIVE, '55+'),
+        (SIXTY, '60+'),
+        (SIXTYFIVE, '65+'),
+
+    )
+
     day = models.ForeignKey(Day, on_delete=models.CASCADE, null=True, verbose_name='День недели', related_name='events')
     name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    payment = models.BooleanField(default=False, verbose_name='Платное')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, null=True, verbose_name='Возраст')
     start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
     end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
 
@@ -689,9 +715,34 @@ class DayCDSCH(models.Model):
 
 
 class EventyCDSCH(models.Model):
+    ZERO = '0+'
+    SIX = '6+'
+    TWELVE = '12+'
+    FOURTEEN = '14+'
+    SIXTEEN = '16+'
+    EIGHTEEN = '18+'
+    FIFTYFIVE = '55+'
+    SIXTY = '60+'
+    SIXTYFIVE = '65+'
+
+    AGE_CHOICES = (
+        (ZERO, '0+'),
+        (SIX, '6+'),
+        (TWELVE, '12+'),
+        (FOURTEEN, '14+'),
+        (SIXTEEN, '16+'),
+        (EIGHTEEN, '18+'),
+        (FIFTYFIVE, '55+'),
+        (SIXTY, '60+'),
+        (SIXTYFIVE, '65+'),
+
+    )
+
     day = models.ForeignKey(DayCDSCH, on_delete=models.CASCADE, null=True, verbose_name='День недели',
                             related_name='events')
     name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    payment = models.BooleanField(default=False, verbose_name='Платное')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, null=True, verbose_name='Возраст')
     start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
     end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
 
@@ -736,8 +787,33 @@ class DayBER(models.Model):
 
 
 class EventyBER(models.Model):
+    ZERO = '0+'
+    SIX = '6+'
+    TWELVE = '12+'
+    FOURTEEN = '14+'
+    SIXTEEN = '16+'
+    EIGHTEEN = '18+'
+    FIFTYFIVE = '55+'
+    SIXTY = '60+'
+    SIXTYFIVE = '65+'
+
+    AGE_CHOICES = (
+        (ZERO, '0+'),
+        (SIX, '6+'),
+        (TWELVE, '12+'),
+        (FOURTEEN, '14+'),
+        (SIXTEEN, '16+'),
+        (EIGHTEEN, '18+'),
+        (FIFTYFIVE, '55+'),
+        (SIXTY, '60+'),
+        (SIXTYFIVE, '65+'),
+
+    )
+
     day = models.ForeignKey(DayBER, on_delete=models.CASCADE, null=True, verbose_name='День недели', related_name='events')
     name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    payment = models.BooleanField(default=False, verbose_name='Платное')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, null=True, verbose_name='Возраст')
     start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
     end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
 
@@ -784,8 +860,33 @@ class DayF2(models.Model):
 
 
 class EventyF2(models.Model):
+    ZERO = '0+'
+    SIX = '6+'
+    TWELVE = '12+'
+    FOURTEEN = '14+'
+    SIXTEEN = '16+'
+    EIGHTEEN = '18+'
+    FIFTYFIVE = '55+'
+    SIXTY = '60+'
+    SIXTYFIVE = '65+'
+
+    AGE_CHOICES = (
+        (ZERO, '0+'),
+        (SIX, '6+'),
+        (TWELVE, '12+'),
+        (FOURTEEN, '14+'),
+        (SIXTEEN, '16+'),
+        (EIGHTEEN, '18+'),
+        (FIFTYFIVE, '55+'),
+        (SIXTY, '60+'),
+        (SIXTYFIVE, '65+'),
+
+    )
+
     day = models.ForeignKey(DayF2, on_delete=models.CASCADE, null=True, verbose_name='День недели', related_name='events')
     name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    payment = models.BooleanField(default=False, verbose_name='Платное')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, null=True, verbose_name='Возраст')
     start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
     end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
 
@@ -831,8 +932,33 @@ class DayF3(models.Model):
 
 
 class EventyF3(models.Model):
+    ZERO = '0+'
+    SIX = '6+'
+    TWELVE = '12+'
+    FOURTEEN = '14+'
+    SIXTEEN = '16+'
+    EIGHTEEN = '18+'
+    FIFTYFIVE = '55+'
+    SIXTY = '60+'
+    SIXTYFIVE = '65+'
+
+    AGE_CHOICES = (
+        (ZERO, '0+'),
+        (SIX, '6+'),
+        (TWELVE, '12+'),
+        (FOURTEEN, '14+'),
+        (SIXTEEN, '16+'),
+        (EIGHTEEN, '18+'),
+        (FIFTYFIVE, '55+'),
+        (SIXTY, '60+'),
+        (SIXTYFIVE, '65+'),
+
+    )
+
     day = models.ForeignKey(DayF3, on_delete=models.CASCADE, null=True, verbose_name='День недели', related_name='events')
     name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    payment = models.BooleanField(default=False, verbose_name='Платное')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, null=True, verbose_name='Возраст')
     start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
     end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
 
@@ -878,8 +1004,33 @@ class DayF4(models.Model):
 
 
 class EventyF4(models.Model):
+    ZERO = '0+'
+    SIX = '6+'
+    TWELVE = '12+'
+    FOURTEEN = '14+'
+    SIXTEEN = '16+'
+    EIGHTEEN = '18+'
+    FIFTYFIVE = '55+'
+    SIXTY = '60+'
+    SIXTYFIVE = '65+'
+
+    AGE_CHOICES = (
+        (ZERO, '0+'),
+        (SIX, '6+'),
+        (TWELVE, '12+'),
+        (FOURTEEN, '14+'),
+        (SIXTEEN, '16+'),
+        (EIGHTEEN, '18+'),
+        (FIFTYFIVE, '55+'),
+        (SIXTY, '60+'),
+        (SIXTYFIVE, '65+'),
+
+    )
+
     day = models.ForeignKey(DayF4, on_delete=models.CASCADE, null=True, verbose_name='День недели', related_name='events')
     name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    payment = models.BooleanField(default=False, verbose_name='Платное')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, null=True, verbose_name='Возраст')
     start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
     end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
 

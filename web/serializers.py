@@ -53,7 +53,7 @@ class EventSerializer(serializers.ModelSerializer):
 class EventySerializer(serializers.ModelSerializer):
     class Meta:
         model = Eventy
-        fields = ('id', 'name', 'start_time', 'end_time')
+        fields = ('id', 'name', 'payment', 'age', 'start_time', 'end_time')
 
 
 class DaySerializer(serializers.ModelSerializer):
@@ -80,7 +80,7 @@ class WeekSerializer(serializers.ModelSerializer):
 class EventyCDSCHSerializer(serializers.ModelSerializer):
     class Meta:
         model = EventyCDSCH
-        fields = ('id', 'name', 'start_time', 'end_time')
+        fields = ('id', 'name', 'payment', 'age', 'start_time', 'end_time')
 
 
 class DayCDSCHSerializer(serializers.ModelSerializer):
@@ -107,7 +107,7 @@ class WeekCDSCHSerializer(serializers.ModelSerializer):
 class EventyBERSerializer(serializers.ModelSerializer):
     class Meta:
         model = EventyBER
-        fields = ('id', 'name', 'start_time', 'end_time')
+        fields = ('id', 'name', 'payment', 'age', 'start_time', 'end_time')
 
 
 class DayBERSerializer(serializers.ModelSerializer):
@@ -134,7 +134,7 @@ class WeekBERSerializer(serializers.ModelSerializer):
 class EventyF2Serializer(serializers.ModelSerializer):
     class Meta:
         model = EventyF2
-        fields = ('id', 'name', 'start_time', 'end_time')
+        fields = ('id', 'name', 'payment', 'age', 'start_time', 'end_time')
 
 
 class DayF2Serializer(serializers.ModelSerializer):
@@ -161,7 +161,7 @@ class WeekF2Serializer(serializers.ModelSerializer):
 class EventyF3Serializer(serializers.ModelSerializer):
     class Meta:
         model = EventyF3
-        fields = ('id', 'name', 'start_time', 'end_time')
+        fields = ('id', 'name', 'payment', 'age', 'start_time', 'end_time')
 
 
 class DayF3Serializer(serializers.ModelSerializer):
@@ -188,7 +188,7 @@ class WeekF3Serializer(serializers.ModelSerializer):
 class EventyF4Serializer(serializers.ModelSerializer):
     class Meta:
         model = EventyF4
-        fields = ('id', 'name', 'start_time', 'end_time')
+        fields = ('id', 'name', 'payment', 'age', 'start_time', 'end_time')
 
 
 class DayF4Serializer(serializers.ModelSerializer):
