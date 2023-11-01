@@ -677,6 +677,26 @@ class WeekPrint(ListView):
         return context
 
 
+class WeekVertical(ListView):
+    model = Week
+    template_name = 'schedule_ikc_vertical.html'
+
+    def get_queryset(self):
+        active_week = Week.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return Week.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = Week.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = Day.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=1)
+        return context
+
+
 class WeekCDSCHPrint(ListView):
     model = WeekCDSCH
     template_name = 'schedule_cdsch.html'

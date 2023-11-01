@@ -6,7 +6,7 @@ from . import views
 from .views import BibliotekiAPIView, NewsAPIView, EventAPIView, ServiceAPIView, \
     WeekView, WeekCDSCHView, WeekBERView, WeekF2View, WeekF3View, WeekF4View, CinemaWeekView, ActiveWeeksAPIView, \
     WeekAPIView, CinemaWeekAPIView, WeekPrint, WeekCDSCHPrint, WeekBERPrint, WeekF2Print, WeekF3Print, WeekF4Print, \
-    CinemaWeekPrint
+    CinemaWeekPrint, WeekVertical
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -49,6 +49,7 @@ urlpatterns = [
 
     path('schedule_ikc/', WeekView.as_view(), name='schedule_ikc'),
     path('schedule-ikc-print/', WeekPrint.as_view(), name='schedule-ikc-print'),
+    path('schedule-ikc-vertical/', WeekVertical.as_view(), name='schedule-ikc-vertical'),
     path('schedule_cdsch/', WeekCDSCHView.as_view(), name='schedule_cdsch'),
     path('schedule-cdsch-print/', WeekCDSCHPrint.as_view(), name='schedule-cdsch-print'),
     path('schedule_ber/', WeekBERView.as_view(), name='schedule_ber'),
