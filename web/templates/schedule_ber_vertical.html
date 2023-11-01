@@ -8,10 +8,7 @@
         font-size: 1vw;
     }
     .ri {
-        line-height: 1.0 !important;
-    }
-    .pp {
-        line-height: 1.0 !important;
+        line-height: 1.5 !important;
     }
     .mbp {
         margin-bottom: 0.2rem !important;
@@ -48,7 +45,7 @@
                     {% for weekday in weekdays %}
                     <div class="row d-flex">
                         <div class="col-md-2 align-items-center border-right">
-                            <h2 class="font-responsive font-weight-bold text-danger d-flex justify-content-center">{{ weekday.date|date:"d" }}</h2>
+                            <h1 class="font-responsive font-weight-bold text-danger d-flex justify-content-center">{{ weekday.date|date:"d" }}</h1>
                             <h5 class="font-responsive font-weight-bold d-flex justify-content-center align-items-center">{{ weekday.name }}</h5>
                         </div>
                         <div class="col-md-10">
