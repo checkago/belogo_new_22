@@ -6,7 +6,7 @@ from . import views
 from .views import BibliotekiAPIView, NewsAPIView, EventAPIView, ServiceAPIView, \
     WeekView, WeekCDSCHView, WeekBERView, WeekF2View, WeekF3View, WeekF4View, CinemaWeekView, ActiveWeeksAPIView, \
     WeekAPIView, CinemaWeekAPIView, WeekPrint, WeekCDSCHPrint, WeekBERPrint, WeekF2Print, WeekF3Print, WeekF4Print, \
-    CinemaWeekPrint, WeekVertical
+    CinemaWeekPrint, WeekVertical, WeekCDSCHVertical, WeekBERVertical, WeekF2Vertical, WeekF3Vertical, WeekF4Vertical
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -52,14 +52,19 @@ urlpatterns = [
     path('schedule-ikc-vertical/', WeekVertical.as_view(), name='schedule-ikc-vertical'),
     path('schedule_cdsch/', WeekCDSCHView.as_view(), name='schedule_cdsch'),
     path('schedule-cdsch-print/', WeekCDSCHPrint.as_view(), name='schedule-cdsch-print'),
+    path('schedule-cdsch-vertical/', WeekCDSCHVertical.as_view(), name='schedule-cdsch-vertical'),
     path('schedule_ber/', WeekBERView.as_view(), name='schedule_ber'),
     path('schedule-ber-print/', WeekBERPrint.as_view(), name='schedule-ber-print'),
+    path('schedule-ber-vertical/', WeekBERVertical.as_view(), name='schedule-ber-vertical'),
     path('schedule_f2/', WeekF2View.as_view(), name='schedule_f2'),
     path('schedule-f2-print/', WeekF2Print.as_view(), name='schedule-f2-print'),
+    path('schedule-f2-vertical/', WeekF2Vertical.as_view(), name='schedule-f2-vertical'),
     path('schedule_f3/', WeekF3View.as_view(), name='schedule_f3'),
     path('schedule-f3-print/', WeekF3Print.as_view(), name='schedule-f3-print'),
+    path('schedule-f3-vertical/', WeekF3Vertical.as_view(), name='schedule-f3-vertical'),
     path('schedule_f4/', WeekF4View.as_view(), name='schedule_f4'),
     path('schedule-f4-print/', WeekF4Print.as_view(), name='schedule-f4-print'),
+    path('schedule-f4-vertical/', WeekF4Vertical.as_view(), name='schedule-f4-vertical'),
     path('cinema/', CinemaWeekView.as_view(), name='cinema'),
     path('cinema-print/', CinemaWeekPrint.as_view(), name='cinema-print'),
 

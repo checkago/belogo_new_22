@@ -390,7 +390,7 @@ def dublicate_week(modeladmin, request, queryset):
 
         # Создание копии объекта Week
         new_week = week.__class__.objects.create(
-            name=f"Неделя {new_week_number}",  # Изменить название нового объекта
+            name=f"Неделя {new_week_number}",
             start_date=start_date,
             end_date=end_date,
             active=False
@@ -409,6 +409,8 @@ def dublicate_week(modeladmin, request, queryset):
                 event.__class__.objects.create(
                     day=new_day,
                     name=event.name,
+                    payment=event.payment,
+                    age=event.age,
                     start_time=event.start_time,
                     end_time=event.end_time
                 )
