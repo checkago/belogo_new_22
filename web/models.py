@@ -291,8 +291,6 @@ class Question(models.Model):
 
 
 class Feedback(models.Model):
-    category = models.ForeignKey(Category, default='Форма обратной связи', blank=True, related_name='feedbacks',
-                                 on_delete=models.SET_NULL, null=True, verbose_name='Категория')
     name = models.CharField(max_length=35, verbose_name='Имя')
     email = models.EmailField(verbose_name='Е-мэйл')
     phone = models.CharField(max_length=17, blank=True, verbose_name='Номер телефона')

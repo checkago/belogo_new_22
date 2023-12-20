@@ -7,7 +7,7 @@
 {% block content %}
 {% include '_header_pages.html' %}
 
-<div class="container mt-5 pt-2  pb-2 mt-2">
+<div id="fback" class="container mt-5 pt-2  pb-2 mt-2">
     <div class="row">
     <div class="col-xs-12 col-lg-5 mb-3">
         <form method="POST">
@@ -22,29 +22,28 @@
           </div>
 
           <!-- Body -->
-              <div hidden>{% crispy_field fback.category %}</div>
               <div class="md-form">
                 <i class="fas fa-user prefix dark-grey-text"></i>
                 {% crispy_field fback.name 'class' 'form-control textInput required' 'placeholder' ' ' %}
-                <label for="orangeForm-name" class="active">Ваше имя <span class="sup text-danger">*</span></label>
+                <label for="id_name" class="active">Ваше имя <span class="sup text-danger">*</span></label>
               </div>
 
               <div class="md-form">
                 <i class="fas fa-envelope prefix dark-grey-text"></i>
                 {% crispy_field fback.email 'class' 'form-control emailinput required' 'placeholder' ' ' %}
-                <label for="orangeForm-email" class="active">Ваша почта <span class="sup text-danger">*</span></label>
+                <label for="id_email" class="active">Ваша почта <span class="sup text-danger">*</span></label>
               </div>
 
               <div class="md-form">
                   <i class="fas fa-phone prefix dark-grey-text"></i>
                 {% crispy_field fback.phone 'class' 'form-control textInput' 'placeholder' ' ' %}
-                <label for="orangeForm-phone" class="active">Номер телефона</label>
+                <label for="id_phone" class="active">Номер телефона</label>
               </div>
 
               <div class="md-form">
                 <i class="fas fa-envelope prefix dark-grey-text"></i>
                 {% crispy_field fback.comment 'class' 'form-control md-textarea' 'placeholder' ' ' %}
-                <label for="orangeForm-text" class="active">Сообщение <span class="sup text-danger">*</span></label>
+                <label for="id_comment" class="active">Сообщение <span class="sup text-danger">*</span></label>
               </div>
                 <span class="sup text-danger">*</span><span class="font-small"> - обязательное поле</span>
               <div class="text-center">

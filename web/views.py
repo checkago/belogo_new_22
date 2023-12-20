@@ -200,17 +200,12 @@ def contacts(request):
     description = 'Контакты и способы связи с сотрудниками и руководством Библиотек Балашиха мкр Железнодорожный'
 
     if request.method == 'POST':
-        fback = FeedbackForm(request.POST, initial={"category": "category"})
+        fback = FeedbackForm(request.POST)
 
         if fback.is_valid():
             Feedback = fback.save(commit=False)
-            cd = fback.cleaned_data
             Feedback.save()
-            subject = 'Сообщение от {} ({})'.format(cd['name'], cd['email'])
-            message = '"{}". {} | {}'.format(cd['comment'], cd['name'], cd['phone'])
-            send_mail(subject, message, 'site@biblioteka-belogo.ru', [cd['email'], 'bib76@biblioteka-belogo.ru'])
-            sent = True
-            return redirect('/contacts')
+            return redirect('/')
 
     else:
         fback = FeedbackForm()

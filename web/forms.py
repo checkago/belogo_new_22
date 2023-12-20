@@ -51,7 +51,7 @@ class FeedbackForm(forms.ModelForm):
 
     class Meta:
         model = Feedback
-        fields = ('name', 'phone', 'email', 'comment', 'category')
+        fields = ('name', 'phone', 'email', 'comment')
 
 
 class BookrequestForm(forms.ModelForm):
