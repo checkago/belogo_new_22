@@ -194,7 +194,6 @@ def vacancy(request, pk):
     return render(request, 'vacancy.html', {'title': title, 'name': name, 'vacancy': vacancy, 'date': date, 'salary': salary,
                                             'description': description})
 
-@cache_page(60*15)
 def contacts(request):
     title = 'Контакты'
     biblioteki = Biblioteka.objects.all()
@@ -209,7 +208,7 @@ def contacts(request):
             Feedback.save()
             subject = 'Сообщение от {} ({})'.format(cd['name'], cd['email'])
             message = '"{}". {} | {}'.format(cd['comment'], cd['name'], cd['phone'])
-            send_mail(subject, message, 'site@biblioteka-belogo.ru', [cd['email'], 'bib76@yandex.ru'])
+            send_mail(subject, message, 'site@biblioteka-belogo.ru', [cd['email'], 'bib76@biblioteka-belogo.ru'])
             sent = True
             return redirect('/contacts')
 
