@@ -33,7 +33,7 @@ class FeedbackForm(forms.ModelForm):
         widget=forms.Textarea(attrs={'rows': '1'})
     )
     email = forms.EmailField(required=False, widget=forms.EmailInput)
-    captcha = ReCaptchaField()
+    # captcha = ReCaptchaField()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
