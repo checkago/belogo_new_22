@@ -290,7 +290,7 @@ class Question(models.Model):
         return self.name
 
 
-class Feedback(models.Model):
+class Feedback(models.Model, EmailSignalMixin):
     name = models.CharField(max_length=35, verbose_name='Имя')
     email = models.EmailField(verbose_name='Е-мэйл')
     phone = models.CharField(max_length=17, blank=True, verbose_name='Номер телефона')
