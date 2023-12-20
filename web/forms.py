@@ -33,7 +33,7 @@ class FeedbackForm(forms.ModelForm):
         widget=forms.Textarea(attrs={'rows': '1'})
     )
     email = forms.EmailField(required=False, widget=forms.EmailInput)
-    # captcha = ReCaptchaField()
+    captcha = ReCaptchaField()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -42,12 +42,12 @@ class FeedbackForm(forms.ModelForm):
         self.fields['email'].label = 'E-mail'
         self.fields['comment'].label = 'Коментарий'
 
-    def clean_email(self):
-        email = self.cleaned_data['email']
-        domain = email.split('.')[-1]
-        if domain in ['com', 'net', 'org', 'xyz', 'de', 'fr', 'ua', 'nl', 'cz', 'group', 'biz', 'dk']:
-            raise forms.ValidationError(f'Использование почтового ящика в домене .{domain} заблокированно')
-        return email
+    # def clean_email(self):
+    #     email = self.cleaned_data['email']
+    #     domain = email.split('.')[-1]
+    #     if domain in ['com', 'net', 'org', 'xyz', 'de', 'fr', 'ua', 'nl', 'cz', 'group', 'biz', 'dk']:
+    #         raise forms.ValidationError(f'Использование почтового ящика в домене .{domain} заблокированно')
+    #     return email
 
     class Meta:
         model = Feedback
