@@ -67,12 +67,12 @@
                     {% endfor %}
                     </div>
             <div class="row">
-                <div class="col-md-6 text-left">
+                <div class="col-md-5 text-left">
                     <h5 class="font-responsive font-weight-bold">Телефон:</h5>
                     <h6 class="font-responsive font-weight-bold">{{ biblioteka.phone }}</h6>
                     <h6 class="font-responsive font-weight-bold">{{ biblioteka.email }}</h6>
                 </div>
-                <div class="col-md-6 text-right">
+                <div class="col-md-7 text-right">
                     <h5 class="font-responsive font-weight-bold">Рабочие дни: {{ biblioteka.workdays }}{% if biblioteka.workdays_alt %} | {{ biblioteka.workdays_alt }}{% endif %}</h5>
                     <h6 class="font-responsive font-weight-bold">Время работы: {{ biblioteka.worktime }}{% if biblioteka.worktime_alt %} | {{ biblioteka.worktime_alt }}{% endif %}</h6>
                     <h6 class="font-responsive font-weight-bold">Выходной: {{ biblioteka.weekend }}</h6>
