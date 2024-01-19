@@ -48,13 +48,13 @@
                         <div class="row">
                             {% for Event in page_obj %}
                             <div class="col-md-4">
-                                <div class="card my-3">
+                                <div class="card my-3 {% if Event.date == event.date %}bg-info{% endif %}">
                                     <div class="card-body">
                                         <img class="img-responsive" src="{{ Event.image.url }}" alt="{{ Event.name }} {{ Event.library }} Железнодорожный"/>
                                     </div>
                                     <div class="card-footer">
                                         <h5>{{ Event.name }}</h5>
-                                        <h5>{{ Event.library }}</h5>
+                                        <h6>{{ Event.library }}</h6>
                                         {% if Event.is_past_due %}
                                             <span class="text-dark font-weight-bold">Завершено:</span>
                                             <p class="text-danger font-weight-bold"><s>{{ Event.date }}</s></p>
