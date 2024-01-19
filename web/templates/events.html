@@ -16,41 +16,39 @@
     <div class="container">
         <div class="row">
             {% for Event in events %}
-            <div class="col-md-4 d-flex">
-                <div class="card my-3">
-                    <div class="card-body">
-                        <a href="#" data-toggle="modal" data-target="#event_week_{{ Event.id }}"><img class="img-responsive" src="{{ Event.image.url }}" alt="{{ Event.name }} {{ Event.library }} Железнодорожный"/></a>
-                    </div>
-                    <div class="card-footer">
-                        <h5>{{ Event.name }}</h5>
-                        <h5>{{ Event.library }}</h5>
-                        {% if Event.is_past_due %}
-                            <span class="text-dark font-weight-bold">Завершено:</span>
-                            <p class="text-danger font-weight-bold"><s>{{ Event.date }}</s></p>
-                        {% else %}
-                            <span class="text-dark font-weight-bold">Ожидается:</span>
-                            <p class="text-dark font-weight-bold">{{ Event.date }}</p>
-                        {% endif %}
+                <div class="col-md-4 d-flex">
+                    <div class="card my-3 {% if Event.date == event.date %}bg-secondary{% endif %}">
+                        <div class="card-body">
+                            <a href="#" data-toggle="modal" data-target="#event_week_{{ Event.id }}"><img class="img-responsive" src="{{ Event.image.url }}" alt="{{ Event.name }} {{ Event.library }} Железнодорожный"/></a>
+                        </div>
+                        <div class="card-footer">
+                            <h5>{{ Event.name }}</h5>
+                            <h5>{{ Event.library }}</h5>
+                            {% if Event.is_past_due %}
+                                <span class="text-dark font-weight-bold">Завершено:</span>
+                                <p class="text-danger font-weight-bold"><s>{{ Event.date }}</s></p>
+                            {% else %}
+                                <span class="text-dark font-weight-bold">Ожидается:</span>
+                                <p class="text-dark font-weight-bold">{{ Event.date }}</p>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="modal top fade" id="event_week_{{ Event.id }}" tabindex="-1" aria-labelledby="Расписание" aria-hidden="true" data-backdrop="true" data-keyboard="true">
-              <div class="modal-dialog modal-xl  modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="btn-close btn-danger" data-dismiss="modal" aria-label="Закрыть"></button>
-                  </div>
-                  <div class="modal-body"><img class="img-fluid z-depth-2 rounded" src="{{ Event.image.url }}" /></div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">
-                      Закрыть
-                    </button>
-                  </div>
+                <div class="modal top fade" id="event_week_{{ Event.id }}" tabindex="-1" aria-labelledby="Расписание" aria-hidden="true" data-backdrop="true" data-keyboard="true">
+                    <div class="modal-dialog modal-xl  modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close btn-danger" data-dismiss="modal" aria-label="Закрыть"></button>
+                            </div>
+                            <div class="modal-body"><img class="img-fluid z-depth-2 rounded" src="{{ Event.image.url }}" /></div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                    Закрыть
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-
             {% endfor %}
         </div>
     </div>
