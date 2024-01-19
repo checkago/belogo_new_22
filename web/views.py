@@ -38,7 +38,8 @@ def index(request):
     anonsy = Anons.objects.all().order_by('-id')
     categories = Category.objects.prefetch_related('news')
     category = Category.objects.all()
-    event = Event.objects.latest('id')
+    datenow = date.today()
+    event = Event.objects.filter(date__gt=datenow).order_by('date').first()
     cinema = Cinema.objects.latest('id')
     partners1 = Partner.objects.filter(block='1').order_by('?')
     partners2 = Partner.objects.filter(block='2').order_by('?')
@@ -403,7 +404,7 @@ class BookDetailView(generic.DetailView):
 def events(request):
     title = 'Мероприятия и события'
     description = 'Ожидаемые и недавно прошедшие мероприятия и события в библиотеках Балашихи в микрорайоне Железнодорожный'
-    events = Event.objects.order_by('-id')[:9]
+    events = Event.objects.order_by('-date')[:9]
     datenow = datetime.date.today()
     return render(request, 'events.html', {'title': title, 'description': description, 'events': events,
                                            'datenow': datenow})
