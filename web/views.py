@@ -430,7 +430,7 @@ def shedules(request):
 def events_archive(request):
     title = 'Архив мероприятий'
     description = 'Архив прошедших в билиотеках Балашихи мероприятий'
-    events = Event.objects.order_by('-id')
+    events = Event.objects.order_by('-date')
     datenow = datetime.date.today()
     paginator = Paginator(events, 9)
     page_number = request.GET.get('page')
