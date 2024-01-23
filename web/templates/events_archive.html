@@ -47,8 +47,8 @@
                     <div class="container mt-5 mb-5">
                         <div class="row">
                             {% for Event in page_obj %}
-                            <div class="col-md-4">
-                                <div class="card my-3 {% if Event.date == event.date %}bg-info{% endif %}">
+                            <div class="col-md-4 d-flex">
+                                <div class="card my-3 {% if Event.date == closest_event_date %}bg-yellow2{% endif %}">
                                     <div class="card-body">
                                         <img class="img-responsive" src="{{ Event.image.url }}" alt="{{ Event.name }} {{ Event.library }} Железнодорожный"/>
                                     </div>
