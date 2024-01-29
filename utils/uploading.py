@@ -7,7 +7,7 @@ class ImageUploadHelper:
             'upload_postfix': 'uploads'
         },
         'News': {
-            'field': 'slug',
+            'field': 'name',
             'upload_postfix': 'news_images'
         },
     }

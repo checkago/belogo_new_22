@@ -406,8 +406,14 @@ def events(request):
     description = 'Ожидаемые и недавно прошедшие мероприятия и события в библиотеках Балашихи в микрорайоне Железнодорожный'
     events = Event.objects.order_by('-date')[:9]
     datenow = datetime.date.today()
-    return render(request, 'events.html', {'title': title, 'description': description, 'events': events,
-                                           'datenow': datenow})
+    closest_event_date = None
+
+    for event in events:
+        if event.date >= datenow and (closest_event_date is None or event.date < closest_event_date):
+            closest_event_date = event.date
+    context = {'title': title, 'description': description, 'events': events, 'datenow': datenow,
+               'closest_event_date': closest_event_date}
+    return render(request, 'events.html', context)
 
 
 @cache_page(60*15)
@@ -432,13 +438,17 @@ def events_archive(request):
     description = 'Архив прошедших в билиотеках Балашихи мероприятий'
     events = Event.objects.order_by('-date')
     datenow = datetime.date.today()
+    closest_event_date = None
+
+    for event in events:
+        if event.date >= datenow and (closest_event_date is None or event.date < closest_event_date):
+            closest_event_date = event.date
     paginator = Paginator(events, 9)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-
-    return render(request, 'events_archive.html', {'events': events, 'title': title, 'paginator': paginator,
-                                              'page_obj': page_obj, 'description': description, 'datenow': datenow})
-
+    context = {'events': events, 'title': title, 'paginator': paginator, 'page_obj': page_obj,
+               'description': description, 'datenow': datenow, 'closest_event_date': closest_event_date}
+    return render(request, 'events_archive.html', context)
 
 def page_not_found_view(request, exception):
     return render(request, '404.html', status=404)

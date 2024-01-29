@@ -17,7 +17,7 @@
         <div class="row">
             {% for Event in events %}
                 <div class="col-md-4 d-flex">
-                        <div class="card my-3 {% if Event.date == closest_date %}{% if Event.date >= current_date %}bg-warning{% endif %}{% endif %}">
+                    <div class="card my-3 {% if Event.date == closest_event_date %}bg-yellow2{% endif %}">
                         <div class="card-body">
                             <a href="#" data-toggle="modal" data-target="#event_week_{{ Event.id }}"><img class="img-responsive" src="{{ Event.image.url }}" alt="{{ Event.name }} {{ Event.library }} Железнодорожный"/></a>
                         </div>
