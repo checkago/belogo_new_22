@@ -48,7 +48,6 @@ class NewsAdminForm(forms.ModelForm):
 
 
 class NewsAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('name',)}
     inlines = [ImageGalleryInline]
     form = NewsAdminForm
     list_display = ('name', 'category',)
