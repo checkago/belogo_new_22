@@ -44,9 +44,9 @@ class Category(MPTTModel):
     slug = models.SlugField(max_length=128, unique=True)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
 
-    def get_pages(self):
-        ids = self.get_descendants(include_self=True).values_list('id')
-        return Book.objects.filter(category_id__in=ids).count()
+    # def get_pages(self):
+    #     ids = self.get_descendants(include_self=True).values_list('id')
+    #     return Book.objects.filter(category_id__in=ids).count()
 
     class Meta:
         verbose_name = 'Категория'
