@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% include '_header_pages.html' %}
+
+<div class="container">
+    {% include "_page_menu_empty.html" %}
+    <div class="row">
+    <div class="col-md-12 mt-5 mb-5 pt-5 pb-5">
+        <div class="row">
+            <div class="col-md-6">
+                {% for category in categories %}
+                    {% if category.id == 5 %}
+                        <a href="{% url 'documents_in_category' category.id %}">
+                            <div class="card mb-4 pb-4">
+                                <p>{{ category.name }}</p>
+                            </div>
+                        </a>
+                    {% elif category.id == 4 %}
+                        <a href="{% url 'documents_in_category' category.id %}">
+                            <div class="card">
+                                <p>{{ category.name }}</p>
+                            </div>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-md-6">
+                {% for category in categories %}
+                    {% if category.id == 6 %}
+                        <a href="{% url 'documents_in_category' category.id %}">
+                            <div class="card">
+
+                                <p>{{ category.name }}</p>
+                            </div>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% include '_footer.html' %}
+
+{% endblock %}

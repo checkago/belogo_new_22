@@ -96,6 +96,33 @@ def news_view(request, pk):
     return render(request, 'news.html', {'news': news, 'title': title, 'image': image, 'description': description,
                                          'date': date, 'category': category})
 
+
+def document_categories(request):
+    # Список id категорий, которые вы хотите вывести
+    category_ids = [4, 5, 6]  # Пример списка id категорий
+
+    # Запрос категорий по их id
+    categories = Category.objects.filter(id__in=category_ids)
+    return render(request, 'documents_category.html', {'categories': categories})
+
+
+def documents_in_category(request, category_id):
+    category = Category.objects.get(pk=category_id)
+    documents = Document.objects.filter(category=category, published=True)
+
+    paginator = Paginator(documents, 10)  # Разбивка на страницы по 10 документов
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'category': category,
+        'page_obj': page_obj,
+    }
+
+    return render(request, 'documents.html', context)
+
+
 @cache_page(60*15)
 def documents(request):
     categories = Category.objects.prefetch_related('documents')
