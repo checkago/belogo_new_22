@@ -99,7 +99,7 @@ def news_view(request, pk):
 
 def document_categories(request):
     # Список id категорий, которые вы хотите вывести
-    category_ids = [1, 2, 3]  # Пример списка id категорий
+    category_ids = [14, 15, 16]  # Пример списка id категорий
 
     # Запрос категорий по их id
     categories = Category.objects.filter(id__in=category_ids)

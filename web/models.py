@@ -428,7 +428,7 @@ class PolojenieKonkurs(models.Model):
     start_date = models.DateField(verbose_name='Дата начала проведения', blank=True, null=True)
     end_date = models.DateField(verbose_name='Дата окончания проведения', blank=True, null=True)
     name = models.CharField(max_length=250, verbose_name='Заголовок')
-    category = models.ForeignKey(Category, default=3, blank=True, on_delete=models.SET_NULL,
+    category = models.ForeignKey(Category, default=16, blank=True, on_delete=models.SET_NULL,
                                  related_name='polojenya_konkurs', null=True, verbose_name='Категория')
     description = models.TextField(verbose_name='Текст')
     image = models.ImageField(upload_to='img/konkurs', blank=True, null=True, verbose_name='Главное фото')

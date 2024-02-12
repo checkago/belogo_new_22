@@ -9,7 +9,7 @@
     <div class="row d-flex justify-content-center pt-3">
             <div class="col-md-8">
                 {% for category in categories %}
-                        {% if category.id == 2 %}
+                        {% if category.id == 15 %}
                             <div class="card mt-3 shadow-2">
                                 <div class="card-body">
                                   <div class="row g-0">
@@ -24,7 +24,7 @@
                                   </div>
                                 </div>
                             </div>
-                        {% elif category.id == 1 %}
+                        {% elif category.id == 14 %}
                             <div class="card mt-3 shadow-2">
                                 <div class="card-body">
                                   <div class="row g-0">
@@ -45,7 +45,7 @@
             <div class="vr" style="height: 250px;"></div>
             <div class="col-md-4 d-flex">
                 {% for category in categories %}
-                    {% if category.id == 3 %}
+                    {% if category.id == 16 %}
                         <a href="{% url 'documents_in_category' category.id %}">
                             <div class="card wider d-flex justify-content-center text-center shadow-2-strong">
                               <div class="card-body">
