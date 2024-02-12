@@ -12,27 +12,58 @@
             <div class="col-md-6">
                 {% for category in categories %}
                     {% if category.id == 5 %}
-                        <a href="{% url 'documents_in_category' category.id %}">
-                            <div class="card mb-4 pb-4">
-                                <p>{{ category.name }}</p>
-                            </div>
-                        </a>
+                        <div class="col-md-12">
+                            <a href="{% url 'documents_in_category' category.id %}">
+                                <div class="card">
+                                  <div class="card-body">
+                                      <div class="row">
+                                          <div class="col-md-4">
+                                              <img src="{% static 'img/documents.png' %}" />
+                                          </div>
+                                          <div class="col-md-8">
+                                              <h5 class="card-title font-weight-bold">{{ category.name }}</h5>
+                                              <p class="card-text">Документы для ознакомления читателей с изменениями в работе учреждения.
+                                                        Предстоящих мероприятиях и событиях касающихся работы централизованной библиотечной системы.</p>
+                                              <a href="{% url 'documents_in_category' category.id %}" class="btn bg-yellow2 font-weight-bold" data-mdb-ripple-init>Перейти</a>
+                                          </div>
+                                      </div>
+                                  </div>
+                                </div>
+                            </a>
+                        </div>
                     {% elif category.id == 4 %}
-                        <a href="{% url 'documents_in_category' category.id %}">
-                            <div class="card">
-                                <p>{{ category.name }}</p>
-                            </div>
-                        </a>
+                        <div class="col-md-12">
+                            <a href="{% url 'documents_in_category' category.id %}">
+                                <div class="card mt-3">
+                                    <div class="card-body">
+                                      <div class="row">
+                                          <div class="col-md-4">
+                                              <img src="{% static 'img/stamp.png' %}" />
+                                          </div>
+                                          <div class="col-md-8">
+                                              <h5 class="card-title font-weight-bold">{{ category.name }}</h5>
+                                              <p class="card-text">Учредительные документы организации. Устав. Положения по филиалам и другие.</p>
+                                              <a href="{% url 'documents_in_category' category.id %}" class="btn bg-yellow2 font-weight-bold" data-mdb-ripple-init>Перейти</a>
+                                          </div>
+                                      </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
                     {% endif %}
                 {% endfor %}
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 d-flex">
                 {% for category in categories %}
                     {% if category.id == 6 %}
                         <a href="{% url 'documents_in_category' category.id %}">
-                            <div class="card">
-
-                                <p>{{ category.name }}</p>
+                            <div class="card wider d-flex text-center">
+                              <div class="card-body">
+                                <img src="{% static 'img/contest.png' %}" class="img-fluid" />
+                                <h5 class="card-title font-weight-bold">{{ category.name }}</h5>
+                                <p class="card-text">Положения о конкурсах. Документы и заявки.</p>
+                                <a href="{% url 'documents_in_category' category.id %}" class="btn bg-yellow2 font-weight-bold" data-mdb-ripple-init>Перейти</a>
+                              </div>
                             </div>
                         </a>
                     {% endif %}

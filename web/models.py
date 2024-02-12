@@ -429,6 +429,27 @@ class Document(models.Model):
         return self.name
 
 
+class PolojenieKonkurs(models.Model):
+    date = models.DateField(default=date.today, verbose_name='Дата публикации')
+    start_date = models.DateField(verbose_name='Дата начала проведения', blank=True, null=True)
+    end_date = models.DateField(verbose_name='Дата окончания проведения', blank=True, null=True)
+    name = models.CharField(max_length=250, verbose_name='Заголовок')
+    category = models.ForeignKey(Category, default=6, blank=True, on_delete=models.SET_NULL,
+                                 related_name='polojenya_konkurs', null=True, verbose_name='Категория')
+    description = models.TextField(verbose_name='Текст')
+    image = models.ImageField(upload_to='img/konkurs', blank=True, null=True, verbose_name='Главное фото')
+    konkurs_doc = models.FileField(upload_to='documents/polojenie_k', verbose_name='Файл положения', blank=True, null=True)
+    konkurs_zayavka = models.FileField(upload_to='documents/polojeni_k_z', verbose_name='Файл Заявки', blank=True, null=True)
+    published = models.BooleanField(default=True, verbose_name='Опубликована')
+
+    class Meta:
+        verbose_name = 'Положение '
+        verbose_name_plural = 'Положения о конкурсах'
+
+    def __str__(self):
+        return self.name
+
+
 class Raiting(models.Model):
     date = models.DateField(default=date.today, verbose_name='Дата')
     name = models.CharField(max_length=250, verbose_name='Заголовок')

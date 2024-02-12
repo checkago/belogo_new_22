@@ -12,7 +12,8 @@ from web.models import ImageGallery, Category, News, Document, Raiting, Bibliote
     TermsOfUse, Vacancy, VeteranVOV, VeteranTruda, LeningradResident, HeroMemoryBook, Anons, Shedule, Event, Cinema, \
     Position, Employers, Service_dop, Service, Book, Question, Feedback, Bookrequest, ServiceDop, Partner, Library, \
     Author, LibraryCategory, Week, Eventy, Day, WeekCDSCH, WeekBER, WeekF2, WeekF3, WeekF4, DayCDSCH, \
-    EventyCDSCH, EventyBER, DayBER, EventyF2, DayF2, EventyF3, DayF3, EventyF4, DayF4, Movie, CinemaDay, CinemaWeek
+    EventyCDSCH, EventyBER, DayBER, EventyF2, DayF2, EventyF3, DayF3, EventyF4, DayF4, Movie, CinemaDay, CinemaWeek, \
+    PolojenieKonkurs
 
 
 class ImageGalleryInline(GenericTabularInline):
@@ -30,6 +31,7 @@ admin.site.register(
     list_display=(
         'tree_actions',
         'indented_title',
+        'id',
     ),
     list_display_links=(
         'indented_title',
@@ -80,6 +82,11 @@ class DocumentAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     form = DocumentAdminForm
     list_display = ('name', 'published')
+
+
+class PolojenieKonkursAdmin(admin.ModelAdmin):
+    form = DocumentAdminForm
+    list_display = ('name', 'start_date', 'end_date', 'published', 'category')
 
 
 class CinemaAdmin(admin.ModelAdmin):
@@ -514,6 +521,7 @@ admin.site.register(WeekF3, WeekF3Admin)
 admin.site.register(WeekF4, WeekF4Admin)
 admin.site.register(News, NewsAdmin)
 admin.site.register(Document, DocumentAdmin)
+admin.site.register(PolojenieKonkurs, PolojenieKonkursAdmin)
 admin.site.register(Raiting, RaitingAdmin)
 admin.site.register(Shedule, SheduleAdmin)
 admin.site.register(Event, EventAdmin)

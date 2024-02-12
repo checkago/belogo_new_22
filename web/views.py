@@ -109,9 +109,13 @@ def document_categories(request):
 def documents_in_category(request, category_id):
     category = Category.objects.get(pk=category_id)
     documents = Document.objects.filter(category=category, published=True)
+    polojeniya = PolojenieKonkurs.objects.filter(category=category, published=True)
 
-    paginator = Paginator(documents, 10)  # Разбивка на страницы по 10 документов
+    # Объединение результатов запросов
+    combined_results = list(documents) + list(polojeniya)
+    combined_results.sort(key=lambda x: x.date, reverse=True)
 
+    paginator = Paginator(combined_results, 10)  # Разбивка на страницы по 10 документов
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -147,6 +151,23 @@ def document(request, pk):
     date = document.date
     return render(request, 'document.html', {'title': title, 'document': document, 'date': date, 'description': description,
                                              'image': image, 'category': category})
+
+
+def polojenie_view(request, pk):
+    polojenie = get_object_or_404(PolojenieKonkurs, pk=pk)
+    category = polojenie.category
+    title = polojenie.name
+    image = polojenie.image
+    description = polojenie.description
+    date = polojenie.date
+    start_date = polojenie.date
+    end_date = polojenie.date
+    pdf = polojenie.konkurs_doc
+    doc = polojenie.konkurs_zayavka
+    return render(request, 'polojenie.html', {'title': title, 'polojenie': polojenie, 'date': date,
+                                             'description': description, 'image': image, 'category': category,
+                                             'start_date': start_date, 'end_date': end_date, 'pdf': pdf, 'doc': doc})
+
 
 @cache_page(60*15)
 def services(request):

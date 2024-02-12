@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% include '_header_pages.html' %}
+
+<div class="container">
+    {% include "_page_menu_bib.html" %}
+    <nav class='mt-2' aria-label="breadcrumb sm-hidden" id="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'document_categories' %}">Документы</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+      </ol>
+    </nav>
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                  <h5 class="text-left text-dark black-text font-weight-bold"><strong>{{ polojenie.name }}</strong></h5>
+                  <hr class="hr-pink mb-3">
+                </div>
+                <div class="col-md-12">
+                    <span class="font-weight-bold">Дата публикации:</span><h4>{{ polojenie.date }}</h4>
+                </div>
+                <div class="col-md-4">
+                    {% if polojenie.image %}
+                    <img class=img-fluid src="{{ polojenie.image.url }}" />
+                    {% else %}
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <div class="col-md-12 pt-2">
+                        <h5><span class="font-weight-bold">Начало проведения:</span> {{ polojenie.start_date }}</h5>
+                        <h5><span class="font-weight-bold">Окончание проведения:</span> {{ polojenie.end_date }}</h5>
+                    </div>
+                </div>
+                <div class="col-md-8 pt-4">
+                    <h5><span class="font-weight-bold">Преамбула:</span></h5>
+                    <div class="pl-3">{{ polojenie.description|safe }}</div>
+                </div>
+                <div class="col-md-12 mb-4">
+                    <hr class="hr-pink mb-3">
+                    <a href="{{ polojenie.konkurs_doc.url }}" class="btn bg-yellow2 btn-sm" target="_blank"><h5 class="font-weight-bold">Открыть ПОЛОЖЕНИЕ</h5></a>
+                    <a href="{{ polojenie.konkurs_zayavka.url }}" class="btn bg-yellow2 btn-sm"><h5 class="font-weight-bold">Скачать ЗАЯВКУ</h5></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include '_footer.html' %}
+
+{% endblock %}

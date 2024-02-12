@@ -18,6 +18,7 @@ urlpatterns = [
     path('category/<int:category_id>/', views.documents_in_category, name='documents_in_category'),
     path('documents/', views.documents, name='documents'),
     path('documents/<int:pk>/', views.document, name='document'),
+    path('polojenie/<int:pk>/', views.polojenie_view, name='polojenie'),
     path('services/', views.services, name='services'),
     path('quality/', views.raitings, name='raitings'),
     path('quality/<int:pk>/', views.raiting, name='raiting'),
