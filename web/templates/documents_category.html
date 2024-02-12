@@ -7,26 +7,26 @@
 <div class="container">
     {% include "_page_menu_empty.html" %}
     <div class="row">
-    <div class="col-md-12 mt-5 mb-5 pt-5 pb-5">
-        <div class="row">
             <div class="col-md-6">
                 {% for category in categories %}
                     {% if category.id == 5 %}
                         <div class="col-md-12">
                             <a href="{% url 'documents_in_category' category.id %}">
-                                <div class="card">
-                                  <div class="card-body">
-                                      <div class="row">
-                                          <div class="col-md-4">
-                                              <img src="{% static 'img/documents.png' %}" />
-                                          </div>
-                                          <div class="col-md-8">
-                                              <h5 class="card-title font-weight-bold">{{ category.name }}</h5>
-                                              <p class="card-text">Документы для ознакомления читателей с изменениями в работе учреждения.
-                                                        Предстоящих мероприятиях и событиях касающихся работы централизованной библиотечной системы.</p>
-                                              <a href="{% url 'documents_in_category' category.id %}" class="btn bg-yellow2 font-weight-bold" data-mdb-ripple-init>Перейти</a>
-                                          </div>
+                                <div class="card mb-3">
+                                  <div class="row g-0">
+                                    <div class="col-md-4">
+                                      <img src="{% static 'img/documents.png' %}" />
+                                    </div>
+                                    <div class="col-md-8">
+                                      <div class="card-body">
+                                        <h5 class="card-title">{{ category.name }}</h5>
+                                        <p class="card-text">
+                                          Документы для ознакомления читателей с изменениями в работе учреждения.
+                                                        Предстоящих мероприятиях и событиях касающихся работы централизованной библиотечной системы.
+                                        </p>
+                                        <a href="{% url 'documents_in_category' category.id %}" class="btn bg-yellow2 font-weight-bold" data-mdb-ripple-init>Перейти</a>
                                       </div>
+                                    </div>
                                   </div>
                                 </div>
                             </a>
@@ -70,8 +70,6 @@
                 {% endfor %}
             </div>
         </div>
-    </div>
-</div>
 </div>
 {% include '_footer.html' %}
 
