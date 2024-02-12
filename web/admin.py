@@ -22,21 +22,16 @@ class ImageGalleryInline(GenericTabularInline):
 
 
 class CategoryAdmin(DraggableMPTTAdmin):
-    prepopulated_fields = {'slug': ('name',)}
-
-
-admin.site.register(
-    Category,
-    CategoryAdmin,
-    list_display=(
+    list_display = (
         'tree_actions',
         'indented_title',
         'id',
-    ),
-    list_display_links=(
+    )
+    list_display_links = (
         'indented_title',
-    ),
-)
+    )
+
+admin.site.register(Category, CategoryAdmin)
 
 
 class NewsAdminForm(forms.ModelForm):
@@ -79,7 +74,6 @@ class RaitingAdminForm(forms.ModelForm):
 
 
 class DocumentAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('name',)}
     form = DocumentAdminForm
     list_display = ('name', 'published')
 

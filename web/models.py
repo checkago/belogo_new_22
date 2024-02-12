@@ -41,12 +41,7 @@ class Employers(models.Model):
 
 class Category(MPTTModel):
     name = models.CharField(max_length=50, unique=True, verbose_name='Категория')
-    slug = models.SlugField(max_length=128, unique=True)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
-
-    # def get_pages(self):
-    #     ids = self.get_descendants(include_self=True).values_list('id')
-    #     return Book.objects.filter(category_id__in=ids).count()
 
     class Meta:
         verbose_name = 'Категория'
@@ -415,7 +410,6 @@ class ServiceDop(models.Model):
 class Document(models.Model):
     date = models.DateField(default=date.today, verbose_name='Дата')
     name = models.CharField(max_length=250, verbose_name='Заголовок')
-    slug = models.SlugField(null=True, unique=True, verbose_name='Псевдоним')
     category = models.ForeignKey(Category, blank=True, on_delete=models.SET_NULL, related_name='documents', null=True, verbose_name='Категория')
     description = models.TextField(verbose_name='Текст')
     image = models.ImageField(upload_to='img/news', blank=True, null=True, verbose_name='Главное фото')
@@ -434,7 +428,7 @@ class PolojenieKonkurs(models.Model):
     start_date = models.DateField(verbose_name='Дата начала проведения', blank=True, null=True)
     end_date = models.DateField(verbose_name='Дата окончания проведения', blank=True, null=True)
     name = models.CharField(max_length=250, verbose_name='Заголовок')
-    category = models.ForeignKey(Category, default=6, blank=True, on_delete=models.SET_NULL,
+    category = models.ForeignKey(Category, default=3, blank=True, on_delete=models.SET_NULL,
                                  related_name='polojenya_konkurs', null=True, verbose_name='Категория')
     description = models.TextField(verbose_name='Текст')
     image = models.ImageField(upload_to='img/konkurs', blank=True, null=True, verbose_name='Главное фото')

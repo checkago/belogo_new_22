@@ -6,62 +6,52 @@
 
 <div class="container">
     {% include "_page_menu_empty.html" %}
-    <div class="row">
-            <div class="col-md-6">
+    <div class="row d-flex justify-content-center pt-3">
+            <div class="col-md-8">
                 {% for category in categories %}
-                    {% if category.id == 5 %}
-                        <div class="col-md-12">
-                            <a href="{% url 'documents_in_category' category.id %}">
-                                <div class="card mb-3">
+                        {% if category.id == 2 %}
+                            <div class="card mt-3 shadow-2">
+                                <div class="card-body">
                                   <div class="row g-0">
-                                    <div class="col-md-4">
-                                      <img src="{% static 'img/documents.png' %}" />
-                                    </div>
-                                    <div class="col-md-8">
-                                      <div class="card-body">
-                                        <h5 class="card-title">{{ category.name }}</h5>
-                                        <p class="card-text">
-                                          Документы для ознакомления читателей с изменениями в работе учреждения.
-                                                        Предстоящих мероприятиях и событиях касающихся работы централизованной библиотечной системы.
-                                        </p>
-                                        <a href="{% url 'documents_in_category' category.id %}" class="btn bg-yellow2 font-weight-bold" data-mdb-ripple-init>Перейти</a>
+                                      <div class="col-md-3 d-flex justify-content-center align-content-center">
+                                          <img src="{% static 'img/documents.png' %}" class="img-fluid shadow-2-strong" />
                                       </div>
-                                    </div>
+                                      <div class="col-md-9">
+                                          <h5 class="card-title font-weight-bold">{{ category.name }}</h5>
+                                          <p class="card-text">Документы для ознакомления читателей с изменениями в работе учреждения. Предстоящих мероприятиях и событиях касающихся работы централизованной библиотечной системы.</p>
+                                          <a href="{% url 'documents_in_category' category.id %}" class="btn bg-yellow2 font-weight-bold" data-mdb-ripple-init>Перейти</a>
+                                      </div>
                                   </div>
                                 </div>
-                            </a>
-                        </div>
-                    {% elif category.id == 4 %}
-                        <div class="col-md-12">
-                            <a href="{% url 'documents_in_category' category.id %}">
-                                <div class="card mt-3">
-                                    <div class="card-body">
-                                      <div class="row">
-                                          <div class="col-md-4">
-                                              <img src="{% static 'img/stamp.png' %}" />
-                                          </div>
-                                          <div class="col-md-8">
-                                              <h5 class="card-title font-weight-bold">{{ category.name }}</h5>
-                                              <p class="card-text">Учредительные документы организации. Устав. Положения по филиалам и другие.</p>
-                                              <a href="{% url 'documents_in_category' category.id %}" class="btn bg-yellow2 font-weight-bold" data-mdb-ripple-init>Перейти</a>
-                                          </div>
+                            </div>
+                        {% elif category.id == 1 %}
+                            <div class="card mt-3 shadow-2">
+                                <div class="card-body">
+                                  <div class="row g-0">
+                                      <div class="col-md-3 d-flex justify-content-center align-content-center">
+                                          <img src="{% static 'img/stamp.png' %}" class="img-fluid shadow-2-strong" />
                                       </div>
-                                    </div>
+                                      <div class="col-md-9">
+                                          <h5 class="card-title font-weight-bold">{{ category.name }}</h5>
+                                          <p class="card-text">Учредительные документы организации. Устав. Положения по филиалам и другие.</p>
+                                          <a href="{% url 'documents_in_category' category.id %}" class="btn bg-yellow2 font-weight-bold" data-mdb-ripple-init>Перейти</a>
+                                      </div>
+                                  </div>
                                 </div>
-                            </a>
-                        </div>
-                    {% endif %}
+                            </div>
+                        {% endif %}
                 {% endfor %}
             </div>
-            <div class="col-md-6 d-flex">
+            <div class="vr" style="height: 250px;"></div>
+            <div class="col-md-4 d-flex">
                 {% for category in categories %}
-                    {% if category.id == 6 %}
+                    {% if category.id == 3 %}
                         <a href="{% url 'documents_in_category' category.id %}">
-                            <div class="card wider d-flex text-center">
+                            <div class="card wider d-flex justify-content-center text-center shadow-2-strong">
                               <div class="card-body">
                                 <img src="{% static 'img/contest.png' %}" class="img-fluid" />
                                 <h5 class="card-title font-weight-bold">{{ category.name }}</h5>
-                                <p class="card-text">Положения о конкурсах. Документы и заявки.</p>
+                                <p class="card-text">Положения о конкурсах. Документы и заявки. Мы с нетерпением ждем участников!</p>
                                 <a href="{% url 'documents_in_category' category.id %}" class="btn bg-yellow2 font-weight-bold" data-mdb-ripple-init>Перейти</a>
                               </div>
                             </div>

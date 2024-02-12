@@ -31,7 +31,7 @@ def getRoutes(request):
     ]
     return Response(routes)
 
-@cache_page(60*15)
+@cache_page(60*10)
 def index(request):
     title = 'МБУК ЦБС им. А. Белого'
     description = 'Официальный сайт Централизованной библиотечной сети имени Андрея Белого. Библиотека Железнодорожный'
@@ -99,7 +99,7 @@ def news_view(request, pk):
 
 def document_categories(request):
     # Список id категорий, которые вы хотите вывести
-    category_ids = [4, 5, 6]  # Пример списка id категорий
+    category_ids = [1, 2, 3]  # Пример списка id категорий
 
     # Запрос категорий по их id
     categories = Category.objects.filter(id__in=category_ids)
