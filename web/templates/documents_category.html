@@ -9,7 +9,7 @@
     <div class="row d-flex justify-content-center pt-3">
             <div class="col-md-8">
                 {% for category in categories %}
-                        {% if category.id == 15 %}
+                        {% if category.id == 10 %}
                             <div class="card mt-3 shadow-2">
                                 <div class="card-body">
                                   <div class="row g-0">
@@ -18,7 +18,7 @@
                                       </div>
                                       <div class="col-md-9">
                                           <h5 class="card-title font-weight-bold">{{ category.name }}</h5>
-                                          <p class="card-text">Документы и регламенты для ознакомления читателей с изменениями в работе учреждения. Предстоящих мероприятиях и событиях касающихся работы централизованной библиотечной системы.</p>
+                                          <p class="card-text">Документы для ознакомления читателей с изменениями в работе учреждения. Предстоящих мероприятиях и событиях касающихся работы централизованной библиотечной системы.</p>
                                           <a href="{% url 'documents_in_category' category.id %}" class="btn bg-yellow2 font-weight-bold" data-mdb-ripple-init>Перейти</a>
                                       </div>
                                   </div>
