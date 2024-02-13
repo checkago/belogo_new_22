@@ -585,7 +585,7 @@ class Anons(models.Model):
 
 class BookView(models.Model):
     book = models.ForeignKey('Library', on_delete=models.CASCADE, verbose_name='Книга')
-    view_count = models.PositiveIntegerField(default=1, verbose_name='Количество просмотров')
+    view_count = models.PositiveIntegerField(default=1, verbose_name='Количество просмотров книги')
     viewed_at = models.DateField(default=timezone.now, verbose_name='Дата просмотра')
 
     class Meta:

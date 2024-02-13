@@ -287,14 +287,23 @@ class LibraryAdminForm(forms.ModelForm):
 
 @admin.register(BookView)
 class BookViewAdmin(admin.ModelAdmin):
-    list_display = ('book', 'view_count', 'viewed_at')
+    list_display = ('book', 'view_count', 'viewed_at', 'total_views')
     list_filter = ('viewed_at',)
     date_hierarchy = 'viewed_at'
+    actions = None  # Отключаем возможность выполнения действий над выбранными объектами
+
+    def total_views(self, obj):
+        # Получаем общее количество просмотров для всех книг
+        total_views = sum(book.view_count for book in BookView.objects.all())
+        return total_views
+
+    total_views.short_description = 'ОБщее колличество просмотров'
 
 
 class LibraryAdmin(admin.ModelAdmin):
     form = LibraryAdminForm
     list_display = ('title', 'author', 'views')
+
 
 
 class AuthorAdmin(admin.ModelAdmin):
