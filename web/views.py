@@ -13,7 +13,7 @@ from datetime import datetime, timedelta
 from .forms import *
 from .models import *
 import datetime
-from django.views import generic
+from django.views import generic, View
 from .serializers import (BibliotekaSerializer, NewsSerializer,
                           EventySerializer, ServiceSerializer, BookFormSerializer, ActiveWeeksSerializer,
                           WeekSerializer, EventSerializer, WeekCDSCHSerializer, WeekBERSerializer, WeekF2Serializer,
@@ -425,27 +425,28 @@ def library_hud(request):
                                               'paginator': paginator, 'page_obj': page_obj})
 
 
+
 class BookDetailView(generic.DetailView):
     model = Library
     template_name = 'book_view.html'
-    title = Library.title
     context_object_name = 'book'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = Library.title
-        context['author'] = Library.author
-        context['image'] = Library.image
-        context['description'] = Library.description
-        context['link'] = Library.link
-        return context
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
-        self.object.views += 1
-        self.object.save()
-        context = self.get_context_data(object=self.object, title=self.object.title)
-        return self.render_to_response(context)
+        # Проверяем, существует ли уже запись о просмотре книги сегодня
+        today_views = BookView.objects.filter(book=self.object, viewed_at=timezone.now().date())
+        if today_views.exists():
+            # Если запись сегодняшнего просмотра уже существует, увеличиваем счетчик
+            today_view = today_views.first()
+            today_view.view_count += 1
+            today_view.save()
+        else:
+            # Если запись сегодняшнего просмотра еще не существует, создаем новую
+            BookView.objects.create(book=self.object)
+        return super().get(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Library, pk=self.kwargs.get('pk'))
 
 
 @cache_page(60*15)

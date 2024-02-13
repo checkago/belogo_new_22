@@ -1,7 +1,9 @@
 from datetime import timedelta
-
+from datetime import datetime
 from django.contrib import admin
 from django import forms
+from django.db.models.functions import ExtractMonth, ExtractYear
+from django.views import View
 from mptt.admin import DraggableMPTTAdmin
 from django.contrib.contenttypes.admin import GenericTabularInline
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
@@ -13,7 +15,7 @@ from web.models import ImageGallery, Category, News, Document, Raiting, Bibliote
     Position, Employers, Service_dop, Service, Book, Question, Feedback, Bookrequest, ServiceDop, Partner, Library, \
     Author, LibraryCategory, Week, Eventy, Day, WeekCDSCH, WeekBER, WeekF2, WeekF3, WeekF4, DayCDSCH, \
     EventyCDSCH, EventyBER, DayBER, EventyF2, DayF2, EventyF3, DayF3, EventyF4, DayF4, Movie, CinemaDay, CinemaWeek, \
-    PolojenieKonkurs
+    PolojenieKonkurs, BookView
 
 
 class ImageGalleryInline(GenericTabularInline):
@@ -281,6 +283,13 @@ class LibraryAdminForm(forms.ModelForm):
         verbose_name = 'Описание'
         model = Anons
         fields = '__all__'
+
+
+@admin.register(BookView)
+class BookViewAdmin(admin.ModelAdmin):
+    list_display = ('book', 'view_count', 'viewed_at')
+    list_filter = ('viewed_at',)
+    date_hierarchy = 'viewed_at'
 
 
 class LibraryAdmin(admin.ModelAdmin):

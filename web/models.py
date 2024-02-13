@@ -583,6 +583,18 @@ class Anons(models.Model):
     def __str__(self):
         return self.title
 
+class BookView(models.Model):
+    book = models.ForeignKey('Library', on_delete=models.CASCADE, verbose_name='Книга')
+    view_count = models.PositiveIntegerField(default=1, verbose_name='Количество просмотров')
+    viewed_at = models.DateField(default=timezone.now, verbose_name='Дата просмотра')
+
+    class Meta:
+        verbose_name = 'Просмотр'
+        verbose_name_plural = 'Просмотры'
+
+    def __str__(self):
+        return f'{self.book.title} - {self.viewed_at}'
+
 
 class Library(models.Model):
     title = models.CharField(max_length=200, verbose_name='Наименование')
@@ -593,6 +605,7 @@ class Library(models.Model):
     link = models.URLField(verbose_name='Ссылка на PDF файл', blank=True)
     file = models.FileField(upload_to='img/books/files', blank=True, verbose_name='Файл')
     views = models.IntegerField(default=0, verbose_name='Количество просмотров')
+
 
     class Meta:
         verbose_name = 'Электронная книга'

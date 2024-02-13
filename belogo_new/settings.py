@@ -121,6 +121,7 @@ ADMIN_REORDER = (
      'models': ('web.Library',
                 'web.Author',
                 'web.LibraryCategory',
+                'web.BookView',
                 )
      },
     {'app': 'web', 'label': 'Библиотека',
