@@ -303,11 +303,11 @@ def kniga_pamyati(request):
 
 
 def book_form(request):
-    title = 'Форма форма продления книг/и'
+    title = 'Форма продления книг/и'
     sent = False
     if request.method == 'POST':
         bform = BookForm(request.POST)
-        if bform.is_valid():
+        if bform.is_valid() and bform.cleaned_data['agreement']:
             Book = bform.save(commit=False)
             Book.save()
             return redirect('/')
@@ -323,13 +323,13 @@ def q_form(request):
     sent = False
     if request.method == 'POST':
         qform = QuestionForm(request.POST)
-        if qform.is_valid():
+        if qform.is_valid() and qform.cleaned_data['agreement']:
             Question = qform.save(commit=False)
             cd = qform.cleaned_data
             Question.save()
             subject = 'Вопрос библиотекарю от {} ({})'.format(cd['name'], cd['email'])
             message = '"{}". {}'.format(cd['comment'], cd['name'])
-            send_mail(subject, message, 'site@biblioteka-belogo.ru', [cd['email'], 'bib76@biblioteka-belogo.ru'])
+            send_mail(subject, message, 'site@obs-balashiha.ru', [cd['email'], 'bib76@biblioteka-belogo.ru'])
             sent = True
             return redirect('/')
 
@@ -344,7 +344,7 @@ def brq_form(request):
     sent = False
     if request.method == 'POST':
         brqform = BookrequestForm(request.POST)
-        if brqform.is_valid():
+        if brqform.is_valid() and brqform.cleaned_data['agreement']:
             Bookrequest = brqform.save(commit=False)
             Bookrequest.save()
             return redirect('/')
@@ -363,7 +363,7 @@ def s_form(request):
     sent = False
     if request.method == 'POST':
         sform = ServiceDopForm(request.POST, request.FILES)
-        if sform.is_valid():
+        if sform.is_valid() and sform.cleaned_data['agreement']:
             ServiceDop = sform.save(commit=False)
             ServiceDop.save()
              # Отправка данных на email
@@ -371,8 +371,8 @@ def s_form(request):
             email = EmailMessage(
                 'Новая форма дополнительной услуги',
                 message,
-                'site@biblioteka-belogo.ru',
-                ['bib76@biblioteka-belogo.ru']
+                'site@obs-balashiha.ru',
+                ['bib76@obs-balashiha.ru']
             )
              # Добавление файла вложением
             if request.FILES.get('file'):

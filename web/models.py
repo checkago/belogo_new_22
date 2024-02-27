@@ -310,6 +310,7 @@ class Book(models.Model, EmailSignalMixin):
     phone = models.CharField(max_length=17, blank=True, verbose_name='Номер елефона')
     email = models.EmailField(verbose_name='Е-мэйл')
     comment = models.TextField(max_length=300, verbose_name='Комментарий')
+    agreement = models.BooleanField(default=False, verbose_name='Согласие(персональные данные)')
 
     class Meta:
         verbose_name = 'Форма продления книг'
@@ -326,6 +327,7 @@ class Question(models.Model):
     email = models.EmailField(verbose_name='Е-мэйл')
     phone = models.CharField(max_length=17, blank=True, verbose_name='Номер телефона')
     comment = models.TextField(verbose_name='Вопрос')
+    agreement = models.BooleanField(default=False, verbose_name='Согласие(персональные данные)')
 
     class Meta:
         verbose_name = 'Вопрос библиотекарю'
@@ -340,6 +342,7 @@ class Feedback(models.Model, EmailSignalMixin):
     email = models.EmailField(verbose_name='Е-мэйл')
     phone = models.CharField(max_length=17, blank=True, verbose_name='Номер телефона')
     comment = models.TextField(max_length=350, verbose_name='Комментарий')
+    agreement = models.BooleanField(default=False, verbose_name='Согласие(персональные данные)')
 
     class Meta:
         verbose_name = 'Форма обратной связи'
@@ -353,6 +356,7 @@ class Bookrequest(models.Model, EmailSignalMixin):
     name = models.CharField(max_length=35, verbose_name='Имя')
     email = models.EmailField(verbose_name='Е-мэйл')
     comment = models.TextField(max_length=350, verbose_name='Список книг')
+    agreement = models.BooleanField(default=False, verbose_name='Согласие(персональные данные)')
 
     class Meta:
         verbose_name = 'Комплектование'
@@ -398,6 +402,7 @@ class ServiceDop(models.Model):
     email = models.EmailField(verbose_name='Е-мэйл')
     comment = models.TextField(verbose_name='Комментарий')
     file = models.FileField(upload_to='img/files', verbose_name='Файл', blank=True, null=True)
+    agreement = models.BooleanField(default=False, verbose_name='Согласие(персональные данные)')
 
     class Meta:
         verbose_name = 'Форма дополнительной услуги'

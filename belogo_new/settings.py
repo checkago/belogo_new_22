@@ -237,9 +237,9 @@ AUTH_PASSWORD_VALIDATORS = [
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'site@biblioteka-belogo.ru'
-EMAIL_HOST_PASSWORD = 'wP5maMBAujPAQ0JixUUq'
-EMAIL_SIGNAL_DEFAULT_SENDER = 'site@biblioteka-belogo.ru'
+EMAIL_HOST_USER = 'site@obs-balashiha.ru'
+EMAIL_HOST_PASSWORD = 'zQKENmwihEvMKuHUpTXT'
+EMAIL_SIGNAL_DEFAULT_SENDER = 'site@obs-balashiha.ru'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

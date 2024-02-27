@@ -13,7 +13,7 @@ class BookForm(forms.ModelForm):
 
     class Meta:
         model = Book
-        fields = ('library', 'age', 'school', 'fio', 'bilet', 'phone', 'email', 'comment')
+        fields = ('library', 'age', 'school', 'fio', 'bilet', 'phone', 'email', 'comment', 'agreement')
 
 
 class QuestionForm(forms.ModelForm):
@@ -24,7 +24,7 @@ class QuestionForm(forms.ModelForm):
 
     class Meta:
         model = Question
-        fields = ('name', 'email', 'phone', 'comment', 'category')
+        fields = ('name', 'email', 'phone', 'comment', 'category', 'agreement')
 
 
 class FeedbackForm(forms.ModelForm):
@@ -41,6 +41,7 @@ class FeedbackForm(forms.ModelForm):
         self.fields['phone'].label = 'Номер телефона'
         self.fields['email'].label = 'E-mail'
         self.fields['comment'].label = 'Коментарий'
+        self.fields['agreement'].label = 'Согласие'
 
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -51,7 +52,7 @@ class FeedbackForm(forms.ModelForm):
 
     class Meta:
         model = Feedback
-        fields = ('name', 'phone', 'email', 'comment')
+        fields = ('name', 'phone', 'email', 'comment', 'agreement')
 
 
 class BookrequestForm(forms.ModelForm):
@@ -62,7 +63,7 @@ class BookrequestForm(forms.ModelForm):
 
     class Meta:
         model = Bookrequest
-        fields = ('name', 'email', 'comment')
+        fields = ('name', 'email', 'comment', 'agreement')
 
 
 class ServiceDopForm(forms.ModelForm):
@@ -72,5 +73,5 @@ class ServiceDopForm(forms.ModelForm):
     )
     class Meta:
         model = ServiceDop
-        fields = ('date', 'fio', 'phone', 'email', 'comment', 'file')
+        fields = ('date', 'fio', 'phone', 'email', 'comment', 'file', 'agreement')
 

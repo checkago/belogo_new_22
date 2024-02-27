@@ -73,15 +73,30 @@
                                     {% crispy_field bform.comment 'class' 'form-control  md-textarea' 'placeholder' '' %}
                                     <label data-error="Не верно" data-success="Верно" for="form2"><strong>{{ bform.comment.label }}</strong></label>
                                 </div>
+                                <div class="md-form">
+                                    <input type="checkbox" id="id_agreement" name="agreement">
+                                    <!-- Здесь ссылка на внешний документ -->
+                                    <a href="https://obs-balashiha.ru/documents/53/" target="_blank">Согласие на обработку персональных данных</a>
+                                </div>
                               </div>
 
                               <!--Footer-->
                               <div class="modal-footer justify-content-center">
-                                <button type="submit" class="btn bg-yellow2 waves-effect">Отправить <i class="fas fa-paper-plane-o ml-1"></i></button>
+                                <button type="submit" class="btn bg-yellow2 waves-effect" onclick="return validateForm()">Отправить <i class="fas fa-paper-plane-o ml-1"></i></button>
                               </div>
                         </div>
                     </div>
                 </form>
+                <script>
+                    function validateForm() {
+                        var agreementCheckbox = document.getElementById("id_agreement");
+                        if (!agreementCheckbox.checked) {
+                            alert("Пожалуйста, согласитесь с условиями обработки персональных данных");
+                            return false; // Остановить отправку формы
+                        }
+                        return true; // Разрешить отправку формы
+                    }
+                </script>
                 <!--/.Content-->
             </div>
         </div>
