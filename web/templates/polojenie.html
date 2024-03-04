@@ -42,8 +42,14 @@
                 </div>
                 <div class="col-md-12 mb-4">
                     <hr class="hr-pink mb-3">
+                    {% if polojenie.konkurs_doc %}
                     <a href="{{ polojenie.konkurs_doc.url }}" class="btn bg-yellow2 btn-sm" target="_blank"><h5 class="font-weight-bold">Открыть ПОЛОЖЕНИЕ</h5></a>
+                    {% else %}
+                    {% endif %}
+                    {% if polojenie.onkurs_zayavka %}
                     <a href="{{ polojenie.konkurs_zayavka.url }}" class="btn bg-yellow2 btn-sm"><h5 class="font-weight-bold">Скачать ЗАЯВКУ</h5></a>
+                    {% else %}
+                    {% endif %}
                 </div>
             </div>
         </div>
