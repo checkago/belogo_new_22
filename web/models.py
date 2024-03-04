@@ -437,8 +437,8 @@ class PolojenieKonkurs(models.Model):
                                  related_name='polojenya_konkurs', null=True, verbose_name='Категория')
     description = models.TextField(verbose_name='Текст')
     image = models.ImageField(upload_to='img/konkurs', blank=True, null=True, verbose_name='Главное фото')
-    konkurs_doc = models.FileField(upload_to='documents/polojenie_k', verbose_name='Файл положения', blank=True, null=True)
-    konkurs_zayavka = models.FileField(upload_to='documents/polojeni_k_z', verbose_name='Файл Заявки', blank=True, null=True)
+    konkurs_doc = models.FileField(upload_to='documents/polojenie_k', blank=True, null=True, verbose_name='Файл положения')
+    konkurs_zayavka = models.FileField(upload_to='documents/polojeni_k_z', blank=True, null=True, verbose_name='Файл Заявки')
     published = models.BooleanField(default=True, verbose_name='Опубликована')
 
     class Meta:
