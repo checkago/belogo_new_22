@@ -514,7 +514,7 @@ class NewsAPIView(generics.ListAPIView):
 
 
 class EventAPIView(generics.ListAPIView):
-    queryset = Event.objects.order_by('-id')[0:15]
+    queryset = Event.objects.order_by('-id')[0:30]
     serializer_class = EventSerializer
 
 
