@@ -307,7 +307,7 @@ class Book(models.Model, EmailSignalMixin):
     datetime = models.DateTimeField(auto_now=True, verbose_name='Дата')
     fio = models.CharField(max_length=200, verbose_name='ФИО')
     bilet = models.CharField(max_length=18, verbose_name='№ читательского билета', blank=True)
-    phone = models.CharField(max_length=17, blank=True, verbose_name='Номер елефона')
+    phone = models.CharField(max_length=17, blank=True, verbose_name='Номер телефона')
     email = models.EmailField(verbose_name='Е-мэйл')
     comment = models.TextField(max_length=300, verbose_name='Комментарий')
     agreement = models.BooleanField(default=False, verbose_name='Согласие(персональные данные)')
