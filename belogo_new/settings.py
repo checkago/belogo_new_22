@@ -71,7 +71,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'admin_reorder.middleware.ModelAdminReorder',
     'django.middleware.gzip.GZipMiddleware',
-    'django.middleware.locale.LocaleMiddleware'
+    'django.middleware.locale.LocaleMiddleware',
+    'web.cors_middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'belogo_new.urls'
