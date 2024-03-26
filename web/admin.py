@@ -89,8 +89,18 @@ class CinemaAdmin(admin.ModelAdmin):
     list_display = ('name',)
 
 
+
+class EventAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorUploadingWidget(config_name='awesome_ckeditor'))
+
+    class Meta:
+        verbose_name = 'Текст'
+        model = Event
+        fields = '__all__'
+
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    form = EventAdminForm
+    list_display = ('id', 'name', 'date', 'description')
 
 
 class BibliotekaAdminForm(forms.ModelForm):
