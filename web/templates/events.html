@@ -150,7 +150,7 @@
                     {
                         id: "{{ Event.id }}",
                         title: "{{ Event.name }}",
-                        start: "{{ Event.date_iso }}",
+                        start: moment.utc('{{ Event.date_iso }}').local(),
                         description: "{% if Event.description %}{{ Event.description|safe }}{% else %}''{% endif %}",
                         image: "{% if Event.image %}{{ Event.image.url }}{% else %}''{% endif %}"
 
