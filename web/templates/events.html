@@ -78,7 +78,7 @@
     }
 
 </style>
-<link type="text/css" href="{% static 'js/vendor/fullcalendar-3.10.0/fullcalendar.min.css' %}" />
+
 <div class="container">
     {% include "_page_menu_bib.html" %}
     <nav class='mt-2' aria-label="breadcrumb sm-hidden" id="breadcrumb">
@@ -129,64 +129,7 @@
     </div>
 </div>
 
-<script type="text/javascript" src="{% static 'js/vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/vendor/fullcalendar-3.10.0/fullcalendar.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/vendor/fullcalendar-3.10.0/locale/ru.js' %}"></script>
-<script>
-    $(document).ready(function() {
-        $('#calendar').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            defaultView: 'month',
-            locale: 'ru',
-            events: [
-                {% for Event in events %}
-                    {
-                        id: "{{ Event.id }}",
-                        title: "{{ Event.name }}",
-                        start: "{{ Event.date_iso }}",
-                        description: "{% if Event.description %}{{ Event.description }}{% else %}''{% endif %}",
-                        image: "{% if Event.image %}{{ Event.image.url }}{% else %}''{% endif %}"
 
-                    },
-                {% endfor %}
-            ],
-            eventRender: function(Event, element) {
-                if (Event.start.isBefore(moment())) {
-                    element.find('.fc-content').addClass('fc-content-finish');
-                }
-
-                element.find('.fc-content').on('click', function() {
-                    $('#event_week_' + Event.id).modal('show');
-                });
-            },
-            eventMouseover: function(Event, jsEvent, view) {
-                var tooltip = '<div class="tooltip">'
-                            + '<img src="' + Event.image + '" class="img-fluid">' // Изображение с классом img-fluid
-                            + '<div class="tooltip-header">' + Event.title + '</div>'
-                            + '<div class="tooltip-description">' + Event.description + '</div>'
-                            + '</div>';
-                $("body").append(tooltip);
-                $(this).mouseover(function(e) {
-                    $(this).css('z-index', 10000);
-                    $('.tooltip').fadeIn('500');
-                    $('.tooltip').fadeTo('10', 1.9);
-                }).mousemove(function(e) {
-                    var tooltipWidth = $('.tooltip').outerWidth();
-                    $('.tooltip').css('top', e.pageY - $('.tooltip').outerHeight() - 20);
-                    $('.tooltip').css('left', e.pageX - tooltipWidth / 2);
-                });
-            },
-            eventMouseout: function(Event, jsEvent, view) {
-                $(this).css('z-index', 8);
-                $('.tooltip').remove();
-            }
-        });
-    });
-</script>
 
 {% include '_footer.html' %}
 {% endblock %}
