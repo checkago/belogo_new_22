@@ -78,7 +78,7 @@
     }
 
 </style>
-<link rel="stylesheet" type="text/css" href="{% static 'js/vendor/fullcalendar-3.10.0/fullcalendar.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'js/vendor/fullcalendar-3.10.0/fullcalendar.css' %}">
 <div class="container">
     {% include "_page_menu_bib.html" %}
     <nav class='mt-2' aria-label="breadcrumb sm-hidden" id="breadcrumb">
@@ -129,9 +129,9 @@
     </div>
 </div>
 
-<script src="{% static 'js/vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
-<script src="{% static 'js/vendor/fullcalendar-3.10.0/fullcalendar.js' %}"></script>
-<script src="{% static 'js/vendor/fullcalendar-3.10.0/locale/ru.js' %}"></script>
+<script type="text/javascript"  src="{% static 'js/vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+<script type="text/javascript"  src="{% static 'js/vendor/fullcalendar-3.10.0/fullcalendar.js' %}"></script>
+<script type="text/javascript"  src="{% static 'js/vendor/fullcalendar-3.10.0/locale/ru.js' %}"></script>
 <script>
     $(document).ready(function() {
         $('#calendar').fullCalendar({
