@@ -100,6 +100,7 @@ class EventAdminForm(forms.ModelForm):
 
 class EventAdmin(admin.ModelAdmin):
     form = EventAdminForm
+    list_filter = ('date',)
     list_display = ('name', 'date', 'description', 'id')
 
 
