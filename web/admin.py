@@ -100,7 +100,7 @@ class EventAdminForm(forms.ModelForm):
 
 class EventAdmin(admin.ModelAdmin):
     form = EventAdminForm
-    list_display = ('id', 'name', 'date', 'description')
+    list_display = ('name', 'date', 'description', 'id')
 
 
 class BibliotekaAdminForm(forms.ModelForm):
