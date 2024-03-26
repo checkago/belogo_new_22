@@ -1,7 +1,7 @@
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from datetime import date
+from datetime import datetime, date
 
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
@@ -185,7 +185,7 @@ class Event(models.Model):
     name = models.CharField(max_length=100, verbose_name='Название события')
     library = models.CharField(max_length=150, choices=BIB_CHOICES, default=IKC,
                                verbose_name='Выбор Библиотеки')
-    date = models.DateField(default=date.today, verbose_name='Дата проведения')
+    date = models.DateTimeField(default=date.today, verbose_name='Дата проведения')
     description = models.TextField(blank=True, verbose_name='Описание')
     image = models.ImageField(upload_to='img/events', blank=True, null=True, verbose_name='Изображение')
 
@@ -195,7 +195,8 @@ class Event(models.Model):
 
     @property
     def is_past_due(self):
-        return date.today() > self.date
+        today = timezone.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        return today > self.date
 
     def __str__(self):
         return f"{self.name} | {self.date}"
