@@ -89,7 +89,6 @@ class CinemaAdmin(admin.ModelAdmin):
     list_display = ('name',)
 
 
-
 class EventAdminForm(forms.ModelForm):
     description = forms.CharField(widget=CKEditorUploadingWidget(config_name='awesome_ckeditor'))
 
@@ -97,6 +96,7 @@ class EventAdminForm(forms.ModelForm):
         verbose_name = 'Текст'
         model = Event
         fields = '__all__'
+
 
 class EventAdmin(admin.ModelAdmin):
     form = EventAdminForm
@@ -118,10 +118,6 @@ class BibliotekaAdmin(admin.ModelAdmin):
 
 
 class SheduleAdmin(admin.ModelAdmin):
-    list_display = ('name',)
-
-
-class EventAdmin(admin.ModelAdmin):
     list_display = ('name',)
 
 
