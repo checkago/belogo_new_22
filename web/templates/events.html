@@ -3,7 +3,82 @@
 
 {% block content %}
 {% include '_header_pages.html' %}
+<style>
 
+    .fc {
+        background: #fff;
+    }
+
+    .fc .fc-toolbar {
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .fc td.fc-today {
+        background: #f2f2f2 !important;
+    }
+
+    .fc .fc-event {
+        background-color: transparent;
+        border: 0;
+    }
+
+    .fc .fc-content {
+        background-color: #ffc107;
+        padding: 2px;
+        color: #313030;
+    }
+
+    .fc .fc-content-finish {
+        background-color: #f33211;
+        padding: 2px;
+        color: #fff;
+        text-decoration: line-through;
+        text-decoration-color: black;
+    }
+
+    .fc .fc-state-default {
+        border-color: #4fc3f7;
+        color: #4fc3f7;
+    }
+
+    .fc .fc-state-active {
+        background-color: #4fc3f7;
+        background-image: none;
+        outline: 0;
+        color: #fff;
+        box-shadow: none;
+        text-shadow: none;
+    }
+
+    .fc button {
+        background: transparent;
+    }
+
+    .tooltip {
+        position: absolute;
+        background-color: white; /* Белый фон */
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .tooltip-header {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .tooltip img {
+        max-width: 100%;
+        height: 75px;
+        margin-bottom: 5px;
+    }
+    .tooltip-description {
+        font-size: 14px;
+    }
+
+</style>
+<link rel="stylesheet" href="{% static 'js/vendor/fullcalendar-3.10.0/fullcalendar.css' %}" />
 <div class="container">
     {% include "_page_menu_bib.html" %}
     <nav class='mt-2' aria-label="breadcrumb sm-hidden" id="breadcrumb">
@@ -13,46 +88,105 @@
         <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
       </ol>
     </nav>
-    <div class="container">
-        <div class="row">
-            {% for Event in events %}
-                <div class="col-md-4 d-flex">
-                    <div class="card my-3 {% if Event.date == closest_event_date %}bg-yellow2{% endif %}">
-                        <div class="card-body">
-                            <a href="#" data-toggle="modal" data-target="#event_week_{{ Event.id }}"><img class="img-responsive" src="{{ Event.image.url }}" alt="{{ Event.name }} {{ Event.library }} Железнодорожный"/></a>
+    <div class="row">
+        <div class="container col-md-9">
+            <div class="container-fluid">
+                <section>
+                    <div class="row">
+
+                    <!-- Grid column -->
+                        <div class="col-md-12">
+                            <div id="calendar" class="calendar" data-mdb-calendar-init data-mdb-monday-first="true"></div>
                         </div>
-                        <div class="card-footer">
-                            <h5>{{ Event.name }}</h5>
-                            <h6>{{ Event.library }}</h6>
-                            {% if Event.is_past_due %}
-                                <span class="text-dark font-weight-bold">Завершено:</span>
-                                <p class="text-danger font-weight-bold"><s>{{ Event.date }}</s></p>
-                            {% else %}
-                                <span class="text-dark font-weight-bold">Ожидается:</span>
-                                <p class="text-dark font-weight-bold">{{ Event.date }}</p>
-                            {% endif %}
-                        </div>
+
+                    <!-- Grid column -->
                     </div>
-                </div>
-                <div class="modal top fade" id="event_week_{{ Event.id }}" tabindex="-1" aria-labelledby="Расписание" aria-hidden="true" data-backdrop="true" data-keyboard="true">
-                    <div class="modal-dialog modal-xl  modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="btn-close btn-danger" data-dismiss="modal" aria-label="Закрыть"></button>
-                            </div>
-                            <div class="modal-body"><img class="img-fluid z-depth-2 rounded" src="{{ Event.image.url }}" /></div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">
-                                    Закрыть
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
+                </section>
+            </div>
         </div>
+        {% for Event in events %}
+        <div class="modal top fade" id="event_week_{{ Event.id }}" tabindex="-1" aria-labelledby="Расписание" aria-hidden="true" data-backdrop="true" data-keyboard="true">
+            <div class="modal-dialog modal-xl  modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close btn-danger" data-dismiss="modal" aria-label="Закрыть"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <img class="img-fluid z-depth-1 rounded" src="{{ Event.image.url }}" />
+                        </div>
+                        <h4 class="pt-3 font-weight-bold">{{ Event.name }}</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            Закрыть
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </div>
-{% include '_footer.html' %}
 
+<script src="{% static 'js/vendor/fullcalendar-3.10.0/lib/moment.min.js' %}"></script>
+<script src="{% static 'js/vendor/fullcalendar-3.10.0/fullcalendar.js' %}"></script>
+<script src="{% static 'js/vendor/fullcalendar-3.10.0/locale/ru.js' %}"></script>
+<script>
+    $(document).ready(function() {
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            defaultView: 'month',
+            locale: 'ru',
+            events: [
+                {% for Event in events %}
+                    {
+                        id: "{{ Event.id }}",
+                        title: "{{ Event.name }}",
+                        start: "{{ Event.date_iso }}",
+                        description: "{% if Event.description %}{{ Event.description }}{% else %}''{% endif %}",
+                        image: "{% if Event.image %}{{ Event.image.url }}{% else %}''{% endif %}"
+
+                    },
+                {% endfor %}
+            ],
+            eventRender: function(Event, element) {
+                if (Event.start.isBefore(moment())) {
+                    element.find('.fc-content').addClass('fc-content-finish');
+                }
+
+                element.find('.fc-content').on('click', function() {
+                    $('#event_week_' + Event.id).modal('show');
+                });
+            },
+            eventMouseover: function(Event, jsEvent, view) {
+                var tooltip = '<div class="tooltip">'
+                            + '<img src="' + Event.image + '" class="img-fluid">' // Изображение с классом img-fluid
+                            + '<div class="tooltip-header">' + Event.title + '</div>'
+                            + '<div class="tooltip-description">' + Event.description + '</div>'
+                            + '</div>';
+                $("body").append(tooltip);
+                $(this).mouseover(function(e) {
+                    $(this).css('z-index', 10000);
+                    $('.tooltip').fadeIn('500');
+                    $('.tooltip').fadeTo('10', 1.9);
+                }).mousemove(function(e) {
+                    var tooltipWidth = $('.tooltip').outerWidth();
+                    $('.tooltip').css('top', e.pageY - $('.tooltip').outerHeight() - 20);
+                    $('.tooltip').css('left', e.pageX - tooltipWidth / 2);
+                });
+            },
+            eventMouseout: function(Event, jsEvent, view) {
+                $(this).css('z-index', 8);
+                $('.tooltip').remove();
+            }
+        });
+    });
+</script>
+
+{% include '_footer.html' %}
 {% endblock %}
