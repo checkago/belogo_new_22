@@ -142,6 +142,10 @@
     return tmp.textContent || tmp.innerText || "";
     }
 
+    function formatTime(time) {
+    return moment(time).format('HH:mm');
+    }
+
     $(document).ready(function() {
         $('#calendar').fullCalendar({
             header: {
