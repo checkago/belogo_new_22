@@ -449,7 +449,7 @@ class BookDetailView(generic.DetailView):
         return get_object_or_404(Library, pk=self.kwargs.get('pk'))
 
 
-@cache_page(60*15)
+
 def events(request):
     title = 'Мероприятия и события'
     description = 'Ожидаемые и недавно прошедшие мероприятия и события в библиотеках Балашихи в микрорайоне Железнодорожный'
