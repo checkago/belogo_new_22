@@ -90,7 +90,7 @@ class CinemaAdmin(admin.ModelAdmin):
 
 
 class EventAdminForm(forms.ModelForm):
-    description = forms.CharField(widget=CKEditorUploadingWidget(config_name='awesome_ckeditor', blank=True))
+    description = forms.CharField(widget=CKEditorUploadingWidget(config_name='awesome_ckeditor'))
 
     class Meta:
         verbose_name = 'Текст'
