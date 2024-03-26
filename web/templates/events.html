@@ -135,6 +135,13 @@
 <script type="text/javascript"  src="{% static 'js/fullcalendar.js' %}"></script>
 <script type="text/javascript"  src="{% static 'js/ru.js' %}"></script>
 <script>
+
+    function stripHtml(html) {
+    var tmp = document.createElement("DIV");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
+    }
+
     $(document).ready(function() {
         $('#calendar').fullCalendar({
             header: {
@@ -149,7 +156,7 @@
                 {% for Event in events %}
                     {
                         id: "{{ Event.id }}",
-                        title: "{{ Event.name }}",
+                        title: stripHtml("{{ Event.name }}"),
                         start: moment.utc('{{ Event.date_iso }}').local(),
                         description: "{% if Event.description %}{{ Event.description|safe }}{% else %}''{% endif %}",
                         image: "{% if Event.image %}{{ Event.image.url }}{% else %}''{% endif %}"
