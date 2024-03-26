@@ -10684,3 +10684,31 @@ footer.page-footer h2 {
 
 .orange-text-2 {
   color: #ffa726 !important; }
+
+.fc {
+  background: #fff; }
+  .fc .fc-toolbar {
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px; }
+  .fc td.fc-today {
+    background: #f2f2f2 !important; }
+  .fc .fc-event {
+    background-color: transparent;
+    border: 0; }
+  .fc .fc-content {
+    background-color: #4fc3f7;
+    padding: 2px;
+    color: #fff; }
+  .fc .fc-state-default {
+    border-color: #4fc3f7;
+    color: #4fc3f7; }
+  .fc .fc-state-active {
+    background-color: #4fc3f7;
+    background-image: none;
+    outline: 0;
+    color: #fff;
+    box-shadow: none;
+    text-shadow: none; }
+  .fc button {
+    background: transparent; }
