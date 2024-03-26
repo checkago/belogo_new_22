@@ -158,7 +158,7 @@
                         id: "{{ Event.id }}",
                         title: stripHtml("{{ Event.name }}"),
                         start: moment.utc('{{ Event.date_iso }}').local(),
-                        description: "{% if Event.description %}{{ Event.description|safe }}{% else %}''{% endif %}",
+                        description: "{% if Event.description %}{{ Event.description|safe }}{% else %}{% endif %}",
                         image: "{% if Event.image %}{{ Event.image.url }}{% else %}''{% endif %}",
                         time: moment.utc('{{ Event.date_iso }}').local().format('HH:mm') // Форматирование времени с минутами
 
