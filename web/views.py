@@ -457,6 +457,10 @@ def events(request):
 
     for event in events:
         event.date_iso = event.date.isoformat()
+        if event.date_end:
+            event.date_end_iso = event.date_end.isoformat()
+        else:
+            event.date_end_iso = None
 
     context = {'title': title, 'description': description, 'events': events}
     return render(request, 'events.html', context)

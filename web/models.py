@@ -185,7 +185,8 @@ class Event(models.Model):
     name = models.CharField(max_length=100, verbose_name='Название события')
     library = models.CharField(max_length=150, choices=BIB_CHOICES, default=IKC,
                                verbose_name='Выбор Библиотеки')
-    date = models.DateTimeField(verbose_name='Дата проведения')
+    date = models.DateTimeField(verbose_name='Дата и время начала')
+    date_end = models.DateTimeField(null=True, blank=True, verbose_name='Дата и время окончания')
     description = models.TextField(blank=True, verbose_name='Описание')
     image = models.ImageField(upload_to='img/events', blank=True, null=True, verbose_name='Изображение')
 
