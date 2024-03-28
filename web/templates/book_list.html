@@ -51,10 +51,10 @@
                         <p class="card-text">
                           <div class="row">
                             <div class="col-md-4">
-                                {% if Library.image != Null %}
+                                {% if Library.image%}
                                     <img class="" width="100px" src="{{ Library.image.url }}" />
                                 {% else %}
-
+                                    <img class="" width="100px" src="" />
                                 {% endif %}
                             </div>
                             <div class="col-md-8">
