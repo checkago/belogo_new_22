@@ -39,6 +39,7 @@ urlpatterns = [
     path('brq_form/', views.brq_form, name='brq_form'),
     path('library-category/', views.library_category, name='library_category'),
     path('book-list/1917/', views.library_imperia, name='library_imperia'),
+    path('book-list/balashiha-golosa-serdetz/', views.library_balashiha, name='library_balashiha'),
     path('book-list/krai/', views.library_krai, name='library_krai'),
     path('book-list/hud/', views.library_hud, name='library_hud'),
     path('book/<int:pk>/', views.BookDetailView.as_view(), name='book_view'),

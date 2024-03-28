@@ -388,10 +388,23 @@ def library_category(request):
     title = 'Разделы электронной библиотеки'
     return render(request, 'library_category.html', {'title': title})
 
-@cache_page(60*15)
+
+# @cache_page(60*15)
+def library_balashiha(request):
+    title = 'Журнал: "Балашиха: Голоса сердец"'
+    categories = LibraryCategory.objects.filter(name='Журнал: "Балашиха: Голоса сердец"')
+    books_list = Library.objects.filter(category__in=categories).distinct().order_by('id')
+    paginator = Paginator(books_list, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'book_list.html', {'categories': categories, 'title': title,
+                                             'books_list': books_list, 'paginator': paginator, 'page_obj': page_obj})
+
+# @cache_page(60*15)
 def library_imperia(request):
     title = 'Книги, изданные до 1917 года'
-    categories = LibraryCategory.objects.prefetch_related('library_imperia')
+    categories = LibraryCategory.objects.filter(name='Книги, изданные до 1917 года')
     books_list = Library.objects.filter(category__in=categories).distinct().order_by('id')
     paginator = Paginator(books_list, 5)
     page_number = request.GET.get('page')
@@ -400,10 +413,10 @@ def library_imperia(request):
     return render(request, 'book_list.html', {'categories': categories, 'title': title,
                                              'books_list': books_list, 'paginator': paginator, 'page_obj': page_obj})
 
-@cache_page(60*15)
+# @cache_page(60*15)
 def library_krai(request):
     title = 'Краеведческая литература'
-    categories = LibraryCategory.objects.prefetch_related('library_krai')
+    categories = LibraryCategory.objects.filter(name='Краеведческая литература')
     books_list = Library.objects.filter(category__in=categories).distinct().order_by('id')
     paginator = Paginator(books_list, 5)
     page_number = request.GET.get('page')
@@ -412,10 +425,10 @@ def library_krai(request):
     return render(request, 'book_list.html', {'categories': categories, 'title': title,
                                              'books_list': books_list, 'paginator': paginator, 'page_obj': page_obj})
 
-@cache_page(60*15)
+# @cache_page(60*15)
 def library_hud(request):
     title = 'Художественная литература'
-    categories = LibraryCategory.objects.prefetch_related('library_hud')
+    categories = LibraryCategory.objects.filter(name='Художественная литература')
     books_list = Library.objects.filter(category__in=categories).distinct().order_by('id')
     paginator = Paginator(books_list, 5)
     page_number = request.GET.get('page')
