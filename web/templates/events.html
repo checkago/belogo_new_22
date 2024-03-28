@@ -178,7 +178,7 @@
                     var eventDuration = moment.duration(Event.end.diff(Event.start)).asDays();
                     if (eventDuration > 1) {
                         var endDateFormat = Event.end.format('DD.MM.YYYY');
-                        eventTime += " - " + endDateFormat + " (длится " + eventDuration + " дней)";
+                        eventTime += " - " + endDateFormat + " (длится " + Math.ceil(eventDuration) + " дней)";
                         element.find('.fc-content').addClass('fc-content-end');
                     }
                 }
