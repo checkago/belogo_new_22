@@ -48,6 +48,7 @@
                     <div class="card mb-2">
                       <div class="card-body">
                         <p class="card-text">
+                          <a href="{% url 'book_view' Library.pk %}">
                           <div class="row">
                             <div class="col-md-3">
                                 {% if Library.image != Null %}
@@ -57,13 +58,11 @@
                                 {% endif %}
                             </div>
                             <div class="col-md-9">
-                                <a href="{% url 'book_view' Library.pk %}">
-                                    <h5 class="text-right text-dark black-text"><strong>{{ Library.title }}</strong></h5>
-                                </a>
-                                
+                                <h5 class="text-right text-dark black-text"><strong>{{ Library.title }}</strong></h5>
                                 <h6 class="text-right text-dark black-text"><strong>Автор: {{ Library.author }}</strong></h6>
                             </div>
                           </div>
+                          </a>
                         </p>
                       </div>
                     </div>
