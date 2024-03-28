@@ -307,9 +307,9 @@ class BookViewAdmin(admin.ModelAdmin):
     total_views.short_description = 'ОБщее колличество просмотров'
 
 
-class LibraryAdmin(admin.ModelAdmin):
+class LibraryAdmin(ImportExportModelAdmin):
     form = LibraryAdminForm
-    list_display = ('title', 'author', 'views')
+    list_display = ('title', 'author', 'views',)
 
 
 
