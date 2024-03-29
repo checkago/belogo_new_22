@@ -389,7 +389,7 @@ def library_category(request):
     return render(request, 'library_category.html', {'title': title})
 
 
-# @cache_page(60*15)
+@cache_page(60*10)
 def library_balashiha(request):
     title = 'Журнал: "Балашиха: Голоса сердец"'
     categories = LibraryCategory.objects.filter(name='Журнал: "Балашиха: Голоса сердец"')
@@ -401,7 +401,7 @@ def library_balashiha(request):
     return render(request, 'book_list.html', {'categories': categories, 'title': title,
                                              'books_list': books_list, 'paginator': paginator, 'page_obj': page_obj})
 
-# @cache_page(60*15)
+@cache_page(60*10)
 def library_imperia(request):
     title = 'Книги, изданные до 1917 года'
     categories = LibraryCategory.objects.filter(name='Книги, изданные до 1917 года')
@@ -413,7 +413,7 @@ def library_imperia(request):
     return render(request, 'book_list.html', {'categories': categories, 'title': title,
                                              'books_list': books_list, 'paginator': paginator, 'page_obj': page_obj})
 
-# @cache_page(60*15)
+@cache_page(60*10)
 def library_krai(request):
     title = 'Краеведческая литература'
     categories = LibraryCategory.objects.filter(name='Краеведческая литература')
@@ -425,7 +425,7 @@ def library_krai(request):
     return render(request, 'book_list.html', {'categories': categories, 'title': title,
                                              'books_list': books_list, 'paginator': paginator, 'page_obj': page_obj})
 
-# @cache_page(60*15)
+@cache_page(60*10)
 def library_hud(request):
     title = 'Художественная литература'
     categories = LibraryCategory.objects.filter(name='Художественная литература')
