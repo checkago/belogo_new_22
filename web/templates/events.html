@@ -183,7 +183,8 @@
                     }
                 }
                 element.find('.fc-time').text(eventTime);
-                if (Event.start.isBefore(moment())) {
+
+                if ((Event.end && moment() > Event.end) || (!Event.end && moment() > Event.start)) {
                     element.find('.fc-content').addClass('fc-content-finish');
                 }
 
