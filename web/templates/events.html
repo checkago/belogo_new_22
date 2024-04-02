@@ -124,9 +124,12 @@
                         <button type="button" class="btn-close btn-danger" data-dismiss="modal" aria-label="Закрыть"></button>
                     </div>
                     <div class="modal-body">
+                        {% if Event.image %}
                         <div class="text-center">
                             <img class="img-fluid z-depth-1 rounded" src="{{ Event.image.url }}" />
                         </div>
+                        {% else %}
+                        {% endif %}
                         <h4 class="pt-3 font-weight-bold">{{ Event.name }}</h4>
                     </div>
                     <div class="modal-footer">
