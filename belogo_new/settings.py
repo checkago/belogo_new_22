@@ -72,8 +72,9 @@ MIDDLEWARE = [
     'admin_reorder.middleware.ModelAdminReorder',
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.locale.LocaleMiddleware'
-]
 
+]
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 ROOT_URLCONF = 'belogo_new.urls'
 
 TEMPLATES = [
@@ -167,12 +168,12 @@ ADMIN_REORDER = (
      },
 )
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 DATABASES = {
     'default': {

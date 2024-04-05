@@ -169,6 +169,16 @@ def polojenie_view(request, pk):
                                              'start_date': start_date, 'end_date': end_date, 'pdf': pdf, 'doc': doc})
 
 
+def projects_list(request):
+    projects = Project.objects.all()
+    return render(request, 'projects.html', {'projects': projects})
+
+
+def project_view(request, pk):
+    project = get_object_or_404(Project, pk=pk)
+    return render(request, 'project.html', {'project': project})
+
+
 @cache_page(60*15)
 def services(request):
     categories = Category.objects.prefetch_related('services')
