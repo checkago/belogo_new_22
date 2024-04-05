@@ -96,7 +96,7 @@ def news_view(request, pk):
     return render(request, 'news.html', {'news': news, 'title': title, 'image': image, 'description': description,
                                          'date': date, 'category': category})
 
-
+@cache_page(60*15)
 def document_categories(request):
     # Список id категорий, которые вы хотите вывести
     category_ids = [14, 10, 16, 15]  # Пример списка id категорий
@@ -105,7 +105,7 @@ def document_categories(request):
     categories = Category.objects.filter(id__in=category_ids)
     return render(request, 'documents_category.html', {'categories': categories})
 
-
+@cache_page(60*15)
 def documents_in_category(request, category_id):
     category = Category.objects.get(pk=category_id)
     documents = Document.objects.filter(category=category, published=True)
@@ -168,7 +168,7 @@ def polojenie_view(request, pk):
                                              'description': description, 'image': image, 'category': category,
                                              'start_date': start_date, 'end_date': end_date, 'pdf': pdf, 'doc': doc})
 
-
+@cache_page(60*15)
 def projects_list(request):
     projects = Project.objects.all()
     return render(request, 'projects.html', {'projects': projects})
