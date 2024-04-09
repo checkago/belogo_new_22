@@ -11,8 +11,10 @@
     <div class="container">
         <h1 class="pb-3">Результат поиска</h1>
         <form method="GET" class="d-none d-md-flex input-group w-auto my-auto">
-            <input id="mdb-5-search-input" autocomplete="off" type="search" class="form-control rounded" name="q" value="{{ query }}" placeholder="Search (ctrl + &quot;/&quot; to focus)">
-            <button class="input-group-text border-0" type="submit"><i class="fas fa-search text-primary" id="mdb-5-search-icon"></i></button>
+            <div class="input-group rounded">
+                <input id="mdb-5-search-input" autocomplete="off" type="search" class="form-control rounded" name="q" value="{{ query }}" placeholder="Search (ctrl + &quot;/&quot; to focus)">
+                <button class="input-group-text border-0" type="submit"><i class="fas fa-search text-primary" id="mdb-5-search-icon"></i></button>
+            </div>
         </form>
         <div class="pt-3">
             <ul>

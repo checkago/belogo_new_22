@@ -70,8 +70,12 @@
         </ul>
 
         <form method="get" action="{% url 'search' %}">
-            <input type="text" name="q" placeholder="Поиск...">
-            <button type="submit">Поиск</button>
+            <div class="input-group rounded">
+                <input type="search" name="q"  class="form-control rounded" placeholder="Поиск..." aria-label="Search" aria-describedby="search-addon" />
+                <button type="submit" class="input-group-text border-0" id="search-addon">
+                    <i class="fas fa-search text-primary"></i>
+                </button>
+            </div>
         </form>
 
       </div>
