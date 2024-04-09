@@ -1,4 +1,5 @@
 from django.views.generic import ListView
+from haystack.query import SearchQuerySet
 from rest_framework import generics
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -987,6 +988,13 @@ class CinemaWeekPrint(ListView):
         return context
 
 
+def search(request):
+    query = request.GET.get('q')
+    if query:
+        results = SearchQuerySet().filter(content=query)
+    else:
+        results = []
+    return render(request, 'search_results.html', {'results': results, 'query': query})
 
 
 

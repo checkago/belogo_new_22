@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load custom_filters %}
+{% load static %}
+{% load crispy_forms_field %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+{% include '_header_pages.html' %}
+
+    <div class="container">
+        <h1 class="pb-3">Результат поиска</h1>
+        <form method="GET" class="d-none d-md-flex input-group w-auto my-auto">
+            <input id="mdb-5-search-input" autocomplete="off" type="search" class="form-control rounded" name="q" value="{{ query }}" placeholder="Search (ctrl + &quot;/&quot; to focus)">
+            <button class="input-group-text border-0" type="submit"><i class="fas fa-search text-primary" id="mdb-5-search-icon"></i></button>
+        </form>
+        <div class="pt-3">
+            <ul>
+                {% for result in results %}
+                    <li class="text-primary">{{ result.object.name }}</li>
+                    <!-- Дополнительные поля объекта result могут быть использованы для отображения информации о результате -->
+                    <p>{{ result.object.description|truncatewords_html:20|highlight:query }}<a href="{% url 'news_view' result.object.pk %}" class="font-weight-bold">Читать далее</a></p>
+                {% empty %}
+                    <li>Ничего не найдено.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+{% include '_footer.html' %}
+{% endblock %}

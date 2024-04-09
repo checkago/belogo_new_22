@@ -68,6 +68,12 @@
             <a href="{% url 'contacts' %}" class="text-dark font-weight-bold">Контакты</a>
           </li>
         </ul>
+
+        <form method="get" action="{% url 'search' %}">
+            <input type="text" name="q" placeholder="Поиск...">
+            <button type="submit">Поиск</button>
+        </form>
+
       </div>
       <!--Grid column-->
     </div>

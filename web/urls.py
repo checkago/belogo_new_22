@@ -48,6 +48,7 @@ urlpatterns = [
     path('events-archive/', views.events_archive, name='events_archive'),
     path('shedules/', views.shedules, name='shedules'),
     path('mobile-app/', views.mobile, name='mobile-app'),
+    path('search/', views.search, name='search'),
 
 
     # """Schedules"""
