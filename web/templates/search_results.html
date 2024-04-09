@@ -10,13 +10,19 @@
 
     <div class="container">
         <h1 class="pb-5">Результат поиска</h1>
-        <form method="GET" class="d-none d-md-flex input-group w-auto my-auto">
-            <div class="input-group rounded pt-3 pb-3">
-                <input id="mdb-5-search-input" autocomplete="off" type="search" class="form-control rounded" name="q" value="{{ query }}" placeholder="Введите информацию для поиска">
+        <nav class='mt-2' aria-label="breadcrumb sm-hidden" id="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'news' %}">Все новости</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Результат поиска</li>
+            <form method="GET" action="{% url 'search' %}" class="d-none d-md-flex input-group input-group rounded pt-1">
+                <input type="search" name="q"  class="form-control rounded" placeholder="Поиск..." aria-label="Search" aria-describedby="search-addon" />
                 <button class="input-group-text border-0" type="submit"><i class="fas fa-search text-primary" id="mdb-5-search-icon"></i></button>
-            </div>
-        </form>
-        <div class="pt-3 pb-4">
+            </form>
+          </ol>
+        </nav>
+        <div class="row">
+            <div class="pt-3 pb-4">
             <ul>
                 {% for result in results %}
                     <li class="text-primary font-weight-bold">{{ result.object.name }}</li>
@@ -27,6 +33,7 @@
                     <li class="text-danger">Ничего не найдено.</li>
                 {% endfor %}
             </ul>
+        </div>
         </div>
     </div>
 
