@@ -67,6 +67,7 @@
                                 {% endif %}
                             </div>
                             <div class="col-md-9">
+                                <h6 class="text-left text-primary black-text"><strong>{{ News.library.name }}</strong></h6>
                                 <h6 class="text-right text-dark black-text"><strong>{{ News.name }}</strong> | {{ News.date }}</h6>
                                 {{ News.description | safe | slice:":200" }}...
                             </div>
