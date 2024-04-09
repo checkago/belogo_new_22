@@ -106,7 +106,7 @@ class ImageGallery(models.Model):
 class News(models.Model):
     date = models.DateField(default=date.today, verbose_name='Дата')
     name = models.CharField(max_length=250, verbose_name='Заголовок', db_index=True)
-    library = models.ForeignKey(Biblioteka, blank=True, on_delete=models.CASCADE, null=True, verbose_name='Библиотека')
+    library = models.ForeignKey(Biblioteka, blank=True, on_delete=models.SET_NULL, null=True, verbose_name='Библиотека')
     category = models.ForeignKey(Category, blank=True, on_delete=models.SET_NULL, related_name='news', null=True,
                                  verbose_name='Категория', db_index=True)
     description = models.TextField(verbose_name='Текст')
