@@ -777,13 +777,13 @@ class Eventy(models.Model):
     )
     """ПОЛЯ age, day, start и end доджны быть blank=True и null=True при следующих миграциях"""
 
-    day = models.ForeignKey(Day,blank=True, null=True,  on_delete=models.CASCADE, verbose_name='День недели', related_name='events')
+    day = models.ForeignKey(Day, on_delete=models.CASCADE, verbose_name='День недели', related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
-    age = models.CharField(max_length=50,blank=True, null=True,  choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
-    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
-    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
+    start_time = models.TimeField(verbose_name='Время начала')
+    end_time = models.TimeField(verbose_name='Время окончания')
 
     class Meta:
         verbose_name = 'Мероприятие ИКЦ'
