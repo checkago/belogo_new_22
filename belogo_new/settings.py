@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'email_signals',
     'admin_reorder',
     'nested_admin',
-    'haystack'
+    # 'haystack'
 ]
 
 
