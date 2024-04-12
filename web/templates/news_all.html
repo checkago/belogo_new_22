@@ -11,6 +11,10 @@
         <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
         <li class="breadcrumb-item"><a href="{% url 'biblioteki' %}">Библиотеки</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+        <form method="GET" action="{% url 'search' %}" class="d-none d-md-flex input-group input-group rounded pt-1">
+            <input type="search" name="q"  class="form-control rounded" placeholder="Поиск..." aria-label="Search" aria-describedby="search-addon" />
+            <button class="input-group-text border-0" type="submit"><i class="fas fa-search text-primary" id="mdb-5-search-icon"></i></button>
+        </form>
       </ol>
     </nav>
     <div class="row">
@@ -53,7 +57,6 @@
                 {% for News in page_obj %}
                     <div class="card mb-2">
                       <div class="card-body pt-1 pb-1 mt-1 mb-1">
-                        <p class="card-text">
                           <div class="row">
                             <div class="col-md-3">
                                 {% if News.image != Null %}
@@ -63,12 +66,17 @@
                                 {% endif %}
                             </div>
                             <div class="col-md-9">
-                                <h6 class="text-right text-dark black-text"><strong>{{ News.name }}</strong> | {{ News.date }}</h6>
-                                {{ News.description | safe | slice:":200" }}...
+                                <div>
+                                    <h5 class="float-left text-primary"><strong>{{ News.name }}</strong></h5><span class=" text-end float-right"> | {{ News.date }}</span><br>
+                                </div>
+                                <div class="pb-2">
+                                    <span class="font-weight-bold font-small text-dark float-right">{{ News.library.name }}</span>
+                                </div>
+                                <hr>
+                                <p>{{ News.description | safe | slice:":200" }}...</p>
                             </div>
                         </div>
-                        </p>
-                        <a href="{% url 'news_view' News.pk %}" class="btn bg-yellow2 float-right btn-sm">Читать далее</a>
+                          <a href="{% url 'news_view' News.pk %}" class="btn bg-yellow2 float-right btn-sm">Читать далее</a>
                       </div>
                     </div>
                 {% endfor %}

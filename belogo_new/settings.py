@@ -49,10 +49,21 @@ INSTALLED_APPS = [
     'rest_framework',
     'email_signals',
     'admin_reorder',
-    'nested_admin'
+    'nested_admin',
+    'haystack'
 ]
 
 
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    },
+}
+
+
+HAYSTACK_DEFAULT_OPERATOR = 'AND'  # Опционально, оператор поиска по умолчанию (AND или OR)
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 
 RECAPTCHA_PRIVATE_KEY = '6Le7wlkpAAAAAB4RxltG12n2k_atBFuorFbdnsw3'
@@ -72,8 +83,9 @@ MIDDLEWARE = [
     'admin_reorder.middleware.ModelAdminReorder',
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.locale.LocaleMiddleware'
-]
 
+]
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 ROOT_URLCONF = 'belogo_new.urls'
 
 TEMPLATES = [

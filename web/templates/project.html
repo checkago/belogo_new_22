@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% include '_header_pages.html' %}
+
+<div class="container">
+    {% include "_page_menu_bib.html" %}
+    <nav class='mt-2' aria-label="breadcrumb sm-hidden" id="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'document_categories' %}">Документы</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'projects' %}">Проекты</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ project.theme }}</li>
+      </ol>
+    </nav>
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                  <h5 class="text-left text-dark black-text font-weight-bold"><strong>{{ project.library.name }}</strong></h5>
+                  <hr class="hr-pink mb-3">
+                </div>
+                <div class="col-md-12">
+                    <span class="font-weight-bold">Дата публикации:</span><h4>{{ project.date }}</h4>
+                </div>
+                <div class="col-md-12 pt-4">
+                    <h5><span class="font-weight-bold">Содержание проекта:</span></h5>
+                    <div class="card-footer text-center">
+                        <embed src="{{ project.file.url }}#toolbar=0&navpanes=1&scrollbar=1" width="850" height="1100" type="application/pdf" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include '_footer.html' %}
+
+{% endblock %}

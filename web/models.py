@@ -106,6 +106,7 @@ class ImageGallery(models.Model):
 class News(models.Model):
     date = models.DateField(default=date.today, verbose_name='Дата')
     name = models.CharField(max_length=250, verbose_name='Заголовок', db_index=True)
+    library = models.ForeignKey(Biblioteka, blank=True, on_delete=models.SET_NULL, null=True, verbose_name='Библиотека')
     category = models.ForeignKey(Category, blank=True, on_delete=models.SET_NULL, related_name='news', null=True,
                                  verbose_name='Категория', db_index=True)
     description = models.TextField(verbose_name='Текст')
@@ -136,6 +137,31 @@ class Partner(models.Model):
     def __str__(self):
         return self.name
 
+
+class Project(models.Model):
+    theme = models.ForeignKey('ProjectTheme', on_delete=models.CASCADE, verbose_name='Тема проекта')
+    library = models.ForeignKey(Biblioteka, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Выбор Библиотеки')
+    date = models.DateField(default=date.today, blank=True, verbose_name='Дата')
+    file = models.FileField(upload_to='media/projects', verbose_name='Файл', blank=True)
+    link = models.URLField(blank=True, verbose_name='Ссылка на PDF')
+
+    class Meta:
+        verbose_name = 'Проект'
+        verbose_name_plural = 'Проекты'
+
+    def __str__(self):
+        return self.library.name
+
+
+class ProjectTheme(models.Model):
+    name = models.CharField(max_length=250, verbose_name='Название темы проектов')
+
+    class Meta:
+        verbose_name = 'Тема проектов'
+        verbose_name_plural = 'Темы проектов'
+
+    def __str__(self):
+        return self.name
 
 class Event(models.Model):
 
@@ -749,14 +775,15 @@ class Eventy(models.Model):
         (SIXTYFIVE, '65+'),
 
     )
+    """ПОЛЯ age, day, start и end доджны быть blank=True и null=True при следующих миграциях"""
 
-    day = models.ForeignKey(Day, on_delete=models.CASCADE, null=True, verbose_name='День недели', related_name='events')
-    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    day = models.ForeignKey(Day, on_delete=models.CASCADE, verbose_name='День недели', related_name='events')
+    name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
-    booking =  models.BooleanField(default=False, verbose_name='Запись')
-    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, null=True, verbose_name='Возраст')
-    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
-    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
+    booking = models.BooleanField(default=False, verbose_name='Запись')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
+    start_time = models.TimeField(verbose_name='Время начала')
+    end_time = models.TimeField(verbose_name='Время окончания')
 
     class Meta:
         verbose_name = 'Мероприятие ИКЦ'

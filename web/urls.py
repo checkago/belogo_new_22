@@ -27,7 +27,8 @@ urlpatterns = [
     path('fservices/<int:pk>/', views.free_services, name='free_services'),
     path('terms/<int:pk>/', views.termsofuse, name='termsofuse'),
     path('resources/', views.resources, name='resources'),
-    path('projects/', views.projects, name='projects'),
+    path('projects/', views.projects_list, name='projects'),
+    path('projects/<int:pk>/', views.project_view, name='project'),
     path('contacts/', views.contacts, name='contacts'),
     path('veterany_vov/', views.veterany_vov, name='veterany_vov'),
     path('trujeniki_tyla/', views.veterany_tyla, name='veterany_truda'),
@@ -39,6 +40,7 @@ urlpatterns = [
     path('brq_form/', views.brq_form, name='brq_form'),
     path('library-category/', views.library_category, name='library_category'),
     path('book-list/1917/', views.library_imperia, name='library_imperia'),
+    path('book-list/balashiha-golosa-serdetz/', views.library_balashiha, name='library_balashiha'),
     path('book-list/krai/', views.library_krai, name='library_krai'),
     path('book-list/hud/', views.library_hud, name='library_hud'),
     path('book/<int:pk>/', views.BookDetailView.as_view(), name='book_view'),
@@ -46,6 +48,7 @@ urlpatterns = [
     path('events-archive/', views.events_archive, name='events_archive'),
     path('shedules/', views.shedules, name='shedules'),
     path('mobile-app/', views.mobile, name='mobile-app'),
+    path('search/', views.search, name='search'),
 
 
     # """Schedules"""

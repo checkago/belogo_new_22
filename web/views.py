@@ -1,4 +1,5 @@
 from django.views.generic import ListView
+from haystack.query import SearchQuerySet
 from rest_framework import generics
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -96,7 +97,7 @@ def news_view(request, pk):
     return render(request, 'news.html', {'news': news, 'title': title, 'image': image, 'description': description,
                                          'date': date, 'category': category})
 
-
+@cache_page(60*15)
 def document_categories(request):
     # Список id категорий, которые вы хотите вывести
     category_ids = [14, 10, 16, 15]  # Пример списка id категорий
@@ -105,7 +106,7 @@ def document_categories(request):
     categories = Category.objects.filter(id__in=category_ids)
     return render(request, 'documents_category.html', {'categories': categories})
 
-
+@cache_page(60*15)
 def documents_in_category(request, category_id):
     category = Category.objects.get(pk=category_id)
     documents = Document.objects.filter(category=category, published=True)
@@ -167,6 +168,16 @@ def polojenie_view(request, pk):
     return render(request, 'polojenie.html', {'title': title, 'polojenie': polojenie, 'date': date,
                                              'description': description, 'image': image, 'category': category,
                                              'start_date': start_date, 'end_date': end_date, 'pdf': pdf, 'doc': doc})
+
+@cache_page(60*15)
+def projects_list(request):
+    projects = Project.objects.all()
+    return render(request, 'projects.html', {'projects': projects})
+
+
+def project_view(request, pk):
+    project = get_object_or_404(Project, pk=pk)
+    return render(request, 'project.html', {'project': project})
 
 
 @cache_page(60*15)
@@ -388,10 +399,23 @@ def library_category(request):
     title = 'Разделы электронной библиотеки'
     return render(request, 'library_category.html', {'title': title})
 
-@cache_page(60*15)
+
+@cache_page(60*10)
+def library_balashiha(request):
+    title = 'Журнал: "Балашиха: Голоса сердец"'
+    categories = LibraryCategory.objects.filter(name='Журнал: "Балашиха: Голоса сердец"')
+    books_list = Library.objects.filter(category__in=categories).distinct().order_by('id')
+    paginator = Paginator(books_list, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'book_list.html', {'categories': categories, 'title': title,
+                                             'books_list': books_list, 'paginator': paginator, 'page_obj': page_obj})
+
+@cache_page(60*10)
 def library_imperia(request):
     title = 'Книги, изданные до 1917 года'
-    categories = LibraryCategory.objects.prefetch_related('library_imperia')
+    categories = LibraryCategory.objects.filter(name='Книги, изданные до 1917 года')
     books_list = Library.objects.filter(category__in=categories).distinct().order_by('id')
     paginator = Paginator(books_list, 5)
     page_number = request.GET.get('page')
@@ -400,10 +424,10 @@ def library_imperia(request):
     return render(request, 'book_list.html', {'categories': categories, 'title': title,
                                              'books_list': books_list, 'paginator': paginator, 'page_obj': page_obj})
 
-@cache_page(60*15)
+@cache_page(60*10)
 def library_krai(request):
     title = 'Краеведческая литература'
-    categories = LibraryCategory.objects.prefetch_related('library_krai')
+    categories = LibraryCategory.objects.filter(name='Краеведческая литература')
     books_list = Library.objects.filter(category__in=categories).distinct().order_by('id')
     paginator = Paginator(books_list, 5)
     page_number = request.GET.get('page')
@@ -412,10 +436,10 @@ def library_krai(request):
     return render(request, 'book_list.html', {'categories': categories, 'title': title,
                                              'books_list': books_list, 'paginator': paginator, 'page_obj': page_obj})
 
-@cache_page(60*15)
+@cache_page(60*10)
 def library_hud(request):
     title = 'Художественная литература'
-    categories = LibraryCategory.objects.prefetch_related('library_hud')
+    categories = LibraryCategory.objects.filter(name='Художественная литература')
     books_list = Library.objects.filter(category__in=categories).distinct().order_by('id')
     paginator = Paginator(books_list, 5)
     page_number = request.GET.get('page')
@@ -449,7 +473,7 @@ class BookDetailView(generic.DetailView):
         return get_object_or_404(Library, pk=self.kwargs.get('pk'))
 
 
-@cache_page(60*10)
+# @cache_page(60*10)
 def events(request):
     title = 'Мероприятия и события'
     description = 'Ожидаемые и недавно прошедшие мероприятия и события в библиотеках Балашихи в микрорайоне Железнодорожный'
@@ -964,6 +988,13 @@ class CinemaWeekPrint(ListView):
         return context
 
 
+def search(request):
+    query = request.GET.get('q')
+    if query:
+        results = SearchQuerySet().filter(content=query)
+    else:
+        results = []
+    return render(request, 'search_results.html', {'results': results, 'query': query})
 
 
 

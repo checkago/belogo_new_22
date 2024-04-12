@@ -45,28 +45,27 @@
                 </nav>
 
                 {% for Library in page_obj %}
+                    <a href="{% url 'book_view' Library.pk %}">
                     <div class="card mb-2">
                       <div class="card-body">
                         <p class="card-text">
                           <div class="row">
-                            <div class="col-md-3">
-                                {% if Library.image != Null %}
+                            <div class="col-md-4">
+                                {% if Library.image%}
                                     <img class="" width="100px" src="{{ Library.image.url }}" />
                                 {% else %}
-
+                                    <img class="" width="100px" src="" />
                                 {% endif %}
                             </div>
-                            <div class="col-md-9">
-                                <a href="{% url 'book_view' Library.pk %}">
-                                    <h5 class="text-right text-dark black-text"><strong>{{ Library.title }}</strong></h5>
-                                </a>
-                                
+                            <div class="col-md-8">
+                                <h5 class="text-right text-dark black-text"><strong>{{ Library.title }}</strong></h5>
                                 <h6 class="text-right text-dark black-text"><strong>Автор: {{ Library.author }}</strong></h6>
                             </div>
                           </div>
                         </p>
                       </div>
                     </div>
+                    </a>
                 {% endfor %}
 
 

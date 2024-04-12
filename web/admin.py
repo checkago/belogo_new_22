@@ -15,7 +15,7 @@ from web.models import ImageGallery, Category, News, Document, Raiting, Bibliote
     Position, Employers, Service_dop, Service, Book, Question, Feedback, Bookrequest, ServiceDop, Partner, Library, \
     Author, LibraryCategory, Week, Eventy, Day, WeekCDSCH, WeekBER, WeekF2, WeekF3, WeekF4, DayCDSCH, \
     EventyCDSCH, EventyBER, DayBER, EventyF2, DayF2, EventyF3, DayF3, EventyF4, DayF4, Movie, CinemaDay, CinemaWeek, \
-    PolojenieKonkurs, BookView
+    PolojenieKonkurs, BookView, Project, ProjectTheme
 
 
 class ImageGalleryInline(GenericTabularInline):
@@ -284,7 +284,7 @@ class AnonsAdmin(admin.ModelAdmin):
 
 
 class LibraryAdminForm(forms.ModelForm):
-    description = forms.CharField(widget=CKEditorUploadingWidget(config_name='awesome_ckeditor'))
+    description = forms.CharField(widget=CKEditorUploadingWidget(config_name='awesome_ckeditor'), required=False)
 
     class Meta:
         verbose_name = 'Описание'
@@ -307,9 +307,9 @@ class BookViewAdmin(admin.ModelAdmin):
     total_views.short_description = 'ОБщее колличество просмотров'
 
 
-class LibraryAdmin(admin.ModelAdmin):
+class LibraryAdmin(ImportExportModelAdmin):
     form = LibraryAdminForm
-    list_display = ('title', 'author', 'views')
+    list_display = ('title', 'author', 'views',)
 
 
 
@@ -545,6 +545,8 @@ admin.site.register(Raiting, RaitingAdmin)
 admin.site.register(Shedule, SheduleAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(Cinema, CinemaAdmin)
+admin.site.register(Project)
+admin.site.register(ProjectTheme)
 admin.site.register(Biblioteka, BibliotekaAdmin)
 admin.site.register(Position, PositionAdmin)
 admin.site.register(Employers, EmployerAdmin)

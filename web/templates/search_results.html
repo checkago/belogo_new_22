@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load custom_filters %}
+{% load static %}
+{% load crispy_forms_field %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+{% include '_header_pages.html' %}
+
+    <div class="container">
+        <h1 class="pb-5">Результат поиска</h1>
+        <nav class='mt-2' aria-label="breadcrumb sm-hidden" id="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'news' %}">Все новости</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Результат поиска</li>
+            <form method="GET" action="{% url 'search' %}" class="d-none d-md-flex input-group input-group rounded pt-1">
+                <input type="search" name="q"  class="form-control rounded" placeholder="Поиск..." aria-label="Search" aria-describedby="search-addon" />
+                <button class="input-group-text border-0" type="submit"><i class="fas fa-search text-primary" id="mdb-5-search-icon"></i></button>
+            </form>
+          </ol>
+        </nav>
+        <div class="row">
+            <div class="pt-3 pb-4">
+            <ul>
+                {% for result in results %}
+                    <li class="text-primary font-weight-bold">{{ result.object.name }}</li>
+                    <!-- Дополнительные поля объекта result могут быть использованы для отображения информации о результате -->
+                    <p>{{ result.object.description|truncatewords_html:20|highlight:query }}<a href="{% url 'news_view' result.object.pk %}" class="font-weight-bold">Читать далее</a></p>
+                    <hr class="pb-2">
+                {% empty %}
+                    <li class="text-danger">Ничего не найдено.</li>
+                    <li class="text-primary">Попробуйте изменить поисковый запрос и нажмите поиск еще раз.</li>
+                    <li class="">Если необходимая информация не найдена, возможно ее нет в нашей базе данных.</li>
+                    <li>Если вы уверены, что информация есть или была опубликована на сайте, сообщите нам используя <a href="{% url 'contacts' %}">форму обратной связи.</a>
+                    Мы постараемся вам помочь</li>
+                {% endfor %}
+            </ul>
+        </div>
+        </div>
+    </div>
+
+{% include '_footer.html' %}
+{% endblock %}

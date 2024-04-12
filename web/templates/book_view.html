@@ -15,9 +15,15 @@
     </nav>
     <div class="container mb-5 mt-3">
         <div class="row">
+            {% if book.image %}
             <div class="col-md-4">
                 <img src="{{ book.image.url }}" class="image-fluid" width="300px" />
             </div>
+            {% else %}
+            <div class="col-md-4">
+                <img src="" class="image-fluid" width="300px" />
+            </div>
+            {% endif %}
             <div class="col-md-8">
                 <h5 class="font-weight-bold">
                     Название: {{ book.title }}

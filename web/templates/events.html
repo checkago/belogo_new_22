@@ -16,7 +16,8 @@
     }
 
     .fc td.fc-today {
-        background: #f2f2f2 !important;
+        background: #f4d8ab !important;
+        font-weight: bold;
     }
 
     .fc .fc-event {
@@ -69,6 +70,9 @@
         padding: 10px;
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 500px; /* Установите максимальную ширину подсказки */
+        white-space: normal; /* Разрешить перенос слов */
+        word-wrap: break-word; /* Разрыв слов для переноса */
     }
     .tooltip-header {
         font-weight: bold;
@@ -120,9 +124,12 @@
                         <button type="button" class="btn-close btn-danger" data-dismiss="modal" aria-label="Закрыть"></button>
                     </div>
                     <div class="modal-body">
+                        {% if Event.image %}
                         <div class="text-center">
                             <img class="img-fluid z-depth-1 rounded" src="{{ Event.image.url }}" />
                         </div>
+                        {% else %}
+                        {% endif %}
                         <h4 class="pt-3 font-weight-bold">{{ Event.name }}</h4>
                     </div>
                     <div class="modal-footer">
@@ -178,12 +185,13 @@
                     var eventDuration = moment.duration(Event.end.diff(Event.start)).asDays();
                     if (eventDuration > 1) {
                         var endDateFormat = Event.end.format('DD.MM.YYYY');
-                        eventTime += " - " + endDateFormat + " (длится " + eventDuration + " дней)";
+                        eventTime += " - " + endDateFormat + " (длится " + Math.ceil(eventDuration) + " дней)";
                         element.find('.fc-content').addClass('fc-content-end');
                     }
                 }
                 element.find('.fc-time').text(eventTime);
-                if (Event.start.isBefore(moment())) {
+
+                if ((Event.end && moment() > Event.end) || (!Event.end && moment() > Event.start)) {
                     element.find('.fc-content').addClass('fc-content-finish');
                 }
 
