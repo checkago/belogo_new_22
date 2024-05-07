@@ -36,7 +36,7 @@ def getRoutes(request):
 def index(request):
     title = 'МБУК ЦБС им. А. Белого'
     description = 'Официальный сайт Централизованной библиотечной сети имени Андрея Белого. Библиотека Железнодорожный'
-    anonsy = Anons.objects.all().order_by('-id')
+    anonsy = Anons.objects.all().order_by('id')
     categories = Category.objects.prefetch_related('news')
     category = Category.objects.all()
     datenow = date.today()
