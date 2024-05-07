@@ -9,19 +9,18 @@
       </h1>
     {% endif %}
 {% for Anons in anonsy %}
-
+    {% if Anons.active == True %}
     <div class="container mb-1 pb-2 mt-1 pt-1">
-        {% if Anons.active == True %}
           <!--Section: Features v.1-->
           <section id="features" class="mb-2 mt-2">
             <div class="text-center mb-3 font-weight-bold">
                 {{ Anons.description|safe }}
             </div>
           </section>
-        {% else %}
-        {% endif %}
       <!--/Section: Features v.1-->
     </div>
+    {% else %}
+    {% endif %}
 
 {% endfor %}
 
