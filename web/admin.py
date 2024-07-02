@@ -15,7 +15,10 @@ from web.models import ImageGallery, Category, News, Document, Raiting, Bibliote
     Position, Employers, Service_dop, Service, Book, Question, Feedback, Bookrequest, ServiceDop, Partner, Library, \
     Author, LibraryCategory, Week, Eventy, Day, WeekCDSCH, WeekBER, WeekF2, WeekF3, WeekF4, DayCDSCH, \
     EventyCDSCH, EventyBER, DayBER, EventyF2, DayF2, EventyF3, DayF3, EventyF4, DayF4, Movie, CinemaDay, CinemaWeek, \
-    PolojenieKonkurs, BookView, Project, ProjectTheme, DayB5, WeekB5
+    PolojenieKonkurs, BookView, Project, ProjectTheme, DayB5, WeekB5, EventyCGBT, DayCGBT, EventyBCJ, DayBCJ, \
+    EventyBSCD, DayBSCD, EventyYB, DayYB, EventyDB, DayDB, EventyNMB, DayNMB, EventyCSB, DayCSB, EventySSB, DaySSB, \
+    EventyFSB, DayFSB, EventyDBT, DayDBT, EventyNAB, DayNAB, EventyPPB, DayPPB, EventyNB, DayNB, WeekCGBT, WeekBCJ, \
+    WeekBSCD, WeekYB, WeekDB, WeekNMB, WeekCSB, WeekSSB, WeekFSB, WeekDBT, WeekNAB, WeekPPB, WeekNB
 
 
 class ImageGalleryInline(GenericTabularInline):
@@ -409,6 +412,148 @@ class DayB5Inline(NestedTabularInline):
     extra = 1
 
 
+class EventyCGBTInline(NestedTabularInline):
+    model = EventyCGBT
+    extra = 1
+
+
+class DayCGBTInline(NestedTabularInline):
+    model = DayCGBT
+    inlines = [EventyCGBTInline]
+    extra = 1
+
+
+class EventyBCJInline(NestedTabularInline):
+    model = EventyBCJ
+    extra = 1
+
+
+class DayBCJInline(NestedTabularInline):
+    model = DayBCJ
+    inlines = [EventyBCJInline]
+    extra = 1
+
+
+class EventyBSCDInline(NestedTabularInline):
+    model = EventyBSCD
+    extra = 1
+
+
+class DayBSCDInline(NestedTabularInline):
+    model = DayBSCD
+    inlines = [EventyBSCDInline]
+    extra = 1
+
+
+class EventyYBInline(NestedTabularInline):
+    model = EventyYB
+    extra = 1
+
+
+class DayYBInline(NestedTabularInline):
+    model = DayYB
+    inlines = [EventyYBInline]
+    extra = 1
+
+
+class EventyDBInline(NestedTabularInline):
+    model = EventyDB
+    extra = 1
+
+
+class DayDBInline(NestedTabularInline):
+    model = DayDB
+    inlines = [EventyDBInline]
+    extra = 1
+
+
+class EventyNMBInline(NestedTabularInline):
+    model = EventyNMB
+    extra = 1
+
+
+class DayNMBInline(NestedTabularInline):
+    model = DayNMB
+    inlines = [EventyNMBInline]
+    extra = 1
+
+
+class EventyCSBInline(NestedTabularInline):
+    model = EventyCSB
+    extra = 1
+
+
+class DayCSBInline(NestedTabularInline):
+    model = DayCSB
+    inlines = [EventyCSBInline]
+    extra = 1
+
+
+class EventySSBInline(NestedTabularInline):
+    model = EventySSB
+    extra = 1
+
+
+class DaySSBInline(NestedTabularInline):
+    model = DaySSB
+    inlines = [EventySSBInline]
+    extra = 1
+
+
+class EventyFSBInline(NestedTabularInline):
+    model = EventyFSB
+    extra = 1
+
+
+class DayFSBInline(NestedTabularInline):
+    model = DayFSB
+    inlines = [EventyFSBInline]
+    extra = 1
+
+
+class EventyDBTInline(NestedTabularInline):
+    model = EventyDBT
+    extra = 1
+
+
+class DayDBTInline(NestedTabularInline):
+    model = DayDBT
+    inlines = [EventyDBTInline]
+    extra = 1
+
+
+class EventyNABInline(NestedTabularInline):
+    model = EventyNAB
+    extra = 1
+
+
+class DayNABInline(NestedTabularInline):
+    model = DayNAB
+    inlines = [EventyNABInline]
+    extra = 1
+
+
+class EventyPPBInline(NestedTabularInline):
+    model = EventyPPB
+    extra = 1
+
+
+class DayPPBInline(NestedTabularInline):
+    model = DayPPB
+    inlines = [EventyPPBInline]
+    extra = 1
+
+
+class EventyNBInline(NestedTabularInline):
+    model = EventyNB
+    extra = 1
+
+
+class DayNBInline(NestedTabularInline):
+    model = DayNB
+    inlines = [EventyNBInline]
+    extra = 1
+
 def dublicate_week(modeladmin, request, queryset):
     for week in queryset:
         # Получение последнего номера недели
@@ -549,6 +694,97 @@ class WeekB5Admin(NestedModelAdmin):
     list_display = ('name', 'start_date', 'end_date', 'active')
 
 
+class WeekCGBTAdmin(NestedModelAdmin):
+    actions = [dublicate_week]
+    inlines = [DayCGBTInline]
+    exclude = ['active']
+    list_display = ('name', 'start_date', 'end_date', 'active')
+
+
+class WeekBCJAdmin(NestedModelAdmin):
+    actions = [dublicate_week]
+    inlines = [DayBCJInline]
+    exclude = ['active']
+    list_display = ('name', 'start_date', 'end_date', 'active')
+
+
+class WeekBSCDAdmin(NestedModelAdmin):
+    actions = [dublicate_week]
+    inlines = [DayBSCDInline]
+    exclude = ['active']
+    list_display = ('name', 'start_date', 'end_date', 'active')
+
+
+class WeekYBAdmin(NestedModelAdmin):
+    actions = [dublicate_week]
+    inlines = [DayYBInline]
+    exclude = ['active']
+    list_display = ('name', 'start_date', 'end_date', 'active')
+
+
+class WeekDBAdmin(NestedModelAdmin):
+    actions = [dublicate_week]
+    inlines = [DayDBInline]
+    exclude = ['active']
+    list_display = ('name', 'start_date', 'end_date', 'active')
+
+
+class WeekNMBAdmin(NestedModelAdmin):
+    actions = [dublicate_week]
+    inlines = [DayNMBInline]
+    exclude = ['active']
+    list_display = ('name', 'start_date', 'end_date', 'active')
+
+
+class WeekCSBAdmin(NestedModelAdmin):
+    actions = [dublicate_week]
+    inlines = [DayCSBInline]
+    exclude = ['active']
+    list_display = ('name', 'start_date', 'end_date', 'active')
+
+
+class WeekSSBAdmin(NestedModelAdmin):
+    actions = [dublicate_week]
+    inlines = [DaySSBInline]
+    exclude = ['active']
+    list_display = ('name', 'start_date', 'end_date', 'active')
+
+
+class WeekFSBAdmin(NestedModelAdmin):
+    actions = [dublicate_week]
+    inlines = [DayFSBInline]
+    exclude = ['active']
+    list_display = ('name', 'start_date', 'end_date', 'active')
+
+
+class WeekDBTAdmin(NestedModelAdmin):
+    actions = [dublicate_week]
+    inlines = [DayDBTInline]
+    exclude = ['active']
+    list_display = ('name', 'start_date', 'end_date', 'active')
+
+
+class WeekNABAdmin(NestedModelAdmin):
+    actions = [dublicate_week]
+    inlines = [DayNABInline]
+    exclude = ['active']
+    list_display = ('name', 'start_date', 'end_date', 'active')
+
+
+class WeekPPBAdmin(NestedModelAdmin):
+    actions = [dublicate_week]
+    inlines = [DayPPBInline]
+    exclude = ['active']
+    list_display = ('name', 'start_date', 'end_date', 'active')
+
+
+class WeekNBAdmin(NestedModelAdmin):
+    actions = [dublicate_week]
+    inlines = [DayNBInline]
+    exclude = ['active']
+    list_display = ('name', 'start_date', 'end_date', 'active')
+
+
 admin.site.register(CinemaWeek, CinemaWeekAdmin)
 admin.site.register(Week, WeekAdmin)
 admin.site.register(WeekCDSCH, WeekCDSCHAdmin)
@@ -557,6 +793,19 @@ admin.site.register(WeekF2, WeekF2Admin)
 admin.site.register(WeekF3, WeekF3Admin)
 admin.site.register(WeekF4, WeekF4Admin)
 admin.site.register(WeekB5, WeekB5Admin)
+admin.site.register(WeekCGBT, WeekCGBTAdmin)
+admin.site.register(WeekBCJ, WeekBCJAdmin)
+admin.site.register(WeekBSCD, WeekBSCDAdmin)
+admin.site.register(WeekYB, WeekYBAdmin)
+admin.site.register(WeekDB, WeekDBAdmin)
+admin.site.register(WeekNMB, WeekNMBAdmin)
+admin.site.register(WeekCSB, WeekCSBAdmin)
+admin.site.register(WeekSSB, WeekSSBAdmin)
+admin.site.register(WeekFSB, WeekFSBAdmin)
+admin.site.register(WeekDBT, WeekDBTAdmin)
+admin.site.register(WeekNAB, WeekNABAdmin)
+admin.site.register(WeekPPB, WeekPPBAdmin)
+admin.site.register(WeekNB, WeekNBAdmin)
 admin.site.register(News, NewsAdmin)
 admin.site.register(Document, DocumentAdmin)
 admin.site.register(PolojenieKonkurs, PolojenieKonkursAdmin)

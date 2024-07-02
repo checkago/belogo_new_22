@@ -117,7 +117,20 @@ ADMIN_REORDER = (
                 'web.WeekF2',
                 'web.WeekF3',
                 'web.WeekF4',
-                'web.WeekB5',)
+                'web.WeekB5',
+                'web.WeekCGBT',
+                'web.WeekBCJ',
+                'web.WeekBSCD',
+                'web.WeekYB',
+                'web.WeekDB',
+                'web.WeekNMB',
+                'web.WeekCSB',
+                'web.WeekSSB',
+                'web.WeekFSB',
+                'web.WeekDBT',
+                'web.WeekNAB',
+                'web.WeekPPB',
+                'web.WeekNB',)
      },
 
     {'app': 'web', 'label': 'Публикации',
