@@ -15,7 +15,7 @@ from web.models import ImageGallery, Category, News, Document, Raiting, Bibliote
     Position, Employers, Service_dop, Service, Book, Question, Feedback, Bookrequest, ServiceDop, Partner, Library, \
     Author, LibraryCategory, Week, Eventy, Day, WeekCDSCH, WeekBER, WeekF2, WeekF3, WeekF4, DayCDSCH, \
     EventyCDSCH, EventyBER, DayBER, EventyF2, DayF2, EventyF3, DayF3, EventyF4, DayF4, Movie, CinemaDay, CinemaWeek, \
-    PolojenieKonkurs, BookView, Project, ProjectTheme
+    PolojenieKonkurs, BookView, Project, ProjectTheme, DayB5
 
 
 class ImageGalleryInline(GenericTabularInline):
@@ -398,6 +398,17 @@ class DayF4Inline(NestedTabularInline):
     extra = 1
 
 
+class EventyB5Inline(NestedTabularInline):
+    model = EventyF4
+    extra = 1
+
+
+class DayB5Inline(NestedTabularInline):
+    model = DayB5
+    inlines = [EventyB5Inline]
+    extra = 1
+
+
 def dublicate_week(modeladmin, request, queryset):
     for week in queryset:
         # Получение последнего номера недели
@@ -531,6 +542,13 @@ class WeekF4Admin(NestedModelAdmin):
     list_display = ('name', 'start_date', 'end_date', 'active')
 
 
+class WeekB5Admin(NestedModelAdmin):
+    actions = [dublicate_week]
+    inlines = [DayB5Inline]
+    exclude = ['active']
+    list_display = ('name', 'start_date', 'end_date', 'active')
+
+
 admin.site.register(CinemaWeek, CinemaWeekAdmin)
 admin.site.register(Week, WeekAdmin)
 admin.site.register(WeekCDSCH, WeekCDSCHAdmin)
@@ -538,6 +556,7 @@ admin.site.register(WeekBER, WeekBERAdmin)
 admin.site.register(WeekF2, WeekF2Admin)
 admin.site.register(WeekF3, WeekF3Admin)
 admin.site.register(WeekF4, WeekF4Admin)
+admin.site.register(WeekB5, WeekB5Admin)
 admin.site.register(News, NewsAdmin)
 admin.site.register(Document, DocumentAdmin)
 admin.site.register(PolojenieKonkurs, PolojenieKonkursAdmin)
