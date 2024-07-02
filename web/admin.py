@@ -15,7 +15,7 @@ from web.models import ImageGallery, Category, News, Document, Raiting, Bibliote
     Position, Employers, Service_dop, Service, Book, Question, Feedback, Bookrequest, ServiceDop, Partner, Library, \
     Author, LibraryCategory, Week, Eventy, Day, WeekCDSCH, WeekBER, WeekF2, WeekF3, WeekF4, DayCDSCH, \
     EventyCDSCH, EventyBER, DayBER, EventyF2, DayF2, EventyF3, DayF3, EventyF4, DayF4, Movie, CinemaDay, CinemaWeek, \
-    PolojenieKonkurs, BookView, Project, ProjectTheme, DayB5
+    PolojenieKonkurs, BookView, Project, ProjectTheme, DayB5, WeekB5
 
 
 class ImageGalleryInline(GenericTabularInline):
