@@ -116,7 +116,8 @@ ADMIN_REORDER = (
                 'web.WeekBER',
                 'web.WeekF2',
                 'web.WeekF3',
-                'web.WeekF4',)
+                'web.WeekF4',
+                'web.WeekB5',)
      },
 
     {'app': 'web', 'label': 'Публикации',
