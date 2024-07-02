@@ -777,13 +777,13 @@ class Eventy(models.Model):
     )
     """ПОЛЯ age, day, start и end доджны быть blank=True и null=True при следующих миграциях"""
 
-    day = models.ForeignKey(Day, on_delete=models.CASCADE, verbose_name='День недели', related_name='events')
+    day = models.ForeignKey(Day, on_delete=models.CASCADE, blank=True, null=True, verbose_name='День недели', related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
-    age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
-    start_time = models.TimeField(verbose_name='Время начала')
-    end_time = models.TimeField(verbose_name='Время окончания')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, blank=True, null=True, verbose_name='Возраст')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
+    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
 
     class Meta:
         verbose_name = 'Мероприятие ИКЦ'
@@ -849,7 +849,7 @@ class EventyCDSCH(models.Model):
 
     )
 
-    day = models.ForeignKey(DayCDSCH, on_delete=models.CASCADE, null=True, verbose_name='День недели',
+    day = models.ForeignKey(DayCDSCH, on_delete=models.CASCADE, blank=True, null=True, verbose_name='День недели',
                             related_name='events')
     name = models.CharField(max_length=150, blank=True, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
@@ -1153,6 +1153,1042 @@ class EventyF4(models.Model):
     class Meta:
         verbose_name = 'Мероприятие Ф4'
         verbose_name_plural = 'Мероприятия Ф4'
+
+    def __str__(self):
+        return self.name
+
+
+class WeekB5(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Наименование')
+    start_date = models.DateField(verbose_name='Первое число недели', blank=True, null=True)
+    end_date = models.DateField(verbose_name='Последнее число недели', blank=True, null=True)
+    active = models.BooleanField(default=False, verbose_name='Текущая рабочая неделя')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for day in self.days.filter(week=self):
+            for event in day.events.all():
+                event.save()
+
+    class Meta:
+        verbose_name = 'Расписание Библиотеки №5'
+        verbose_name_plural = 'Расписания Библиотеки №5'
+
+    def __str__(self):
+        return self.name
+
+
+class DayB5(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата', blank=True, null=True)
+    week = models.ForeignKey(WeekB5, on_delete=models.CASCADE, verbose_name='Неделя', related_name='days')
+
+    class Meta:
+        verbose_name = 'Рабочий день Библиотеки №5'
+        verbose_name_plural = 'Рабочий день Библиотеки №5'
+
+    def __str__(self):
+        return self.name
+
+
+class EventyB5(models.Model):
+    ZERO = '0+'
+    SIX = '6+'
+    TWELVE = '12+'
+    FOURTEEN = '14+'
+    SIXTEEN = '16+'
+    EIGHTEEN = '18+'
+    FIFTYFIVE = '55+'
+    SIXTY = '60+'
+    SIXTYFIVE = '65+'
+
+    AGE_CHOICES = (
+        (ZERO, '0+'),
+        (SIX, '6+'),
+        (TWELVE, '12+'),
+        (FOURTEEN, '14+'),
+        (SIXTEEN, '16+'),
+        (EIGHTEEN, '18+'),
+        (FIFTYFIVE, '55+'),
+        (SIXTY, '60+'),
+        (SIXTYFIVE, '65+'),
+
+    )
+
+    day = models.ForeignKey(DayB5, on_delete=models.CASCADE, null=True, verbose_name='День недели',
+                            related_name='events')
+    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    payment = models.BooleanField(default=False, verbose_name='Платное')
+    booking =  models.BooleanField(default=False, verbose_name='Запись')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, null=True, verbose_name='Возраст')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
+    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
+
+    class Meta:
+        verbose_name = 'Мероприятие Библиотеки №5'
+        verbose_name_plural = 'Мероприятия Библиотеки №5'
+
+    def __str__(self):
+        return self.name
+
+
+class WeekCGBT(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Наименование')
+    start_date = models.DateField(verbose_name='Первое число недели', blank=True, null=True)
+    end_date = models.DateField(verbose_name='Последнее число недели', blank=True, null=True)
+    active = models.BooleanField(default=False, verbose_name='Текущая рабочая неделя')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for day in self.days.filter(week=self):
+            for event in day.events.all():
+                event.save()
+
+    class Meta:
+        verbose_name = 'Расписание ЦГБ им. Тютчева'
+        verbose_name_plural = 'Расписания ЦГБ им. Тютчева'
+
+    def __str__(self):
+        return self.name
+
+
+class DayCGBT(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата', blank=True, null=True)
+    week = models.ForeignKey(WeekCGBT, on_delete=models.CASCADE, verbose_name='Неделя', related_name='days')
+
+    class Meta:
+        verbose_name = 'Рабочий день ЦГБ им. Тютчева'
+        verbose_name_plural = 'Рабочий день ЦГБ им. Тютчева'
+
+    def __str__(self):
+        return self.name
+
+
+class EventyCGBT(models.Model):
+    ZERO = '0+'
+    SIX = '6+'
+    TWELVE = '12+'
+    FOURTEEN = '14+'
+    SIXTEEN = '16+'
+    EIGHTEEN = '18+'
+    FIFTYFIVE = '55+'
+    SIXTY = '60+'
+    SIXTYFIVE = '65+'
+
+    AGE_CHOICES = (
+        (ZERO, '0+'),
+        (SIX, '6+'),
+        (TWELVE, '12+'),
+        (FOURTEEN, '14+'),
+        (SIXTEEN, '16+'),
+        (EIGHTEEN, '18+'),
+        (FIFTYFIVE, '55+'),
+        (SIXTY, '60+'),
+        (SIXTYFIVE, '65+'),
+
+    )
+
+    day = models.ForeignKey(DayCGBT, on_delete=models.CASCADE, null=True, verbose_name='День недели',
+                            related_name='events')
+    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    payment = models.BooleanField(default=False, verbose_name='Платное')
+    booking =  models.BooleanField(default=False, verbose_name='Запись')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, null=True, verbose_name='Возраст')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
+    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
+
+    class Meta:
+        verbose_name = 'Мероприятие ЦГБ им. Тютчева'
+        verbose_name_plural = 'Мероприятия ЦГБ им. Тютчева'
+
+    def __str__(self):
+        return self.name
+
+
+class WeekBCJ(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Наименование')
+    start_date = models.DateField(verbose_name='Первое число недели', blank=True, null=True)
+    end_date = models.DateField(verbose_name='Последнее число недели', blank=True, null=True)
+    active = models.BooleanField(default=False, verbose_name='Текущая рабочая неделя')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for day in self.days.filter(week=self):
+            for event in day.events.all():
+                event.save()
+
+    class Meta:
+        verbose_name = 'Расписание БЦ Южный'
+        verbose_name_plural = 'Расписания БЦ Южный'
+
+    def __str__(self):
+        return self.name
+
+
+class DayBCJ(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата', blank=True, null=True)
+    week = models.ForeignKey(WeekBCJ, on_delete=models.CASCADE, verbose_name='Неделя', related_name='days')
+
+    class Meta:
+        verbose_name = 'Рабочий день ЦГБ им. Тютчева'
+        verbose_name_plural = 'Рабочий день БЦ Южный'
+
+    def __str__(self):
+        return self.name
+
+
+class EventyBCJ(models.Model):
+    ZERO = '0+'
+    SIX = '6+'
+    TWELVE = '12+'
+    FOURTEEN = '14+'
+    SIXTEEN = '16+'
+    EIGHTEEN = '18+'
+    FIFTYFIVE = '55+'
+    SIXTY = '60+'
+    SIXTYFIVE = '65+'
+
+    AGE_CHOICES = (
+        (ZERO, '0+'),
+        (SIX, '6+'),
+        (TWELVE, '12+'),
+        (FOURTEEN, '14+'),
+        (SIXTEEN, '16+'),
+        (EIGHTEEN, '18+'),
+        (FIFTYFIVE, '55+'),
+        (SIXTY, '60+'),
+        (SIXTYFIVE, '65+'),
+
+    )
+
+    day = models.ForeignKey(DayBCJ, on_delete=models.CASCADE, null=True, verbose_name='День недели',
+                            related_name='events')
+    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    payment = models.BooleanField(default=False, verbose_name='Платное')
+    booking =  models.BooleanField(default=False, verbose_name='Запись')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, null=True, verbose_name='Возраст')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
+    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
+
+    class Meta:
+        verbose_name = 'Мероприятие БЦ Южный'
+        verbose_name_plural = 'Мероприятия БЦ Южный'
+
+    def __str__(self):
+        return self.name
+
+
+class WeekBSCD(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Наименование')
+    start_date = models.DateField(verbose_name='Первое число недели', blank=True, null=True)
+    end_date = models.DateField(verbose_name='Последнее число недели', blank=True, null=True)
+    active = models.BooleanField(default=False, verbose_name='Текущая рабочая неделя')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for day in self.days.filter(week=self):
+            for event in day.events.all():
+                event.save()
+
+    class Meta:
+        verbose_name = 'Расписание БСЧ им Дмитриева'
+        verbose_name_plural = 'Расписания БСЧ им Дмитриева'
+
+    def __str__(self):
+        return self.name
+
+
+class DayBSCD(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата', blank=True, null=True)
+    week = models.ForeignKey(WeekBSCD, on_delete=models.CASCADE, verbose_name='Неделя', related_name='days')
+
+    class Meta:
+        verbose_name = 'Рабочий день БСЧ им Дмитриева'
+        verbose_name_plural = 'Рабочий БСЧ им Дмитриева'
+
+    def __str__(self):
+        return self.name
+
+
+class EventyBSCD(models.Model):
+    ZERO = '0+'
+    SIX = '6+'
+    TWELVE = '12+'
+    FOURTEEN = '14+'
+    SIXTEEN = '16+'
+    EIGHTEEN = '18+'
+    FIFTYFIVE = '55+'
+    SIXTY = '60+'
+    SIXTYFIVE = '65+'
+
+    AGE_CHOICES = (
+        (ZERO, '0+'),
+        (SIX, '6+'),
+        (TWELVE, '12+'),
+        (FOURTEEN, '14+'),
+        (SIXTEEN, '16+'),
+        (EIGHTEEN, '18+'),
+        (FIFTYFIVE, '55+'),
+        (SIXTY, '60+'),
+        (SIXTYFIVE, '65+'),
+
+    )
+
+    day = models.ForeignKey(DayBSCD, on_delete=models.CASCADE, null=True, verbose_name='День недели',
+                            related_name='events')
+    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    payment = models.BooleanField(default=False, verbose_name='Платное')
+    booking =  models.BooleanField(default=False, verbose_name='Запись')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, null=True, verbose_name='Возраст')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
+    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
+
+    class Meta:
+        verbose_name = 'Мероприятие БСЧ им Дмитриева'
+        verbose_name_plural = 'Мероприятия БСЧ им Дмитриева'
+
+    def __str__(self):
+        return self.name
+
+
+class WeekYB(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Наименование')
+    start_date = models.DateField(verbose_name='Первое число недели', blank=True, null=True)
+    end_date = models.DateField(verbose_name='Последнее число недели', blank=True, null=True)
+    active = models.BooleanField(default=False, verbose_name='Текущая рабочая неделя')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for day in self.days.filter(week=self):
+            for event in day.events.all():
+                event.save()
+
+    class Meta:
+        verbose_name = 'Расписание Юношеская библиотека'
+        verbose_name_plural = 'Расписания Юношеская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class DayYB(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата', blank=True, null=True)
+    week = models.ForeignKey(WeekYB, on_delete=models.CASCADE, verbose_name='Неделя', related_name='days')
+
+    class Meta:
+        verbose_name = 'Рабочий день Юношеская библиотека'
+        verbose_name_plural = 'Рабочий день Юношеская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class EventyYB(models.Model):
+    ZERO = '0+'
+    SIX = '6+'
+    TWELVE = '12+'
+    FOURTEEN = '14+'
+    SIXTEEN = '16+'
+    EIGHTEEN = '18+'
+    FIFTYFIVE = '55+'
+    SIXTY = '60+'
+    SIXTYFIVE = '65+'
+
+    AGE_CHOICES = (
+        (ZERO, '0+'),
+        (SIX, '6+'),
+        (TWELVE, '12+'),
+        (FOURTEEN, '14+'),
+        (SIXTEEN, '16+'),
+        (EIGHTEEN, '18+'),
+        (FIFTYFIVE, '55+'),
+        (SIXTY, '60+'),
+        (SIXTYFIVE, '65+'),
+
+    )
+
+    day = models.ForeignKey(DayYB, on_delete=models.CASCADE, null=True, verbose_name='День недели',
+                            related_name='events')
+    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    payment = models.BooleanField(default=False, verbose_name='Платное')
+    booking =  models.BooleanField(default=False, verbose_name='Запись')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, null=True, verbose_name='Возраст')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
+    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
+
+    class Meta:
+        verbose_name = 'Мероприятие Юношеская библиотека'
+        verbose_name_plural = 'Мероприятия Юношеская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class WeekDB(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Наименование')
+    start_date = models.DateField(verbose_name='Первое число недели', blank=True, null=True)
+    end_date = models.DateField(verbose_name='Последнее число недели', blank=True, null=True)
+    active = models.BooleanField(default=False, verbose_name='Текущая рабочая неделя')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for day in self.days.filter(week=self):
+            for event in day.events.all():
+                event.save()
+
+    class Meta:
+        verbose_name = 'Расписание Детская библиотека'
+        verbose_name_plural = 'Расписания Детская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class DayDB(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата', blank=True, null=True)
+    week = models.ForeignKey(WeekDB, on_delete=models.CASCADE, verbose_name='Неделя', related_name='days')
+
+    class Meta:
+        verbose_name = 'Рабочий день Детская библиотека'
+        verbose_name_plural = 'Рабочий день Детская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class EventyDB(models.Model):
+    ZERO = '0+'
+    SIX = '6+'
+    TWELVE = '12+'
+    FOURTEEN = '14+'
+    SIXTEEN = '16+'
+    EIGHTEEN = '18+'
+    FIFTYFIVE = '55+'
+    SIXTY = '60+'
+    SIXTYFIVE = '65+'
+
+    AGE_CHOICES = (
+        (ZERO, '0+'),
+        (SIX, '6+'),
+        (TWELVE, '12+'),
+        (FOURTEEN, '14+'),
+        (SIXTEEN, '16+'),
+        (EIGHTEEN, '18+'),
+        (FIFTYFIVE, '55+'),
+        (SIXTY, '60+'),
+        (SIXTYFIVE, '65+'),
+
+    )
+
+    day = models.ForeignKey(DayDB, on_delete=models.CASCADE, null=True, verbose_name='День недели',
+                            related_name='events')
+    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    payment = models.BooleanField(default=False, verbose_name='Платное')
+    booking =  models.BooleanField(default=False, verbose_name='Запись')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, null=True, verbose_name='Возраст')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
+    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
+
+    class Meta:
+        verbose_name = 'Мероприятие Детская библиотека'
+        verbose_name_plural = 'Мероприятия Детская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class WeekNMB(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Наименование')
+    start_date = models.DateField(verbose_name='Первое число недели', blank=True, null=True)
+    end_date = models.DateField(verbose_name='Последнее число недели', blank=True, null=True)
+    active = models.BooleanField(default=False, verbose_name='Текущая рабочая неделя')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for day in self.days.filter(week=self):
+            for event in day.events.all():
+                event.save()
+
+    class Meta:
+        verbose_name = 'Расписание Новомилетская сельская библиотека'
+        verbose_name_plural = 'Расписания Новомилетская сельская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class DayNMB(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата', blank=True, null=True)
+    week = models.ForeignKey(WeekNMB, on_delete=models.CASCADE, verbose_name='Неделя', related_name='days')
+
+    class Meta:
+        verbose_name = 'Рабочий день Новомилетская сельская библиотека'
+        verbose_name_plural = 'Рабочий день Новомилетская сельская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class EventyNMB(models.Model):
+    ZERO = '0+'
+    SIX = '6+'
+    TWELVE = '12+'
+    FOURTEEN = '14+'
+    SIXTEEN = '16+'
+    EIGHTEEN = '18+'
+    FIFTYFIVE = '55+'
+    SIXTY = '60+'
+    SIXTYFIVE = '65+'
+
+    AGE_CHOICES = (
+        (ZERO, '0+'),
+        (SIX, '6+'),
+        (TWELVE, '12+'),
+        (FOURTEEN, '14+'),
+        (SIXTEEN, '16+'),
+        (EIGHTEEN, '18+'),
+        (FIFTYFIVE, '55+'),
+        (SIXTY, '60+'),
+        (SIXTYFIVE, '65+'),
+
+    )
+
+    day = models.ForeignKey(DayNMB, on_delete=models.CASCADE, null=True, verbose_name='День недели',
+                            related_name='events')
+    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    payment = models.BooleanField(default=False, verbose_name='Платное')
+    booking =  models.BooleanField(default=False, verbose_name='Запись')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, null=True, verbose_name='Возраст')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
+    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
+
+    class Meta:
+        verbose_name = 'Мероприятие Новомилетская сельская библиотека'
+        verbose_name_plural = 'Мероприятия Новомилетская сельская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class WeekCSB(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Наименование')
+    start_date = models.DateField(verbose_name='Первое число недели', blank=True, null=True)
+    end_date = models.DateField(verbose_name='Последнее число недели', blank=True, null=True)
+    active = models.BooleanField(default=False, verbose_name='Текущая рабочая неделя')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for day in self.days.filter(week=self):
+            for event in day.events.all():
+                event.save()
+
+    class Meta:
+        verbose_name = 'Расписание Черновская сельская библиотека'
+        verbose_name_plural = 'Расписания Черновская сельская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class DayCSB(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата', blank=True, null=True)
+    week = models.ForeignKey(WeekCSB, on_delete=models.CASCADE, verbose_name='Неделя', related_name='days')
+
+    class Meta:
+        verbose_name = 'Рабочий день Черновская сельская библиотека'
+        verbose_name_plural = 'Рабочий день Черновская сельская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class EventyCSB(models.Model):
+    ZERO = '0+'
+    SIX = '6+'
+    TWELVE = '12+'
+    FOURTEEN = '14+'
+    SIXTEEN = '16+'
+    EIGHTEEN = '18+'
+    FIFTYFIVE = '55+'
+    SIXTY = '60+'
+    SIXTYFIVE = '65+'
+
+    AGE_CHOICES = (
+        (ZERO, '0+'),
+        (SIX, '6+'),
+        (TWELVE, '12+'),
+        (FOURTEEN, '14+'),
+        (SIXTEEN, '16+'),
+        (EIGHTEEN, '18+'),
+        (FIFTYFIVE, '55+'),
+        (SIXTY, '60+'),
+        (SIXTYFIVE, '65+'),
+
+    )
+
+    day = models.ForeignKey(DayCSB, on_delete=models.CASCADE, null=True, verbose_name='День недели',
+                            related_name='events')
+    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    payment = models.BooleanField(default=False, verbose_name='Платное')
+    booking =  models.BooleanField(default=False, verbose_name='Запись')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, null=True, verbose_name='Возраст')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
+    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
+
+    class Meta:
+        verbose_name = 'Мероприятие Черновская сельская библиотека'
+        verbose_name_plural = 'Мероприятия Черновская сельская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class WeekSSB(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Наименование')
+    start_date = models.DateField(verbose_name='Первое число недели', blank=True, null=True)
+    end_date = models.DateField(verbose_name='Последнее число недели', blank=True, null=True)
+    active = models.BooleanField(default=False, verbose_name='Текущая рабочая неделя')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for day in self.days.filter(week=self):
+            for event in day.events.all():
+                event.save()
+
+    class Meta:
+        verbose_name = 'Расписание Соболихинская сельская библиотека'
+        verbose_name_plural = 'Расписания Соболихинская сельская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class DaySSB(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата', blank=True, null=True)
+    week = models.ForeignKey(WeekSSB, on_delete=models.CASCADE, verbose_name='Неделя', related_name='days')
+
+    class Meta:
+        verbose_name = 'Рабочий день Соболихинская сельская библиотека'
+        verbose_name_plural = 'Рабочий день Соболихинская сельская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class EventySSB(models.Model):
+    ZERO = '0+'
+    SIX = '6+'
+    TWELVE = '12+'
+    FOURTEEN = '14+'
+    SIXTEEN = '16+'
+    EIGHTEEN = '18+'
+    FIFTYFIVE = '55+'
+    SIXTY = '60+'
+    SIXTYFIVE = '65+'
+
+    AGE_CHOICES = (
+        (ZERO, '0+'),
+        (SIX, '6+'),
+        (TWELVE, '12+'),
+        (FOURTEEN, '14+'),
+        (SIXTEEN, '16+'),
+        (EIGHTEEN, '18+'),
+        (FIFTYFIVE, '55+'),
+        (SIXTY, '60+'),
+        (SIXTYFIVE, '65+'),
+
+    )
+
+    day = models.ForeignKey(DaySSB, on_delete=models.CASCADE, null=True, verbose_name='День недели',
+                            related_name='events')
+    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    payment = models.BooleanField(default=False, verbose_name='Платное')
+    booking =  models.BooleanField(default=False, verbose_name='Запись')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, null=True, verbose_name='Возраст')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
+    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
+
+    class Meta:
+        verbose_name = 'Мероприятие Соболихинская сельская библиотека'
+        verbose_name_plural = 'Мероприятия Соболихинская сельская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class WeekFSB(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Наименование')
+    start_date = models.DateField(verbose_name='Первое число недели', blank=True, null=True)
+    end_date = models.DateField(verbose_name='Последнее число недели', blank=True, null=True)
+    active = models.BooleanField(default=False, verbose_name='Текущая рабочая неделя')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for day in self.days.filter(week=self):
+            for event in day.events.all():
+                event.save()
+
+    class Meta:
+        verbose_name = 'Расписание Федурновская сельская библиотека'
+        verbose_name_plural = 'Расписания Федурновская сельская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class DayFSB(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата', blank=True, null=True)
+    week = models.ForeignKey(WeekFSB, on_delete=models.CASCADE, verbose_name='Неделя', related_name='days')
+
+    class Meta:
+        verbose_name = 'Рабочий день Федурновская сельская библиотека'
+        verbose_name_plural = 'Рабочий день Федурновская сельская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class EventyFSB(models.Model):
+    ZERO = '0+'
+    SIX = '6+'
+    TWELVE = '12+'
+    FOURTEEN = '14+'
+    SIXTEEN = '16+'
+    EIGHTEEN = '18+'
+    FIFTYFIVE = '55+'
+    SIXTY = '60+'
+    SIXTYFIVE = '65+'
+
+    AGE_CHOICES = (
+        (ZERO, '0+'),
+        (SIX, '6+'),
+        (TWELVE, '12+'),
+        (FOURTEEN, '14+'),
+        (SIXTEEN, '16+'),
+        (EIGHTEEN, '18+'),
+        (FIFTYFIVE, '55+'),
+        (SIXTY, '60+'),
+        (SIXTYFIVE, '65+'),
+
+    )
+
+    day = models.ForeignKey(DayFSB, on_delete=models.CASCADE, null=True, verbose_name='День недели',
+                            related_name='events')
+    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    payment = models.BooleanField(default=False, verbose_name='Платное')
+    booking =  models.BooleanField(default=False, verbose_name='Запись')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, null=True, verbose_name='Возраст')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
+    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
+
+    class Meta:
+        verbose_name = 'Мероприятие Федурновская сельская библиотека'
+        verbose_name_plural = 'Мероприятия Федурновская сельская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class WeekDBT(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Наименование')
+    start_date = models.DateField(verbose_name='Первое число недели', blank=True, null=True)
+    end_date = models.DateField(verbose_name='Последнее число недели', blank=True, null=True)
+    active = models.BooleanField(default=False, verbose_name='Текущая рабочая неделя')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for day in self.days.filter(week=self):
+            for event in day.events.all():
+                event.save()
+
+    class Meta:
+        verbose_name = 'Расписание Детская библиотека (Твардовского)'
+        verbose_name_plural = 'Расписания Детская библиотека (Твардовского)'
+
+    def __str__(self):
+        return self.name
+
+
+class DayDBT(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата', blank=True, null=True)
+    week = models.ForeignKey(WeekDBT, on_delete=models.CASCADE, verbose_name='Неделя', related_name='days')
+
+    class Meta:
+        verbose_name = 'Рабочий день Детская библиотека (Твардовского)'
+        verbose_name_plural = 'Рабочий день Детская библиотека (Твардовского)'
+
+    def __str__(self):
+        return self.name
+
+
+class EventyDBT(models.Model):
+    ZERO = '0+'
+    SIX = '6+'
+    TWELVE = '12+'
+    FOURTEEN = '14+'
+    SIXTEEN = '16+'
+    EIGHTEEN = '18+'
+    FIFTYFIVE = '55+'
+    SIXTY = '60+'
+    SIXTYFIVE = '65+'
+
+    AGE_CHOICES = (
+        (ZERO, '0+'),
+        (SIX, '6+'),
+        (TWELVE, '12+'),
+        (FOURTEEN, '14+'),
+        (SIXTEEN, '16+'),
+        (EIGHTEEN, '18+'),
+        (FIFTYFIVE, '55+'),
+        (SIXTY, '60+'),
+        (SIXTYFIVE, '65+'),
+
+    )
+
+    day = models.ForeignKey(DayDBT, on_delete=models.CASCADE, null=True, verbose_name='День недели',
+                            related_name='events')
+    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    payment = models.BooleanField(default=False, verbose_name='Платное')
+    booking =  models.BooleanField(default=False, verbose_name='Запись')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, null=True, verbose_name='Возраст')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
+    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
+
+    class Meta:
+        verbose_name = 'Мероприятие Детская библиотека (Твардовского)'
+        verbose_name_plural = 'Мероприятия Детская библиотека (Твардовского)'
+
+    def __str__(self):
+        return self.name
+
+
+class WeekNAB(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Наименование')
+    start_date = models.DateField(verbose_name='Первое число недели', blank=True, null=True)
+    end_date = models.DateField(verbose_name='Последнее число недели', blank=True, null=True)
+    active = models.BooleanField(default=False, verbose_name='Текущая рабочая неделя')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for day in self.days.filter(week=self):
+            for event in day.events.all():
+                event.save()
+
+    class Meta:
+        verbose_name = 'Расписание Никольско-Архангельская библиотека'
+        verbose_name_plural = 'Расписания Никольско-Архангельская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class DayNAB(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата', blank=True, null=True)
+    week = models.ForeignKey(WeekNAB, on_delete=models.CASCADE, verbose_name='Неделя', related_name='days')
+
+    class Meta:
+        verbose_name = 'Рабочий день Никольско-Архангельская библиотека'
+        verbose_name_plural = 'Рабочий день Никольско-Архангельская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class EventyNAB(models.Model):
+    ZERO = '0+'
+    SIX = '6+'
+    TWELVE = '12+'
+    FOURTEEN = '14+'
+    SIXTEEN = '16+'
+    EIGHTEEN = '18+'
+    FIFTYFIVE = '55+'
+    SIXTY = '60+'
+    SIXTYFIVE = '65+'
+
+    AGE_CHOICES = (
+        (ZERO, '0+'),
+        (SIX, '6+'),
+        (TWELVE, '12+'),
+        (FOURTEEN, '14+'),
+        (SIXTEEN, '16+'),
+        (EIGHTEEN, '18+'),
+        (FIFTYFIVE, '55+'),
+        (SIXTY, '60+'),
+        (SIXTYFIVE, '65+'),
+
+    )
+
+    day = models.ForeignKey(DayNAB, on_delete=models.CASCADE, null=True, verbose_name='День недели',
+                            related_name='events')
+    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    payment = models.BooleanField(default=False, verbose_name='Платное')
+    booking =  models.BooleanField(default=False, verbose_name='Запись')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, null=True, verbose_name='Возраст')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
+    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
+
+    class Meta:
+        verbose_name = 'Мероприятие Никольско-Архангельская библиотека'
+        verbose_name_plural = 'Мероприятия Никольско-Архангельская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class WeekPPB(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Наименование')
+    start_date = models.DateField(verbose_name='Первое число недели', blank=True, null=True)
+    end_date = models.DateField(verbose_name='Последнее число недели', blank=True, null=True)
+    active = models.BooleanField(default=False, verbose_name='Текущая рабочая неделя')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for day in self.days.filter(week=self):
+            for event in day.events.all():
+                event.save()
+
+    class Meta:
+        verbose_name = 'Расписание Пехра-Покровская библиотека'
+        verbose_name_plural = 'Расписания Пехра-Покровская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class DayPPB(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата', blank=True, null=True)
+    week = models.ForeignKey(WeekPPB, on_delete=models.CASCADE, verbose_name='Неделя', related_name='days')
+
+    class Meta:
+        verbose_name = 'Рабочий день Пехра-Покровская библиотека'
+        verbose_name_plural = 'Рабочий день Пехра-Покровская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class EventyPPB(models.Model):
+    ZERO = '0+'
+    SIX = '6+'
+    TWELVE = '12+'
+    FOURTEEN = '14+'
+    SIXTEEN = '16+'
+    EIGHTEEN = '18+'
+    FIFTYFIVE = '55+'
+    SIXTY = '60+'
+    SIXTYFIVE = '65+'
+
+    AGE_CHOICES = (
+        (ZERO, '0+'),
+        (SIX, '6+'),
+        (TWELVE, '12+'),
+        (FOURTEEN, '14+'),
+        (SIXTEEN, '16+'),
+        (EIGHTEEN, '18+'),
+        (FIFTYFIVE, '55+'),
+        (SIXTY, '60+'),
+        (SIXTYFIVE, '65+'),
+
+    )
+
+    day = models.ForeignKey(DayPPB, on_delete=models.CASCADE, null=True, verbose_name='День недели',
+                            related_name='events')
+    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    payment = models.BooleanField(default=False, verbose_name='Платное')
+    booking =  models.BooleanField(default=False, verbose_name='Запись')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, null=True, verbose_name='Возраст')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
+    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
+
+    class Meta:
+        verbose_name = 'Мероприятие Пехра-Покровская библиотека'
+        verbose_name_plural = 'Мероприятия Пехра-Покровская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class WeekNB(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Наименование')
+    start_date = models.DateField(verbose_name='Первое число недели', blank=True, null=True)
+    end_date = models.DateField(verbose_name='Последнее число недели', blank=True, null=True)
+    active = models.BooleanField(default=False, verbose_name='Текущая рабочая неделя')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for day in self.days.filter(week=self):
+            for event in day.events.all():
+                event.save()
+
+    class Meta:
+        verbose_name = 'Расписание Никольская библиотека'
+        verbose_name_plural = 'Расписания Никольская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class DayNB(models.Model):
+    name = models.CharField(max_length=15, verbose_name='День недели')
+    date = models.DateField(verbose_name='Дата', blank=True, null=True)
+    week = models.ForeignKey(WeekNB, on_delete=models.CASCADE, verbose_name='Неделя', related_name='days')
+
+    class Meta:
+        verbose_name = 'Рабочий день Никольская библиотека'
+        verbose_name_plural = 'Рабочий день Никольская библиотека'
+
+    def __str__(self):
+        return self.name
+
+
+class EventyNB(models.Model):
+    ZERO = '0+'
+    SIX = '6+'
+    TWELVE = '12+'
+    FOURTEEN = '14+'
+    SIXTEEN = '16+'
+    EIGHTEEN = '18+'
+    FIFTYFIVE = '55+'
+    SIXTY = '60+'
+    SIXTYFIVE = '65+'
+
+    AGE_CHOICES = (
+        (ZERO, '0+'),
+        (SIX, '6+'),
+        (TWELVE, '12+'),
+        (FOURTEEN, '14+'),
+        (SIXTEEN, '16+'),
+        (EIGHTEEN, '18+'),
+        (FIFTYFIVE, '55+'),
+        (SIXTY, '60+'),
+        (SIXTYFIVE, '65+'),
+
+    )
+
+    day = models.ForeignKey(DayNB, on_delete=models.CASCADE, null=True, verbose_name='День недели',
+                            related_name='events')
+    name = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    payment = models.BooleanField(default=False, verbose_name='Платное')
+    booking =  models.BooleanField(default=False, verbose_name='Запись')
+    age = models.CharField(max_length=50, choices=AGE_CHOICES, blank=True, null=True, verbose_name='Возраст')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Время начала')
+    end_time = models.TimeField(blank=True, null=True, verbose_name='Время окончания')
+
+    class Meta:
+        verbose_name = 'Мероприятие Никольская библиотека'
+        verbose_name_plural = 'Мероприятия Никольская библиотека'
 
     def __str__(self):
         return self.name
