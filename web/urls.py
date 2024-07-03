@@ -6,7 +6,8 @@ from . import views
 from .views import BibliotekiAPIView, NewsAPIView, EventAPIView, ServiceAPIView, \
     WeekView, WeekCDSCHView, WeekBERView, WeekF2View, WeekF3View, WeekF4View, CinemaWeekView, ActiveWeeksAPIView, \
     WeekAPIView, CinemaWeekAPIView, WeekPrint, WeekCDSCHPrint, WeekBERPrint, WeekF2Print, WeekF3Print, WeekF4Print, \
-    CinemaWeekPrint, WeekVertical, WeekCDSCHVertical, WeekBERVertical, WeekF2Vertical, WeekF3Vertical, WeekF4Vertical
+    CinemaWeekPrint, WeekVertical, WeekCDSCHVertical, WeekBERVertical, WeekF2Vertical, WeekF3Vertical, WeekF4Vertical, \
+    WeekB5View, WeekB5Print, WeekB5Vertical
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -71,6 +72,9 @@ urlpatterns = [
     path('schedule_f4/', WeekF4View.as_view(), name='schedule_f4'),
     path('schedule-f4-print/', WeekF4Print.as_view(), name='schedule-f4-print'),
     path('schedule-f4-vertical/', WeekF4Vertical.as_view(), name='schedule-f4-vertical'),
+    path('schedule_b5/', WeekB5View.as_view(), name='schedule_b5'),
+    path('schedule-b5-print/', WeekB5Print.as_view(), name='schedule-b5-print'),
+    path('schedule-b5-vertical/', WeekB5Vertical.as_view(), name='schedule-b5-vertical'),
     path('cinema/', CinemaWeekView.as_view(), name='cinema'),
     path('cinema-print/', CinemaWeekPrint.as_view(), name='cinema-print'),
 

@@ -490,7 +490,7 @@ def events(request):
     return render(request, 'events.html', context)
 
 
-@cache_page(60*15)
+# @cache_page(60*15)
 def shedules(request):
     title = 'Системные расписания'
     description = 'Системные библиотек "ЦБС им. А. Белого"'
@@ -500,10 +500,28 @@ def shedules(request):
     schedule_f2 = WeekF2.objects.filter(active=True)
     schedule_f3 = WeekF3.objects.filter(active=True)
     schedule_f4 = WeekF4.objects.filter(active=True)
+    schedule_b5 = WeekB5.objects.filter(active=False)
+    schedule_cgbt = WeekCGBT.objects.filter(active=True)
+    schedule_bcj = WeekBCJ.objects.filter(active=True)
+    schedule_bscd = WeekBSCD.objects.filter(active=True)
+    schedule_yb = WeekYB.objects.filter(active=True)
+    schedule_db = WeekDB.objects.filter(active=True)
+    schedule_nmb = WeekNMB.objects.filter(active=True)
+    schedule_csb = WeekCSB.objects.filter(active=True)
+    schedule_ssb = WeekSSB.objects.filter(active=True)
+    schedule_fsb = WeekFSB.objects.filter(active=True)
+    schedule_dbt = WeekDBT.objects.filter(active=True)
+    schedule_nab = WeekNAB.objects.filter(active=True)
+    schedule_ppb = WeekPPB.objects.filter(active=True)
+    schedule_nb = WeekNB.objects.filter(active=True)
     return render(request, 'shedules.html', {'title': title, 'description': description, 'schedule_ikc': schedule_ikc,
-                                             'schedule_cdsch':schedule_cdsch, 'schedule_ber':schedule_ber,
-                                             'schedule_f2':schedule_f2, 'schedule_f3':schedule_f3,
-                                             'schedule_f4':schedule_f4})
+                                             'schedule_cdsch': schedule_cdsch, 'schedule_ber': schedule_ber,
+                                             'schedule_f2': schedule_f2, 'schedule_f3': schedule_f3, 'schedule_f4': schedule_f4,
+                                             'schedule_b5': schedule_b5, 'schedule_cgbt': schedule_cgbt, 'schedule_bcj': schedule_bcj,
+                                             'schedule_bscd': schedule_bscd, 'schedule_yb': schedule_yb, 'schedule_db': schedule_db,
+                                             'schedule_nmb': schedule_nmb, 'schedule_csb': schedule_csb, 'schedule_ssb': schedule_ssb,
+                                             'schedule_fsb': schedule_fsb, 'schedule_dbt': schedule_dbt, 'schedule_nab': schedule_nab,
+                                             'schedule_ppb': schedule_ppb, 'schedule_nb': schedule_nb})
 
 
 @cache_page(60*15)
@@ -666,6 +684,22 @@ class WeekF4View(ListView):
         context['start_date'] = self.get_queryset().first().start_date
         context['end_date'] = self.get_queryset().first().end_date
         context['biblioteka'] = Biblioteka.objects.get(id=6)
+        return context
+
+
+class WeekB5View(ListView):
+    model = WeekB5
+    template_name = 'schedule_b5.html'
+
+    def get_queryset(self):
+        return WeekB5.objects.filter(active=False)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayB5.objects.filter(week__active=False)
+        context['start_date'] = self.get_queryset().first().start_date
+        context['end_date'] = self.get_queryset().first().end_date
+        context['biblioteka'] = Biblioteka.objects.get(id=12)
         return context
 
 
@@ -996,5 +1030,772 @@ def search(request):
         results = []
     return render(request, 'search_results.html', {'results': results, 'query': query})
 
+
+class WeekB5Print(ListView):
+    model = WeekB5
+    template_name = 'schedule_b5.html'
+
+    def get_queryset(self):
+        active_week = WeekB5.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekB5.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekB5.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayB5.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=12)
+        return context
+
+
+class WeekB5Vertical(ListView):
+    model = WeekB5
+    template_name = 'schedule_b5_vertical.html'
+
+    def get_queryset(self):
+        active_week = WeekB5.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekB5.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekB5.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayB5.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=12)
+        return context
+
+
+class WeekCGBTView(ListView):
+    model = WeekCGBT
+    template_name = 'schedule_cgbt.html'
+
+    def get_queryset(self):
+        return WeekCGBT.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayCGBT.objects.filter(week__active=True)
+        context['start_date'] = self.get_queryset().first().start_date
+        context['end_date'] = self.get_queryset().first().end_date
+        context['biblioteka'] = Biblioteka.objects.get(id=8)
+        return context
+
+
+class WeekCGBTPrint(ListView):
+    model = WeekCGBT
+    template_name = 'schedule_cgbt.html'
+
+    def get_queryset(self):
+        active_week = WeekCGBT.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekCGBT.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekCGBT.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayCGBT.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=8)
+        return context
+
+
+class WeekCGBTVertical(ListView):
+    model = WeekCGBT
+    template_name = 'schedule_cgbt_vertical.html'
+
+    def get_queryset(self):
+        active_week = WeekCGBT.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekCGBT.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekCGBT.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayCGBT.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=8)
+        return context
+
+
+class WeekBCJView(ListView):
+    model = WeekBCJ
+    template_name = 'schedule_bcj.html'
+
+    def get_queryset(self):
+        return WeekBCJ.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayBCJ.objects.filter(week__active=True)
+        context['start_date'] = self.get_queryset().first().start_date
+        context['end_date'] = self.get_queryset().first().end_date
+        context['biblioteka'] = Biblioteka.objects.get(id=9)
+        return context
+
+
+class WeekBCJPrint(ListView):
+    model = WeekBCJ
+    template_name = 'schedule_bcj.html'
+
+    def get_queryset(self):
+        active_week = WeekBCJ.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekBCJ.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekBCJ.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayBCJ.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=9)
+        return context
+
+
+class WeekBCJVertical(ListView):
+    model = WeekBCJ
+    template_name = 'schedule_bcj_vertical.html'
+
+    def get_queryset(self):
+        active_week = WeekBCJ.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekBCJ.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekBCJ.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayBCJ.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=9)
+        return context
+
+
+class WeekBSCDView(ListView):
+    model = WeekBSCD
+    template_name = 'schedule_bscd.html'
+
+    def get_queryset(self):
+        return WeekBSCD.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayBSCD.objects.filter(week__active=True)
+        context['start_date'] = self.get_queryset().first().start_date
+        context['end_date'] = self.get_queryset().first().end_date
+        context['biblioteka'] = Biblioteka.objects.get(id=10)
+        return context
+
+
+class WeekBSCDPrint(ListView):
+    model = WeekBSCD
+    template_name = 'schedule_bscd.html'
+
+    def get_queryset(self):
+        active_week = WeekBSCD.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekBSCD.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekBSCD.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayBSCD.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=10)
+        return context
+
+
+class WeekBSCDVertical(ListView):
+    model = WeekBSCD
+    template_name = 'schedule_bscd_vertical.html'
+
+    def get_queryset(self):
+        active_week = WeekBSCD.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekBSCD.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekBSCD.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayBSCD.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=10)
+        return context
+
+
+class WeekYBView(ListView):
+    model = WeekYB
+    template_name = 'schedule_yb.html'
+
+    def get_queryset(self):
+        return WeekYB.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayYB.objects.filter(week__active=True)
+        context['start_date'] = self.get_queryset().first().start_date
+        context['end_date'] = self.get_queryset().first().end_date
+        context['biblioteka'] = Biblioteka.objects.get(id=11)
+        return context
+
+
+class WeekYBPrint(ListView):
+    model = WeekYB
+    template_name = 'schedule_yb.html'
+
+    def get_queryset(self):
+        active_week = WeekYB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekYB.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekYB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayYB.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=11)
+        return context
+
+
+class WeekYBVertical(ListView):
+    model = WeekYB
+    template_name = 'schedule_yb_vertical.html'
+
+    def get_queryset(self):
+        active_week = WeekYB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekYB.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekYB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayYB.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=11)
+        return context
+
+
+class WeekNBView(ListView):
+    model = WeekNB
+    template_name = 'schedule_nb.html'
+
+    def get_queryset(self):
+        return WeekNB.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayNB.objects.filter(week__active=True)
+        context['start_date'] = self.get_queryset().first().start_date
+        context['end_date'] = self.get_queryset().first().end_date
+        context['biblioteka'] = Biblioteka.objects.get(id=13)
+        return context
+
+
+class WeekNBPrint(ListView):
+    model = WeekNB
+    template_name = 'schedule_nb.html'
+
+    def get_queryset(self):
+        active_week = WeekNB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekNB.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekNB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayNB.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=13)
+        return context
+
+
+class WeekNBVertical(ListView):
+    model = WeekNB
+    template_name = 'schedule_nb_vertical.html'
+
+    def get_queryset(self):
+        active_week = WeekNB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekNB.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekNB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayNB.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=13)
+        return context
+
+
+class WeekNABView(ListView):
+    model = WeekNAB
+    template_name = 'schedule_nab.html'
+
+    def get_queryset(self):
+        return WeekNAB.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayNAB.objects.filter(week__active=True)
+        context['start_date'] = self.get_queryset().first().start_date
+        context['end_date'] = self.get_queryset().first().end_date
+        context['biblioteka'] = Biblioteka.objects.get(id=14)
+        return context
+
+
+class WeekNABPrint(ListView):
+    model = WeekNAB
+    template_name = 'schedule_nab.html'
+
+    def get_queryset(self):
+        active_week = WeekNAB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekNAB.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekNAB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayNAB.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=14)
+        return context
+
+
+class WeekNABVertical(ListView):
+    model = WeekNAB
+    template_name = 'schedule_nab_vertical.html'
+
+    def get_queryset(self):
+        active_week = WeekNAB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekNAB.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekNAB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayNAB.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=14)
+        return context
+
+
+class WeekPPBView(ListView):
+    model = WeekPPB
+    template_name = 'schedule_ppb.html'
+
+    def get_queryset(self):
+        return WeekPPB.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayPPB.objects.filter(week__active=True)
+        context['start_date'] = self.get_queryset().first().start_date
+        context['end_date'] = self.get_queryset().first().end_date
+        context['biblioteka'] = Biblioteka.objects.get(id=15)
+        return context
+
+
+class WeekPPBPrint(ListView):
+    model = WeekPPB
+    template_name = 'schedule_ppb.html'
+
+    def get_queryset(self):
+        active_week = WeekPPB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekPPB.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekPPB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayPPB.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=15)
+        return context
+
+
+class WeekPPBVertical(ListView):
+    model = WeekPPB
+    template_name = 'schedule_ppb_vertical.html'
+
+    def get_queryset(self):
+        active_week = WeekPPB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekPPB.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekPPB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayPPB.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=15)
+        return context
+
+
+class WeekDBView(ListView):
+    model = WeekDB
+    template_name = 'schedule_db.html'
+
+    def get_queryset(self):
+        return WeekDB.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayDB.objects.filter(week__active=True)
+        context['start_date'] = self.get_queryset().first().start_date
+        context['end_date'] = self.get_queryset().first().end_date
+        context['biblioteka'] = Biblioteka.objects.get(id=16)
+        return context
+
+
+class WeekDBPrint(ListView):
+    model = WeekDB
+    template_name = 'schedule_db.html'
+
+    def get_queryset(self):
+        active_week = WeekDB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekDB.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekDB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayDB.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=16)
+        return context
+
+
+class WeekDBVertical(ListView):
+    model = WeekDB
+    template_name = 'schedule_db_vertical.html'
+
+    def get_queryset(self):
+        active_week = WeekDB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekDB.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekDB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayDB.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=16)
+        return context
+
+
+class WeekNMBView(ListView):
+    model = WeekNMB
+    template_name = 'schedule_nmb.html'
+
+    def get_queryset(self):
+        return WeekNMB.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayNMB.objects.filter(week__active=True)
+        context['start_date'] = self.get_queryset().first().start_date
+        context['end_date'] = self.get_queryset().first().end_date
+        context['biblioteka'] = Biblioteka.objects.get(id=17)
+        return context
+
+
+class WeekNMBPrint(ListView):
+    model = WeekNMB
+    template_name = 'schedule_nmb.html'
+
+    def get_queryset(self):
+        active_week = WeekNMB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekNMB.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekNMB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayNMB.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=17)
+        return context
+
+
+class WeekNMBVertical(ListView):
+    model = WeekNMB
+    template_name = 'schedule_nmb_vertical.html'
+
+    def get_queryset(self):
+        active_week = WeekNMB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekNMB.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekNMB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayNMB.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=17)
+        return context
+
+
+class WeekCSBView(ListView):
+    model = WeekCSB
+    template_name = 'schedule_csb.html'
+
+    def get_queryset(self):
+        return WeekCSB.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayCSB.objects.filter(week__active=True)
+        context['start_date'] = self.get_queryset().first().start_date
+        context['end_date'] = self.get_queryset().first().end_date
+        context['biblioteka'] = Biblioteka.objects.get(id=18)
+        return context
+
+
+class WeekCSBPrint(ListView):
+    model = WeekCSB
+    template_name = 'schedule_csb.html'
+
+    def get_queryset(self):
+        active_week = WeekCSB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekCSB.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekCSB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayCSB.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=18)
+        return context
+
+
+class WeekCSBVertical(ListView):
+    model = WeekCSB
+    template_name = 'schedule_csb_vertical.html'
+
+    def get_queryset(self):
+        active_week = WeekCSB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekCSB.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekCSB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayCSB.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=18)
+        return context
+
+
+class WeekSSBView(ListView):
+    model = WeekSSB
+    template_name = 'schedule_ssb.html'
+
+    def get_queryset(self):
+        return WeekSSB.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DaySSB.objects.filter(week__active=True)
+        context['start_date'] = self.get_queryset().first().start_date
+        context['end_date'] = self.get_queryset().first().end_date
+        context['biblioteka'] = Biblioteka.objects.get(id=19)
+        return context
+
+
+class WeekSSBPrint(ListView):
+    model = WeekSSB
+    template_name = 'schedule_ssb.html'
+
+    def get_queryset(self):
+        active_week = WeekSSB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekSSB.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekSSB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DaySSB.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=19)
+        return context
+
+
+class WeekSSBVertical(ListView):
+    model = WeekSSB
+    template_name = 'schedule_ssb_vertical.html'
+
+    def get_queryset(self):
+        active_week = WeekSSB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekSSB.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekSSB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DaySSB.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=19)
+        return context
+
+
+class WeekFSBView(ListView):
+    model = WeekFSB
+    template_name = 'schedule_fsb.html'
+
+    def get_queryset(self):
+        return WeekFSB.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayFSB.objects.filter(week__active=True)
+        context['start_date'] = self.get_queryset().first().start_date
+        context['end_date'] = self.get_queryset().first().end_date
+        context['biblioteka'] = Biblioteka.objects.get(id=20)
+        return context
+
+
+class WeekFSBPrint(ListView):
+    model = WeekFSB
+    template_name = 'schedule_fsb.html'
+
+    def get_queryset(self):
+        active_week = WeekFSB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekFSB.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekFSB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayFSB.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=20)
+        return context
+
+
+class WeekFSBVertical(ListView):
+    model = WeekFSB
+    template_name = 'schedule_fsb_vertical.html'
+
+    def get_queryset(self):
+        active_week = WeekFSB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekFSB.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekFSB.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayFSB.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=20)
+        return context
+
+
+class WeekDBTView(ListView):
+    model = WeekDBT
+    template_name = 'schedule_dbt.html'
+
+    def get_queryset(self):
+        return WeekDBT.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['weekdays'] = DayDBT.objects.filter(week__active=True)
+        context['start_date'] = self.get_queryset().first().start_date
+        context['end_date'] = self.get_queryset().first().end_date
+        context['biblioteka'] = Biblioteka.objects.get(id=21)
+        return context
+
+
+class WeekDBTPrint(ListView):
+    model = WeekDBT
+    template_name = 'schedule_dbt.html'
+
+    def get_queryset(self):
+        active_week = WeekDBT.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekDBT.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekDBT.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayDBT.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=21)
+        return context
+
+
+class WeekDBTVertical(ListView):
+    model = WeekDBT
+    template_name = 'schedule_dbt_vertical.html'
+
+    def get_queryset(self):
+        active_week = WeekDBT.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        return WeekDBT.objects.filter(start_date=next_week_start_date)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        active_week = WeekDBT.objects.get(active=True)
+        next_week_start_date = active_week.end_date + timedelta(days=1)
+        context['weekdays'] = DayDBT.objects.filter(week__start_date=next_week_start_date)
+        context['start_date'] = next_week_start_date
+        context['end_date'] = next_week_start_date + timedelta(days=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=21)
+        return context
 
 
