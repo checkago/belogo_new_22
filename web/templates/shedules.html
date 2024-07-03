@@ -80,7 +80,27 @@
                         <a href="{% url 'schedule_b5' %}"><img class="img-responsive" src="{% static 'img/schedule_images/f4.webp' %}" alt="{{ schedule_b5.name }} Железнодорожный"/></a>
                     </div>
                     <div class="card-footer">
-                        <h5 class="font-weight-bold">Библиотека №5</h5>
+                        <h5 class="font-weight-bold">{{ schedule_b5.name }}</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex">
+                <div class="card my-3">
+                    <div class="card-body">
+                        <a href="{% url 'schedule_cgbt' %}"><img class="img-responsive" src="{% static 'img/schedule_images/f4.webp' %}" alt="{{ schedule_cgbt.name }} Железнодорожный"/></a>
+                    </div>
+                    <div class="card-footer">
+                        <h5 class="font-weight-bold">Центральная городская библиотека имени Ф.И. Тютчева</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex">
+                <div class="card my-3">
+                    <div class="card-body">
+                        <a href="{% url 'schedule_bcj' %}"><img class="img-responsive" src="{% static 'img/schedule_images/f4.webp' %}" alt="{{ schedule_bcj.name }} Железнодорожный"/></a>
+                    </div>
+                    <div class="card-footer">
+                        <h5 class="font-weight-bold">Центральная городская библиотека имени Ф.И. Тютчева</h5>
                     </div>
                 </div>
             </div>
