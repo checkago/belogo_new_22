@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% include '_header_pages.html' %}
+<style>
+    .font-fluid {
+        font-size: 1vw;
+    }
+    .ri {
+        line-height: 1.5 !important;
+    }
+    .mbp {
+        margin-bottom: 0.2rem !important;
+    }
+    .hrp {
+        margin-top: 0.2rem !important;
+        margin-bottom: 0.1rem !important;
+    }
+</style>
+    <div class="container">
+        <nav class='mt-2' aria-label="breadcrumb sm-hidden" id="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'shedules' %}">Системные расписания</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Детская библиотека (Твардовского, д. 5)</li>
+          </ol>
+        </nav>
+        <div class="container mt-3">
+        <button type="button" id="save-button" class="btn btn-yellow text-dark btn-rounded"><i class="fas fa-print fa-2x"></i></button>
+        <hr class="mt-2">
+        <div id="schedule" class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <h1 class="font-resposive font-weight-bold text-uppercase pt-3 text-danger">Библиотечная Афиша</h1>
+                    <h4 class="font-responsive font-weight-bold pb-3">{{ start_date }} - {{ end_date }}</h4>
+                </div>
+                <div class="col-md-3 text-center">
+                    <img src="{% static 'img/belyi_transparent.png' %}" style="width: 125px" />
+                </div>
+            </div>
+            <hr>
+            <div class="row d-flex">
+                <div class="col-md-9 mt-3">
+                    {% for weekday in weekdays %}
+                    <div class="row d-flex">
+                        <div class="col-md-2 align-items-center border-right">
+                            <h2 class="font-responsive font-weight-bold text-danger d-flex justify-content-center">{{ weekday.date|date:"d" }}</h2>
+                            <h5 class="font-responsive font-weight-bold d-flex justify-content-center align-items-center">{{ weekday.name }}</h5>
+                        </div>
+                        <div class="col-md-10">
+                            {% for event in weekday.events.all|dictsort:"start_time" %}
+                            <div class="row">
+                                <div class="col-md-3 col-3 col-sm-3 col-lg-3"><p class="font-weight-bold font-responsive ri pp mbp">{{ event.start_time|time:"H:i" }} - {{ event.end_time|time:"H:i" }}</p></div>
+                                <div class="col-md-6 col-6 col-sm-6 col-lg-6"><p class="font-weight-bold font-responsive ri pp mbp">{{ event.name }}</p></div>
+                                <div class="col-md-2 col-2 col-sm-2 col-lg-2 text-right"><p class="font-weight-bold font-responsive ri pp mbp">{% if event.payment == True %}<i class="fas fa-ruble-sign"></i>{% else %}{% endif %} {% if event.booking == True %}<i class="fas fa-phone-square-alt"></i>{% else %}{% endif %}</p></div>
+                                <div class="col-md-1 col-1 col-sm-1 col-lg-1 text-right"><p class="font-weight-bold font-responsive ri pp mbp">{% if event.age %}{{ event.age }}{% else %}{% endif %}</p></div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <hr>
+                    {% endfor %}
+                </div>
+                <div class="col-md-3 align-items-center border-left">
+                    <div class="col-md-12 mb-5">
+                        <h5 class="font-weight-bold font-responsive ri pp mbp text-center">{{ biblioteka.name }}</h5>
+                        <hr>
+                        <p class="font-weight-bold font-responsive ri pp mbp text-center">{{ biblioteka.adress }}</p>
+                        <hr>
+                        <p class="font-weight-bold font-responsive ri pp mbp text-center">{{ biblioteka.phone }}</p>
+                        <hr>
+                        <p class="font-weight-bold font-responsive ri pp mbp text-center">{{ biblioteka.email }}</p>
+                    </div>
+                    <div class="col-md-12 mt-5 float-end">
+                        <p class="font-weight-bold font-responsive ri pp mbp text-center mb-2"><i class="fas fa-ruble-sign"></i><span class="text-danger"> - Платное мероприятие</span></p>
+                        <p class="font-weight-bold font-responsive ri pp mbp text-center"><i class="fas fa-phone-square-alt"></i><span class="text-danger"> - Запись на мероприятие</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+<script>
+// Получение кнопки по ее идентификатору и добавление обработчика событий
+document.getElementById("save-button").addEventListener("click", function() {
+  // Код для сохранения фрагмента HTML-страницы в виде изображения
+  html2canvas(document.querySelector("#schedule")).then(canvas => {
+    var link = document.createElement("a");
+    document.body.appendChild(link);
+    link.download = "Системное расписание ИКЦ.jpg";
+    link.href = canvas.toDataURL();
+    link.target = '_blank';
+    link.click();
+  });
+});
+
+</script>
+{% include '_footer.html' %}
+{% endblock %}

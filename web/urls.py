@@ -7,7 +7,12 @@ from .views import BibliotekiAPIView, NewsAPIView, EventAPIView, ServiceAPIView,
     WeekView, WeekCDSCHView, WeekBERView, WeekF2View, WeekF3View, WeekF4View, CinemaWeekView, ActiveWeeksAPIView, \
     WeekAPIView, CinemaWeekAPIView, WeekPrint, WeekCDSCHPrint, WeekBERPrint, WeekF2Print, WeekF3Print, WeekF4Print, \
     CinemaWeekPrint, WeekVertical, WeekCDSCHVertical, WeekBERVertical, WeekF2Vertical, WeekF3Vertical, WeekF4Vertical, \
-    WeekB5View, WeekB5Print, WeekB5Vertical
+    WeekB5View, WeekB5Print, WeekB5Vertical, WeekCGBTView, WeekCGBTPrint, WeekCGBTVertical, WeekBCJView, WeekBCJPrint, \
+    WeekBCJVertical, WeekBSCDView, WeekBSCDPrint, WeekBSCDVertical, WeekYBView, WeekYBPrint, WeekYBVertical, WeekDBView, \
+    WeekDBPrint, WeekDBVertical, WeekNMBView, WeekNMBPrint, WeekNMBVertical, WeekCSBView, WeekCSBPrint, WeekCSBVertical, \
+    WeekSSBView, WeekSSBPrint, WeekSSBVertical, WeekFSBView, WeekFSBPrint, WeekDBTView, WeekFSBVertical, WeekDBTPrint, \
+    WeekDBTVertical, WeekNABView, WeekNABPrint, WeekNABVertical, WeekPPBView, WeekPPBPrint, WeekPPBVertical, WeekNBView, \
+    WeekNBPrint, WeekNBVertical
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -75,6 +80,45 @@ urlpatterns = [
     path('schedule_b5/', WeekB5View.as_view(), name='schedule_b5'),
     path('schedule-b5-print/', WeekB5Print.as_view(), name='schedule-b5-print'),
     path('schedule-b5-vertical/', WeekB5Vertical.as_view(), name='schedule-b5-vertical'),
+    path('schedule_cgbt/', WeekCGBTView.as_view(), name='schedule_cgbt'),
+    path('schedule-cgbt-print/', WeekCGBTPrint.as_view(), name='schedule-cgbt-print'),
+    path('schedule-cgbt-vertical/', WeekCGBTVertical.as_view(), name='schedule-cgbt-vertical'),
+    path('schedule_bcj/', WeekBCJView.as_view(), name='schedule_bcj'),
+    path('schedule-bcj-print/', WeekBCJPrint.as_view(), name='schedule-bcj-print'),
+    path('schedule-bcj-vertical/', WeekBCJVertical.as_view(), name='schedule-bcj-vertical'),
+    path('schedule_bscd/', WeekBSCDView.as_view(), name='schedule_bscd'),
+    path('schedule-bscd-print/', WeekBSCDPrint.as_view(), name='schedule-bscd-print'),
+    path('schedule-bscd-vertical/', WeekBSCDVertical.as_view(), name='schedule-bscd-vertical'),
+    path('schedule_yb/', WeekYBView.as_view(), name='schedule_yb'),
+    path('schedule-yb-print/', WeekYBPrint.as_view(), name='schedule-yb-print'),
+    path('schedule-yb-vertical/', WeekYBVertical.as_view(), name='schedule-yb-vertical'),
+    path('schedule_db/', WeekDBView.as_view(), name='schedule_db'),
+    path('schedule-db-print/', WeekDBPrint.as_view(), name='schedule-db-print'),
+    path('schedule-db-vertical/', WeekDBVertical.as_view(), name='schedule-db-vertical'),
+    path('schedule_nmb/', WeekNMBView.as_view(), name='schedule_nmb'),
+    path('schedule-nmb-print/', WeekNMBPrint.as_view(), name='schedule-nmb-print'),
+    path('schedule-nmb-vertical/', WeekNMBVertical.as_view(), name='schedule-nmb-vertical'),
+    path('schedule_csb/', WeekCSBView.as_view(), name='schedule_csb'),
+    path('schedule-csb-print/', WeekCSBPrint.as_view(), name='schedule-csb-print'),
+    path('schedule-csb-vertical/', WeekCSBVertical.as_view(), name='schedule-csb-vertical'),
+    path('schedule_ssb/', WeekSSBView.as_view(), name='schedule_ssb'),
+    path('schedule-ssb-print/', WeekSSBPrint.as_view(), name='schedule-ssb-print'),
+    path('schedule-ssb-vertical/', WeekSSBVertical.as_view(), name='schedule-ssb-vertical'),
+    path('schedule_fsb/', WeekFSBView.as_view(), name='schedule_fsb'),
+    path('schedule-fsb-print/', WeekFSBPrint.as_view(), name='schedule-fsb-print'),
+    path('schedule-fsb-vertical/', WeekFSBVertical.as_view(), name='schedule-fsb-vertical'),
+    path('schedule_dbt/', WeekDBTView.as_view(), name='schedule_dbt'),
+    path('schedule-dbt-print/', WeekDBTPrint.as_view(), name='schedule-dbt-print'),
+    path('schedule-dbt-vertical/', WeekDBTVertical.as_view(), name='schedule-dbt-vertical'),
+    path('schedule_nab/', WeekNABView.as_view(), name='schedule_nab'),
+    path('schedule-nab-print/', WeekNABPrint.as_view(), name='schedule-nab-print'),
+    path('schedule-nab-vertical/', WeekNABVertical.as_view(), name='schedule-nab-vertical'),
+    path('schedule_ppb/', WeekPPBView.as_view(), name='schedule_ppb'),
+    path('schedule-ppb-print/', WeekPPBPrint.as_view(), name='schedule-ppb-print'),
+    path('schedule-ppb-vertical/', WeekPPBVertical.as_view(), name='schedule-ppb-vertical'),
+    path('schedule_nb/', WeekNBView.as_view(), name='schedule_nb'),
+    path('schedule-nb-print/', WeekNBPrint.as_view(), name='schedule-nb-print'),
+    path('schedule-nb-vertical/', WeekNBVertical.as_view(), name='schedule-nb-vertical'),
     path('cinema/', CinemaWeekView.as_view(), name='cinema'),
     path('cinema-print/', CinemaWeekPrint.as_view(), name='cinema-print'),
 

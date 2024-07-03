@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% include '_header_pages.html' %}
+<style>
+    .font-fluid {
+        font-size: 0.75vw !important;
+    }
+    .ri {
+        line-height: 1.0 !important;
+    }
+    .pp {
+        line-height: 1.0 !important;
+    }
+    .mbp {
+        margin-bottom: 0.3rem !important;
+    }
+    .hrp {
+        margin-top: 0.3rem !important;
+        margin-bottom: 0.3rem !important;
+    }
+
+    @media (max-width: 768px) {
+        /* Применить новый размер шрифта только на мобильных устройствах (col) */
+        .font-fluid {
+            font-size: 2vw !important;
+        }
+    }
+    @media (max-width: 540px) {
+        /* Применить новый размер шрифта только на мобильных устройствах (col) */
+        .font-fluid {
+            font-size: 3vw !important;
+        }
+    }
+</style>
+    <div class="container">
+        <nav class='mt-2' aria-label="breadcrumb sm-hidden" id="breadcrumb">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'shedules' %}">Системные расписания</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Новомилетская сельская библиотека</li>
+            </ol>
+        </nav>
+        <div class="container mt-3">
+        <button type="button" id="save-button" class="btn btn-yellow text-dark btn-rounded"><i class="fas fa-print fa-2x"></i></button>
+        <a class="btn text-white primary-color btn-rounded" href="{% url 'schedule-b5-vertical' %}" role="button">
+          <i class="fab fa-telegram fa-2x"></i>
+        </a>
+        <div id="schedule" class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6 pt-2"><img class="img-fluid" src="{% static 'img/shedule_empty.webp' %}"></div>
+                <div class="col-md-6">
+                    <h5 class="font-responsive font-weight-bold">Новомилетская сельская библиотека</h5>
+                    <h6 class="font-responsive font-weight-bold">{{ start_date }} - {{ end_date }}</h6>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                    {% for weekday in weekdays %}
+                        <div class="col-md-4">
+                            <div class="card card-cascade wider mb-2">
+                                <div class="card-header"><h4 class="font-responsive font-weight-bold text-danger">{{ weekday.name }} - {{ weekday.date|date:"d.m.y" }}</h4></div>
+                                <div class="card-body">
+                                    {% for event in weekday.events.all|dictsort:"start_time" %}
+                                    <div class="row">
+                                        <div class="col-md-3 col-3 col-sm-3 col-lg-3"><p class="font-weight-bold font-responsive ri pp mbp">{{ event.start_time|time:"H:i" }} - {{ event.end_time|time:"H:i" }}</p></div>
+                                        <div class="col-md-9 col-9 col-sm-9 col-lg-9"><p class="font-weight-bold font-responsive ri pp mbp">{{ event.name }}</p></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 col-3 col-sm-3 col-lg-3"></div>
+                                        <div class="col-md-6 col-6 col-sm-6 col-lg-6 text-left text-danger font-weight-bold font-responsive">{% if event.booking == True %}<em>(по записи)</em>{% else %}{% endif %}</div>
+                                        <div class="col-md-3 col-3 col-sm-3 col-lg-3 text-right"><p class="font-weight-bold font-responsive ri pp mbp">{% if event.payment == True %}<i class="fas fa-ruble-sign"></i>{% else %}{% endif %} {% if event.age %}{{ event.age }}{% else %}{% endif %}</p></div>
+                                    </div>
+                                        <hr class="hrp">
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+
+            <div class="row">
+                <div class="col-md-5 text-left">
+                    <h5 class="font-responsive font-weight-bold">Телефон:</h5>
+                    <h6 class="font-responsive font-weight-bold">{{ biblioteka.phone }}</h6>
+                    <h6 class="font-responsive font-weight-bold">{{ biblioteka.email }}</h6>
+                </div>
+                <div class="col-md-7 text-right">
+                    <h5 class="font-responsive font-weight-bold">Рабочие дни: {{ biblioteka.workdays }}{% if biblioteka.workdays_alt %} | {{ biblioteka.workdays_alt }}{% endif %}</h5>
+                    <h6 class="font-responsive font-weight-bold">Время работы: {{ biblioteka.worktime }}{% if biblioteka.worktime_alt %} | {{ biblioteka.worktime_alt }}{% endif %}</h6>
+                    <h6 class="font-responsive font-weight-bold">Выходной: {{ biblioteka.weekend }}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+<script>
+// Получение кнопки по ее идентификатору и добавление обработчика событий
+document.getElementById("save-button").addEventListener("click", function() {
+  // Код для сохранения фрагмента HTML-страницы в виде изображения
+  html2canvas(document.querySelector("#schedule")).then(canvas => {
+    var link = document.createElement("a");
+    document.body.appendChild(link);
+    link.download = "Системное расписание Ф2.jpg";
+    link.href = canvas.toDataURL();
+    link.target = '_blank';
+    link.click();
+  });
+});
+
+</script>
+{% include '_footer.html' %}
+{% endblock %}
