@@ -18,7 +18,7 @@ from web.models import ImageGallery, Category, News, Document, Raiting, Bibliote
     PolojenieKonkurs, BookView, Project, ProjectTheme, DayB5, WeekB5, EventyCGBT, DayCGBT, EventyBCJ, DayBCJ, \
     EventyBSCD, DayBSCD, EventyYB, DayYB, EventyDB, DayDB, EventyNMB, DayNMB, EventyCSB, DayCSB, EventySSB, DaySSB, \
     EventyFSB, DayFSB, EventyDBT, DayDBT, EventyNAB, DayNAB, EventyPPB, DayPPB, EventyNB, DayNB, WeekCGBT, WeekBCJ, \
-    WeekBSCD, WeekYB, WeekDB, WeekNMB, WeekCSB, WeekSSB, WeekFSB, WeekDBT, WeekNAB, WeekPPB, WeekNB
+    WeekBSCD, WeekYB, WeekDB, WeekNMB, WeekCSB, WeekSSB, WeekFSB, WeekDBT, WeekNAB, WeekPPB, WeekNB, EventyB5
 
 
 class ImageGalleryInline(GenericTabularInline):
@@ -119,6 +119,7 @@ class BibliotekaAdminForm(forms.ModelForm):
 class BibliotekaAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     form = BibliotekaAdminForm
+    list_display = ('name', 'id')
 
 
 class SheduleAdmin(admin.ModelAdmin):
@@ -402,7 +403,7 @@ class DayF4Inline(NestedTabularInline):
 
 
 class EventyB5Inline(NestedTabularInline):
-    model = EventyF4
+    model = EventyB5
     extra = 1
 
 
