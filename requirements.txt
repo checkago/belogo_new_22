@@ -53,3 +53,4 @@ urllib3==1.26.10
 verb==0.1.12
 webencodings==0.5.1
 flower
+Whoosh==2.7.4
