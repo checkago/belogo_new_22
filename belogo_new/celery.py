@@ -38,4 +38,60 @@ app.conf.beat_schedule = {
         'task': 'web.tasks.update_weekf4_status',
         'schedule': crontab(minute='*/10'),  # изменено на каждый час
     },
+    'update-weekb5-status': {
+        'task': 'web.tasks.update_weekb5_status',
+        'schedule': crontab(minute='*/10'),  # изменено на каждый час
+    },
+    'update-weekcgbt-status': {
+        'task': 'web.tasks.update_weekcgbt_status',
+        'schedule': crontab(minute='*/10'),  # изменено на каждый час
+    },
+    'update-weekbcj-status': {
+        'task': 'web.tasks.update_weekbcj_status',
+        'schedule': crontab(minute='*/10'),  # изменено на каждый час
+    },
+    'update-weekbscd-status': {
+        'task': 'web.tasks.update_weekbscd_status',
+        'schedule': crontab(minute='*/10'),  # изменено на каждый час
+    },
+    'update-weekyb-status': {
+        'task': 'web.tasks.update_weekyb_status',
+        'schedule': crontab(minute='*/10'),  # изменено на каждый час
+    },
+    'update-weekdb-status': {
+        'task': 'web.tasks.update_weekdb_status',
+        'schedule': crontab(minute='*/10'),  # изменено на каждый час
+    },
+    'update-weeknmb-status': {
+        'task': 'web.tasks.update_weeknmb_status',
+        'schedule': crontab(minute='*/10'),  # изменено на каждый час
+    },
+    'update-weekcsb-status': {
+        'task': 'web.tasks.update_weekcsb_status',
+        'schedule': crontab(minute='*/10'),  # изменено на каждый час
+    },
+    'update-weekssb-status': {
+        'task': 'web.tasks.update_weekssb_status',
+        'schedule': crontab(minute='*/10'),  # изменено на каждый час
+    },
+    'update-weekfsb-status': {
+        'task': 'web.tasks.update_weekfsb_status',
+        'schedule': crontab(minute='*/10'),  # изменено на каждый час
+    },
+    'update-weekdbt-status': {
+        'task': 'web.tasks.update_weekdbt_status',
+        'schedule': crontab(minute='*/10'),  # изменено на каждый час
+    },
+    'update-weeknab-status': {
+        'task': 'web.tasks.update_weeknab_status',
+        'schedule': crontab(minute='*/10'),  # изменено на каждый час
+    },
+    'update-weekppb-status': {
+        'task': 'web.tasks.update_weekppb_status',
+        'schedule': crontab(minute='*/10'),  # изменено на каждый час
+    },
+    'update-weeknb-status': {
+        'task': 'web.tasks.update_weeknb_status',
+        'schedule': crontab(minute='*/10'),  # изменено на каждый час
+    },
 }
