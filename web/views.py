@@ -19,7 +19,9 @@ from .serializers import (BibliotekaSerializer, NewsSerializer,
                           EventySerializer, ServiceSerializer, BookFormSerializer, ActiveWeeksSerializer,
                           WeekSerializer, EventSerializer, WeekCDSCHSerializer, WeekBERSerializer, WeekF2Serializer,
                           WeekF3Serializer, WeekF4Serializer, CinemaWeekSerializer, WeekB5Serializer,
-                          WeekCGBTSerializer, WeekBCJSerializer)
+                          WeekCGBTSerializer, WeekBCJSerializer, WeekBSCDSerializer, WeekYBSerializer, WeekDBSerializer,
+                          WeekNMBSerializer, WeekCSBSerializer, WeekSSBSerializer, WeekFSBSerializer, WeekDBTSerializer,
+                          WeekNABSerializer, WeekPPBSerializer, WeekNBSerializer)
 
 
 def getRoutes(request):
@@ -761,6 +763,72 @@ class ActiveWeeksAPIView(APIView):
         title_week_bcj = WeekBCJ._meta.verbose_name
         serializer_week_bcj = WeekBCJSerializer(queryset_week_bcj, many=True)
         weeks.extend(self.add_title(serializer_week_bcj.data, title_week_bcj))
+
+        # Блок 10
+        queryset_week_bscd = WeekBSCD.objects.filter(active=True)
+        title_week_bscd = WeekBSCD._meta.verbose_name
+        serializer_week_bscd = WeekBSCDSerializer(queryset_week_bscd, many=True)
+        weeks.extend(self.add_title(serializer_week_bscd.data, title_week_bscd))
+
+        # Блок 11
+        queryset_week_yb = WeekYB.objects.filter(active=True)
+        title_week_yb = WeekYB._meta.verbose_name
+        serializer_week_yb = WeekYBSerializer(queryset_week_yb, many=True)
+        weeks.extend(self.add_title(serializer_week_yb.data, title_week_yb))
+
+        # Блок 12
+        queryset_week_db = WeekDB.objects.filter(active=True)
+        title_week_db = WeekDB._meta.verbose_name
+        serializer_week_db = WeekDBSerializer(queryset_week_db, many=True)
+        weeks.extend(self.add_title(serializer_week_db.data, title_week_db))
+
+        # Блок 13
+        queryset_week_nmb = WeekNMB.objects.filter(active=True)
+        title_week_nmb = WeekNMB._meta.verbose_name
+        serializer_week_nmb = WeekNMBSerializer(queryset_week_nmb, many=True)
+        weeks.extend(self.add_title(serializer_week_nmb.data, title_week_nmb))
+
+        # Блок 14
+        queryset_week_csb = WeekCSB.objects.filter(active=True)
+        title_week_csb = WeekCSB._meta.verbose_name
+        serializer_week_csb = WeekCSBSerializer(queryset_week_csb, many=True)
+        weeks.extend(self.add_title(serializer_week_csb.data, title_week_csb))
+
+        # Блок 15
+        queryset_week_ssb = WeekSSB.objects.filter(active=True)
+        title_week_ssb = WeekSSB._meta.verbose_name
+        serializer_week_ssb = WeekSSBSerializer(queryset_week_ssb, many=True)
+        weeks.extend(self.add_title(serializer_week_ssb.data, title_week_ssb))
+
+        # Блок 16
+        queryset_week_fsb = WeekFSB.objects.filter(active=True)
+        title_week_fsb = WeekFSB._meta.verbose_name
+        serializer_week_fsb = WeekFSBSerializer(queryset_week_fsb, many=True)
+        weeks.extend(self.add_title(serializer_week_fsb.data, title_week_fsb))
+
+        # Блок 17
+        queryset_week_dbt = WeekDBT.objects.filter(active=True)
+        title_week_dbt = WeekDBT._meta.verbose_name
+        serializer_week_dbt = WeekDBTSerializer(queryset_week_dbt, many=True)
+        weeks.extend(self.add_title(serializer_week_dbt.data, title_week_dbt))
+
+        # Блок 18
+        queryset_week_nab = WeekNAB.objects.filter(active=True)
+        title_week_nab = WeekNAB._meta.verbose_name
+        serializer_week_nab = WeekNABSerializer(queryset_week_nab, many=True)
+        weeks.extend(self.add_title(serializer_week_nab.data, title_week_nab))
+
+        # Блок 14
+        queryset_week_ppb = WeekPPB.objects.filter(active=True)
+        title_week_ppb = WeekPPB._meta.verbose_name
+        serializer_week_ppb = WeekPPBSerializer(queryset_week_ppb, many=True)
+        weeks.extend(self.add_title(serializer_week_ppb.data, title_week_ppb))
+
+        # Блок 14
+        queryset_week_nb = WeekNB.objects.filter(active=True)
+        title_week_nb = WeekNB._meta.verbose_name
+        serializer_week_nb = WeekNBSerializer(queryset_week_nb, many=True)
+        weeks.extend(self.add_title(serializer_week_nb.data, title_week_nb))
 
         return Response(weeks)
 
