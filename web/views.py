@@ -18,7 +18,8 @@ from django.views import generic, View
 from .serializers import (BibliotekaSerializer, NewsSerializer,
                           EventySerializer, ServiceSerializer, BookFormSerializer, ActiveWeeksSerializer,
                           WeekSerializer, EventSerializer, WeekCDSCHSerializer, WeekBERSerializer, WeekF2Serializer,
-                          WeekF3Serializer, WeekF4Serializer, CinemaWeekSerializer)
+                          WeekF3Serializer, WeekF4Serializer, CinemaWeekSerializer, WeekB5Serializer,
+                          WeekCGBTSerializer)
 
 
 def getRoutes(request):
@@ -692,11 +693,11 @@ class WeekB5View(ListView):
     template_name = 'schedule_b5.html'
 
     def get_queryset(self):
-        return WeekB5.objects.filter(active=False)
+        return WeekB5.objects.filter(active=True)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['weekdays'] = DayB5.objects.filter(week__active=False)
+        context['weekdays'] = DayB5.objects.filter(week__active=True)
         context['start_date'] = self.get_queryset().first().start_date
         context['end_date'] = self.get_queryset().first().end_date
         context['biblioteka'] = Biblioteka.objects.get(id=12)
@@ -742,6 +743,18 @@ class ActiveWeeksAPIView(APIView):
         title_week_f4 = WeekF4._meta.verbose_name
         serializer_week_f4 = WeekF4Serializer(queryset_week_f4, many=True)
         weeks.extend(self.add_title(serializer_week_f4.data, title_week_f4))
+
+        # Блок 7
+        queryset_week_b5 = WeekB5.objects.filter(active=True)
+        title_week_b5 = WeekB5._meta.verbose_name
+        serializer_week_b5 = WeekB5Serializer(queryset_week_b5, many=True)
+        weeks.extend(self.add_title(serializer_week_b5.data, title_week_b5))
+
+        # Блок 8
+        queryset_week_cgbt = WeekCGBT.objects.filter(active=True)
+        title_week_cgbt = WeekCGBT._meta.verbose_name
+        serializer_week_cgbt = WeekCGBTSerializer(queryset_week_cgbt, many=True)
+        weeks.extend(self.add_title(serializer_week_cgbt.data, title_week_cgbt))
 
         return Response(weeks)
 
