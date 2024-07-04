@@ -14,7 +14,7 @@ RUN apk add postgresql-dev
 
 RUN pip install --upgrade pip
 RUN pip --default-timeout=1200 install -r requirements.txt
-
+RUN pip install --upgrade celery
 
 RUN chmod +x entrypoint.sh
 
