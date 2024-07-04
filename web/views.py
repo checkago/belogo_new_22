@@ -19,7 +19,7 @@ from .serializers import (BibliotekaSerializer, NewsSerializer,
                           EventySerializer, ServiceSerializer, BookFormSerializer, ActiveWeeksSerializer,
                           WeekSerializer, EventSerializer, WeekCDSCHSerializer, WeekBERSerializer, WeekF2Serializer,
                           WeekF3Serializer, WeekF4Serializer, CinemaWeekSerializer, WeekB5Serializer,
-                          WeekCGBTSerializer)
+                          WeekCGBTSerializer, WeekBCJSerializer)
 
 
 def getRoutes(request):
@@ -755,6 +755,12 @@ class ActiveWeeksAPIView(APIView):
         title_week_cgbt = WeekCGBT._meta.verbose_name
         serializer_week_cgbt = WeekCGBTSerializer(queryset_week_cgbt, many=True)
         weeks.extend(self.add_title(serializer_week_cgbt.data, title_week_cgbt))
+
+        # Блок 9
+        queryset_week_bcj = WeekBCJ.objects.filter(active=True)
+        title_week_bcj = WeekBCJ._meta.verbose_name
+        serializer_week_bcj = WeekBCJSerializer(queryset_week_bcj, many=True)
+        weeks.extend(self.add_title(serializer_week_bcj.data, title_week_bcj))
 
         return Response(weeks)
 
