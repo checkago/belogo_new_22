@@ -42,7 +42,7 @@ services:
       context: .
     hostname: worker
     entrypoint: celery
-    command: -A belogo_new.celery worker -l info
+    command: -A belogo_new.celery worker -l info -E
     volumes:
       - ./service:/service
     links:
