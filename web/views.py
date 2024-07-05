@@ -493,7 +493,7 @@ def events(request):
     return render(request, 'events.html', context)
 
 
-# @cache_page(60*15)
+@cache_page(60*10)
 def shedules(request):
     title = 'Системные расписания'
     description = 'Системные библиотек "ЦБС им. А. Белого"'
