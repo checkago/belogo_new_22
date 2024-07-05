@@ -1332,7 +1332,7 @@ class DayBCJ(models.Model):
     week = models.ForeignKey(WeekBCJ, on_delete=models.CASCADE, verbose_name='Неделя', related_name='days')
 
     class Meta:
-        verbose_name = 'Рабочий день ЦГБ им. Тютчева'
+        verbose_name = 'Рабочий день БЦ Южный'
         verbose_name_plural = 'Рабочий день БЦ Южный'
 
     def __str__(self):
