@@ -119,7 +119,7 @@ def documents_in_category(request, category_id):
     combined_results = list(documents) + list(polojeniya)
     combined_results.sort(key=lambda x: x.date, reverse=True)
 
-    paginator = Paginator(combined_results, 10)  # Разбивка на страницы по 10 документов
+    paginator = Paginator(combined_results, 2)  # Разбивка на страницы по 10 документов
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
