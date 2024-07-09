@@ -138,7 +138,7 @@ def documents(request):
     description = 'Официальные документы МБУК ЦБС им. А. Белого'
     branch_categories = categories.get_descendants(include_self=True)
     docs_list = Document.objects.filter(category__in=branch_categories).distinct().order_by('-date')
-    paginator = Paginator(docs_list, 20)
+    paginator = Paginator(docs_list, 2)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
