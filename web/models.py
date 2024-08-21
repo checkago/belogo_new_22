@@ -446,6 +446,7 @@ class Document(models.Model):
     category = models.ForeignKey(Category, blank=True, on_delete=models.SET_NULL, related_name='documents', null=True, verbose_name='Категория')
     description = models.TextField(verbose_name='Текст')
     image = models.ImageField(upload_to='img/news', blank=True, null=True, verbose_name='Главное фото')
+    file = models.FileField(upload_to='media/documents', verbose_name='Файл', blank=True)
     published = models.BooleanField(default=True, verbose_name='Опубликована')
 
     class Meta:
