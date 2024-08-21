@@ -784,7 +784,7 @@ class Eventy(models.Model):
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
     start_time = models.TimeField(verbose_name='Время начала')
-    end_time = models.TimeField(verbose_name='Время окончания')
+    end_time = models.TimeField(verbose_name='Время окончания', null=True)
 
     class Meta:
         verbose_name = 'Мероприятие ИКЦ'
@@ -857,7 +857,7 @@ class EventyCDSCH(models.Model):
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
     start_time = models.TimeField(verbose_name='Время начала')
-    end_time = models.TimeField(verbose_name='Время окончания')
+    end_time = models.TimeField(verbose_name='Время окончания', null=True)
 
     class Meta:
         verbose_name = 'Мероприятие ЦДСЧ'
@@ -1003,7 +1003,7 @@ class EventyF2(models.Model):
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
     start_time = models.TimeField(verbose_name='Время начала')
-    end_time = models.TimeField(verbose_name='Время окончания')
+    end_time = models.TimeField(verbose_name='Время окончания', null=True)
 
     class Meta:
         verbose_name = 'Мероприятие Ф2'
@@ -1076,7 +1076,7 @@ class EventyF3(models.Model):
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
     start_time = models.TimeField(verbose_name='Время начала')
-    end_time = models.TimeField(verbose_name='Время окончания')
+    end_time = models.TimeField(verbose_name='Время окончания', null=True)
 
     class Meta:
         verbose_name = 'Мероприятие Ф3'
@@ -1149,7 +1149,7 @@ class EventyF4(models.Model):
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
     start_time = models.TimeField(verbose_name='Время начала')
-    end_time = models.TimeField(verbose_name='Время окончания')
+    end_time = models.TimeField(verbose_name='Время окончания', null=True)
 
     class Meta:
         verbose_name = 'Мероприятие Ф4'
@@ -1223,7 +1223,7 @@ class EventyB5(models.Model):
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
     start_time = models.TimeField(verbose_name='Время начала')
-    end_time = models.TimeField(verbose_name='Время окончания')
+    end_time = models.TimeField(verbose_name='Время окончания', null=True)
 
     class Meta:
         verbose_name = 'Мероприятие Библиотеки №5'
@@ -1297,7 +1297,7 @@ class EventyCGBT(models.Model):
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
     start_time = models.TimeField(verbose_name='Время начала')
-    end_time = models.TimeField(verbose_name='Время окончания')
+    end_time = models.TimeField(verbose_name='Время окончания', null=True)
 
     class Meta:
         verbose_name = 'Мероприятие ЦГБ им. Тютчева'
@@ -1371,7 +1371,7 @@ class EventyBCJ(models.Model):
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
     start_time = models.TimeField(verbose_name='Время начала')
-    end_time = models.TimeField(verbose_name='Время окончания')
+    end_time = models.TimeField(verbose_name='Время окончания', null=True)
 
     class Meta:
         verbose_name = 'Мероприятие БЦ Южный'
@@ -1445,7 +1445,7 @@ class EventyBSCD(models.Model):
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
     start_time = models.TimeField(verbose_name='Время начала')
-    end_time = models.TimeField(verbose_name='Время окончания')
+    end_time = models.TimeField(verbose_name='Время окончания', null=True)
 
     class Meta:
         verbose_name = 'Мероприятие БСЧ им Дмитриева'
@@ -1519,7 +1519,7 @@ class EventyYB(models.Model):
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
     start_time = models.TimeField(verbose_name='Время начала')
-    end_time = models.TimeField(verbose_name='Время окончания')
+    end_time = models.TimeField(verbose_name='Время окончания', null=True)
 
     class Meta:
         verbose_name = 'Мероприятие Юношеская библиотека'
@@ -1593,7 +1593,7 @@ class EventyDB(models.Model):
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
     start_time = models.TimeField(verbose_name='Время начала')
-    end_time = models.TimeField(verbose_name='Время окончания')
+    end_time = models.TimeField(verbose_name='Время окончания', null=True)
 
     class Meta:
         verbose_name = 'Мероприятие Детская библиотека'
@@ -1667,7 +1667,7 @@ class EventyNMB(models.Model):
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
     start_time = models.TimeField(verbose_name='Время начала')
-    end_time = models.TimeField(verbose_name='Время окончания')
+    end_time = models.TimeField(verbose_name='Время окончания', null=True)
 
     class Meta:
         verbose_name = 'Мероприятие Новомилетская сельская библиотека'
@@ -1741,7 +1741,7 @@ class EventyCSB(models.Model):
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
     start_time = models.TimeField(verbose_name='Время начала')
-    end_time = models.TimeField(verbose_name='Время окончания')
+    end_time = models.TimeField(verbose_name='Время окончания', null=True)
 
     class Meta:
         verbose_name = 'Мероприятие Черновская сельская библиотека'
@@ -1815,7 +1815,7 @@ class EventySSB(models.Model):
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
     start_time = models.TimeField(verbose_name='Время начала')
-    end_time = models.TimeField(verbose_name='Время окончания')
+    end_time = models.TimeField(verbose_name='Время окончания', null=True)
 
     class Meta:
         verbose_name = 'Мероприятие Соболихинская сельская библиотека'
@@ -1889,7 +1889,7 @@ class EventyFSB(models.Model):
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
     start_time = models.TimeField(verbose_name='Время начала')
-    end_time = models.TimeField(verbose_name='Время окончания')
+    end_time = models.TimeField(verbose_name='Время окончания', null=True)
 
     class Meta:
         verbose_name = 'Мероприятие Федурновская сельская библиотека'
@@ -1963,7 +1963,7 @@ class EventyDBT(models.Model):
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
     start_time = models.TimeField(verbose_name='Время начала')
-    end_time = models.TimeField(verbose_name='Время окончания')
+    end_time = models.TimeField(verbose_name='Время окончания', null=True)
 
     class Meta:
         verbose_name = 'Мероприятие Детская библиотека (Твардовского)'
@@ -2037,7 +2037,7 @@ class EventyNAB(models.Model):
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
     start_time = models.TimeField(verbose_name='Время начала')
-    end_time = models.TimeField(verbose_name='Время окончания')
+    end_time = models.TimeField(verbose_name='Время окончания', null=True)
 
     class Meta:
         verbose_name = 'Мероприятие Никольско-Архангельская библиотека'
@@ -2111,7 +2111,7 @@ class EventyPPB(models.Model):
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
     start_time = models.TimeField(verbose_name='Время начала')
-    end_time = models.TimeField(verbose_name='Время окончания')
+    end_time = models.TimeField(verbose_name='Время окончания', null=True)
 
     class Meta:
         verbose_name = 'Мероприятие Пехра-Покровская библиотека'
@@ -2185,7 +2185,7 @@ class EventyNB(models.Model):
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
     start_time = models.TimeField(verbose_name='Время начала')
-    end_time = models.TimeField(verbose_name='Время окончания')
+    end_time = models.TimeField(verbose_name='Время окончания', null=True)
 
     class Meta:
         verbose_name = 'Мероприятие Никольская библиотека'
