@@ -778,7 +778,7 @@ class Eventy(models.Model):
     )
     """ПОЛЯ age, day, start и end доджны быть blank=True и null=True при следующих миграциях"""
 
-    day = models.ForeignKey(Day, on_delete=models.CASCADE, verbose_name='День недели', related_name='events')
+    day = models.ForeignKey(Day, on_delete=models.CASCADE, null=True, verbose_name='День недели', related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
@@ -850,7 +850,7 @@ class EventyCDSCH(models.Model):
 
     )
 
-    day = models.ForeignKey(DayCDSCH, on_delete=models.CASCADE, verbose_name='День недели',
+    day = models.ForeignKey(DayCDSCH, on_delete=models.CASCADE, null=True, verbose_name='День недели',
                             related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
@@ -923,7 +923,7 @@ class EventyBER(models.Model):
 
     )
 
-    day = models.ForeignKey(DayBER, on_delete=models.CASCADE, verbose_name='День недели', related_name='events')
+    day = models.ForeignKey(DayBER, on_delete=models.CASCADE, null=True, verbose_name='День недели', related_name='events')
     name = models.CharField(max_length=150, blank=True, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking =  models.BooleanField(default=False, verbose_name='Запись')
@@ -997,7 +997,7 @@ class EventyF2(models.Model):
 
     )
 
-    day = models.ForeignKey(DayF2, on_delete=models.CASCADE, verbose_name='День недели', related_name='events')
+    day = models.ForeignKey(DayF2, on_delete=models.CASCADE, null=True, verbose_name='День недели', related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
@@ -1070,7 +1070,7 @@ class EventyF3(models.Model):
 
     )
 
-    day = models.ForeignKey(DayF3, on_delete=models.CASCADE, verbose_name='День недели', related_name='events')
+    day = models.ForeignKey(DayF3, on_delete=models.CASCADE, null=True, verbose_name='День недели', related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
@@ -1143,7 +1143,7 @@ class EventyF4(models.Model):
 
     )
 
-    day = models.ForeignKey(DayF4, on_delete=models.CASCADE, verbose_name='День недели', related_name='events')
+    day = models.ForeignKey(DayF4, on_delete=models.CASCADE, null=True, verbose_name='День недели', related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
@@ -1216,7 +1216,7 @@ class EventyB5(models.Model):
 
     )
 
-    day = models.ForeignKey(DayB5, on_delete=models.CASCADE, verbose_name='День недели',
+    day = models.ForeignKey(DayB5, on_delete=models.CASCADE, null=True, verbose_name='День недели',
                             related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
@@ -1290,7 +1290,7 @@ class EventyCGBT(models.Model):
 
     )
 
-    day = models.ForeignKey(DayCGBT, on_delete=models.CASCADE, verbose_name='День недели',
+    day = models.ForeignKey(DayCGBT, on_delete=models.CASCADE, null=True, verbose_name='День недели',
                             related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
@@ -1364,7 +1364,7 @@ class EventyBCJ(models.Model):
 
     )
 
-    day = models.ForeignKey(DayBCJ, on_delete=models.CASCADE, verbose_name='День недели',
+    day = models.ForeignKey(DayBCJ, on_delete=models.CASCADE, null=True, verbose_name='День недели',
                             related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
@@ -1438,7 +1438,7 @@ class EventyBSCD(models.Model):
 
     )
 
-    day = models.ForeignKey(DayBSCD, on_delete=models.CASCADE, verbose_name='День недели',
+    day = models.ForeignKey(DayBSCD, on_delete=models.CASCADE, null=True, verbose_name='День недели',
                             related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
@@ -1512,7 +1512,7 @@ class EventyYB(models.Model):
 
     )
 
-    day = models.ForeignKey(DayYB, on_delete=models.CASCADE, verbose_name='День недели',
+    day = models.ForeignKey(DayYB, on_delete=models.CASCADE, null=True, verbose_name='День недели',
                             related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
@@ -1586,7 +1586,7 @@ class EventyDB(models.Model):
 
     )
 
-    day = models.ForeignKey(DayDB, on_delete=models.CASCADE, verbose_name='День недели',
+    day = models.ForeignKey(DayDB, on_delete=models.CASCADE, null=True, verbose_name='День недели',
                             related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
@@ -1660,7 +1660,7 @@ class EventyNMB(models.Model):
 
     )
 
-    day = models.ForeignKey(DayNMB, on_delete=models.CASCADE, verbose_name='День недели',
+    day = models.ForeignKey(DayNMB, on_delete=models.CASCADE, null=True, verbose_name='День недели',
                             related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
@@ -1734,7 +1734,7 @@ class EventyCSB(models.Model):
 
     )
 
-    day = models.ForeignKey(DayCSB, on_delete=models.CASCADE, verbose_name='День недели',
+    day = models.ForeignKey(DayCSB, on_delete=models.CASCADE, null=True, verbose_name='День недели',
                             related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
@@ -1808,7 +1808,7 @@ class EventySSB(models.Model):
 
     )
 
-    day = models.ForeignKey(DaySSB, on_delete=models.CASCADE, verbose_name='День недели',
+    day = models.ForeignKey(DaySSB, on_delete=models.CASCADE, null=True, verbose_name='День недели',
                             related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
@@ -1882,7 +1882,7 @@ class EventyFSB(models.Model):
 
     )
 
-    day = models.ForeignKey(DayFSB, on_delete=models.CASCADE, verbose_name='День недели',
+    day = models.ForeignKey(DayFSB, on_delete=models.CASCADE, null=True, verbose_name='День недели',
                             related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
@@ -1956,7 +1956,7 @@ class EventyDBT(models.Model):
 
     )
 
-    day = models.ForeignKey(DayDBT, on_delete=models.CASCADE, verbose_name='День недели',
+    day = models.ForeignKey(DayDBT, on_delete=models.CASCADE, null=True, verbose_name='День недели',
                             related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
@@ -2030,7 +2030,7 @@ class EventyNAB(models.Model):
 
     )
 
-    day = models.ForeignKey(DayNAB, on_delete=models.CASCADE, verbose_name='День недели',
+    day = models.ForeignKey(DayNAB, on_delete=models.CASCADE, null=True, verbose_name='День недели',
                             related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
@@ -2104,7 +2104,7 @@ class EventyPPB(models.Model):
 
     )
 
-    day = models.ForeignKey(DayPPB, on_delete=models.CASCADE, verbose_name='День недели',
+    day = models.ForeignKey(DayPPB, on_delete=models.CASCADE, null=True, verbose_name='День недели',
                             related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
@@ -2178,7 +2178,7 @@ class EventyNB(models.Model):
 
     )
 
-    day = models.ForeignKey(DayNB, on_delete=models.CASCADE, verbose_name='День недели',
+    day = models.ForeignKey(DayNB, on_delete=models.CASCADE, null=True, verbose_name='День недели',
                             related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
