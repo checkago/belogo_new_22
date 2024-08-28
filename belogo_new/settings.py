@@ -26,7 +26,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['biblioteka-belogo.ru', 'obs-balashiha.ru', '213.141.153.187']
 
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False
 
 env = environ.Env()
 environ.Env.read_env('.env')
