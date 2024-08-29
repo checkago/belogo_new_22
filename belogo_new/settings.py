@@ -201,7 +201,7 @@ ADMIN_REORDER = (
 #     }
 # }
 SECURE_SSL_REDIRECT = True
-SECURE_REDIRECT_EXEMPT = [r'^no-ssl/$', ...]
+# SECURE_REDIRECT_EXEMPT = [r'^no-ssl/$', ...]
 
 DATABASES = {
     'default': {
