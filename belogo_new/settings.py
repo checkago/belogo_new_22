@@ -200,8 +200,6 @@ ADMIN_REORDER = (
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-SECURE_SSL_REDIRECT = True
-SECURE_REDIRECT_EXEMPT = [r'^no-ssl/$', ...]
 
 DATABASES = {
     'default': {
