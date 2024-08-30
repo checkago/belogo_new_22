@@ -9,12 +9,26 @@ from .models import Week, Day, Eventy, WeekCDSCH, DayCDSCH, EventyCDSCH, WeekBER
 
 
 class BibliotekaSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
+    def get_image(self, obj):
+        request = self.context.get('request')
+        if request:
+            return request.build_absolute_uri(obj.image.url).replace('http://', 'https://')
+        return obj.image.url
     class Meta:
         model = Biblioteka
         fields = '__all__'
 
 
 class NewsSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
+    def get_image(self, obj):
+        request = self.context.get('request')
+        if request:
+            return request.build_absolute_uri(obj.image.url).replace('http://', 'https://')
+        return obj.image.url
     class Meta:
         model = News
         fields = ['id', 'date', 'name', 'description', 'image']
@@ -48,6 +62,13 @@ class BookFormSerializer(serializers.Serializer):
 
 
 class EventSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
+    def get_image(self, obj):
+        request = self.context.get('request')
+        if request:
+            return request.build_absolute_uri(obj.image.url).replace('http://', 'https://')
+        return obj.image.url
     class Meta:
         model = Event
         fields = ('id', 'name', 'library', 'date', 'description', 'image')
