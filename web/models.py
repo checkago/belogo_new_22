@@ -779,13 +779,13 @@ class Eventy(models.Model):
     )
     """ПОЛЯ age, day, start и end доджны быть blank=True и null=True при следующих миграциях"""
 
-    day = models.ForeignKey(Day, on_delete=models.CASCADE, verbose_name='День недели', related_name='events', null=True)
+    day = models.ForeignKey(Day, on_delete=models.CASCADE, verbose_name='День недели', related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
-    start_time = models.TimeField(verbose_name='Время начала', null=True)
-    end_time = models.TimeField(verbose_name='Время окончания', null=True)
+    start_time = models.TimeField(verbose_name='Время начала')
+    end_time = models.TimeField(verbose_name='Время окончания')
 
     class Meta:
         verbose_name = 'Мероприятие ИКЦ'
@@ -852,13 +852,13 @@ class EventyCDSCH(models.Model):
     )
 
     day = models.ForeignKey(DayCDSCH, on_delete=models.CASCADE, verbose_name='День недели',
-                            related_name='events', null=True)
+                            related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
-    start_time = models.TimeField(verbose_name='Время начала', null=True)
-    end_time = models.TimeField(verbose_name='Время окончания', null=True)
+    start_time = models.TimeField(verbose_name='Время начала')
+    end_time = models.TimeField(verbose_name='Время окончания')
 
     class Meta:
         verbose_name = 'Мероприятие ЦДСЧ'
@@ -924,7 +924,7 @@ class EventyBER(models.Model):
 
     )
 
-    day = models.ForeignKey(DayBER, on_delete=models.CASCADE, verbose_name='День недели', related_name='events', null=True)
+    day = models.ForeignKey(DayBER, on_delete=models.CASCADE, verbose_name='День недели', related_name='events')
     name = models.CharField(max_length=150, blank=True, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking =  models.BooleanField(default=False, verbose_name='Запись')
@@ -998,13 +998,13 @@ class EventyF2(models.Model):
 
     )
 
-    day = models.ForeignKey(DayF2, on_delete=models.CASCADE, verbose_name='День недели', related_name='events', null=True)
+    day = models.ForeignKey(DayF2, on_delete=models.CASCADE, verbose_name='День недели', related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
-    start_time = models.TimeField(verbose_name='Время начала', null=True)
-    end_time = models.TimeField(verbose_name='Время окончания', null=True)
+    start_time = models.TimeField(verbose_name='Время начала')
+    end_time = models.TimeField(verbose_name='Время окончания')
 
     class Meta:
         verbose_name = 'Мероприятие Ф2'
@@ -1071,13 +1071,13 @@ class EventyF3(models.Model):
 
     )
 
-    day = models.ForeignKey(DayF3, on_delete=models.CASCADE, verbose_name='День недели', related_name='events', null=True)
+    day = models.ForeignKey(DayF3, on_delete=models.CASCADE, verbose_name='День недели', related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
-    start_time = models.TimeField(verbose_name='Время начала', null=True)
-    end_time = models.TimeField(verbose_name='Время окончания', null=True)
+    start_time = models.TimeField(verbose_name='Время начала')
+    end_time = models.TimeField(verbose_name='Время окончания')
 
     class Meta:
         verbose_name = 'Мероприятие Ф3'
@@ -1144,13 +1144,13 @@ class EventyF4(models.Model):
 
     )
 
-    day = models.ForeignKey(DayF4, on_delete=models.CASCADE, verbose_name='День недели', related_name='events', null=True)
+    day = models.ForeignKey(DayF4, on_delete=models.CASCADE, verbose_name='День недели', related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
-    start_time = models.TimeField(verbose_name='Время начала', null=True)
-    end_time = models.TimeField(verbose_name='Время окончания', null=True)
+    start_time = models.TimeField(verbose_name='Время начала')
+    end_time = models.TimeField(verbose_name='Время окончания')
 
     class Meta:
         verbose_name = 'Мероприятие Ф4'
@@ -1218,13 +1218,13 @@ class EventyB5(models.Model):
     )
 
     day = models.ForeignKey(DayB5, on_delete=models.CASCADE, verbose_name='День недели',
-                            related_name='events', null=True)
+                            related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
-    start_time = models.TimeField(verbose_name='Время начала', null=True)
-    end_time = models.TimeField(verbose_name='Время окончания', null=True)
+    start_time = models.TimeField(verbose_name='Время начала')
+    end_time = models.TimeField(verbose_name='Время окончания')
 
     class Meta:
         verbose_name = 'Мероприятие Библиотеки №5'
@@ -1292,13 +1292,13 @@ class EventyCGBT(models.Model):
     )
 
     day = models.ForeignKey(DayCGBT, on_delete=models.CASCADE, verbose_name='День недели',
-                            related_name='events', null=True)
+                            related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
-    start_time = models.TimeField(verbose_name='Время начала', null=True)
-    end_time = models.TimeField(verbose_name='Время окончания', null=True)
+    start_time = models.TimeField(verbose_name='Время начала')
+    end_time = models.TimeField(verbose_name='Время окончания')
 
     class Meta:
         verbose_name = 'Мероприятие ЦГБ им. Тютчева'
@@ -1366,13 +1366,13 @@ class EventyBCJ(models.Model):
     )
 
     day = models.ForeignKey(DayBCJ, on_delete=models.CASCADE, verbose_name='День недели',
-                            related_name='events', null=True)
+                            related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
-    start_time = models.TimeField(verbose_name='Время начала', null=True)
-    end_time = models.TimeField(verbose_name='Время окончания', null=True)
+    start_time = models.TimeField(verbose_name='Время начала')
+    end_time = models.TimeField(verbose_name='Время окончания')
 
     class Meta:
         verbose_name = 'Мероприятие БЦ Южный'
@@ -1440,13 +1440,13 @@ class EventyBSCD(models.Model):
     )
 
     day = models.ForeignKey(DayBSCD, on_delete=models.CASCADE, verbose_name='День недели',
-                            related_name='events', null=True)
+                            related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
-    start_time = models.TimeField(verbose_name='Время начала', null=True)
-    end_time = models.TimeField(verbose_name='Время окончания', null=True)
+    start_time = models.TimeField(verbose_name='Время начала')
+    end_time = models.TimeField(verbose_name='Время окончания')
 
     class Meta:
         verbose_name = 'Мероприятие БСЧ им Дмитриева'
@@ -1514,13 +1514,13 @@ class EventyYB(models.Model):
     )
 
     day = models.ForeignKey(DayYB, on_delete=models.CASCADE, verbose_name='День недели',
-                            related_name='events', null=True)
+                            related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
-    start_time = models.TimeField(verbose_name='Время начала', null=True)
-    end_time = models.TimeField(verbose_name='Время окончания', null=True)
+    start_time = models.TimeField(verbose_name='Время начала')
+    end_time = models.TimeField(verbose_name='Время окончания')
 
     class Meta:
         verbose_name = 'Мероприятие Юношеская библиотека'
@@ -1588,13 +1588,13 @@ class EventyDB(models.Model):
     )
 
     day = models.ForeignKey(DayDB, on_delete=models.CASCADE, verbose_name='День недели',
-                            related_name='events', null=True)
+                            related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
-    start_time = models.TimeField(verbose_name='Время начала', null=True)
-    end_time = models.TimeField(verbose_name='Время окончания', null=True)
+    start_time = models.TimeField(verbose_name='Время начала')
+    end_time = models.TimeField(verbose_name='Время окончания')
 
     class Meta:
         verbose_name = 'Мероприятие Детская библиотека'
@@ -1662,13 +1662,13 @@ class EventyNMB(models.Model):
     )
 
     day = models.ForeignKey(DayNMB, on_delete=models.CASCADE, verbose_name='День недели',
-                            related_name='events', null=True)
+                            related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
-    start_time = models.TimeField(verbose_name='Время начала', null=True)
-    end_time = models.TimeField(verbose_name='Время окончания', null=True)
+    start_time = models.TimeField(verbose_name='Время начала')
+    end_time = models.TimeField(verbose_name='Время окончания')
 
     class Meta:
         verbose_name = 'Мероприятие Новомилетская сельская библиотека'
@@ -1736,13 +1736,13 @@ class EventyCSB(models.Model):
     )
 
     day = models.ForeignKey(DayCSB, on_delete=models.CASCADE, verbose_name='День недели',
-                            related_name='events', null=True)
+                            related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
-    start_time = models.TimeField(verbose_name='Время начала', null=True)
-    end_time = models.TimeField(verbose_name='Время окончания', null=True)
+    start_time = models.TimeField(verbose_name='Время начала')
+    end_time = models.TimeField(verbose_name='Время окончания')
 
     class Meta:
         verbose_name = 'Мероприятие Черновская сельская библиотека'
@@ -1810,13 +1810,13 @@ class EventySSB(models.Model):
     )
 
     day = models.ForeignKey(DaySSB, on_delete=models.CASCADE, verbose_name='День недели',
-                            related_name='events', null=True)
+                            related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
-    start_time = models.TimeField(verbose_name='Время начала', null=True)
-    end_time = models.TimeField(verbose_name='Время окончания', null=True)
+    start_time = models.TimeField(verbose_name='Время начала')
+    end_time = models.TimeField(verbose_name='Время окончания')
 
     class Meta:
         verbose_name = 'Мероприятие Соболихинская сельская библиотека'
@@ -1884,13 +1884,13 @@ class EventyFSB(models.Model):
     )
 
     day = models.ForeignKey(DayFSB, on_delete=models.CASCADE, verbose_name='День недели',
-                            related_name='events', null=True)
+                            related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
-    start_time = models.TimeField(verbose_name='Время начала', null=True)
-    end_time = models.TimeField(verbose_name='Время окончания', null=True)
+    start_time = models.TimeField(verbose_name='Время начала')
+    end_time = models.TimeField(verbose_name='Время окончания')
 
     class Meta:
         verbose_name = 'Мероприятие Федурновская сельская библиотека'
@@ -1958,13 +1958,13 @@ class EventyDBT(models.Model):
     )
 
     day = models.ForeignKey(DayDBT, on_delete=models.CASCADE, verbose_name='День недели',
-                            related_name='events', null=True)
+                            related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
-    start_time = models.TimeField(verbose_name='Время начала', null=True)
-    end_time = models.TimeField(verbose_name='Время окончания', null=True)
+    start_time = models.TimeField(verbose_name='Время начала')
+    end_time = models.TimeField(verbose_name='Время окончания')
 
     class Meta:
         verbose_name = 'Мероприятие Детская библиотека (Твардовского)'
@@ -2032,13 +2032,13 @@ class EventyNAB(models.Model):
     )
 
     day = models.ForeignKey(DayNAB, on_delete=models.CASCADE, verbose_name='День недели',
-                            related_name='events', null=True)
+                            related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
-    start_time = models.TimeField(verbose_name='Время начала', null=True)
-    end_time = models.TimeField(verbose_name='Время окончания', null=True)
+    start_time = models.TimeField(verbose_name='Время начала')
+    end_time = models.TimeField(verbose_name='Время окончания')
 
     class Meta:
         verbose_name = 'Мероприятие Никольско-Архангельская библиотека'
@@ -2106,13 +2106,13 @@ class EventyPPB(models.Model):
     )
 
     day = models.ForeignKey(DayPPB, on_delete=models.CASCADE, verbose_name='День недели',
-                            related_name='events', null=True)
+                            related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
-    start_time = models.TimeField(verbose_name='Время начала', null=True)
-    end_time = models.TimeField(verbose_name='Время окончания', null=True)
+    start_time = models.TimeField(verbose_name='Время начала')
+    end_time = models.TimeField(verbose_name='Время окончания')
 
     class Meta:
         verbose_name = 'Мероприятие Пехра-Покровская библиотека'
@@ -2180,13 +2180,13 @@ class EventyNB(models.Model):
     )
 
     day = models.ForeignKey(DayNB, on_delete=models.CASCADE, verbose_name='День недели',
-                            related_name='events', null=True)
+                            related_name='events')
     name = models.CharField(max_length=150, verbose_name='Название')
     payment = models.BooleanField(default=False, verbose_name='Платное')
     booking = models.BooleanField(default=False, verbose_name='Запись')
     age = models.CharField(max_length=50, choices=AGE_CHOICES, default=ZERO, verbose_name='Возраст')
-    start_time = models.TimeField(verbose_name='Время начала', null=True)
-    end_time = models.TimeField(verbose_name='Время окончания', null=True)
+    start_time = models.TimeField(verbose_name='Время начала')
+    end_time = models.TimeField(verbose_name='Время окончания')
 
     class Meta:
         verbose_name = 'Мероприятие Никольская библиотека'
