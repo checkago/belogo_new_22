@@ -68,6 +68,7 @@ class Biblioteka(models.Model):
     telegram = models.URLField(verbose_name='аккаунт Телеграмм', blank=True, null=True)
     description = models.TextField(verbose_name='Описание')
     image = models.ImageField(upload_to='img/cbs', blank=True, null=True, verbose_name='Фото')
+    qrcode = models.ImageField(upload_to='img/cbs', blank=True, null=True, verbose_name='QR-код')
     worktime = models.CharField(max_length=50, verbose_name='Время работы', blank=True, default='09:00 - 21:00')
     workdays = models.CharField(max_length=50, verbose_name='Рабочие дни', blank=True, default='Понедельник-Пятница')
     worktime_alt = models.CharField(max_length=50, verbose_name='Время работы', blank=True, default='09:00 - 21:00')

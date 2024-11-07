@@ -23,7 +23,7 @@
                         <div class="col-md-4">
                             <img class=img-fluid src="{{ biblioteka.image.url }}" />
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <p><strong class="font-weight-bold">{{ biblioteka.direktor }}:</strong> {{ biblioteka.employer }}</p>
                             <p><strong class="font-weight-bold">Адрес:</strong> {{ biblioteka.adress }}</p>
                             <p><strong class="font-weight-bold">Телефон:</strong> <strong class="blue-text"><strong>{{ biblioteka.phone }}</strong></strong></p>
@@ -52,6 +52,9 @@
 
                                 {% endif %}</p>
                             <hr>
+                        </div>
+                        <div class="col-md-2">
+                            <img class=img-fluid src="{{ biblioteka.qrcode.url }}" />
                         </div>
                     </div>
         <div>{{ biblioteka.description|safe }}</div>
