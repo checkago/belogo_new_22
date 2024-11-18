@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-qgj-94qz%*=o+4byxx%##qoy*wx$luxs0%_rp$#!i1_!*%)9jt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['biblioteka-belogo.ru', 'obs-balashiha.ru', '213.141.153.187', '192.168.88.99']
+ALLOWED_HOSTS = ['biblioteka-belogo.ru', 'obs-balashiha.ru', '213.141.153.187', '192.168.88.99', '127.0.0.1']
 
 
 env = environ.Env()
@@ -214,12 +214,12 @@ DATABASES = {
 }
 
 
-CACHES = {
+caches = {
     "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://redis-server:6379",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        "backend": "django_redis.cache.rediscache",
+        "location": "redis://redis-server:6379",
+        "options": {
+            "client_class": "django_redis.client.defaultclient",
         }
     }
 }
