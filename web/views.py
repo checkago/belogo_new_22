@@ -44,7 +44,10 @@ def index(request):
     category = Category.objects.all()
     datenow = date.today()
     event = Event.objects.filter(date__gt=datenow).order_by('date').first()
-    cinema = Cinema.objects.latest('id')
+    try:
+        cinema = Cinema.objects.latest('id')
+    except Cinema.DoesNotExist:
+        cinema = None  # или обработайте случай, когда объекта нет
     partners1 = Partner.objects.filter(block='1').order_by('?')
     partners2 = Partner.objects.filter(block='2').order_by('?')
     branch_categories = categories.get_descendants(include_self=True).select_related('news')
