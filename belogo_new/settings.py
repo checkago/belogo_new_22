@@ -235,6 +235,9 @@ COMPRESS_JS_FILTERS = [
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 SESSION_CACHE_ALIAS = 'default'
 
+SESSION_COOKIE_AGE = 1209600  # Время жизни сессии в секундах (2 недели по умолчанию)
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
 CELERY_BROKER_URL = 'redis://redis-server:6379'
 CELERY_RESULT_BACKEND = 'redis://redis-server:6379'
 CELERY_TIMEZONE = 'Europe/Moscow'
