@@ -35,7 +35,7 @@ def getRoutes(request):
     ]
     return Response(routes)
 
-@cache_page(60*10)
+"""@cache_page(60*10)"""
 def index(request):
     title = 'МБУК ЦБС им. А. Белого'
     description = 'Официальный сайт Централизованной библиотечной сети имени Андрея Белого. Библиотека Железнодорожный'
