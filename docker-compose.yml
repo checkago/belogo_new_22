@@ -13,6 +13,7 @@ services:
     - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
     - "5432:5432"
+    restart: always
 
   web:
     build:
@@ -24,6 +25,7 @@ services:
       - "8080:8080"
     depends_on:
       - postgresdb
+    restart: always
 
   nginx:
     build:
@@ -34,10 +36,12 @@ services:
       - "443-443"
     depends_on:
       - web
+    restart: always
 
   redis-server:
     image: redis:alpine
     hostname: redis-server
+    restart: always
 
   worker:
     build:
@@ -51,6 +55,7 @@ services:
       - redis-server
     depends_on:
       - redis-server
+    restart: always
 
   celery-beat:
     build:
@@ -64,6 +69,7 @@ services:
       - redis-server
     depends_on:
       - redis-server
+    restart: always
 
 
 
