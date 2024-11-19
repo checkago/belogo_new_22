@@ -214,15 +214,15 @@ DATABASES = {
 }
 
 
-caches = {
-    "default": {
-        "backend": "django_redis.cache.rediscache",
-        "location": "redis://redis-server:6379",
-        "options": {
-            "client_class": "django_redis.client.defaultclient",
-        }
-    }
-}
+# caches = {
+#     "default": {
+#         "backend": "django_redis.cache.rediscache",
+#         "location": "redis://redis-server:6379",
+#         "options": {
+#             "client_class": "django_redis.client.defaultclient",
+#         }
+#     }
+# }
 
 COMPRESS_CSS_FILTERS = [
     'compressor.filters.css_default.CssAbsoluteFilter',
@@ -232,7 +232,7 @@ COMPRESS_JS_FILTERS = [
     'compressor.filters.jsmin.JSMinFilter',
 ]
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 SESSION_CACHE_ALIAS = 'default'
 
 SESSION_COOKIE_AGE = 1209600  # Время жизни сессии в секундах (2 недели по умолчанию)
