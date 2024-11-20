@@ -18,7 +18,8 @@
             <h3 class="">{{ title }}</h3>
             <hr class="hr-dark">
             {% for Biblioteka in biblioteki %}
-                <div class="col-md-6 col-lg-4 d-flex mt-3">
+                <div class="row">
+                    <div class="col-md-6 col-lg-4 d-flex mt-3">
                     <div class="card card-cascade wider hover-overlay ripple">
                       <!-- Card image -->
                       <div class="view view-cascade overlay">
@@ -42,6 +43,7 @@
 
                       </div>
                     </div>
+                </div>
                 </div>
             {% endfor %}
             </div>
