@@ -18,15 +18,21 @@
             <h3 class="">{{ title }}</h3>
             <hr class="hr-dark">
             {% for Biblioteka in biblioteki %}
-                {% if Biblioteka.primary == True %}
+            {% if Biblioteka.primary == True %}
             <div class="col-12">
 
                 <div class="card pt-3 mb-5 mt-5 pb-2 z-depth-2 border-primary  border-2">
                   <div class="card-body pt-1 pb-1 mt-1 mb-1">
                       <div class="row">
+                        {% if Biblioteka.image %}
                         <div class="col-md-4">
                             <a href="{% url 'biblioteka' Biblioteka.pk %}"><img class='img-fluid' src="{{ Biblioteka.image.url }}" /></a>
                         </div>
+                        {% else %}
+                        <div class="col-md-4">
+                            <a href="{% url 'biblioteka' Biblioteka.pk %}"><img class='img-fluid' src="/media/img/no_foto.webp" /></a>
+                        </div>
+                        {% endif %}
                         <div class="col-md-8">
                             <h5 class="text-center text-dark black-text"><strong>{{ Biblioteka.name }}</strong></h5>
                             <hr>
@@ -41,12 +47,16 @@
             </div>
 
             <div class="row">
-                    {% else %}
+            {% else %}
                 <div class="col-md-6 col-lg-4 d-flex mt-3">
                     <div class="card card-cascade wider hover-overlay ripple">
                       <!-- Card image -->
                       <div class="view view-cascade overlay">
+                          {% if Biblioteka.image %}
                         <img class="card-img-top" src="{{ Biblioteka.image.url }}" alt="Card image cap">
+                          {% else %}
+                        <img class="card-img-top" src="/media/img/no_foto.webp" alt="Card image cap">
+                          {% endif %}
                         <a href="{% url 'biblioteka' Biblioteka.pk %}">
                           <div class="mask rgba-white-slight"></div>
                         </a>
