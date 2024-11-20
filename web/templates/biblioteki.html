@@ -18,36 +18,6 @@
             <h3 class="">{{ title }}</h3>
             <hr class="hr-dark">
             {% for Biblioteka in biblioteki %}
-            {% if Biblioteka.primary == True %}
-            <div class="col-12">
-
-                <div class="card pt-3 mb-5 mt-5 pb-2 z-depth-2 border-primary  border-2">
-                  <div class="card-body pt-1 pb-1 mt-1 mb-1">
-                      <div class="row">
-                        {% if Biblioteka.image %}
-                        <div class="col-md-4">
-                            <a href="{% url 'biblioteka' Biblioteka.pk %}"><img class='img-fluid' src="{{ Biblioteka.image.url }}" /></a>
-                        </div>
-                        {% else %}
-                        <div class="col-md-4">
-                            <a href="{% url 'biblioteka' Biblioteka.pk %}"><img class='img-fluid' src="/media/img/no_foto.webp" /></a>
-                        </div>
-                        {% endif %}
-                        <div class="col-md-8">
-                            <h5 class="text-center text-dark black-text"><strong>{{ Biblioteka.name }}</strong></h5>
-                            <hr>
-                            <h5 class="blue-text pb-2"><strong>{{ Biblioteka.phone }}</strong></h5>
-                            <h5 class="blue-text pb-2"><strong>{{ Biblioteka.email }}</strong></h5>
-                            <h6>{{ Biblioteka.adress }}</h6>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-            {% else %}
                 <div class="col-md-6 col-lg-4 d-flex mt-3">
                     <div class="card card-cascade wider hover-overlay ripple">
                       <!-- Card image -->
@@ -73,8 +43,7 @@
                       </div>
                     </div>
                 </div>
-                    {% endif %}
-                    {% endfor %}
+            {% endfor %}
             </div>
         </div>
     </div>
