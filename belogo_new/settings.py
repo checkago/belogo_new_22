@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-qgj-94qz%*=o+4byxx%##qoy*wx$luxs0%_rp$#!i1_!*%)9jt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['biblioteka-belogo.ru', 'obs-balashiha.ru', '213.141.153.187', '192.168.88.99', '127.0.0.1']
+ALLOWED_HOSTS = ['biblioteka-belogo.ru', 'obs-balashiha.ru', 'localhost', '213.141.153.187', '192.168.88.99', '127.0.0.1']
 
 
 env = environ.Env()
@@ -214,15 +214,15 @@ DATABASES = {
 }
 
 
-caches = {
-    "default": {
-        "backend": "django_redis.cache.rediscache",
-        "location": "redis://redis-server:6379",
-        "options": {
-            "client_class": "django_redis.client.defaultclient",
-        }
-    }
-}
+# caches = {
+#     "default": {
+#         "backend": "django_redis.cache.rediscache",
+#         "location": "redis://redis-server:6379",
+#         "options": {
+#             "client_class": "django_redis.client.defaultclient",
+#         }
+#     }
+# }
 
 COMPRESS_CSS_FILTERS = [
     'compressor.filters.css_default.CssAbsoluteFilter',
@@ -232,8 +232,11 @@ COMPRESS_JS_FILTERS = [
     'compressor.filters.jsmin.JSMinFilter',
 ]
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 SESSION_CACHE_ALIAS = 'default'
+
+SESSION_COOKIE_AGE = 1209600  # Время жизни сессии в секундах (2 недели по умолчанию)
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
 CELERY_BROKER_URL = 'redis://redis-server:6379'
 CELERY_RESULT_BACKEND = 'redis://redis-server:6379'
