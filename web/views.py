@@ -62,7 +62,7 @@ def index(request):
 def biblioteki(request):
     title = 'Состав централизованной библиотечной системы'
     description = 'Состав централизованной библиотечной системы. Список библиотек в микрорайоне Железнодорожный'
-    biblioteki = Biblioteka.objects.all()
+    biblioteki = Biblioteka.objects.all().order_by('id')
     return render(request, 'biblioteki.html', {'title': title, 'biblioteki': biblioteki})
 
 @cache_page(60*15)
