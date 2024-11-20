@@ -119,7 +119,7 @@ class BibliotekaAdminForm(forms.ModelForm):
 class BibliotekaAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     form = BibliotekaAdminForm
-    list_display = ('name', 'id')
+    list_display = ('name', 'id', 'primary')
 
 
 class SheduleAdmin(admin.ModelAdmin):
