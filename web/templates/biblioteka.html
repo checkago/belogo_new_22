@@ -27,7 +27,7 @@
                                 <img class=img-fluid src="/media/img/no_foto.webp" />
                             {% endif %}
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <p><strong class="font-weight-bold">{{ biblioteka.direktor }}:</strong> {{ biblioteka.employer }}</p>
                             <p><strong class="font-weight-bold">Адрес:</strong> {{ biblioteka.adress }}</p>
                             <p><strong class="font-weight-bold">Телефон:</strong> <strong class="blue-text"><strong>{{ biblioteka.phone }}</strong></strong></p>
@@ -56,13 +56,6 @@
 
                                 {% endif %}</p>
                             <hr>
-                        </div>
-                        <div class="col-md-2">
-                            <img class=img-fluid src="{{ biblioteka.qrcode.url }}" />
-                            <br>
-                            <span class="font-weight-bold">
-                                <p class="text-center blue-text">QR-код Анкеты для оценки работы библиотеки</p>
-                            </span>
                         </div>
                     </div>
         <div>{{ biblioteka.description|safe }}</div>
