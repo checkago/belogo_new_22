@@ -106,7 +106,7 @@ def news_view(request, pk):
 @cache_page(60*15)
 def document_categories(request):
     # Список id категорий, которые вы хотите вывести
-    category_ids = [14, 10, 16, 15]  # Пример списка id категорий
+    category_ids = [3, 7, 6, 15]  # Пример списка id категорий
 
     # Запрос категорий по их id
     categories = Category.objects.filter(id__in=category_ids)
