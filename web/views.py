@@ -1035,7 +1035,7 @@ class WeekF3Print(ListView):
         context['weekdays'] = DayF3.objects.filter(week__start_date=next_week_start_date)
         context['start_date'] = next_week_start_date
         context['end_date'] = next_week_start_date + timedelta(days=6)
-        context['biblioteka'] = Biblioteka.objects.get(id=5)
+        context['biblioteka'] = Biblioteka.objects.get(id=7)
         return context
 
 
@@ -1055,7 +1055,7 @@ class WeekF3Vertical(ListView):
         context['weekdays'] = DayF3.objects.filter(week__start_date=next_week_start_date)
         context['start_date'] = next_week_start_date
         context['end_date'] = next_week_start_date + timedelta(days=6)
-        context['biblioteka'] = Biblioteka.objects.get(id=5)
+        context['biblioteka'] = Biblioteka.objects.get(id=7)
         return context
 
 
@@ -1075,7 +1075,7 @@ class WeekF4Print(ListView):
         context['weekdays'] = DayF4.objects.filter(week__start_date=next_week_start_date)
         context['start_date'] = next_week_start_date
         context['end_date'] = next_week_start_date + timedelta(days=6)
-        context['biblioteka'] = Biblioteka.objects.get(id=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=8)
         return context
 
 
@@ -1095,7 +1095,7 @@ class WeekF4Vertical(ListView):
         context['weekdays'] = DayF4.objects.filter(week__start_date=next_week_start_date)
         context['start_date'] = next_week_start_date
         context['end_date'] = next_week_start_date + timedelta(days=6)
-        context['biblioteka'] = Biblioteka.objects.get(id=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=8)
         return context
 
 
@@ -1137,7 +1137,7 @@ class WeekB5Print(ListView):
         context['weekdays'] = DayB5.objects.filter(week__start_date=next_week_start_date)
         context['start_date'] = next_week_start_date
         context['end_date'] = next_week_start_date + timedelta(days=6)
-        context['biblioteka'] = Biblioteka.objects.get(id=12)
+        context['biblioteka'] = Biblioteka.objects.get(id=9)
         return context
 
 
@@ -1157,7 +1157,7 @@ class WeekB5Vertical(ListView):
         context['weekdays'] = DayB5.objects.filter(week__start_date=next_week_start_date)
         context['start_date'] = next_week_start_date
         context['end_date'] = next_week_start_date + timedelta(days=6)
-        context['biblioteka'] = Biblioteka.objects.get(id=12)
+        context['biblioteka'] = Biblioteka.objects.get(id=9)
         return context
 
 
@@ -1173,7 +1173,7 @@ class WeekCGBTView(ListView):
         context['weekdays'] = DayCGBT.objects.filter(week__active=True)
         context['start_date'] = self.get_queryset().first().start_date
         context['end_date'] = self.get_queryset().first().end_date
-        context['biblioteka'] = Biblioteka.objects.get(id=8)
+        context['biblioteka'] = Biblioteka.objects.get(id=10)
         return context
 
 
@@ -1193,7 +1193,7 @@ class WeekCGBTPrint(ListView):
         context['weekdays'] = DayCGBT.objects.filter(week__start_date=next_week_start_date)
         context['start_date'] = next_week_start_date
         context['end_date'] = next_week_start_date + timedelta(days=6)
-        context['biblioteka'] = Biblioteka.objects.get(id=8)
+        context['biblioteka'] = Biblioteka.objects.get(id=10)
         return context
 
 
@@ -1213,7 +1213,7 @@ class WeekCGBTVertical(ListView):
         context['weekdays'] = DayCGBT.objects.filter(week__start_date=next_week_start_date)
         context['start_date'] = next_week_start_date
         context['end_date'] = next_week_start_date + timedelta(days=6)
-        context['biblioteka'] = Biblioteka.objects.get(id=8)
+        context['biblioteka'] = Biblioteka.objects.get(id=10)
         return context
 
 
@@ -1229,7 +1229,7 @@ class WeekBCJView(ListView):
         context['weekdays'] = DayBCJ.objects.filter(week__active=True)
         context['start_date'] = self.get_queryset().first().start_date
         context['end_date'] = self.get_queryset().first().end_date
-        context['biblioteka'] = Biblioteka.objects.get(id=9)
+        context['biblioteka'] = Biblioteka.objects.get(id=6)
         return context
 
 
@@ -1249,7 +1249,7 @@ class WeekBCJPrint(ListView):
         context['weekdays'] = DayBCJ.objects.filter(week__start_date=next_week_start_date)
         context['start_date'] = next_week_start_date
         context['end_date'] = next_week_start_date + timedelta(days=6)
-        context['biblioteka'] = Biblioteka.objects.get(id=9)
+        context['biblioteka'] = Biblioteka.objects.get(id=6)
         return context
 
 
@@ -1269,7 +1269,7 @@ class WeekBCJVertical(ListView):
         context['weekdays'] = DayBCJ.objects.filter(week__start_date=next_week_start_date)
         context['start_date'] = next_week_start_date
         context['end_date'] = next_week_start_date + timedelta(days=6)
-        context['biblioteka'] = Biblioteka.objects.get(id=9)
+        context['biblioteka'] = Biblioteka.objects.get(id=6)
         return context
 
 
@@ -1285,7 +1285,7 @@ class WeekBSCDView(ListView):
         context['weekdays'] = DayBSCD.objects.filter(week__active=True)
         context['start_date'] = self.get_queryset().first().start_date
         context['end_date'] = self.get_queryset().first().end_date
-        context['biblioteka'] = Biblioteka.objects.get(id=10)
+        context['biblioteka'] = Biblioteka.objects.get(id=5)
         return context
 
 
@@ -1305,7 +1305,7 @@ class WeekBSCDPrint(ListView):
         context['weekdays'] = DayBSCD.objects.filter(week__start_date=next_week_start_date)
         context['start_date'] = next_week_start_date
         context['end_date'] = next_week_start_date + timedelta(days=6)
-        context['biblioteka'] = Biblioteka.objects.get(id=10)
+        context['biblioteka'] = Biblioteka.objects.get(id=5)
         return context
 
 
@@ -1325,7 +1325,7 @@ class WeekBSCDVertical(ListView):
         context['weekdays'] = DayBSCD.objects.filter(week__start_date=next_week_start_date)
         context['start_date'] = next_week_start_date
         context['end_date'] = next_week_start_date + timedelta(days=6)
-        context['biblioteka'] = Biblioteka.objects.get(id=10)
+        context['biblioteka'] = Biblioteka.objects.get(id=5)
         return context
 
 
