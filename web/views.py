@@ -1885,7 +1885,7 @@ class WeekDBTVertical(ListView):
         context['weekdays'] = DayDBT.objects.filter(week__start_date=next_week_start_date)
         context['start_date'] = next_week_start_date
         context['end_date'] = next_week_start_date + timedelta(days=6)
-        context['biblioteka'] = Biblioteka.objects.get(id=21)
+        context['biblioteka'] = Biblioteka.objects.get(id=20)
         return context
 
 
