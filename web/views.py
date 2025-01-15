@@ -11,6 +11,7 @@ from django.core.mail import EmailMessage
 from django.views.decorators.cache import cache_page
 from datetime import datetime, timedelta
 
+
 from .forms import *
 from .models import *
 import datetime
@@ -1845,7 +1846,7 @@ class WeekDBTView(ListView):
         context['weekdays'] = DayDBT.objects.filter(week__active=True)
         context['start_date'] = self.get_queryset().first().start_date
         context['end_date'] = self.get_queryset().first().end_date
-        context['biblioteka'] = Biblioteka.objects.get(id=21)
+        context['biblioteka'] = Biblioteka.objects.get(id=20)
         return context
 
 
@@ -1865,7 +1866,7 @@ class WeekDBTPrint(ListView):
         context['weekdays'] = DayDBT.objects.filter(week__start_date=next_week_start_date)
         context['start_date'] = next_week_start_date
         context['end_date'] = next_week_start_date + timedelta(days=6)
-        context['biblioteka'] = Biblioteka.objects.get(id=21)
+        context['biblioteka'] = Biblioteka.objects.get(id=20)
         return context
 
 
