@@ -1565,7 +1565,7 @@ class WeekDBView(ListView):
         context['weekdays'] = DayDB.objects.filter(week__active=True)
         context['start_date'] = self.get_queryset().first().start_date
         context['end_date'] = self.get_queryset().first().end_date
-        context['biblioteka'] = Biblioteka.objects.get(id=16)
+        context['biblioteka'] = Biblioteka.objects.get(id=12)
         return context
 
 
@@ -1585,7 +1585,7 @@ class WeekDBPrint(ListView):
         context['weekdays'] = DayDB.objects.filter(week__start_date=next_week_start_date)
         context['start_date'] = next_week_start_date
         context['end_date'] = next_week_start_date + timedelta(days=6)
-        context['biblioteka'] = Biblioteka.objects.get(id=16)
+        context['biblioteka'] = Biblioteka.objects.get(id=12)
         return context
 
 
@@ -1605,7 +1605,7 @@ class WeekDBVertical(ListView):
         context['weekdays'] = DayDB.objects.filter(week__start_date=next_week_start_date)
         context['start_date'] = next_week_start_date
         context['end_date'] = next_week_start_date + timedelta(days=6)
-        context['biblioteka'] = Biblioteka.objects.get(id=16)
+        context['biblioteka'] = Biblioteka.objects.get(id=12)
         return context
 
 
