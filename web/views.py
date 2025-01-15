@@ -1849,7 +1849,6 @@ class WeekDBTView(ListView):
         return context
 
 
-
 class WeekDBTPrint(ListView):
     model = WeekDBT
     template_name = 'schedule_dbt.html'
