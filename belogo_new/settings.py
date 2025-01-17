@@ -194,6 +194,8 @@ ADMIN_REORDER = (
      },
 )
 
+DATA_UPLOAD_MAX_MEMORY_SIZE = 20971520  # 20MB
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
