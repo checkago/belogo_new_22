@@ -31,7 +31,7 @@
                     {% if result.model_name == 'News' %}
                         <a href="{% url 'news_view' result.object.pk %}" class="font-weight-bold">Читать далее</a>
                     {% elif result.model_name == 'Document' %}
-                        <a href="{% url 'document_view' result.object.pk %}" class="font-weight-bold">Скачать</a>
+                        <a href="{% url 'document' result.object.pk %}" class="font-weight-bold">Скачать</a>
                     {% endif %}
                     </p>
                     <hr class="pb-2">
