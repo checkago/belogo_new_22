@@ -1114,12 +1114,18 @@ class CinemaWeekPrint(ListView):
 
 
 def search(request):
-    query = request.GET.get('q')
-    if query:
-        results = SearchQuerySet().filter(content=query)
-    else:
-        results = []
-    return render(request, 'search_results.html', {'results': results, 'query': query})
+    query = request.GET.get('q', '')
+    results = SearchQuerySet().autocomplete(content=query)
+
+    # Разделение результатов по моделям
+    news_results = [result for result in results if result.model_name == 'News']
+    docs_results = [result for result in results if result.model_name == 'Document']
+
+    return render(request, 'search_results.html', {
+        'news_results': news_results,
+        'docs_results': docs_results,
+        'query': query
+    })
 
 
 class WeekB5Print(ListView):
