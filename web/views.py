@@ -1116,7 +1116,7 @@ class CinemaWeekPrint(ListView):
 def search(request):
     query = request.GET.get('q')
     if query:
-        results = SearchQuerySet().filter(content=query)
+        results = SearchQuerySet().autocomplete(content=query)
     else:
         results = []
     return render(request, 'search_results.html', {'results': results, 'query': query})

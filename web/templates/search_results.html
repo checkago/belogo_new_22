@@ -25,17 +25,16 @@
             <div class="pt-3 pb-4">
             <ul>
                 {% for result in results %}
-                    <li class="text-primary font-weight-bold">{{ result.object.name }}</li>
-                    <!-- Дополнительные поля объекта result могут быть использованы для отображения информации о результате -->
-                    <p>{{ result.object.description|truncatewords_html:20|highlight:query }}<a href="{% url 'news_view' result.object.pk %}" class="font-weight-bold">Читать далее</a></p>
-                    <hr class="pb-2">
-                {% empty %}
-                    <li class="text-danger">Ничего не найдено.</li>
-                    <li class="text-primary">Попробуйте изменить поисковый запрос и нажмите поиск еще раз.</li>
-                    <li class="">Если необходимая информация не найдена, возможно ее нет в нашей базе данных.</li>
-                    <li>Если вы уверены, что информация есть или была опубликована на сайте, сообщите нам используя <a href="{% url 'contacts' %}">форму обратной связи.</a>
-                    Мы постараемся вам помочь</li>
-                {% endfor %}
+    <li class="text-primary font-weight-bold">{{ result.object.name }}</li>
+    <p>{{ result.object.description|truncatewords_html:20|highlight:query }}
+    {% if result.model_name == 'News' %}
+        <a href="{% url 'news_view' result.object.pk %}" class="font-weight-bold">Читать далее</a>
+    {% elif result.model_name == 'Document' %}
+        <a href="{% url 'document_view' result.object.pk %}" class="font-weight-bold">Скачать</a>
+    {% endif %}
+    </p>
+    <hr class="pb-2">
+{% endfor %}
             </ul>
         </div>
         </div>
