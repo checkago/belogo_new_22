@@ -1120,6 +1120,10 @@ def search(request):
     print(f"Query: {query}")
     print(f"Results count: {len(results)}")
 
+    for result in results:
+        print(f"Model name: {result.model_name}")
+        print(f"Object PK: {result.object.pk}")
+
     return render(request, 'search_results.html', {'results': results, 'query': query})
 
 
