@@ -4,6 +4,7 @@
 {% load crispy_forms_field %}
 {% load crispy_forms_tags %}
 
+
 {% block content %}
 {% include '_header_pages.html' %}
 
@@ -12,6 +13,7 @@
         <nav class='mt-2' aria-label="breadcrumb sm-hidden" id="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'news' %}">Все новости</a></li>
             <li class="breadcrumb-item active" aria-current="page">Результат поиска</li>
             <form method="GET" action="{% url 'search' %}" class="d-none d-md-flex input-group input-group rounded pt-1">
                 <input type="search" name="q"  class="form-control rounded" placeholder="Поиск..." aria-label="Search" aria-describedby="search-addon" />
@@ -21,32 +23,21 @@
         </nav>
         <div class="row">
             <div class="pt-3 pb-4">
-                <h2>Новости</h2>
-                <ul>
-                    {% for result in news_results %}
-                        <li class="text-primary font-weight-bold">{{ result.object.name }}</li>
-                        <p>{{ result.object.description|truncatewords_html:20|highlight:query }}<a href="{% url 'news_view' result.object.pk %}" class="font-weight-bold">Читать далее</a></p>
-                        <hr class="pb-2">
-                    {% endfor %}
-                </ul>
-
-                <h2>Документы</h2>
-                <ul>
-                    {% for result in docs_results %}
-                        <li class="text-primary font-weight-bold">{{ result.object.name }}</li>
-                        <p>{{ result.object.description|truncatewords_html:20|highlight:query }}<a href="{% url 'document_view' result.object.pk %}" class="font-weight-bold">Скачать</a></p>
-                        <hr class="pb-2">
-                    {% endfor %}
-                </ul>
-
-                {% if not news_results and not docs_results %}
+            <ul>
+                {% for result in results %}
+                    <li class="text-primary font-weight-bold">{{ result.object.name }}</li>
+                    <!-- Дополнительные поля объекта result могут быть использованы для отображения информации о результате -->
+                    <p>{{ result.object.description|truncatewords_html:20|highlight:query }}<a href="{% url 'news_view' result.object.pk %}" class="font-weight-bold">Читать далее</a></p>
+                    <hr class="pb-2">
+                {% empty %}
                     <li class="text-danger">Ничего не найдено.</li>
                     <li class="text-primary">Попробуйте изменить поисковый запрос и нажмите поиск еще раз.</li>
                     <li class="">Если необходимая информация не найдена, возможно ее нет в нашей базе данных.</li>
                     <li>Если вы уверены, что информация есть или была опубликована на сайте, сообщите нам используя <a href="{% url 'contacts' %}">форму обратной связи.</a>
                     Мы постараемся вам помочь</li>
-                {% endif %}
-            </div>
+                {% endfor %}
+            </ul>
+        </div>
         </div>
     </div>
 
