@@ -1115,7 +1115,7 @@ class CinemaWeekPrint(ListView):
 
 def search(request):
     query = request.GET.get('q')
-    results = SearchQuerySet().autocomplete(content=query)
+    results = SearchQuerySet().filter(content=query)
 
     print(f"Query: {query}")
     print(f"Results count: {len(results)}")
