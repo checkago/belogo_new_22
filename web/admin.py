@@ -80,7 +80,8 @@ class RaitingAdminForm(forms.ModelForm):
 
 class DocumentAdmin(admin.ModelAdmin):
     form = DocumentAdminForm
-    list_display = ('name', 'published')
+    list_display = ('name', 'category', 'published')
+    list_filter = ('category', 'published',)
 
 
 class PolojenieKonkursAdmin(admin.ModelAdmin):
