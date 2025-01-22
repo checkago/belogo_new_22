@@ -412,7 +412,7 @@ def library_balashiha(request):
     title = 'Журнал: "Балашиха: Голоса сердец"'
     categories = LibraryCategory.objects.filter(name='Журнал: "Балашиха: Голоса сердец"')
     books_list = Library.objects.filter(category__in=categories).distinct().order_by('id')
-    paginator = Paginator(books_list, 5)
+    paginator = Paginator(books_list, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
