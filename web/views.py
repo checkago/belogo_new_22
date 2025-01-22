@@ -1117,6 +1117,9 @@ def search(request):
     query = request.GET.get('q')
     results = SearchQuerySet().autocomplete(content=query)
 
+    print(f"Query: {query}")
+    print(f"Results count: {len(results)}")
+
     return render(request, 'search_results.html', {'results': results, 'query': query})
 
 
