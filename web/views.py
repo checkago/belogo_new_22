@@ -412,7 +412,7 @@ def library_balashiha(request):
     title = 'Журнал: "Балашиха: Голоса сердец"'
     categories = LibraryCategory.objects.filter(name='Журнал: "Балашиха: Голоса сердец"')
     books_list = Library.objects.filter(category__in=categories).distinct().order_by('id')
-    paginator = Paginator(books_list, 5)
+    paginator = Paginator(books_list, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -1115,10 +1115,15 @@ class CinemaWeekPrint(ListView):
 
 def search(request):
     query = request.GET.get('q')
-    if query:
-        results = SearchQuerySet().filter(content=query)
-    else:
-        results = []
+    results = SearchQuerySet().filter(content=query)
+
+    print(f"Query: {query}")
+    print(f"Results count: {len(results)}")
+
+    for result in results:
+        print(f"Model name: {result.model_name}")
+        print(f"Object PK: {result.object.pk}")
+
     return render(request, 'search_results.html', {'results': results, 'query': query})
 
 

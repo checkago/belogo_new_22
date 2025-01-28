@@ -27,7 +27,13 @@
                 {% for result in results %}
                     <li class="text-primary font-weight-bold">{{ result.object.name }}</li>
                     <!-- Дополнительные поля объекта result могут быть использованы для отображения информации о результате -->
-                    <p>{{ result.object.description|truncatewords_html:20|highlight:query }}<a href="{% url 'news_view' result.object.pk %}" class="font-weight-bold">Читать далее</a></p>
+                    <p>{{ result.object.description|truncatewords_html:20|highlight:query }}
+                    {% if result.model_name == 'news' %}
+                        <a href="{% url 'news_view' result.object.pk %}" class="font-weight-bold">Читать далее</a>
+                    {% elif result.model_name == 'document' %}
+                        <a href="{% url 'document' result.object.pk %}" class="font-weight-bold">Просмотреть</a>
+                    {% endif %}
+                    </p>
                     <hr class="pb-2">
                 {% empty %}
                     <li class="text-danger">Ничего не найдено.</li>
