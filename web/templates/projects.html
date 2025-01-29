@@ -20,6 +20,7 @@
             <h5 class="">Проекты наших библиотек посвященные году защитника и 80-летия Победы.</h5>
             <hr class="hr-dark">
             <div class="row">
+            {% if Project in projects %}
                 {% for Project in projects|dictsort:"id" %}
                 <div class="col-md-3 d-grid d-flex pt-3">
                         <div class="card">
@@ -32,6 +33,9 @@
                         </div>
                 </div>
                 {% endfor %}
+            {% else %}
+            <h3 class="text-danger">Публикация ожидается в ближайщее время.</h3>
+            {% endif %}
             </div>
         </div>
     </div>
