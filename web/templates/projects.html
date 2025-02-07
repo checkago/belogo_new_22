@@ -16,10 +16,11 @@
     </nav>
     <div class="row">
         <div class="col-md-12">
-            <h3 class="font-weight-bold">2024 год, в России объявлен Годом семьи.</h3>
-            <h5 class="">Проекты наших библиотек посвященные году семьи.</h5>
+            <h3 class="font-weight-bold">2025 год, в России объявлен Годом защитника и 80-летия Победы в Великой Отечественной войне 1941-1945 годов.</h3>
+            <h5 class="">Проекты наших библиотек посвященные году защитника и 80-летия Победы.</h5>
             <hr class="hr-dark">
             <div class="row">
+            {% if Project in projects %}
                 {% for Project in projects|dictsort:"id" %}
                 <div class="col-md-3 d-grid d-flex pt-3">
                         <div class="card">
@@ -32,6 +33,11 @@
                         </div>
                 </div>
                 {% endfor %}
+            {% else %}
+                <div class="container-fluid text-center">
+                    <h2 class="text-danger text-center pb-5 pt-5">Публикация ожидается в ближайшее время.</h2>
+                </div>
+            {% endif %}
             </div>
         </div>
     </div>
