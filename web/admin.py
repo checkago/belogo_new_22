@@ -148,7 +148,7 @@ class ServiceAdmin(ImportExportModelAdmin):
 
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('datetime', 'age', 'school', 'fio', 'bilet', 'phone', 'email', 'comment',)
+    list_display = ('datetime', 'age', 'school', 'fio', 'bilet', 'phone', 'email', 'comment', 'library')
 
 
 class QuestionAdmin(admin.ModelAdmin):
