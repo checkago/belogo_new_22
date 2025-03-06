@@ -26,9 +26,9 @@
                         <div class="card">
                             <div class="card-body text-center">
                                 <img class="img-fluid" src="{{ Project.library.image.url }}" />
-                                <h5>{{ Project.title }}</h5>
+                                <h5><span class="font-weight-bold">{{ Project.title }}</span></h5>
                                 <a href="{% url 'project' Project.pk %}">
-                                    <h5><span class="font-weight-bold">{{ Project.library }}</span></h5>
+                                    <h6><{{ Project.library }}</h6>
                                 </a>
                             </div>
                         </div>
