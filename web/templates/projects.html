@@ -24,9 +24,9 @@
                 {% for Project in projects|dictsort:"id" %}
                 <div class="col-md-3 d-grid d-flex pt-3">
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body text-center">
                                 <img class="img-fluid" src="{{ Project.library.image.url }}" />
-                                <h5>{{ Project. }}</h5>
+                                <h5>{{ Project.title }}</h5>
                                 <a href="{% url 'project' Project.pk %}">
                                     <h5><span class="font-weight-bold">{{ Project.library }}</span></h5>
                                 </a>
