@@ -25,11 +25,11 @@
                 <div class="col-md-3 d-grid d-flex pt-3">
                         <div class="card">
                             <div class="card-body text-center">
-                                {% if Biblioteka.image %}
+                                {% if Project.library.image %}
                                 <img class="img-fluid" src="{{ Project.library.image.url }}" />
-                                  {% else %}
+                                {% else %}
                                 <img class="card-img-top" src="/media/img/no_foto.webp" alt="Card image cap">
-                                  {% endif %}
+                                {% endif %}
                                 <a href="{% url 'project' Project.pk %}">
                                     <h5 class="mt-2"><span class="font-weight-bold">{{ Project.title }}</span></h5>
                                     <h6 class="mt-1">{{ Project.library }}</h6>
