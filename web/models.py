@@ -142,7 +142,7 @@ class Partner(models.Model):
 class Project(models.Model):
     theme = models.ForeignKey('ProjectTheme', on_delete=models.CASCADE, verbose_name='Общая тема проекта')
     library = models.ForeignKey(Biblioteka, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Выбор Библиотеки')
-    title = models.CharField(blank=True, verbose_name='Название')
+    title = models.CharField(max_length=150, blank=True, verbose_name='Название')
     date = models.DateField(default=date.today, blank=True, verbose_name='Дата')
     file = models.FileField(upload_to='media/projects', verbose_name='Файл', blank=True)
     link = models.URLField(blank=True, verbose_name='Ссылка на PDF')
