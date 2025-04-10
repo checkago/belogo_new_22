@@ -198,7 +198,7 @@ class Article(models.Model):
     date = models.DateField(default=date.today, blank=True, verbose_name='Дата')
     author = models.ForeignKey(AuthorArticle, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Автор')
     image = models.ImageField(upload_to='media/projects_other/img', blank=True, verbose_name='Изображение')
-    description = models.CharField(max_length=240, blank=True, verbose_name='Преамбула')
+    description = models.TextField(blank=True, verbose_name='Преамбула')
     file_pdf = models.FileField(upload_to='media/projects_other', verbose_name='Файл pdf', blank=True)
     file = models.FileField(upload_to='media/projects_other', verbose_name='Файл (разное)', blank=True)
     link = models.URLField(blank=True, verbose_name='Ссылка на PDF')
