@@ -182,7 +182,7 @@ class Project_other(models.Model):
         return self.title
 
 
-class Author(models.Model):
+class AuthorArticle(models.Model):
     name = models.CharField(max_length=240, verbose_name='ФИО автора')
 
     class Meta:
@@ -196,7 +196,7 @@ class Author(models.Model):
 class Article(models.Model):
     title = models.CharField(max_length=150, blank=True, verbose_name='Название')
     date = models.DateField(default=date.today, blank=True, verbose_name='Дата')
-    author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Автор')
+    author = models.ForeignKey(AuthorArticle, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Автор')
     image = models.ImageField(upload_to='media/projects_other/img', blank=True, verbose_name='Изображение')
     description = models.CharField(max_length=240, blank=True, verbose_name='Преамбула')
     file_pdf = models.FileField(upload_to='media/projects_other', verbose_name='Файл pdf', blank=True)
