@@ -206,7 +206,8 @@ def articles_list(request):
 
 def article_view(request, pk):
     article = get_object_or_404(Article, pk=pk)
-    return render(request, 'article.html', {'article': article})
+    project = get_object_or_404(Project_other, pk=pk)
+    return render(request, 'article.html', {'article': article, 'project': project})
 
 
 @cache_page(60*15)
