@@ -22,7 +22,8 @@
                   <h4 class="text-left text-dark black-text font-weight-bold"><strong>{{ article.title }}</strong></h4>
                   <h5 class="text-left text-dark black-text font-weight-bold"><strong>Автор: {{ article.author }}</strong></h5>
                   {% if article.project %}
-                  <h6 class="text-left text-dark black-text font-weight-bold"><strong>Проект: {{ article.project }}</strong></h6>
+                  <h6 class="text-left text-dark black-text font-weight-bold"><strong>Проект:
+                      <a href="{{ article.project.url }}">{{ article.project }}</a></strong></h6>
                   {% else %}
                   {% endif %}
                   <hr class="hr-dark mb-3">
