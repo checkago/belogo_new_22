@@ -23,7 +23,7 @@
                   <h5 class="text-left text-dark black-text font-weight-bold"><strong>Автор: {{ article.author }}</strong></h5>
                   {% if article.project %}
                   <h6 class="text-left text-dark black-text font-weight-bold"><strong>Проект:
-                      <a href="{% url 'project_other' Project_other.pk %}">{{ article.project }}</a></strong></h6>
+                      <a href="{% url 'project_other' article.project.pk %}">{{ article.project }}</a></strong></h6>
                   {% else %}
                   {% endif %}
                   <hr class="hr-dark mb-3">
