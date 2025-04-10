@@ -11,27 +11,27 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
         <li class="breadcrumb-item"><a href="{% url 'document_categories' %}">Документы</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Проекты</li>
+        <li class="breadcrumb-item active" aria-current="page">Статьи</li>
       </ol>
     </nav>
     <div class="row">
         <div class="col-md-12">
-            <h3 class="font-weight-bold">Наши проекты</h3>
-            <h5 class="">Литературные и творческие проекты наших библиотек.</h5>
+            <h3 class="font-weight-bold">Статьи наших авторов</h3>
+            <h5 class=""></h5>
             <hr class="hr-dark">
             <div class="row">
-            {% if projects %}
-                {% for Project_other in projects|dictsort:"id" %}
+            {% if articles %}
+                {% for Article in articles|dictsort:"id" %}
                 <div class="col-md-3 d-grid d-flex pt-3">
                         <div class="card">
                             <div class="card-body text-center">
-                                {% if Project_other.image %}
-                                <img class="img-fluid" src="{{ Project_other.image.url }}" />
+                                {% if Article.image %}
+                                <img class="img-fluid" src="{{ Article.image.url }}" />
                                 {% else %}
                                 <img class="card-img-top" src="/media/img/no_foto.webp" alt="Card image cap">
                                 {% endif %}
-                                <a href="{% url 'project_other' Project_other.pk %}">
-                                    <h5 class="mt-2"><span class="font-weight-bold">{{ Project_other.title }}</span></h5>
+                                <a href="{% url 'project_other' Article.pk %}">
+                                    <h5 class="mt-2"><span class="font-weight-bold">{{ Article.title }}</span></h5>
                                 </a>
                             </div>
                         </div>
