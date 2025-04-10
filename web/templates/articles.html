@@ -30,7 +30,7 @@
                                 {% else %}
                                 <img class="card-img-top" src="/media/img/no_foto.webp" alt="Card image cap">
                                 {% endif %}
-                                <a href="{% url 'project_other' Article.pk %}">
+                                <a href="{% url 'article' Article.pk %}">
                                     <h5 class="mt-2"><span class="font-weight-bold">{{ Article.title }}</span></h5>
                                     <div class="hr-dark"></div>
                                     <h6 class="mt-2"><span class="font-weight-bold text-primary">Автор: {{ Article.author }}</span></h6>
