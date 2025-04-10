@@ -32,6 +32,8 @@
                                 {% endif %}
                                 <a href="{% url 'project_other' Article.pk %}">
                                     <h5 class="mt-2"><span class="font-weight-bold">{{ Article.title }}</span></h5>
+                                    <div class="hr-dark"></div>
+                                    <h6 class="mt-2"><span class="font-weight-bold">Автор: {{ Article.author }}</span></h6>
                                 </a>
                             </div>
                         </div>
