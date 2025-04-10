@@ -167,7 +167,6 @@ class ProjectTheme(models.Model):
 
 
 class Project_other(models.Model):
-    library = models.ForeignKey(Biblioteka, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Выбор Библиотеки')
     image = models.ImageField(upload_to='media/projects/img', blank=True, verbose_name='Изображение')
     title = models.CharField(max_length=150, blank=True, verbose_name='Название')
     date = models.DateField(default=date.today, blank=True, verbose_name='Дата')
