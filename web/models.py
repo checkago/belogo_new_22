@@ -186,7 +186,7 @@ class AuthorArticle(models.Model):
     name = models.CharField(max_length=240, verbose_name='ФИО автора')
 
     class Meta:
-        verbose_name = 'Автор'
+        verbose_name = 'Наш Автор'
         verbose_name_plural = 'Наши авторы'
 
     def __str__(self):
