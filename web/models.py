@@ -197,6 +197,7 @@ class Article(models.Model):
     title = models.CharField(max_length=150, blank=True, verbose_name='Название')
     date = models.DateField(default=date.today, blank=True, verbose_name='Дата')
     author = models.ForeignKey(AuthorArticle, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Автор')
+    project = models.ForeignKey(Project_other, on_delete=models.CASCADE, null=True, blank=True, verbose_name='К проекту')
     image = models.ImageField(upload_to='media/projects_other/img', blank=True, verbose_name='Изображение')
     description = models.TextField(blank=True, verbose_name='Преамбула')
     file_pdf = models.FileField(upload_to='media/projects_other', verbose_name='Файл pdf', blank=True)
