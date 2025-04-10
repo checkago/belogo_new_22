@@ -200,7 +200,7 @@ class Article(models.Model):
     image = models.ImageField(upload_to='media/projects_other/img', blank=True, verbose_name='Изображение')
     description = models.TextField(blank=True, verbose_name='Преамбула')
     file_pdf = models.FileField(upload_to='media/projects_other', verbose_name='Файл pdf', blank=True)
-    file = models.FileField(upload_to='media/projects_other', verbose_name='Файл (разное)', blank=True)
+    file = models.FileField(upload_to='media/projects_other', blank=True, verbose_name='Файл (разное)')
     link = models.URLField(blank=True, verbose_name='Ссылка на PDF')
 
     class Meta:
