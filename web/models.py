@@ -175,7 +175,7 @@ class Project_other(models.Model):
     link = models.URLField(blank=True, verbose_name='Ссылка на PDF')
 
     class Meta:
-        verbose_name = 'Наш проект'
+        verbose_name = 'Наш  проект'
         verbose_name_plural = 'Наши проекты'
 
     def __str__(self):
