@@ -188,6 +188,17 @@ def project_view(request, pk):
 
 
 @cache_page(60*15)
+def projects_other_list(request):
+    projects = Project_other.objects.all()
+    return render(request, 'projects.html', {'projects': projects})
+
+
+def project_other_view(request, pk):
+    project = get_object_or_404(Project_other, pk=pk)
+    return render(request, 'project.html', {'project': project})
+
+
+@cache_page(60*15)
 def services(request):
     categories = Category.objects.prefetch_related('services')
     title = 'Услуги библиотечной системы'
