@@ -19,7 +19,7 @@ from web.models import ImageGallery, Category, News, Document, Raiting, Bibliote
     EventyBSCD, DayBSCD, EventyYB, DayYB, EventyDB, DayDB, EventyNMB, DayNMB, EventyCSB, DayCSB, EventySSB, DaySSB, \
     EventyFSB, DayFSB, EventyDBT, DayDBT, EventyNAB, DayNAB, EventyPPB, DayPPB, EventyNB, DayNB, WeekCGBT, WeekBCJ, \
     WeekBSCD, WeekYB, WeekDB, WeekNMB, WeekCSB, WeekSSB, WeekFSB, WeekDBT, WeekNAB, WeekPPB, WeekNB, EventyB5, \
-    Project_other
+    Project_other, Article
 
 
 class ImageGalleryInline(GenericTabularInline):
@@ -819,6 +819,7 @@ admin.site.register(Cinema, CinemaAdmin)
 admin.site.register(Project)
 admin.site.register(ProjectTheme)
 admin.site.register(Project_other)
+admin.site.register(Article)
 admin.site.register(Biblioteka, BibliotekaAdmin)
 admin.site.register(Position, PositionAdmin)
 admin.site.register(Employers, EmployerAdmin)

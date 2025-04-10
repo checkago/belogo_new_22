@@ -199,6 +199,17 @@ def project_other_view(request, pk):
 
 
 @cache_page(60*15)
+def articles_list(request):
+    articles = Article.objects.all()
+    return render(request, 'articles.html', {'articles': articles})
+
+
+def article_view(request, pk):
+    article = get_object_or_404(Article, pk=pk)
+    return render(request, 'article.html', {'article': article})
+
+
+@cache_page(60*15)
 def services(request):
     categories = Category.objects.prefetch_related('services')
     title = 'Услуги библиотечной системы'

@@ -181,6 +181,35 @@ class Project_other(models.Model):
     def __str__(self):
         return self.title
 
+
+class Author(models.Model):
+    name = models.CharField(max_length=240, verbose_name='ФИО автора')
+
+    class Meta:
+        verbose_name = 'Автор'
+        verbose_name_plural = 'Наши авторы'
+
+    def __str__(self):
+        return self.name
+
+
+class Article(models.Model):
+    title = models.CharField(max_length=150, blank=True, verbose_name='Название')
+    date = models.DateField(default=date.today, blank=True, verbose_name='Дата')
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Автор')
+    image = models.ImageField(upload_to='media/projects_other/img', blank=True, verbose_name='Изображение')
+    description = models.CharField(max_length=240, blank=True, verbose_name='Преамбула')
+    file_pdf = models.FileField(upload_to='media/projects_other', verbose_name='Файл pdf', blank=True)
+    file = models.FileField(upload_to='media/projects_other', verbose_name='Файл (разное)', blank=True)
+    link = models.URLField(blank=True, verbose_name='Ссылка на PDF')
+
+    class Meta:
+        verbose_name = 'Статья'
+        verbose_name_plural = 'Статьи'
+
+    def __str__(self):
+        return self.title
+
 class Event(models.Model):
 
     IKC = 'Информационно-культурный центр'

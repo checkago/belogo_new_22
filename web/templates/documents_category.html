@@ -62,19 +62,19 @@
         {% elif category.id == 10 %}
         <div class="col-md-6">
             <div class="card mt-3 shadow-2">
-            <div class="card-body">
-              <div class="row g-0">
-                  <div class="col-md-4 d-flex justify-content-center align-content-center">
-                      <img src="{% static 'img/lito.png' %}" class="img-fluid" />
+                <div class="card-body">
+                    <div class="row g-0">
+                        <div class="col-md-4 d-flex justify-content-center align-content-center">
+                            <img src="{% static 'img/lito.png' %}" class="img-fluid" />
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="card-title font-weight-bold">{{ category.name }}</h5>
+                            <p class="card-text">Литературно-Творческое Объединение "Метафора"</p>
+                            <a href="{% url 'documents_in_category' category.id %}" class="btn bg-yellow2 font-weight-bold float-right" data-mdb-ripple-init>Перейти</a>
+                        </div>
                   </div>
-                  <div class="col-md-8">
-                      <h5 class="card-title font-weight-bold">{{ category.name }}</h5>
-                      <p class="card-text">Литературно-Творческое Объединение "Метафора"</p>
-                <a href="{% url 'documents_in_category' category.id %}" class="btn bg-yellow2 font-weight-bold float-right" data-mdb-ripple-init>Перейти</a>
-                  </div>
-              </div>
+                </div>
             </div>
-        </div>
         </div>
         {% endif %}
     {% endfor %}
@@ -106,6 +106,22 @@
                           <h5 class="card-title font-weight-bold">Проекты года</h5>
                           <p class="card-text">Проекты библиотек посвященные году защитника и 80-летия победы!</p>
                           <a href="{% url 'projects' %}" class="btn bg-yellow2 font-weight-bold float-right" data-mdb-ripple-init>Перейти</a>
+                      </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mt-3 shadow-2">
+                <div class="card-body">
+                  <div class="row g-0">
+                      <div class="col-md-4 d-flex justify-content-center align-content-center">
+                          <img src="{% static 'img/statya.webp' %}" class="img-fluid" />
+                      </div>
+                      <div class="col-md-8">
+                          <h5 class="card-title font-weight-bold">Статьи</h5>
+                          <p class="card-text">Статьи наших библиотечных авторов</p>
+                          <a href="{% url 'articles' %}" class="btn bg-yellow2 font-weight-bold float-right" data-mdb-ripple-init>Перейти</a>
                       </div>
                   </div>
                 </div>
