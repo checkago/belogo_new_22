@@ -31,10 +31,13 @@
                         <embed src="{{ project.file_pdf.url }}#toolbar=0&navpanes=1&scrollbar=1" width="850" height="1100" type="application/pdf" />
                     </div>
                 </div>
-                {% if project.file %}
+            <hr>
+                <div class="col-md-12 pt-2">
+                    {% if project.file %}
                 <a href="{{ project.file.url }}" class="btn bg-yellow2 btn-sm"><h5 class="font-weight-bold">Дополнительные файлы проекта</h5></a>
                 {% else %}
                 {% endif %}
+                </div>
             </div>
         </div>
     </div>
