@@ -167,9 +167,9 @@ class ProjectTheme(models.Model):
 
 
 class Project_other(models.Model):
-    image = models.ImageField(upload_to='media/projects/img', blank=True, verbose_name='Изображение')
     title = models.CharField(max_length=150, blank=True, verbose_name='Название')
     date = models.DateField(default=date.today, blank=True, verbose_name='Дата')
+    image = models.ImageField(upload_to='media/projects/img', blank=True, verbose_name='Изображение')
     file_pdf = models.FileField(upload_to='media/projects', verbose_name='Файл pdf', blank=True)
     file = models.FileField(upload_to='media/projects', verbose_name='Файл (разное)', blank=True)
     link = models.URLField(blank=True, verbose_name='Ссылка на PDF')
