@@ -28,12 +28,16 @@
                 </div>
                 <div class="col-md-12 pt-4">
                     <h5><span class="font-weight-bold">Содержание проекта:</span></h5>
-                    {% if article.file %}
                     <div class="card-footer text-center">
-                        <embed src="{{ article.file.url }}#toolbar=0&navpanes=1&scrollbar=1" width="850" height="1100" type="application/pdf" />
+                        <embed src="{{ article.file_pdf.url }}#toolbar=0&navpanes=1&scrollbar=1" width="850" height="1100" type="application/pdf" />
                     </div>
-                    {% else %}
-                    {% endif %}
+                </div>
+                {% if article.file %}
+                <hr class="hr-bold hr-dark mt-3 mb-3">
+                <div class="col-md-12 mt-3">
+                    <a href="{{ article.file.url }}" class="btn bg-yellow2 btn-sm"><h5 class="font-weight-bold text-center align-baseline">Дополнительные файлы статьи</h5></a>
+                {% else %}
+                {% endif %}
                 </div>
             </div>
         </div>
