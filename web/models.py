@@ -148,8 +148,8 @@ class Project(models.Model):
     link = models.URLField(blank=True, verbose_name='Ссылка на PDF')
 
     class Meta:
-        verbose_name = 'Проект года'
-        verbose_name_plural = 'Проекты года'
+        verbose_name = 'Проект'
+        verbose_name_plural = 'Проекты'
 
     def __str__(self):
         return self.library.name
@@ -165,6 +165,7 @@ class ProjectTheme(models.Model):
     def __str__(self):
         return self.name
 
+<<<<<<< HEAD
 
 class Project_other(models.Model):
     title = models.CharField(max_length=150, blank=True, verbose_name='Название')
@@ -181,6 +182,8 @@ class Project_other(models.Model):
     def __str__(self):
         return self.title
 
+=======
+>>>>>>> parent of a1bd596 (проекты разное)
 class Event(models.Model):
 
     IKC = 'Информационно-культурный центр'
