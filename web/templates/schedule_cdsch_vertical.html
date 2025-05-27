@@ -42,7 +42,7 @@
             <hr>
             <div class="row d-flex">
                 <div class="col-md-9 mt-3">
-                    {% for weekday in weekdays %}
+                    {% for weekday in weekdays|dictsort:"date" %}
                     <div class="row d-flex">
                         <div class="col-md-2 align-items-center border-right">
                             <h1 class="font-responsive font-weight-bold text-danger d-flex justify-content-center">{{ weekday.date|date:"d" }}</h1>
