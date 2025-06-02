@@ -20,8 +20,8 @@
             <hr class="hr-dark">
             <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
                 {% for VideoMemoryBook in video %}
-                <div class="container">
-                    <h1>{{ VideoMemoryBook.title }}</h1>
+                <div class="container mb-3">
+                    <h2>{{ VideoMemoryBook.title }}</h2>
 
                     <!-- Видеоплеер plyr -->
                     <video id="player" playsinline controls>
@@ -36,6 +36,7 @@
                         const player = new Plyr('#player');
                     });
                 </script>
+                    <hr class="hr-dark">
                 {% endfor %}
             </div>
         </div>
