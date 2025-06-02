@@ -182,6 +182,7 @@ ADMIN_REORDER = (
                 'web.VeteranTruda',
                 'web.LeningradResident',
                 'web.HeroMemoryBook',
+                'web.VideoMemoryBook',
                 )
      },
 
