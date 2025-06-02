@@ -21,10 +21,10 @@
             <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
                 {% for VideoMemoryBook in video %}
                 <div  class="container mb-4">
-                    <h2>{{ VideoMemoryBook.title }}</h2>
+                    <h3>{{ VideoMemoryBook.title }}</h3>
 
                     <!-- Видеоплеер plyr -->
-                    <video id="player" playsinline controls style="width: 100%; max-width: 600px;">
+                    <video id="player" playsinline controls style="width: 100%; max-width: 800px;">
                         <source src="{{ VideoMemoryBook.video_file.url }}" type="video/mp4" />
                         Ваш браузер не поддерживает HTML5 видео.
                     </video>
