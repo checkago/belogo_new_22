@@ -339,8 +339,8 @@ def lg_residents(request):
 
 def kniga_pamyati(request):
     title = 'Книга памяти'
-    heroes = HeroMemoryBook.objects.all()
-    return render(request, 'vov_kniga_pamyati.html', {'title': title, 'heroes': heroes})
+    video = VideoMemoryBook.objects.all()
+    return render(request, 'vov_kniga_pamyati.html', {'title': title, 'video': video})
 
 
 def book_form(request):

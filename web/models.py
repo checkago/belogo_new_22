@@ -653,6 +653,19 @@ class HeroMemoryBook(models.Model):
         return f"{self.last_name} {self.first_name}"
 
 
+class VideoMemoryBook(models.Model):
+    title = models.CharField(max_length=250, verbose_name='Заголовок')
+    video_file = models.FileField(upload_to='videos/')  # файл сохраняется в MEDIA_ROOT/videos/
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Видео книга памяти'
+        verbose_name_plural = 'Видео для книги памяти'
+
+    def __str__(self):
+        return self.title
+
+
 class Anons(models.Model):
     title = models.CharField(max_length=100, verbose_name='Наименование анонса')
     description = models.TextField(verbose_name='Текст')
