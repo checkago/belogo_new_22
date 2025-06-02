@@ -19,7 +19,7 @@ from web.models import ImageGallery, Category, News, Document, Raiting, Bibliote
     EventyBSCD, DayBSCD, EventyYB, DayYB, EventyDB, DayDB, EventyNMB, DayNMB, EventyCSB, DayCSB, EventySSB, DaySSB, \
     EventyFSB, DayFSB, EventyDBT, DayDBT, EventyNAB, DayNAB, EventyPPB, DayPPB, EventyNB, DayNB, WeekCGBT, WeekBCJ, \
     WeekBSCD, WeekYB, WeekDB, WeekNMB, WeekCSB, WeekSSB, WeekFSB, WeekDBT, WeekNAB, WeekPPB, WeekNB, EventyB5, \
-    Project_other, Article, AuthorArticle
+    Project_other, Article, AuthorArticle, VideoMemoryBook
 
 
 class ImageGalleryInline(GenericTabularInline):
@@ -273,6 +273,10 @@ class HeroMemoryBookAdminForm(forms.ModelForm):
 class HeroMemoryBookAdmin(admin.ModelAdmin):
     form = HeroMemoryBookAdminForm
     list_display = ('last_name', 'first_name', 'middle_name',)
+
+
+class VideoMemoryBookAdmin(admin.ModelAdmin):
+    list_display = ('title')
 
 
 class AnonsAdminForm(forms.ModelForm):
@@ -840,6 +844,7 @@ admin.site.register(VeteranVOV, VeteranVOVAdmin)
 admin.site.register(VeteranTruda, VeteranTrudaAdmin)
 admin.site.register(LeningradResident, LeningradResidentAdmin)
 admin.site.register(HeroMemoryBook, HeroMemoryBookAdmin)
+admin.site.register(VideoMemoryBook, VideoMemoryBookAdmin)
 admin.site.register(Anons, AnonsAdmin)
 admin.site.register(Library, LibraryAdmin)
 admin.site.register(Author, AuthorAdmin)
