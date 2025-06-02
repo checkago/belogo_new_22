@@ -19,48 +19,23 @@
             <h3 class="">{{ title }}</h3>
             <hr class="hr-dark">
             <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
-                {% for HeroMemoryBook in heroes %}
-                <div class="card mb-2">
-                    <!-- Card header -->
-                    <div class="card-header" role="tab" id="headingOne{{ HeroMemoryBook.id }}">
+                {% for VideoMemoryBook in video %}
+                <div class="container">
+                    <h1>{{ VideoMemoryBook.title }}</h1>
 
-                      <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne{{ HeroMemoryBook.id }}" aria-expanded="true"
-                        aria-controls="collapseOne{{ HeroMemoryBook.id }}">
-
-                        <h5 class="mb-0">
-
-                            <span class="font-weight-bold">{{ HeroMemoryBook.last_name }} {{ HeroMemoryBook.first_name }} {{ HeroMemoryBook.middle_name }}</span>
-
-                          <i class="fas fa-angle-down rotate-icon"></i>
-
-                        </h5>
-
-                      </a>
-
-                    </div>
-                    <!-- Card body -->
-                    <div id="collapseOne{{ HeroMemoryBook.id }}" class="collapse" role="tabpanel" aria-labelledby="headingOne{{ HeroMemoryBook.id }}"
-                      data-parent="#accordionEx">
-
-                      <div class="card-body">
-                          <div class="row">
-                              {% if HeroMemoryBook.image == Null %}
-                              <div class="col-md-12 col-lg-12 z-depth-1 py-2">
-                                {{ HeroMemoryBook.description|safe }}
-                              </div>
-                              {% else %}
-                              <div class="col-md-3 col-lg-3">
-                                    <img src="{{ HeroMemoryBook.image.url }}" class="img-fluid border" alt="{{ HeroMemoryBook.first_name }} {{ HeroMemoryBook.last_name }}"/>
-                              </div>
-                              <div class="col-md-12 col-lg-9 z-depth-1 py-2">
-                                  {{ HeroMemoryBook.description|safe }}
-                              </div>
-                              {% endif %}
-                          </div>
-                      </div>
-
-                    </div>
+                    <!-- Видеоплеер plyr -->
+                    <video id="player" playsinline controls>
+                        <source src="{{ VideoMemoryBook.video_file.url }}" type="video/mp4" />
+                        Ваш браузер не поддерживает HTML5 видео.
+                    </video>
                 </div>
+
+                <!-- Инициализация плеера -->
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const player = new Plyr('#player');
+                    });
+                </script>
                 {% endfor %}
             </div>
         </div>
