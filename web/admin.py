@@ -276,7 +276,7 @@ class HeroMemoryBookAdmin(admin.ModelAdmin):
 
 
 class VideoMemoryBookAdmin(admin.ModelAdmin):
-    list_display = ('title')
+    list_display = ('title',)
 
 
 class AnonsAdminForm(forms.ModelForm):
