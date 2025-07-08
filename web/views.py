@@ -697,7 +697,7 @@ class WeekF3View(ListView):
         context['weekdays'] = DayF3.objects.filter(week__active=True)
         context['start_date'] = self.get_queryset().first().start_date
         context['end_date'] = self.get_queryset().first().end_date
-        context['biblioteka'] = Biblioteka.objects.get(id=5)
+        context['biblioteka'] = Biblioteka.objects.get(id=7)
         return context
 
 
@@ -713,7 +713,7 @@ class WeekF4View(ListView):
         context['weekdays'] = DayF4.objects.filter(week__active=True)
         context['start_date'] = self.get_queryset().first().start_date
         context['end_date'] = self.get_queryset().first().end_date
-        context['biblioteka'] = Biblioteka.objects.get(id=6)
+        context['biblioteka'] = Biblioteka.objects.get(id=8)
         return context
 
 
@@ -729,7 +729,7 @@ class WeekB5View(ListView):
         context['weekdays'] = DayB5.objects.filter(week__active=True)
         context['start_date'] = self.get_queryset().first().start_date
         context['end_date'] = self.get_queryset().first().end_date
-        context['biblioteka'] = Biblioteka.objects.get(id=12)
+        context['biblioteka'] = Biblioteka.objects.get(id=9)
         return context
 
 
