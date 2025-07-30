@@ -36,7 +36,12 @@
             </li>
           </ul>
           <ul class="navbar-nav ml-auto nav-flex-icons">
-
+            <li class="nav-item">
+                <div id="finevision_banner" onclick="finevision.activate_navbar()" style="cursor: pointer; z-index: 9999; background: rgb(255, 255, 255); border: 2px solid rgb(0, 0, 0); float: right; position: fixed; top: 15px; left: auto; right: 50px;">
+                    <img width="80" src="https://finevision.ru/static/banner2.jpg">
+                    <script src="https://finevision.ru/static/js/finevision_banner.js"></script>
+                </div>
+            </li>
             <li class="nav-item">
                 <a href="{% url 'mobile-app' %}" class="nav-link waves-effect waves-light"><i class="fab fa-android fa-2x text-success"></i></a>
             </li>
