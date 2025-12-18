@@ -2,6 +2,8 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 from django.urls import path
+from django.views.generic import RedirectView
+
 from . import views
 from .views import BibliotekiAPIView, NewsAPIView, EventAPIView, ServiceAPIView, \
     WeekView, WeekCDSCHView, WeekBERView, WeekF2View, WeekF3View, WeekF4View, CinemaWeekView, ActiveWeeksAPIView, \
@@ -24,6 +26,11 @@ urlpatterns = [
     path('category/<int:category_id>/', views.documents_in_category, name='documents_in_category'),
     path('documents/', views.documents, name='documents'),
     path('documents/<int:pk>/', views.document, name='document'),
+    path('documents/101/', RedirectView.as_view(
+        pattern_name='document',
+        permanent=True,  # 301 редирект (постоянный)
+        kwargs={'pk': 102}  # перенаправляем на id=102
+    )),
     path('polojenie/<int:pk>/', views.polojenie_view, name='polojenie'),
     path('services/', views.services, name='services'),
     path('quality/', views.raitings, name='raitings'),
