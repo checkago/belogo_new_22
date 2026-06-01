@@ -479,6 +479,19 @@ def library_hud(request):
                                               'paginator': paginator, 'page_obj': page_obj})
 
 
+@cache_page(60*10)
+def library_svo(request):
+    title = 'Произведения участников СВО'
+    categories = LibraryCategory.objects.filter(name='Произведения участников СВО')
+    books_list = Library.objects.filter(category__in=categories).distinct().order_by('id')
+    paginator = Paginator(books_list, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'book_list.html', {'categories': categories, 'title': title, 'books_list': books_list,
+                                              'paginator': paginator, 'page_obj': page_obj})
+
+
 
 class BookDetailView(generic.DetailView):
     model = Library
@@ -487,16 +500,16 @@ class BookDetailView(generic.DetailView):
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
-        # Проверяем, существует ли уже запись о просмотре книги сегодня
-        today_views = BookView.objects.filter(book=self.object, viewed_at=timezone.now().date())
+        today = timezone.now().date()  # ← одна дата для всего
+
+        today_views = BookView.objects.filter(book=self.object, viewed_at=today)
         if today_views.exists():
-            # Если запись сегодняшнего просмотра уже существует, увеличиваем счетчик
             today_view = today_views.first()
             today_view.view_count += 1
-            today_view.save()
+            today_view.save(update_fields=['view_count'])  # ← эффективнее
         else:
-            # Если запись сегодняшнего просмотра еще не существует, создаем новую
-            BookView.objects.create(book=self.object)
+            BookView.objects.create(book=self.object, viewed_at=today)  # ← явно указываем дату
+
         return super().get(request, *args, **kwargs)
 
     def get_object(self, queryset=None):
