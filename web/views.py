@@ -482,7 +482,7 @@ def library_hud(request):
 @cache_page(60*10)
 def library_svo(request):
     title = 'Произведения участников СВО'
-    categories = LibraryCategory.objects.filter(name='Произведения участников СВО')
+    categories = LibraryCategory.objects.filter(name='Новая военная литература: произведения участников СВО')
     books_list = Library.objects.filter(category__in=categories).distinct().order_by('id')
     paginator = Paginator(books_list, 5)
     page_number = request.GET.get('page')
