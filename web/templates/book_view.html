@@ -35,7 +35,11 @@
                     Описание: {{ book.description|safe }}
                 </h6>
                 <hr>
+                {% if book.link %}
                 <a href="{{ book.link }}" class="btn bg-yellow2 text-dark font-weight-bold float-right" target="_blank">Читать онлайн</a>
+                {% else %}
+                <a href="{{ book.file }}" class="btn bg-yellow2 text-dark font-weight-bold float-right" target="_blank">Читать онлайн</a>
+                {% endif %}
             </div>
         </div>
     </div>
