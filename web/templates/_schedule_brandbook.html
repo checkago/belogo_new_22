@@ -1,0 +1,116 @@
+{% load static schedule_brandbook %}
+<link rel="stylesheet" href="{% static 'css/schedule_brandbook.css' %}?v=3">
+
+<div id="schedule" class="sch-sheet">
+  <header class="sch-header">
+    <div class="sch-header-top">
+      <div class="sch-header-dots" aria-hidden="true"></div>
+      <div class="sch-lib-name">{{ biblioteka.name }}</div>
+    </div>
+    <div class="sch-title-row">
+      <div class="sch-title">Системное расписание</div>
+      <div class="sch-dates">{% schedule_date_range start_date end_date %}</div>
+    </div>
+  </header>
+
+  <div class="sch-body">
+    {% schedule_layout_rows weekdays start_date as layout_rows %}
+    {% for row in layout_rows %}
+      <div class="sch-days-row sch-cols-{{ row.cols }}">
+        {% for item in row.days %}
+          <section class="sch-day">
+            <h2 class="sch-day-title">{{ item.title }}</h2>
+            <div class="sch-events">
+              {% for event in item.slots %}
+                <div class="sch-event{% if not event %} is-empty{% endif %}">
+                  {% if event %}
+                    <div class="sch-event-time">
+                      <span>{{ event.start_time|time:"H:i" }}</span>
+                      <span>{{ event.end_time|time:"H:i" }}</span>
+                    </div>
+                    <div class="sch-event-body">
+                      <div class="sch-event-name">{{ event.name }}</div>
+                      <div class="sch-event-meta">
+                        {% if event.age %}<span class="sch-meta">{{ event.age }}</span>{% endif %}
+                        {% if event.booking %}<span class="sch-meta sch-meta-booking">по записи</span>{% endif %}
+                        {% if event.payment %}
+                          <span class="sch-meta sch-meta-paid">платно ₽</span>
+                        {% else %}
+                          <span class="sch-meta sch-meta-free">бесплатно</span>
+                        {% endif %}
+                      </div>
+                    </div>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+          </section>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <footer class="sch-footer">
+    <div class="sch-footer-brand">
+      <img src="{% static 'img/schedule_brandbook/brand_mark.png' %}" alt="">
+      <p class="sch-footer-address">{% schedule_address_lines biblioteka.adress %}</p>
+    </div>
+
+    <div class="sch-footer-phones">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6.6 10.8c1.5 3 3.6 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.2 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8z" fill="#fff"/>
+      </svg>
+      <div>
+        <p>{{ biblioteka.phone }}</p>
+        {% if biblioteka.email %}<p>{{ biblioteka.email }}</p>{% endif %}
+      </div>
+    </div>
+
+    <div class="sch-footer-qr-block">
+      <div class="sch-footer-site-item">
+        <span class="sch-site-url">obs-balashiha.ru</span>
+        <div class="sch-footer-qr">
+          <img src="{% static 'img/schedule_brandbook/qr_obs_balashiha.png' %}" alt="QR obs-balashiha.ru">
+        </div>
+      </div>
+      <div class="sch-footer-site-item">
+        <span class="sch-site-url">biblio.mosreg.ru</span>
+        <div class="sch-footer-qr">
+          <img src="{% static 'img/schedule_brandbook/qr_biblio_mosreg.png' %}" alt="QR biblio.mosreg.ru">
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var btn = document.getElementById("save-button");
+  if (!btn) return;
+  btn.addEventListener("click", function () {
+    var node = document.querySelector("#schedule");
+    if (!node || typeof html2canvas !== "function") return;
+    var run = function () {
+      html2canvas(node, {
+        backgroundColor: "#f5ece7",
+        scale: 2,
+        width: 1400,
+        height: 1050,
+        windowWidth: 1400,
+        windowHeight: 1050,
+        useCORS: true
+      }).then(function (canvas) {
+        var link = document.createElement("a");
+        link.download = "{{ download_filename|default:'Системное расписание.jpg' }}";
+        link.href = canvas.toDataURL("image/jpeg", 0.92);
+        link.click();
+      });
+    };
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(run).catch(run);
+    } else {
+      run();
+    }
+  });
+})();
+</script>
